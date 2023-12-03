@@ -1,6 +1,6 @@
 "use strict";
 
-import WaterBodyPage from "../../../components/WaterBodyPage.js";
+import WaterBodyPage from "../../components/WaterBodyPage.js";
 
 (async () => {
     const params = new URLSearchParams(window.location.search);

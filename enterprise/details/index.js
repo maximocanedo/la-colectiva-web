@@ -1,7 +1,7 @@
 "use strict";
 
-import EnterprisePage from "../../../components/EnterprisePage.js";
-import TextField from "../../../components/material/TextField.js";
+import EnterprisePage from "../../components/EnterprisePage.js";
+import TextField from "../../components/material/TextField.js";
 
 (async () => {
     const params = new URLSearchParams(window.location.search);

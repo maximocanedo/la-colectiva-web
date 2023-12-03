@@ -1,5 +1,5 @@
 "use strict";
-import WaterBodyList from "../../components/WaterBodyList.js";
+import WaterBodyList from "../components/WaterBodyList.js";
 
 (async () => {
     const list = await WaterBodyList.load();
