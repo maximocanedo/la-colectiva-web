@@ -22,6 +22,7 @@ export default class WaterBodyPage {
         const apiURL = `http://localhost:3000/waterBodies/${id}`;
         const source = await fetch(apiURL, {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-Type': "application/json"
             }

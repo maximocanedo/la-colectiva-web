@@ -3,7 +3,7 @@ export default class EnterpriseTag {
     constructor(data) {
         this.getData = () => data;
     }
-    static path = "/test/test/enterprise/details"
+    static path = "/test/enterprise/details"
     render() {
         const data = this.getData();
         const a = document.createElement("a");

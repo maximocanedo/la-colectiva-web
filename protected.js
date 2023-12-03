@@ -2,9 +2,10 @@
 
 const access = async () => {
 	const sendData = {};
-	const apiUrl = "/users/protected";
+	const apiUrl = "http://localhost:3000/users/protected";
 	const requestOptions = {
 		method: "GET",
+		credentials: 'include',
 		headers: {
 			"Content-Type": "application/json",
 		},

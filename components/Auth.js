@@ -3,6 +3,7 @@
 const getActualUser = async () => {
     const userData = await fetch("http://localhost:3000/users/protected", {
        method: "GET",
+       credentials: 'include',
        headers: {
            'Content-Type': "application/json"
        }

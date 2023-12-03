@@ -1,7 +1,7 @@
 "use strict";
 
 const login = async () => {
-	const apiUrl = "/users/login";
+	const apiUrl = "http://localhost:3000/users/login";
 
 	const usernameInput = document.querySelector("#username-input").value;
 	const passwordInput = document.querySelector("#password-input").value;
@@ -13,6 +13,7 @@ const login = async () => {
 
 	const requestOptions = {
 		method: "POST",
+		credentials: "include",
 		headers: {
 			"Content-Type": "application/json",
 		},

@@ -7,6 +7,7 @@ export default class WaterBodyList {
     async init() {
         const source = await fetch("http://localhost:3000/waterBodies/", {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-Type': "application/json"
             }

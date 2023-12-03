@@ -1,6 +1,7 @@
 'use strict';
-import { mdc } from './../mdc.controller.js';
+import * as mdce from "./material-components-web.js";
 
+const mdc = mdce.default.mdc;
 const MDCBanner = mdc.banner.MDCBanner;
 const MDCBannerFoundation = mdc.banner.MDCBannerFoundation;
 const MDCComponent = mdc.base.MDCComponent;

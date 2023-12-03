@@ -3,7 +3,7 @@ export default class WaterBodyTag {
     constructor(data) {
         this.getData = () => data;
     }
-    static rootPath = "/test/test/waterbody/details";
+    static rootPath = "/test/waterbody/details";
     static getNames() {
         return [
             "Río", "Arroyo", "Riachuelo", "Canal", "Lago", "Estanque", "Laguna", "Embalse", "Pantano",

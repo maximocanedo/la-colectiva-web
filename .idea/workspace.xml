@@ -4,17 +4,54 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c21bc48-c91e-42f4-90c3-9aad828f629d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/simple-page.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/material.components.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
+    <list default="true" id="f6d5b06f-0439-486a-a4d5-3109abbc6888" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/delta.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/Carousel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/CarouselItem.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/EnterprisePhoneList.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/EnterprisePhoneListItem.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/material/ButtonView.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/material/IconButtonView.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/material/List.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/material/ListItem.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/material/TextField.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/material/dialog/FloatingSheet.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/material/dialog/FullscreenDialog.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/styles/carrousel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/styles/enterprise-page.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/styles/enterprise-phone-list.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/styles/material-colors.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/styles/votes.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/test.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/simple-page.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Comment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/CommentContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/CommentContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/EnterpriseList.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/EnterpriseList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/EnterprisePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/EnterprisePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/EnterpriseTag.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/EnterpriseTag.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/VoteManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/VoteManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/WaterBodyList.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/WaterBodyList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/WaterBodyPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/WaterBodyPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/WaterBodyTag.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/WaterBodyTag.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/components.css" beforeDir="false" afterPath="$PROJECT_DIR$/components/components.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/material.components.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/material.components.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/material/components.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/material/components.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/styles/comments.css" beforeDir="false" afterPath="$PROJECT_DIR$/components/styles/comments.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/protected.js" beforeDir="false" afterPath="$PROJECT_DIR$/protected.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/enterprise/details/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/test/enterprise/details/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/enterprise/details/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/enterprise/details/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/enterprise/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/test/enterprise/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/waterbody/details/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/test/waterbody/details/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/waterbody/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/test/waterbody/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,17 +61,18 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
+  "associatedIndex": 6
 }]]></component>
-  <component name="ProjectId" id="2YrU4p9taevMbmM0T05CRhw3aD8" />
+  <component name="ProjectId" id="2YrXHIuf9BxrOaot5lG4J6B3STi" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -46,13 +84,13 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "F:/Documents/GitHub/la-colectiva-api/simple-page",
+    "last_opened_file_path": "F:/Documents/GitHub/la-colectiva-api",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -63,12 +101,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1c21bc48-c91e-42f4-90c3-9aad828f629d" name="Changes" comment="" />
-      <created>1701283003535</created>
+      <changelist id="f6d5b06f-0439-486a-a4d5-3109abbc6888" name="Changes" comment="" />
+      <created>1701284583306</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1701283003535</updated>
-      <workItem from="1701283004526" duration="598000" />
+      <updated>1701284583306</updated>
+      <workItem from="1701284584358" duration="62209000" />
     </task>
     <servers />
   </component>

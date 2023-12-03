@@ -1,0 +1,19 @@
+@import url('./material-colors.css');
+.enterprise-phone-list {
+    & .enterprise-phone-list__ul {
+        margin: 0px;
+        list-style: none;
+        padding: 0px;
+        & .enterprise-phone-list__item {
+            width: 100%;
+            padding: 4px 8px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            & .enterprise-phone-list__item-content {
+                width: 100%;
+                padding-left: 12px;
+            }
+        }
+    }
+}
