@@ -5,17 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6d5b06f-0439-486a-a4d5-3109abbc6888" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/boats/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/boats/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/Chip.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/boat/BoatSelect.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/dock/DockPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/dock/DockSelect.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/dock/PropertyTag.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/enterprise/EnterpriseSelect.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/material/Snackbar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/material/select/DropdownIcon.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/material/select/OutlinedSelect.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/material/select/SelectMenu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/schedule/SchedulePair.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/styles/dock-map.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/styles/dock-page.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/styles/dock-select.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/styles/map.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/styles/schedules.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docks/dock/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docks/dock/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docks/map/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docks/map/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interislena.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/next/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/next/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/signup/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/signup/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/waterbody/add/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/waterbody/add/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/waterbody/add/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/enterprise/details/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/enterprise/details/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/enterprise/details/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/enterprise/details/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/enterprise/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/enterprise/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/enterprise/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/enterprise/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/waterbody/details/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/waterbody/details/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/waterbody/details/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/waterbody/details/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/waterbody/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/waterbody/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/waterbody/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/waterbody/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boats/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/boats/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boats/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/boats/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/WaterBodyTag.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/WaterBodyTag.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/boat/BoatPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/boat/BoatPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/components.css" beforeDir="false" afterPath="$PROJECT_DIR$/components/components.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/material/TextField.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/material/TextField.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/material/dialog/FullscreenDialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/material/dialog/FullscreenDialog.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/styles/carrousel.css" beforeDir="false" afterPath="$PROJECT_DIR$/components/styles/carrousel.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,9 +51,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="CSS File" />
         <option value="JavaScript File" />
-        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -79,7 +105,7 @@
       <option name="presentableId" value="Default" />
       <updated>1701284583306</updated>
       <workItem from="1701284584358" duration="62209000" />
-      <workItem from="1701608587788" duration="1092000" />
+      <workItem from="1701608587788" duration="75464000" />
     </task>
     <servers />
   </component>

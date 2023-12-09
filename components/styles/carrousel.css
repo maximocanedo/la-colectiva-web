@@ -3,7 +3,7 @@ body {
     padding: 0px;
 }
 .carousel {
-    position: absolute;
+    position: relative;
     width: 100%;
     height: auto;
     min-height: 200px;

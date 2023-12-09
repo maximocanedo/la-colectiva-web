@@ -1,0 +1,15 @@
+.dock {
+    border-radius: 15px;
+    background: white;
+    border: 3px solid #f44336;
+    width: 12px;
+    height: 12px;
+}
+#map_fixed {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    border-radius: 0px !important;
+}

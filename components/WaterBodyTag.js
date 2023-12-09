@@ -1,9 +1,11 @@
 "use strict";
+import Chip from "./Chip.js";
+
 export default class WaterBodyTag {
     constructor(data) {
         this.getData = () => data;
     }
-    static rootPath = "/test/waterbody/details";
+    static rootPath = "/waterbody/details";
     static getNames() {
         return [
             "Río", "Arroyo", "Riachuelo", "Canal", "Lago", "Estanque", "Laguna", "Embalse", "Pantano",
@@ -12,9 +14,15 @@ export default class WaterBodyTag {
     }
     render() {
         const data = this.getData();
-        const a = document.createElement("a");
-        a.setAttribute("href", `${WaterBodyTag.rootPath}?id=${data._id}`);
-        a.innerText = `${WaterBodyTag.getNames()[data.type]} ${data.name}`;
-        return a;
+        const tag = new Chip({
+            label: `${WaterBodyTag.getNames()[data.type]} ${data.name}`,
+            icon: "place",
+            ripple: true
+        });
+        const yoink = tag.render();
+        yoink.addEventListener("click", e => {
+            window.location = `${WaterBodyTag.rootPath}?id=${data._id}`;
+        });
+        return yoink;
     }
 }

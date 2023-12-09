@@ -1,4 +1,4 @@
-import {MDCTextField} from "./components.js";
+import {MDCTextField, MDCTextFieldIcon} from "./components.js";
 
 class TextField {
     static getRandomId(prefix = "") {
@@ -8,10 +8,12 @@ class TextField {
         str += ln === 0 ? "" : ln;
         return str.replaceAll(".", "_");
     }
-    constructor({variant, type, label}, value = "") {
-        this.options = {variant, type, label};
+    constructor({variant, type, label, icon}, value = "") {
+        this.options = {variant, type, label, icon};
         const id = TextField.getRandomId("MDCTextField");
+        this.hasIcon = () => icon !== null && icon !== "";
         this.getId = () => id;
+        this.hasLabel = () => label !== "";
         this.element = this._createTextField();
         this.getInitialValue = () => value;
 
@@ -20,6 +22,8 @@ class TextField {
     _createTextField() {
         const textFieldContainer = document.createElement('label');
         textFieldContainer.classList.add('mdc-text-field');
+        if(!this.hasLabel()) textFieldContainer.classList.add("mdc-text-field--no-label");
+        if(this.hasIcon()) textFieldContainer.classList.add("mdc-text-field--with-leading-icon");
         textFieldContainer.id = this.getId();
         this.getTxtContainer = () => textFieldContainer;
         let inputType = 'text';
@@ -44,6 +48,15 @@ class TextField {
         this.material.setcharacterCounter = e => null;
         this.material.foundation.setValue(v);
     }
+    generateIcon() {
+        const element = document.createElement("i");
+        element.classList.add("material-icons", "mdc-text-field__icon", "mdc-text-field__icon--leading");
+        element.setAttribute("tabindex", 0);
+        element.setAttribute("role", "button");
+        element.innerText = this.options.icon;
+        new MDCTextFieldIcon(element);
+        return element;
+    }
 
     _createFilledTextField(inputType) {
         const rippleSpan = document.createElement('span');
@@ -63,22 +76,24 @@ class TextField {
 
         const lineRippleSpan = document.createElement('span');
         lineRippleSpan.classList.add('mdc-line-ripple');
-
-        return [rippleSpan, floatingLabelSpan, inputField, lineRippleSpan];
+        const icon = this.hasIcon() ? this.generateIcon() : "";
+        return [rippleSpan, (this.hasLabel() ? floatingLabelSpan : ""), icon, inputField, lineRippleSpan];
     }
 
     _createOutlinedTextField(inputType) {
         const notchedOutline = document.createElement("span");
         notchedOutline.classList.add("mdc-notched-outline");
+        const icon = this.hasIcon() ? this.generateIcon() : "";
         const notchedOutline__leading = document.createElement("span");
         notchedOutline__leading.classList.add("mdc-notched-outline__leading");
+
         const notchedOutline__notch = document.createElement("span");
         notchedOutline__notch.classList.add("mdc-notched-outline__notch");
         const floatingLabelSpan = document.createElement('span');
         floatingLabelSpan.classList.add('mdc-floating-label');
         floatingLabelSpan.id = this.getId() + "__label";
         floatingLabelSpan.textContent = (this.options != null ? this.options.label?? "" : ""); // Set your label text here
-        notchedOutline__notch.appendChild(floatingLabelSpan);
+        if(this.hasLabel()) notchedOutline__notch.appendChild(floatingLabelSpan);
         const notchedOutline__trailing = document.createElement("span");
         notchedOutline__trailing.classList.add("mdc-notched-outline__trailing");
 
@@ -92,7 +107,7 @@ class TextField {
 
         notchedOutline.append(notchedOutline__leading, notchedOutline__notch, notchedOutline__trailing);
 
-        return [notchedOutline, inputField];
+        return [notchedOutline, icon, inputField];
     }
 
     getElement() {
