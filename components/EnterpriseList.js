@@ -5,7 +5,7 @@ export default class EnterpriseList {
         this.list = [];
     }
     async init() {
-        const source = await fetch("http://localhost:3000/enterprises/", {
+        const source = await fetch("http://colectiva.com.ar:5050/enterprises/", {
             method: 'GET',
             credentials: 'include',
             headers: {

@@ -87,7 +87,7 @@ export default class Comment {
     }
     async delete() {
         if(!confirm("¿Seguro de eliminar este comentario?")) return;
-        const result = await fetch(`http://localhost:3000/comments/${this.getId()}`, {
+        const result = await fetch(`http://colectiva.com.ar:5050/comments/${this.getId()}`, {
             method: "DELETE",
             credentials: 'include',
         });
@@ -118,7 +118,7 @@ export default class Comment {
 
     async edit() {
         let newValue = this.getNewContent();
-        const result = await fetch(`http://localhost:3000/comments/${this.getId()}`, {
+        const result = await fetch(`http://colectiva.com.ar:5050/comments/${this.getId()}`, {
            method: 'PUT',
             credentials: 'include',
             headers: {

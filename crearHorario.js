@@ -13,7 +13,7 @@ const genOpt = (text, value) => {
 };
 const loadDocks = async () => {
     const docks = await fetch(
-        "http://localhost:3000/docks/?q=&prefer=-1&itemsPerPage=400",
+        "http://colectiva.com.ar:5050/docks/?q=&prefer=-1&itemsPerPage=400",
         {
             method: "GET"
         }
@@ -30,7 +30,7 @@ const loadDocks = async () => {
 
 const loadPaths = async () => {
     const paths = await fetch(
-        "http://localhost:3000/paths/",
+        "http://colectiva.com.ar:5050/paths/",
         {
             method: "GET"
         }
@@ -47,7 +47,7 @@ const loadPaths = async () => {
 
 const addSchedule = async () => {
     const res = await fetch(
-        "http://localhost:3000/schedules",
+        "http://colectiva.com.ar:5050/schedules",
         {
             method: "POST",
             headers: {

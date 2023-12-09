@@ -9,7 +9,7 @@ import EnterprisePage from "../components/EnterprisePage.js";
 
 
 (async () => {
-    const someAPIURL = "http://localhost:3000/boats/6564e1d00d97905b5799e94f";
+    const someAPIURL = "http://colectiva.com.ar:5050/boats/6564e1d00d97905b5799e94f";
     const carousel = await Carousel.load(someAPIURL);
     //document.querySelector("#root").append(carousel.render());
     console.log(carousel);

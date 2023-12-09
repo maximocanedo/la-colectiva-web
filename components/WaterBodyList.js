@@ -5,7 +5,7 @@ export default class WaterBodyList {
         this.list = [];
     }
     async init() {
-        const source = await fetch("http://localhost:3000/waterBodies/", {
+        const source = await fetch("http://colectiva.com.ar:5050/waterBodies/", {
             method: 'GET',
             credentials: 'include',
             headers: {

@@ -32,7 +32,7 @@ export default class CarouselItem {
         this.getItem().classList.remove("carousel--item-active");
     }
     async loadBlob() {
-        const url = `http://localhost:3000/photos/${this.getId()}/view`;
+        const url = `http://colectiva.com.ar:5050/photos/${this.getId()}/view`;
         try {
             const respuesta = await fetch(url);
             if (respuesta.ok) {

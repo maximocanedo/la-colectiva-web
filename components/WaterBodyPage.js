@@ -9,7 +9,7 @@ export default class WaterBodyPage {
             return `${arr[this.getData().type]} ${this.getData().name}`;
         };
         this.getId = () => data._id?? null;
-        this.getAPIURL = () => `http://localhost:3000/waterBodies/${this.getId()}`;
+        this.getAPIURL = () => `http://colectiva.com.ar:5050/waterBodies/${this.getId()}`;
         this.getError = () => err;
     }
     static getNames() {
@@ -19,7 +19,7 @@ export default class WaterBodyPage {
         ];
     }
     static async load(id) {
-        const apiURL = `http://localhost:3000/waterBodies/${id}`;
+        const apiURL = `http://colectiva.com.ar:5050/waterBodies/${id}`;
         const source = await fetch(apiURL, {
             method: 'GET',
             credentials: 'include',

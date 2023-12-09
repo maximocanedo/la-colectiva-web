@@ -29,7 +29,7 @@ const fillRegion = async () => {
   };
     document.querySelector('#region').innerHTML = '';
   const f = await fetch(
-      "http://localhost:3000/waterBodies/",
+      "http://colectiva.com.ar:5050/waterBodies/",
       { method: "GET" }
   );
   if(f.status == 200) {
@@ -43,7 +43,7 @@ const fillRegion = async () => {
 
 const submit = async () => {
     const e = fetch(
-        "http://localhost:3000/docks/", {
+        "http://colectiva.com.ar:5050/docks/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
