@@ -49,9 +49,9 @@ export default class SchedulePair {
 
     }
     async init() {
-        const dv__api = `http://colectiva.com.ar:5050/schedules/${this.getDeparture()._id}`;
+        const dv__api = `https://colectiva.com.ar:5050/schedules/${this.getDeparture()._id}`;
         const dv = await VoteManager.load(dv__api);
-        const av__api = `http://colectiva.com.ar:5050/schedules/${this.getArrival()._id}`;
+        const av__api = `https://colectiva.com.ar:5050/schedules/${this.getArrival()._id}`;
         const av = await VoteManager.load(av__api);
         const votes = [
             (av.upvotes + dv.upvotes),

@@ -8,7 +8,7 @@ export default class BoatPage {
     constructor(data, id) {
         this.getId = () => id;
         this.getData = () => data;
-        this.getAPIURL = () => `http://colectiva.com.ar:5050/boats/${this.getId()}`;
+        this.getAPIURL = () => `https://colectiva.com.ar:5050/boats/${this.getId()}`;
     }
     createContainer() {
         const element = document.createElement("div");
@@ -27,7 +27,7 @@ export default class BoatPage {
         this.createCommentsContainer = () => comments;
     }
     static async load(id) {
-        const APIURL = `http://colectiva.com.ar:5050/boats/${id}`;
+        const APIURL = `https://colectiva.com.ar:5050/boats/${id}`;
         const source = await fetch(APIURL, {
             credentials: "include",
             method: "GET"

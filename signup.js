@@ -1,7 +1,7 @@
 "use strict";
 
 const signup = async () => {
-	const apiUrl = "http://colectiva.com.ar:5050/users/signup";
+	const apiUrl = "https://colectiva.com.ar:5050/users/signup";
 
 	const usernameInput = document.querySelector("#username").value;
 	const nameInput = document.querySelector("#name").value;

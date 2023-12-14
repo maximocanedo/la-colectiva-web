@@ -1,7 +1,7 @@
 "use strict";
 
 const getActualUser = async () => {
-    const userData = await fetch("http://colectiva.com.ar:5050/users/protected", {
+    const userData = await fetch("https://colectiva.com.ar:5050/users/protected", {
        method: "GET",
        credentials: 'include',
        headers: {

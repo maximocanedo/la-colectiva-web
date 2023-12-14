@@ -24,7 +24,7 @@ export default class EnterprisePage {
         return `${prefix}-${cuitBody}-${suffix}`;
     }
     static async load(id) {
-        const APIURL = `http://colectiva.com.ar:5050/enterprises/${id}`;
+        const APIURL = `https://colectiva.com.ar:5050/enterprises/${id}`;
         this.getAPIURL = () => APIURL;
         const user = await auth.getActualUser();
         const source = await fetch(this.getAPIURL(), {

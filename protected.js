@@ -2,7 +2,7 @@
 
 const access = async () => {
 	const sendData = {};
-	const apiUrl = "http://colectiva.com.ar:5050/users/protected";
+	const apiUrl = "https://colectiva.com.ar:5050/users/protected";
 	const requestOptions = {
 		method: "GET",
 		credentials: 'include',

@@ -29,7 +29,7 @@ const oldCall = (async () => {
     const btnEl = btn.getElement();
     btnEl.addEventListener("click", async (e) => {
         document.querySelector("#scheduleContainer").innerHTML = "";
-        const apiURL = `http://colectiva.com.ar:5050/query/next?departure=${select.getSelectedId()}&arrival=${select2.getSelectedId()}&time=09:20&conditions[]=WEDNESDAY`;
+        const apiURL = `https://colectiva.com.ar:5050/query/next?departure=${select.getSelectedId()}&arrival=${select2.getSelectedId()}&time=09:20&conditions[]=WEDNESDAY`;
         const data = await fetch(apiURL, {
             method: "GET",
             credentials: "include"

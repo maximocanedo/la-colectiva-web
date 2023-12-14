@@ -58,7 +58,7 @@ const types__items = [
     );
     console.log(txtType.material);
     btnEnviar.onClick(async (e) => {
-        const result = await fetch("http://colectiva.com.ar:5050/waterBodies/", {
+        const result = await fetch("https://colectiva.com.ar:5050/waterBodies/", {
             method: "POST",
             credentials: "include",
             headers: {

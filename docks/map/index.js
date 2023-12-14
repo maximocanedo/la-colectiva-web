@@ -26,7 +26,7 @@ import "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
         const q = "";
         const query = `?lat=${lat}&lng=${lng}&radio=10000&prefer=${prefer}&q=${q}&p=0&itemsPerPage=200`;
         console.log(query);
-        let source = await fetch("http://colectiva.com.ar:5050/docks/explore" + query, {
+        let source = await fetch("https://colectiva.com.ar:5050/docks/explore" + query, {
             method: "GET",
             credentials: "include"
         });

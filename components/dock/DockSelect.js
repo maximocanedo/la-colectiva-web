@@ -120,7 +120,7 @@ export default class DockSelect {
     async more() {
         this.page++;
         const page = this.page
-        const source = await fetch("http://colectiva.com.ar:5050/docks/?q="+this.q+"&prefer=-1&itemsPerPage="+this.items+"&p="+page, {
+        const source = await fetch("https://colectiva.com.ar:5050/docks/?q="+this.q+"&prefer=-1&itemsPerPage="+this.items+"&p="+page, {
             method: "GET",
             credentials: "include"
         });
@@ -132,7 +132,7 @@ export default class DockSelect {
     }
     async search() {
         const page = this.page;
-        const source = await fetch("http://colectiva.com.ar:5050/docks/?q="+this.q+"&prefer=-1&itemsPerPage="+this.items+"&p="+page, {
+        const source = await fetch("https://colectiva.com.ar:5050/docks/?q="+this.q+"&prefer=-1&itemsPerPage="+this.items+"&p="+page, {
             method: "GET",
             credentials: "include"
         });

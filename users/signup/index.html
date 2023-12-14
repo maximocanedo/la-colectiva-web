@@ -3,10 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/components/material/material-components-web.css"/>
+    <link rel="stylesheet" href="/components/components.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="./index.css" />
 </head>
-<body>
-<div id="root">
-    
-</div>
+<body class="mdc-typography">
+    <main class="mdc-card">
+        <span class="mdc-typography--headline4">Crear una cuenta</span>
+        <div class="space"></div>
+        <span class="mdc-typography--body1">Completá los siguientes campos. </span>
+        <form action="#processing" name="signup" id="signupForm" method="POST" onsubmit="return false;">
+
+        </form>
+    </main>
+<script type="module" src="./index.js"></script>
 </body>
 </html>

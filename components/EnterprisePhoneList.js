@@ -6,7 +6,7 @@ import * as auth from "./Auth.js";
 import ButtonView from "./material/ButtonView.js";
 
 export default class EnterprisePhoneList {
-    static APIPrefix = "http://colectiva.com.ar:5050/enterprises/";
+    static APIPrefix = "https://colectiva.com.ar:5050/enterprises/";
     constructor(data, enterpriseId, actualUser) {
         this.getData = () => data;
         this.getEnterpriseId = () => enterpriseId;

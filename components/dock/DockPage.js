@@ -10,11 +10,11 @@ export default class DockPage {
     constructor(data, id) {
         this.getId = () => id;
         this.getData = () => data;
-        this.getAPIURL = () => `http://colectiva.com.ar:5050/docks/${this.getId()}`;
+        this.getAPIURL = () => `https://colectiva.com.ar:5050/docks/${this.getId()}`;
 
     }
     static async load(id) {
-        const APIURL = `http://colectiva.com.ar:5050/docks/${id}`;
+        const APIURL = `https://colectiva.com.ar:5050/docks/${id}`;
         const response = await fetch(APIURL, {
             credentials: "include",
             method: "GET"

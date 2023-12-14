@@ -3,7 +3,7 @@
 import {MDCList, MDCMenu, MDCRipple} from "./material/components.js";
 
 export default class EnterprisePhoneListItem {
-    static APIPrefix = "http://colectiva.com.ar:5050/enterprises/";
+    static APIPrefix = "https://colectiva.com.ar:5050/enterprises/";
     static formatPhone(phone) {
         const digits = phone.replace(/\D/g, '');
 
