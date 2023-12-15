@@ -51,7 +51,6 @@ class TextField {
     generateIcon() {
         const element = document.createElement("i");
         element.classList.add("material-icons", "mdc-text-field__icon", "mdc-text-field__icon--leading");
-        element.setAttribute("tabindex", 0);
         element.setAttribute("role", "button");
         element.innerText = this.options.icon;
         new MDCTextFieldIcon(element);
