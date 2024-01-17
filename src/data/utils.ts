@@ -15,6 +15,20 @@ const call = async (url: string, body: any, method: string): Promise<Response | 
     }
     return null;
 };
+const get = async (url: string): Promise<Response | null> => {
+    try {
+        return await fetch(baseUrl + url, {
+            method: "GET",
+            headers: {
+                'Content-Type': "application/json",
+                'Authorization': 'Bearer ' + localStorage.getItem("la-colectiva-token")
+            }
+        });
+    } catch(error: any) {
+        console.log(error);
+    }
+    return null;
+};
 const post = async (url: string, body: any): Promise<Response | null> => await call(url, body, "POST");
 const put = async (url: string, body: any): Promise<Response | null> => await call(url, body, "PUT");
 const patch = async (url: string, body: any): Promise<Response | null> => await call(url, body, "PATCH");
@@ -34,6 +48,7 @@ export interface CommonResponse {
 }
 export const u = {
     call,
+    get,
     post,
     put,
     patch,
