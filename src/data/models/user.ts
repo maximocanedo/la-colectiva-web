@@ -71,6 +71,9 @@ export class User implements IUser, IUserMethods {
         this.role = data.role;
         this.active = data.active;
     }
+    public clone(): User {
+        return new User(this);
+    }
     /* Methods */
     public isAdmin(): boolean {
         return this.role === Role.ADMINISTRATOR;
@@ -203,20 +206,20 @@ export class User implements IUser, IUserMethods {
             message: "Error desconocido. "
         };
     }
-    public static async findById(id: string): Promise<User | IError> {
-        const call = await u.get(`users/${id}`);
+    public static async findByUsername(username: string): Promise<User> {
+        const call = await u.get(`users/${username}`);
         if(call != null) {
             const { status } = call;
             if(status === 200) return new User(await call.json()); else {
                 const error: IError = (await call.json()).error;
-                return error;
+                return Promise.reject(error);
             }
         }
-        return {
+        return Promise.reject({
             code: "unknown",
             message: "Error desconocido. ",
             details: "Error desconocido. "
-        };
+        });
 
     }
     public static async myself(): Promise<User | IError> {

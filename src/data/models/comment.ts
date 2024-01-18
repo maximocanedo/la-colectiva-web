@@ -32,6 +32,12 @@ export interface ICommentCreationResponse {
     message: string;
 }
 
+export interface ICommentable {
+    fetchComments: (paginator: IPaginator) => Promise<ICommentFetchResponse>;
+    postComment: (content: string) => Promise<ICommentCreationResponse>;
+    deleteComment?: (comment: Comment) => Promise<CommonResponse>;
+}
+
 export class Comment implements IComment {
     public _id: string;
     public user: IUser | string;
@@ -47,6 +53,10 @@ export class Comment implements IComment {
         this.active = comment.active;
         this.uploadDate = comment.uploadDate;
         this.__v = comment.__v;
+    }
+
+    public clone(): Comment {
+        return new Comment(this);
     }
 
     public async edit(content: string): Promise<CommonResponse> {
@@ -116,7 +126,7 @@ export class Comment implements IComment {
         }
     }
 
-    public static async get(API: string, paginator: IPaginator): Promise<ICommentFetchResponse> {
+    public static async fetch(API: string, paginator: IPaginator): Promise<ICommentFetchResponse> {
         const call = await u.get(API + "/comments");
         if(call != null) {
             const { status } = call;
