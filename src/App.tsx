@@ -8,6 +8,7 @@ import * as auth from "./data/auth";
 	const user = await User.myself();
 	console.log(user);
 })();
+
 function App() {
 	return (
 		<div className="App">
