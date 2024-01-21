@@ -32,7 +32,7 @@ const get = async (url: string): Promise<Response | null> => {
 const post = async (url: string, body: any): Promise<Response | null> => await call(url, body, "POST");
 const put = async (url: string, body: any): Promise<Response | null> => await call(url, body, "PUT");
 const patch = async (url: string, body: any): Promise<Response | null> => await call(url, body, "PATCH");
-const del = async (url: string, body: any): Promise<Response | null> => await call(url, body, "DELETE");
+const del = async (url: string, body?: any): Promise<Response | null> => await call(url, body, "DELETE");
 const head = async (url: string, body: any): Promise<Response | null> => await call(url, body, "HEAD");
 export interface IError {
     code: string;
