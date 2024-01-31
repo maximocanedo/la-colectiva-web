@@ -32,7 +32,7 @@ enum DockPropertyStatus {
     UNLISTED = 5
 };
 
-interface IDock {
+export interface IDock {
     _id: string;
     name: string;
     address: number;
