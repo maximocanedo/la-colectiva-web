@@ -10,3 +10,4 @@ export interface ISchedule {
     user: IUser | string,
     active: boolean
 }
+
