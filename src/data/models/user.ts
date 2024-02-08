@@ -1,12 +1,12 @@
-'use strict';
-import { CommonResponse, IError, u } from "./../utils";
+import { CommonResponse, IError, u } from "../utils";
 export enum Role {
     OBSERVER = 0,
     NORMAL = 1,
     MODERATOR = 2,
     ADMINISTRATOR = 3
-};
+}
 type Birth = Date | string | number;
+
 /**
  * Datos necesarios para crear una cuenta. 
  */
@@ -102,7 +102,7 @@ export const updatePassword = async (username: string, password: string): Promis
  * @param data Datos a editar.
  * @returns Respuesta de la operación.
  */
-export const edit = async (username: string, data: IUserEditRequest): Promise<CommonResponse> {
+export const edit = async (username: string, data: IUserEditRequest): Promise<CommonResponse> => {
     const call = await u.put(`users/${username}`, data);
     if(call != null) {
         const { status } = call;
@@ -121,7 +121,7 @@ export const edit = async (username: string, data: IUserEditRequest): Promise<Co
         success: false,
         message: "Error desconocido. "
     };
-}
+};
 
 /**
  * Deshabilita un usuario.
@@ -150,7 +150,7 @@ export const disable = async (username: string): Promise<CommonResponse> => {
         success: false,
         message: "Error desconocido. "
     };
-}
+};
 
 /**
  * Envia un correo de verificación para comenzar el proceso de recuperación de cuenta.
@@ -170,10 +170,10 @@ export const recover = async (username: string): Promise<MailVerificationSentRes
     return {
         success: false
     }
-}
+};
 
 
-interface ISignUpResponse extends CommonResponse {
+export interface ISignUpResponse extends CommonResponse {
     validationId: string | null;
     error?: IError | null;
 }
@@ -202,10 +202,11 @@ export const create = async (data: ISignUpRequest): Promise<ISignUpResponse> => 
         }
     }
     return {
+        validationId: null,
         success: false,
         message: "Error desconocido. "
     };
-}
+};
 
 // TODO - Probar
 /**
@@ -214,9 +215,9 @@ export const create = async (data: ISignUpRequest): Promise<ISignUpResponse> => 
  * @returns Usuario.
  */
 export const findByUsername = async (username: string): Promise<IUser> => {
-    const call = await u.get(`users/${username}`);
+    const call: Response | null = await u.get(`users/${username}`);
     if(call != null) {
-        const { status } = call;
+        const { status }: Response = call;
         if(status === 200) return await call.json(); 
         else {
             const error: IError = (await call.json()).error;
@@ -229,27 +230,26 @@ export const findByUsername = async (username: string): Promise<IUser> => {
         details: "Error desconocido. "
     });
 
-}
+};
 
 /**
  * Obtiene el usuario en sesión.
  * @returns Usuario actual.
  */
 export const myself = async (): Promise<IUser | IError> => {
-    const call = await u.get(`users/me`);
+    const call: Response | null = await u.get(`users/me`);
     if(call != null) {
-        const { status } = call;
-        if(status === 200) return await call.json(); 
+        const { status }: Response = call;
+        if(status === 200) return await call.json() as IUser;
         else {
-            const error: IError = (await call.json()).error;
-            return error;
+            return (await call.json()).error as IError;
         }
     }
     return {
         code: "unknown",
         message: "Error desconocido. ",
         details: "Error desconocido. "
-    };
+    } as IError;
 }
 
 /**
@@ -257,7 +257,7 @@ export const myself = async (): Promise<IUser | IError> => {
  * @param username Nombre de usuario.
  */
 export const usernameExists = async (username: string): Promise<boolean> => {
-    const call = await u.head(`users/${username}`, {});
+    const call: Response | null = await u.head(`users/${username}`, {});
     return call !== null && call.status === 200;
 }
 
@@ -272,9 +272,9 @@ interface IMailSentFinalResponse {
  * @param mail Correo nuevo.
  */
 export const updateMail = async (mail: string): Promise<IMailSentFinalResponse> => {
-    const call = await u.post("users/me/mail", { mail });
+    const call: Response | null = await u.post("users/me/mail", { mail });
     if(call != null) {
-        const { status } = call;
+        const { status }: Response = call;
         const data: IMailSentResponse = await call.json();
         return {
             success: status === 200,
@@ -291,9 +291,9 @@ export const updateMail = async (mail: string): Promise<IMailSentFinalResponse> 
  * @param password Nueva contraseña.
  */
 export const updateMyPassword = async (password: string): Promise<CommonResponse> => {
-    const call = await u.patch(`users/me`, { password });
+    const call: Response | null = await u.patch(`users/me`, { password });
     if(call != null) {
-        const { status } = call;
+        const { status }: Response = call;
         if(status === 200) return {
             success: true,
             message: "Contraseña actualizada correctamente. "
@@ -319,9 +319,9 @@ export const updateMyPassword = async (password: string): Promise<CommonResponse
  * @returns Respuesta de la operación.
  */
 export const tryCode = async (validationId: string, code: string, password?: string): Promise<CommonResponse> => {
-    const call = await u.post(`users/validate/${validationId}`, { code, password });
+    const call: Response | null = await u.post(`users/validate/${validationId}`, { code, password });
     if(call != null) {
-        const { status } = call;
+        const { status }: Response = call;
         if(status === 204) return {
             success: true,
             message: "Cuenta verificada/recuperada correctamente. "
@@ -345,9 +345,9 @@ export const tryCode = async (validationId: string, code: string, password?: str
  * @returns Resultado de la operación.
  */
 export const editMyself = async (data: IUserEditRequest): Promise<CommonResponse> => {
-    const call = await u.put(`users/me`, data);
+    const call: Response | null = await u.put(`users/me`, data);
     if(call != null) {
-        const { status } = call;
+        const { status }: Response = call;
         if(status === 200) return {
             success: true,
             message: "Tu cuenta fue editada correctamente. "
@@ -370,12 +370,9 @@ export const editMyself = async (data: IUserEditRequest): Promise<CommonResponse
  * @returns Respuesta de la operación.
  */
 export const disableMyself = async (): Promise<CommonResponse> => {
-    const call = await u.del(
-        `users/me`, 
-        {}
-    );
+    const call: Response | null = await u.del("users/me", {});
     if(call != null) {
-        const { status } = call;
+        const { status }: Response = call;
         if(status === 200) return {
             success: true,
             message: "Tu cuenta fue deshabilitada correctamente. "
