@@ -1,6 +1,6 @@
-'use strict';
-import { u, CommonResponse } from "../utils";
+import { u, CommonResponse, IError } from "../utils";
 import { IUser } from "./user";
+import { Err } from "../error";
 
 export interface IComment {
     _id: string;
@@ -38,114 +38,67 @@ export interface ICommentable {
     deleteComment?: (comment: Comment) => Promise<CommonResponse>;
 }
 
-export class Comment implements IComment {
-    public _id: string;
-    public user: IUser | string;
-    public content: string;
-    public active: boolean;
-    public uploadDate: Date;
-    public __v: number;
+const getPrefix = (id: string): string => "comments/" + id;
 
-    constructor(comment: IComment) {
-        this._id = comment._id;
-        this.user = comment.user;
-        this.content = comment.content;
-        this.active = comment.active;
-        this.uploadDate = comment.uploadDate;
-        this.__v = comment.__v;
+/**
+ * Edita un comentario.
+ * @param id ID del comentario a editar.
+ * @param content Nuevo contenido del comentario.
+ */
+export const edit = async (id: string, content: string): Promise<IComment> => {
+    const call: Response = await u.put(getPrefix(id), { content });
+    const { status }: Response = call;
+    const data = await call.json();
+    if(status === 200) {
+        return data;
+    } else {
+        throw new Err(data.error as IError);
     }
+};
 
-    public clone(): Comment {
-        return new Comment(this);
-    }
-
-    public async edit(content: string): Promise<CommonResponse> {
-        const call = await u.put("comments/" + this._id, { content });
-        if(call !== null) {
-            const { status } = call;
-            const data = await call.json();
-            if(status === 200) {
-                this.content = data.content;
-                this.uploadDate = data.uploadDate;
-                this.__v = data.__v;
-                this.active = data.active;
-                return {
-                    success: true,
-                    message: "Comentario editado con éxito. "
-                };
-            } else {
-                return {
-                    success: false,
-                    ...data
-                };
-            }
-        }
+/**
+ * Elimina un comentario.
+ * @param prefix Prefijo de la URL del recurso que contiene ese comentario.
+ * @param id ID del comentario.
+ */
+export const del = async (prefix: string, id: string): Promise<CommonResponse> => {
+    const call: Response = await u.del(`${prefix}/${getPrefix(id)}`, {});
+    const { status }: Response = call;
+    const data = await call.json();
+    if(status === 200) {
         return {
-            success: false,
-            message: "Error de conexión. "
+            success: true,
+            message: "Comentario eliminado con éxito. "
         };
+    } else {
+        throw new Err(data.error as IError);
     }
+};
 
-    public async delete(API: string): Promise<CommonResponse> {
-        const call = await u.del(API + "/comments/" + this._id, {});
-        if(call !== null) {
-            const { status } = call;
-            const data = await call.json();
-            if(status === 200) {
-                this.active = false;
-                return {
-                    success: true,
-                    message: "Comentario eliminado con éxito. "
-                };
-            } else {
-                return {
-                    success: false,
-                    ...data
-                };
-            }
-        }
-        return {
-            success: false,
-            message: "Error de conexión. "
-        };
-    }
+/**
+ * Publica un comentario.
+ * @param prefix Prefijo de la URL del recurso que se desea comentar.
+ * @param content Contenido del comentario.
+ */
+export const post = async (prefix: string, content: string): Promise<ICommentFetchResponse> => {
+    const call: Response = await u.post(prefix + "/comments", { content });
+    const { status }: Response = call;
+    const data = await call.json();
+    if(status === 201) return {
+        ...data,
+        success: true
+    }; else throw new Err(data.error as IError);
+};
 
-    public static async post(API: string, content: string): Promise<ICommentCreationResponse> {
-        const call = await u.post(API + "/comments", { content });
-        if(call != null) {
-            const { status } = call;
-            const data = await call.json();
-            return {
-                ...data,
-                success: status === 201
-            }
-        } return {
-            success: false,
-            comment: [],
-            message: ""
-        }
-    }
-
-    public static async fetch(API: string, paginator: IPaginator): Promise<ICommentFetchResponse> {
-        const call = await u.get(API + "/comments");
-        if(call != null) {
-            const { status } = call;
-            const data = await call.json();
-            if(status === 200) return {
-                success: true,
-                comments: data,
-                message: ""
-            }; return {
-                success: false,
-                comments: [],
-                message: ""
-            }
-        } return {
-            success: false,
-            comments: [],
-            message: ""
-        };
-    }
-
-
-}
+/**
+ * Obtiene comentarios de un recurso.
+ * @param prefix Prefijo de la URL del recurso cuyos comentarios se desea obtener.
+ * @param paginator Objeto paginador.
+ */
+export const fetch = async (prefix: string, paginator: IPaginator = { p: 0, itemsPerPage: 10 }): Promise<IComment[]> => {
+    const call: Response = await u.get(prefix + `/comments?p=${paginator.p}&itemsPerPage=${paginator.itemsPerPage}`);
+    const { status }: Response = call;
+    const data = await call.json();
+    if(status === 200) return data;
+    else throw new Err(data.error as IError);
+};

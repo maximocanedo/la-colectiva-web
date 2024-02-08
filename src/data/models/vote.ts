@@ -1,5 +1,3 @@
-'use strict';
-
 import { u } from "../utils";
 
 export enum VoteType {
@@ -25,8 +23,7 @@ const vote = async (type: VoteType, pre: string): Promise<VoteStatus> => {
     return (call.ok && data) || NO_VOTES_FETCHED;
 };
 export const getVotes = async (pre: string): Promise<VoteStatus> => {
-    const call = await u.get(`${pre}/vote`);
-    if(call === null) return NO_VOTES_FETCHED;
+    const call: Response = await u.get(`${pre}/vote`);
     const data = await call.json();
     return (call.ok && data) || NO_VOTES_FETCHED;
 };
