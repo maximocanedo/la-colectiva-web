@@ -1,4 +1,5 @@
 import { CommonResponse, IError, u } from "../utils";
+import {Err, ConnectionError} from "../error";
 export enum Role {
     OBSERVER = 0,
     NORMAL = 1,
@@ -49,25 +50,20 @@ export interface MailVerificationSentResponse {
  * @returns Respuesta de la operación.
  */
 export const updateRole = async (username: string, role: Role): Promise<CommonResponse> => {
-    const call = await u.patch(`users/${username}`, { role });
-    if(call != null) {
-        const { status } = call;
-        if(status === 200) return {
+    const call: Response | null = await u.patch(`users/${username}`, { role });
+    if (call != null) {
+        const { status }: Response = call;
+        if (status === 200) return {
             success: true,
             message: "Rol actualizado correctamente. "
-        }; else {
-            const error: IError = (await call.json()).error;
-            return {
-                success: false,
-                ...error
-            };
+        };
+        else {
+            throw new Err((await call.json()).error as IError);
         }
     }
-    return {
-        success: false,
-        message: "Error desconocido. "
-    };
+    throw new Err(ConnectionError);
 };
+
 
 /**
  * Cambia la contraseña de un usuario.
@@ -76,24 +72,18 @@ export const updateRole = async (username: string, role: Role): Promise<CommonRe
  * @returns Respuesta de la operación.
  */
 export const updatePassword = async (username: string, password: string): Promise<CommonResponse> => {
-    const call = await u.patch(`users/${username}`, { password });
+    const call: Response | null = await u.patch(`users/${username}`, { password });
     if(call != null) {
-        const { status } = call;
+        const { status }: Response = call;
         if(status === 200) return {
             success: true,
             message: "Contraseña actualizada correctamente. "
         }; else {
             const error: IError = (await call.json()).error;
-            return {
-                success: false,
-                ...error
-            };
+            throw new Err(error);
         }
     }
-    return {
-        success: false,
-        message: "Error desconocido. "
-    };        
+    throw new Err(ConnectionError);
 }
 
 /**
@@ -103,24 +93,18 @@ export const updatePassword = async (username: string, password: string): Promis
  * @returns Respuesta de la operación.
  */
 export const edit = async (username: string, data: IUserEditRequest): Promise<CommonResponse> => {
-    const call = await u.put(`users/${username}`, data);
+    const call: Response | null = await u.put(`users/${username}`, data);
     if(call != null) {
-        const { status } = call;
+        const { status }: Response = call;
         if(status === 200) return {
             success: true,
             message: "Usuario editado correctamente. "
         }; else {
             const error: IError = (await call.json()).error;
-            return {
-                success: false,
-                ...error
-            };
+            throw new Err(error);
         }
     }
-    return {
-        success: false,
-        message: "Error desconocido. "
-    };
+    throw new Err(ConnectionError);
 };
 
 /**
@@ -129,53 +113,42 @@ export const edit = async (username: string, data: IUserEditRequest): Promise<Co
  * @returns Respuesta de la operación.
  */
 export const disable = async (username: string): Promise<CommonResponse> => {
-    const call = await u.del(
+    const call: Response | null = await u.del(
         `users/${username}`, 
         {}
     );
     if(call != null) {
-        const { status } = call;
+        const { status }: Response = call;
         if(status === 200) return {
             success: true,
             message: "Usuario deshabilitado correctamente. "
         }; else {
             const error: IError = (await call.json()).error;
-            return {
-                success: false,
-                ...error
-            };
+            throw new Err(error);
         }
     }
-    return {
-        success: false,
-        message: "Error desconocido. "
-    };
+    throw new Err(ConnectionError);
 };
 
 /**
- * Envia un correo de verificación para comenzar el proceso de recuperación de cuenta.
+ * Envía un correo de verificación para comenzar el proceso de recuperación de cuenta.
  * @param username Nombre de usuario.
  * @returns Objeto con el resultado de la operación y el ID de validación.
  */
 export const recover = async (username: string): Promise<MailVerificationSentResponse> => {
-    const call = await u.post(`users/${username}/recover`, {});
+    const call: Response | null = await u.post(`users/${username}/recover`, {});
     if(call !== null) {
-        const { status } = call;
+        const { status }: Response = call;
         const data = await call.json();
-        return {
-            success: status === 200,
-            ...data
-        };
+        if(status === 200) return { success: true, ...data };
+        else throw new Err(data.error as IError);
     }
-    return {
-        success: false
-    }
+    throw new Err(ConnectionError);
 };
 
 
 export interface ISignUpResponse extends CommonResponse {
     validationId: string | null;
-    error?: IError | null;
 }
 /**
  * Crea una cuenta de usuario.
@@ -183,9 +156,9 @@ export interface ISignUpResponse extends CommonResponse {
  * @returns Respuesta de la operación.
  */
 export const create = async (data: ISignUpRequest): Promise<ISignUpResponse> => {
-    const call = await u.post("users", data);
+    const call: Response | null = await u.post("users", data);
     if(call != null) {
-        const { status } = call;
+        const { status }: Response = call;
         const { code, ...data } = await call.json();
         if(status === 201) return {
             ...data,
@@ -193,19 +166,10 @@ export const create = async (data: ISignUpRequest): Promise<ISignUpResponse> => 
             message: "Usuario creado correctamente. "
         }; else {
             const error: IError = (await call.json()).error;
-            return {
-                validationId: null,
-                success: false,
-                message: error.message,
-                error
-            };
+            throw new Err(error);
         }
     }
-    return {
-        validationId: null,
-        success: false,
-        message: "Error desconocido. "
-    };
+    throw new Err(ConnectionError);
 };
 
 // TODO - Probar
@@ -221,14 +185,10 @@ export const findByUsername = async (username: string): Promise<IUser> => {
         if(status === 200) return await call.json(); 
         else {
             const error: IError = (await call.json()).error;
-            return Promise.reject(error);
+            throw new Err(error);
         }
     }
-    return Promise.reject({
-        code: "unknown",
-        message: "Error desconocido. ",
-        details: "Error desconocido. "
-    });
+    throw new Err(ConnectionError);
 
 };
 
@@ -236,20 +196,17 @@ export const findByUsername = async (username: string): Promise<IUser> => {
  * Obtiene el usuario en sesión.
  * @returns Usuario actual.
  */
-export const myself = async (): Promise<IUser | IError> => {
+export const myself = async (): Promise<IUser> => {
     const call: Response | null = await u.get(`users/me`);
     if(call != null) {
         const { status }: Response = call;
         if(status === 200) return await call.json() as IUser;
         else {
-            return (await call.json()).error as IError;
+            const e: IError = (await call.json()).error as IError;
+            throw new Err(e);
         }
     }
-    return {
-        code: "unknown",
-        message: "Error desconocido. ",
-        details: "Error desconocido. "
-    } as IError;
+    throw new Err(ConnectionError);
 }
 
 /**
@@ -261,7 +218,7 @@ export const usernameExists = async (username: string): Promise<boolean> => {
     return call !== null && call.status === 200;
 }
 
-type IMailSentResponse = { validationId: string } | { error: IError };
+type IMailSentResponse = { validationId: string, error?: IError };
 interface IMailSentFinalResponse {
     success: boolean;
     validationId?: string;
@@ -276,14 +233,12 @@ export const updateMail = async (mail: string): Promise<IMailSentFinalResponse> 
     if(call != null) {
         const { status }: Response = call;
         const data: IMailSentResponse = await call.json();
-        return {
-            success: status === 200,
+        if(status === 200) return {
+            success: true,
             ...data
-        };
+        }; else throw new Err(data.error as IError);
     }
-    return {
-        success: false
-    }
+    throw new Err(ConnectionError);
 }
 
 /**
@@ -299,16 +254,10 @@ export const updateMyPassword = async (password: string): Promise<CommonResponse
             message: "Contraseña actualizada correctamente. "
         }; else {
             const error: IError = (await call.json()).error;
-            return {
-                success: false,
-                ...error
-            };
+            throw new Err(error);
         }
     }
-    return {
-        success: false,
-        message: "Error desconocido. "
-    };        
+    throw new Err(ConnectionError);
 }
 
 /**
@@ -327,16 +276,10 @@ export const tryCode = async (validationId: string, code: string, password?: str
             message: "Cuenta verificada/recuperada correctamente. "
         }; else {
             const error: IError = (await call.json()).error;
-            return {
-                success: false,
-                ...error
-            };
+            throw new Err(error);
         }
     }
-    return {
-        success: false,
-        message: "Error desconocido. "
-    };        
+    throw new Err(ConnectionError);
 }
 
 /**
@@ -353,16 +296,10 @@ export const editMyself = async (data: IUserEditRequest): Promise<CommonResponse
             message: "Tu cuenta fue editada correctamente. "
         }; else {
             const error: IError = (await call.json()).error;
-            return {
-                success: false,
-                ...error
-            };
+            throw new Err(error);
         }
     }
-    return {
-        success: false,
-        message: "Error desconocido. "
-    };
+    throw new Err(ConnectionError);
 }
 
 /**
@@ -378,14 +315,8 @@ export const disableMyself = async (): Promise<CommonResponse> => {
             message: "Tu cuenta fue deshabilitada correctamente. "
         }; else {
             const error: IError = (await call.json()).error;
-            return {
-                success: false,
-                ...error
-            };
+            throw new Err(error);
         }
     }
-    return {
-        success: false,
-        message: "Error desconocido. "
-    };
+    throw new Err(ConnectionError);
 }

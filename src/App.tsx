@@ -1,15 +1,36 @@
-import React from "react";
+import React, {ReactElement} from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { User } from "./data/models/user";
+import * as user from "./data/models/user";
+import { IUser } from "./data/models/user";
 import * as auth from "./data/auth";
 
-(async () => {
-	const user = await User.myself();
-	console.log(user);
+(async (): Promise<void> => {
+	// Two ways of finding a user by its username.
+	// 1:
+	console.log(1);
+
+	user.findByUsername("root")
+		.then((user: IUser): void => {
+			console.log(user);
+		})
+		.catch((error: Error): void => {
+			console.error(error);
+		});
+
+	// 2:
+	console.log(2);
+
+	try {
+		const data: IUser = await user.findByUsername("root");
+		console.log(data);
+	} catch(error) {
+		console.error(error);
+	}
+
 })();
 
-function App() {
+function App(): ReactElement {
 	return (
 		<div className="App">
 			<header className="App-header">

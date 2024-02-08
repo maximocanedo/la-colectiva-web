@@ -45,6 +45,7 @@ export interface CommonResponse {
     details?: string;
     code?: string;
     data?: any | null;
+    error?: IError;
 }
 export const u = {
     call,

@@ -35,189 +35,196 @@ interface IEnterpriseEdit {
     foundationDate: Date;
 }
 
-export class Enterprise implements IEnterprise {
-    public _id: string;
-    public cuit?: number;
-    public name?: string;
-    public user?: IUser | string;
-    public description?: string;
-    public foundationDate?: Date;
-    public phones?: [string];
-    public active?: boolean;
-    public uploadDate?: Date;
-    public __v?: number;
+const getAPIPrefix = (id: string): string => `enterprises/${id}`;
 
-    constructor(data: IEnterprise) {
-        this._id = data._id;
-        this.cuit = data.cuit;
-        this.name = data.name;
-        this.user = data.user;
-        this.description = data.description;
-        this.foundationDate = data.foundationDate;
-        this.phones = data.phones;
-        this.active = data.active;
-        this.uploadDate = data.uploadDate;
-        this.__v = data.__v;
-    }
+/**
+ * Actualizar datos de una empresa.
+ * @param id ID de la empresa.
+ * @param data Datos a actualizar.
+ */
+export const edit = async (id: string, data: IEnterpriseEdit): Promise<CommonResponse> => {
+    const call: Response | null = await u.put(getAPIPrefix(id), data);
+    if(call !== null) {
+        const { status }: Response = call;
+        if(status === 200) return {
+            success: true,
+            message: "Edición exitosa. "
+        };
+        else {
+            const { error }: { error: IError } = await call.json();
+            return {
+                success: false,
+                ...error
+            };
+        }
+    } return {
+        success: false,
+        message: "Error de conexión. "
+    };
+};
 
-    
-    public async edit(data: IEnterpriseEdit): Promise<CommonResponse> {
-        const call = await u.put(this.getAPIPrefix(), data);
-        if(call !== null) {
-            const { status } = call;
-            if(status == 200) return {
-                success: true,
-                message: "Edición exitosa. "
-            };
-            else {
-                const { error }: { error: IError } = await call.json();
-                return {
-                    success: false,
-                    ...error
-                };
-            }
-        } return {
+/**
+ * Deshabilitar un registro de empresa.
+ * @param id ID de la empresa.
+ */
+export const disable = async (id: string): Promise<CommonResponse> => {
+    const call: Response | null = await u.del(getAPIPrefix(id), {});
+    if(call == null) return {
+        success: false,
+        message: "Error de conexión. "
+    };
+    const { status }: Response = call;
+    if(status === 200) return {
+        success: true,
+        message: "Eliminación exitosa. "
+    };
+    else {
+        const { error }: { error: IError } = await call.json();
+        return {
             success: false,
-            message: "Error de conexión. "
+            ...error
         };
     }
-    public async delete(): Promise<CommonResponse> {
-        const call = await u.del(this.getAPIPrefix(), {});
-        if(call == null) return {
+};
+
+/**
+ * Crea un registro de empresa.
+ * @param enterprise Datos de la empresa.
+ */
+export const create = async (enterprise: IEnterpriseCreate): Promise<CommonResponse> => {
+    const call: Response | null = await u.post("enterprises", enterprise);
+    if(call == null) return {
+    success: false,
+    message: "Error de conexión. "
+};
+const { status }: Response = call;
+if(status === 201) {
+    const data = await call.json();
+    return {
+        success: true,
+        message: "Creación exitosa. ",
+        data: {
+            ...enterprise,
+            _id: data._id
+        }
+    };
+}
+else {
+    const { error }: { error: IError } = await call.json();
+    return {
+        success: false,
+        ...error
+    };
+}
+};
+
+/**
+ * Busca un registro de empresa por ID.
+ * @param id ID del registro.
+ */
+export const find = async (id: string): Promise<IEnterprise> => {
+    const call: Response | null = await u.get(getAPIPrefix(id));
+    if(call == null) return Promise.reject({
+        code: "unknown-error",
+        message: "Error de conexión. ",
+        details: "No se pudo conectar con el servidor. "
+    });
+    const { status }: Response = call;
+    if(status === 200) {
+        const data = await call.json();
+        return data;
+    } return Promise.reject(await call.json());
+};
+
+/**
+ * Listar empresas.
+ */
+export const list = async (): Promise<IEnterprise[]> => {
+    const call: Response | null = await u.get("enterprises");
+    if(call == null) return Promise.reject({
+        code: "unknown-error",
+        message: "Error de conexión. ",
+        details: "No se pudo conectar con el servidor. "
+    });
+    const { status }: Response = call;
+    if(status === 200) {
+        const data = await call.json();
+        return data;
+    } return Promise.reject(await call.json());
+};
+
+/**
+ * Obtener lista de números asociados a una empresa.
+ * @param id ID de la empresa.
+ */
+export const getPhones = async (id: string): Promise<string[]> => {
+    const call: Response | null = await u.get(getAPIPrefix(id) + "/phones");
+    if(call == null) return [];
+    const { status }: Response = call;
+    if(status === 200) {
+        const data = await call.json();
+        return data;
+    } return [];
+}
+
+/**
+ * Asociar un número a una empresa.
+ * @param id ID de la empresa.
+ * @param phone Número de teléfono.
+ */
+export const addPhone = async (id: string, phone: string): Promise<CommonResponse> => {
+    const call: Response | null = await u.post(getAPIPrefix(id) + "/phones", { phone });
+    if(call == null) return {
+        success: false,
+        message: "Error de conexión. "
+    };
+    const { status }: Response = call;
+    if(status === 200) return {
+        success: true,
+        message: "Teléfono agregado. "
+    };
+    else {
+        const { error }: { error: IError } = await call.json();
+        return {
             success: false,
-            message: "Error de conexión. "
+            ...error
         };
-        const { status } = call;
-        if(status === 200) return {
-            success: true,
-            message: "Eliminación exitosa. "
-        };
-        else {
-            const { error }: { error: IError } = await call.json();
-            return {
-                success: false,
-                ...error
-            };
-        }
     }
-    public static async create(enterprise: IEnterpriseCreate): Promise<CommonResponse> {
-        const call = await u.post("enterprises", enterprise);
-        if(call == null) return {
+};
+
+/**
+ * Eliminar un número de empresa.
+ * @param id ID de la empresa.
+ * @param phone Número de teléfono a eliminar.
+ */
+export const deletePhone = async (id: string, phone: string): Promise<CommonResponse> => {
+    const call: Response | null = await u.del(getAPIPrefix(id) + "/phones", { phone });
+    if(call == null) return {
+        success: false,
+        message: "Error de conexión. "
+    };
+    const { status }: Response = call;
+    if(status === 200) return {
+        success: true,
+        message: "Teléfono eliminado. "
+    };
+    else {
+        const { error }: { error: IError } = await call.json();
+        return {
             success: false,
-            message: "Error de conexión. "
+            ...error
         };
-        const { status } = call;
-        if(status === 201) {
-            const data = await call.json();
-            return {
-                success: true,
-                message: "Creación exitosa. ",
-                data: new Enterprise({
-                    ...enterprise,
-                    _id: data._id
-                })
-            };
-        }
-        else {
-            const { error }: { error: IError } = await call.json();
-            return {
-                success: false,
-                ...error
-            };
-        }
-    }
-    public static async find(id: string): Promise<Enterprise> {
-        const call = await u.get("enterprises/" + id);
-        if(call == null) return Promise.reject({
-            code: "unknown-error",
-            message: "Error de conexión. ",
-            details: "No se pudo conectar con el servidor. "
-        });
-        const { status } = call;
-        if(status === 200) {
-            const data = await call.json();
-            return new Enterprise(data);
-        } return Promise.reject(await call.json());
-    }
-    public static async list(): Promise<Enterprise[]> {
-        const call = await u.get("enterprises");
-        if(call == null) return Promise.reject({
-            code: "unknown-error",
-            message: "Error de conexión. ",
-            details: "No se pudo conectar con el servidor. "
-        });
-        const { status } = call;
-        if(status === 200) {
-            const data = await call.json();
-            return data.map((data: IEnterprise) => new Enterprise(data));
-        } return Promise.reject(await call.json());
-    }
-    public async getPhones(): Promise<string[]> {
-        const call = await u.get(this.getAPIPrefix() + "/phones");
-        if(call == null) return [];
-        const { status } = call;
-        if(status === 200) {
-            const data = await call.json();
-            return data;
-        } return [];
-    }
-    public async addPhone(phone: string): Promise<CommonResponse> {
-        const call = await u.post(this.getAPIPrefix() + "/phones", { phone });
-        if(call == null) return {
-            success: false,
-            message: "Error de conexión. "
-        };
-        const { status } = call;
-        if(status === 200) return {
-            success: true,
-            message: "Teléfono agregado. "
-        };
-        else {
-            const { error }: { error: IError } = await call.json();
-            return {
-                success: false,
-                ...error
-            };
-        }
-    }
-    public async deletePhone(phone: string): Promise<CommonResponse> {
-        const call = await u.del(this.getAPIPrefix() + "/phones", { phone });
-        if(call == null) return {
-            success: false,
-            message: "Error de conexión. "
-        };
-        const { status } = call;
-        if(status === 200) return {
-            success: true,
-            message: "Teléfono eliminado. "
-        };
-        else {
-            const { error }: { error: IError } = await call.json();
-            return {
-                success: false,
-                ...error
-            };
-        }
-    }
-    public getAPIPrefix(): string {
-        return `/enterprises/${this._id}`;
-    }
-    public async getVotes(): Promise<VoteStatus> {
-        return getVotes(this.getAPIPrefix());
-    }
-    public async upvote(): Promise<VoteStatus> {
-        return upvote(this.getAPIPrefix());
-    }
-    public async downvote(): Promise<VoteStatus> {
-        return downvote(this.getAPIPrefix());
-    }
-    public async fetchComments(paginator: IPaginator): Promise<ICommentFetchResponse> {
-        return Comment.fetch(this.getAPIPrefix(), paginator);
-    }
-    public async postComment(content: string): Promise<ICommentCreationResponse> {
-        return Comment.post(this.getAPIPrefix(), content);
-    }
-    public async deleteComment(comment: Comment): Promise<CommonResponse> {
-        return comment.delete(this.getAPIPrefix());
     }
 }
+
+export const votes = {
+    get: (id: string): Promise<VoteStatus> => getVotes(getAPIPrefix(id)),
+    upvote: (id: string): Promise<VoteStatus> => upvote(getAPIPrefix(id)),
+    downvote: (id: string): Promise<VoteStatus> => downvote(getAPIPrefix(id))
+};
+
+export const comments = {
+    fetch: (id: string, paginator: IPaginator): Promise<ICommentFetchResponse> => Comment.fetch(getAPIPrefix(id), paginator),
+    post: (id: string, content: string): Promise<ICommentCreationResponse> => Comment.post(getAPIPrefix(id), content),
+    erase: (id: string, comment: Comment): Promise<CommonResponse> => comment.delete(getAPIPrefix(id))
+};
