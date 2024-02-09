@@ -1,7 +1,7 @@
 import React, {ReactElement} from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import * as user from "./data/models/user";
+import * as user from "./data/actions/user";
 import { IUser } from "./data/models/user";
 import * as auth from "./data/auth";
 
