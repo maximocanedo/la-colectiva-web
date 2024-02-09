@@ -6,10 +6,11 @@ const call = async (url: string, body: any, method: string): Promise<Response> =
     const call: Response | null = await fetch(baseUrl + url, {
         method,
         headers: {
-            'Content-Type': typeof body === "string" ? "text/plain" : "application/json",
+            'Content-Type': body instanceof FormData ? "multipart/form-data" :
+                (typeof body === "string" ? "text/plain" : "application/json"),
             'Authorization': 'Bearer ' + localStorage.getItem("la-colectiva-token")
         },
-        body: (typeof body === "string") ? body : JSON.stringify(body)
+        body: body instanceof FormData ? body : ((typeof body === "string") ? body : JSON.stringify(body))
     });
     if(call === null) throw new Err(ConnectionError);
     else return call as Response;

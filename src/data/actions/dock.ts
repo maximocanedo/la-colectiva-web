@@ -5,6 +5,8 @@ import {IDock, IDockCreate, IDockEdit} from "../models/dock";
 import {Err} from "../error";
 import {downvote, getVotes, upvote} from "./vote";
 import * as comment from "./comment";
+import * as picture from "./picture";
+import {IPictureDetails} from "../models/picture";
 const getPrefix = (id: string): string => "docks/" + id;
 /**
  * Edita un registro de muelle.
@@ -119,4 +121,8 @@ export const comments = {
         comment.post(getPrefix(id), content),
     del: async (id: string, commentId: string): Promise<CommonResponse> =>
         comment.del(getPrefix(id), commentId)
+};
+export const pictures = {
+    upload: async (id: string, image: Blob, description: string): Promise<CommonResponse> => picture.upload(getPrefix(id), image, description),
+    list: async (id: string): Promise<IPictureDetails[]> => picture.list(getPrefix(id))
 };

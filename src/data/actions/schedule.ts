@@ -1,4 +1,4 @@
-import {ISchedule, IScheduleCreate, IScheduleEdit, IScheduleLight} from "../models/schedules";
+import {ISchedule, IScheduleCreate, IScheduleEdit, IScheduleLight, ScheduleGroup} from "../models/schedules";
 import {CommonResponse, u} from "../utils";
 import {Err} from "../error";
 import {IPaginator} from "../models/comment";
@@ -66,5 +66,27 @@ export const search = async (q: string, { p, itemsPerPage }: IPaginator = { p: 0
     const { status, json }: Response = await u.get(`schedules/?q=${q}&p=${p}&itemsPerPage=${itemsPerPage}`);
     const { data, error } = await json();
     if(status === 200) return data;
+    throw new Err(error);
+};
+
+const buildNextURLParams = ({ departure, arrival, time, conditions }: { departure: string, arrival: string, time: string, conditions: string[] }): string => {
+    const params: URLSearchParams = new URLSearchParams();
+    params.append("departure", departure);
+    params.append("arrival", arrival);
+    params.append("time", time);
+    conditions.map((condition: string) => params.append("conditions[]", condition));
+    return params.toString();
+};
+/**
+ * **Consultar próximo horario.**
+ * @param departure Muelle de partida.
+ * @param arrival Muelle destino.
+ * @param time Hora de consulta.
+ * @param conditions Condiciones que se deben cumplir. Mínimo una.
+ */
+export const next = async (departure: string, arrival: string, time: string, conditions: string[] = []): Promise<ScheduleGroup[]> => {
+    const { ok, json }: Response = await u.get(`query/next?${buildNextURLParams({ departure, arrival, time, conditions })}`);
+    const { data, error } = await json();
+    if(ok) return data;
     throw new Err(error);
 };

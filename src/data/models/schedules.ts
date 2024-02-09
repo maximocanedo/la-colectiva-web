@@ -1,5 +1,5 @@
 import { IDock } from "./dock";
-import { IPath } from "./path";
+import {AvailabilityCondition, IPath} from "./path";
 import { IUser } from "./user";
 
 export interface ISchedule {
@@ -18,6 +18,27 @@ export interface IScheduleLight {
     uploadDate?: Date | string,
     active?: boolean,
     __v?: number
+}
+export interface ScheduleGroup {
+    _id: string;
+    schedules: IScheduleLight[],
+    path: {
+        boat: {
+            _id: string;
+            mat: string;
+            name: string;
+            status: boolean;
+        };
+        title: string;
+        description: string;
+    };
+    enterprise: {
+        _id: string;
+        cuit: number;
+        name: string;
+    },
+    duration: number;
+    available: AvailabilityCondition[]
 }
 export interface IScheduleCreate {
     dock: string;
