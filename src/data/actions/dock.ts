@@ -90,7 +90,23 @@ export const search = async (q: string = "", paginator: IPaginator = { p: 0, ite
         return data.data;
     } throw new Err(data.error);
 };
-// TODO /docks/explore
+/**
+ * **Explorar muelles cercanos**
+ *
+ * Busca los muelles más cercanos a las coordenadas dadas.
+ * @param q Texto a buscar.
+ * @param coordinates Coordenadas a consultar.
+ * @param prefer Tipo de muelle preferido. -1 para desactivar.
+ * @param radio Radio en metros dentro del cual buscar.
+ * @param p Número de página.
+ * @param itemsPerPage Elementos por página.
+ */
+export const explore = async (q: string = "", coordinates: [ number, number ], prefer: number = -1, radio: number = 300, { p, itemsPerPage }: IPaginator = { p: 0, itemsPerPage: 10 }): Promise<IDock[]> => {
+    const { status, json }: Response = await u.get(`docks/@${coordinates[0]},${coordinates[1]},${radio}?q=${q}&prefer=${prefer}&p=${p}&itemsPerPage=${itemsPerPage}`);
+    const { data, error } = await json();
+    if(status === 200) return data;
+    throw new Err(error);
+};
 export const votes = {
     get: async (id: string): Promise<VoteStatus> => getVotes(getPrefix(id)),
     upvote: async (id: string): Promise<VoteStatus> => upvote(getPrefix(id)),
