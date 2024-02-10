@@ -1,5 +1,6 @@
-'use strict';
-import { u, CommonResponse, IError } from './utils';
+import { u, CommonResponse } from './utils';
+import {Err} from "./error";
+
 type CommonCredentials = {
     password: string;
 };
@@ -14,31 +15,30 @@ export type LoginSuccessfulResponse = {
     token: string;
 }
 
+/**
+ * **Iniciar sesión**
+ *
+ * Intenta iniciar sesión con las credenciales dadas.
+ *
+ * Si el inicio de sesión fue exitoso, guarda el token en memoria para su posterior uso.
+ * @param data Credenciales del usuario.
+ * @last-tested 10/02/24 09:34
+ * @author Máximo Canedo (@maximocanedo)
+ */
 export const login = async (data: Credentials): Promise<CommonResponse> => {
-    const call = await u.post("auth", data);
-    if(call !== null) {
-        const { status } = call;
-        if(status === 200) {
-            const res: LoginSuccessfulResponse = await call.json();
-            localStorage.setItem("la-colectiva-token", res.token);
-            return {
-                success: true,
-                message: "Inicio de sesión exitoso. "
-            };
-        } else {
-            const res: IError = await call.json();
-            return {
-                success: false,
-                ...res
-            };
-        }
-    }
-    return {
-        success: false,
-        message: "Error de conexión. "
-    };
+    const call: Response = await u.post("auth", data);
+    const { token, error } = await call.json();
+    if(call.ok) {
+        localStorage.setItem("la-colectiva-token", token);
+        return { success: true, message: "Inicio de sesión exitoso. " };
+    } throw new Err(error);
 };
-
+/**
+ * **Cerrar sesión**
+ *
+ * Elimina de la memoria el token de usuario.
+ * @author Máximo Canedo (@maximocanedo)
+ */
 export const logout = (): CommonResponse => {
     if(localStorage.getItem("la-colectiva-token") === null) {
         return {
