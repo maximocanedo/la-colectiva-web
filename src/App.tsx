@@ -6,6 +6,8 @@ import {ISignUpResponse, IUser, Role} from "./data/models/user";
 import * as auth from "./data/auth";
 import {CommonResponse} from "./data/utils";
 import {disableMyself} from "./data/actions/user";
+import {FluentProvider, webLightTheme} from "@fluentui/react-components";
+import TestPage from "./components/basic/testingPage";
 const login = (async (): Promise<void> => {
 	localStorage.setItem("la-colectiva-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjU3YjE0ZjAxYTQ1NzE0ZmE3NmI1ZjNhIiwiaWF0IjoxNzA3NDkyODgzLCJleHAiOjE3MzkwNTA0ODN9.LbyE5WZV0zaRAB9y_DmTT5uAHfx2YOBYwt3bYvJcXP8");
 });
@@ -31,15 +33,9 @@ const test = (async (): Promise<void> => {
 
 function App(): ReactElement {
 	return (
-		<div className="App">
-			<br/>
-			<button onClick={test}>Test</button>
-			<br/><br/><br/>
-			<button onClick={login}>Iniciar sesión como @root</button>
-			<br/>
-			<br/>
-			<button onClick={logout}>Cerrar sesión</button>
-		</div>
+		<FluentProvider theme={webLightTheme}>
+			<TestPage />
+		</FluentProvider>
 	);
 }
 
