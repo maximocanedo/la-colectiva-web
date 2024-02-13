@@ -1,4 +1,6 @@
-
+* {
+    box-sizing: border-box;
+}
 header {
     position: fixed;
     top: 0px;
@@ -14,10 +16,19 @@ main {
     width: 100%;
     height: calc(100% - 72px);
     padding: 12px;
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-y: scroll;
 }
 
 .main {
     width: 300px;
+}
+
+.rtlCell {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
 }

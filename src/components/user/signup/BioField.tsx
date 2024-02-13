@@ -1,36 +1,31 @@
 import React, {FormEventHandler, useState} from "react";
-import {Field, FieldProps, Input} from "@fluentui/react-components";
+import {Field, FieldProps, Input, Textarea} from "@fluentui/react-components";
 
-interface NameFieldProps extends FieldProps {
+interface BioFieldProps extends FieldProps {
     value: string;
     onValueChange: (value: string) => void;
     onValidationChange: (error: boolean) => void;
 }
-const NameField = (props: NameFieldProps): React.JSX.Element => {
-    const [ name, setName ] = useState<string>(props.value);
+const BioField = (props: BioFieldProps): React.JSX.Element => {
+    const [ value, setValue ] = useState<string>(props.value);
     const [ vm, setVM ] = useState<string>("");
     const [ vs, setVS ] = useState<"error" | "warning" | "success" | "none" | undefined>(undefined);
 
     return <Field
-        label="Nombre"
+        label="Biografía"
         validationMessage={vm}
         validationState={vs}
         {...props}
     >
-        <Input
-            maxLength={24}
-            minLength={3}
-            value={name}
+        <Textarea
+            value={value}
+            maxLength={48}
             onChange={(ev) => {
                 const e: string = ev.target.value;
-                setName(ev.target.value);
+                setValue(e);
                 props.onValueChange(e);
-                if(e.length < 3) {
-                    setVM("El nombre debe contener al menos 3 caracteres. ");
-                    setVS("error");
-                    props.onValidationChange(false);
-                } else if(e.length > 24) {
-                    setVM("El nombre debe contener hasta 24 caracteres. ");
+                if(e.length > 48) {
+                    setVM("La biografía puede contener hasta 48 caracteres. ");
                     setVS("error");
                     props.onValidationChange(false);
                 } else {
@@ -41,4 +36,4 @@ const NameField = (props: NameFieldProps): React.JSX.Element => {
         }} />
     </Field>
 };
-export default NameField;
+export default BioField;

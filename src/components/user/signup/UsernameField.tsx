@@ -3,10 +3,12 @@ import {Field, FieldProps, Input} from "@fluentui/react-components";
 import * as users from "./../../../data/actions/user";
 
 interface UsernameFieldProps extends FieldProps {
+    value: string;
     onValueChange: (value: string) => void;
     onValidationChange: (error: boolean) => void;
 }
 const UsernameField = (props: UsernameFieldProps): React.JSX.Element => {
+    const [ value, setValue ] = useState<string>(props.value);
     const [ vm, setVM ] = useState<string>("");
     const [ vs, setVS ] = useState<"error" | "warning" | "success" | "none" | undefined>(undefined);
     return <Field
@@ -16,10 +18,12 @@ const UsernameField = (props: UsernameFieldProps): React.JSX.Element => {
         {...props}
     >
         <Input
+            value={value}
             maxLength={24}
             minLength={3}
             onChange={(ev) => {
                 const e: string = ev.target.value;
+                setValue(e);
                 if(e.match(/^[a-zA-Z0-9_.]{3,24}$/)) {
                     setVM("");
                     setVS(undefined);

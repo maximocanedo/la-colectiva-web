@@ -1,7 +1,7 @@
 import React, {ReactElement} from "react";
 import "./App.css";
 import "./styles/styles.css";
-import {FluentProvider, webLightTheme} from "@fluentui/react-components";
+import {FluentProvider, Toaster, useId, webLightTheme} from "@fluentui/react-components";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from "./components/basic/Header";
 import Footer from "./components/basic/Footer";
@@ -11,6 +11,7 @@ import NotFoundPage from "./page/NotFoundPage";
 import SignUpPage from "./page/SignUpPage";
 
 function App(): ReactElement {
+	const toasterId: string = useId("toaster");
 	return (
 		<Router>
 			<FluentProvider theme={webLightTheme}>
@@ -18,11 +19,12 @@ function App(): ReactElement {
 				<main>
 					<Routes>
 						<Route path={"/"} element={HomePage} />
-						<Route path={"/signup"} element={<SignUpPage />} />
+						<Route path={"/signup"} element={<SignUpPage toasterId={toasterId}  />} />
 						<Route path={"/users/:username"} element={<UserProfile />} />
 						<Route path={"*"} element={NotFoundPage} />
 					</Routes>
 				</main>
+				<Toaster toasterId={toasterId} />
 				<Footer />
 			</FluentProvider>
 		</Router>
