@@ -1,5 +1,6 @@
 {
   "test": "Este é um teste. ",
+  "loading": "Carregando... ",
   "actions": {
     "next": "Próximo"
   },
@@ -101,7 +102,18 @@
             "upToFourtyEight": "A bio pode conter até 48 caracteres. "
           }
         }
-      }
+      },
+      "UserButton": {
+        "roles": {
+          "observer": "Observador",
+          "normal": "Usuário",
+          "moderator": "Moderador",
+          "admin": "Administrador"
+        },
+        "err": {
+          "notFound": "Usuário não encontrado. "
+        }
+    }
     }
   }
 }

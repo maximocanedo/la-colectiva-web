@@ -1,4 +1,5 @@
 {
+  "loading": "Cargando... ",
   "test": "Esto es una prueba.",
   "actions": {
     "next": "Siguiente"
@@ -102,6 +103,17 @@
             "upToFourtyEight": "La biografía no puede tener más de 48 caracteres."
           },
           "ok": {}
+        }
+      },
+      "UserButton": {
+        "roles": {
+          "observer": "Observador",
+          "normal": "Usuario",
+          "moderator": "Moderador",
+          "admin": "Administrador"
+        },
+        "err": {
+          "notFound": "Usuario no encontrado. "
         }
       }
     }

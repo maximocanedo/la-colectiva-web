@@ -1,5 +1,6 @@
 {
   "test": "This is a test. ",
+  "loading": "Loading... ",
   "actions": {
     "next": "Next"
   },
@@ -102,6 +103,17 @@
             "upToFourtyEight": "Bio can contain up to 48 characters. "
           },
           "ok": {}
+        }
+      },
+      "UserButton": {
+        "roles": {
+          "observer": "Observer",
+          "normal": "User",
+          "moderator": "Moderator",
+          "admin": "Administrator"
+        },
+        "err": {
+          "notFound": "User not found. "
         }
       }
     }

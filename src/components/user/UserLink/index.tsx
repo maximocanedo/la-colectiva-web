@@ -1,22 +1,20 @@
-import * as user from "./../../data/actions/user";
+import * as user from "../../../data/actions/user";
 import React, { useState, useEffect } from 'react';
-import {IUser} from "../../data/models/user";
+import {IUser} from "../../../data/models/user";
 import {Link, Spinner} from "@fluentui/react-components";
+import {UserLinkProps} from "./defs";
+import {StateManager} from "../../../page/SignUpPage/defs";
 
-export interface UserLinkProps {
-    from: string;
-}
+
 const USER_PROFILE_PAGE: string = "/users?username=";
 const resolveUserProfilePageURL = (username: string): string => USER_PROFILE_PAGE + username;
-
 const UserLink = (props: UserLinkProps): React.JSX.Element => {
     const { from }: UserLinkProps = props;
-    const [userObj, setUserObj] = useState<IUser | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [userObj, setUserObj]: StateManager<IUser | null> = useState<IUser | null>(null);
+    const [loading, setLoading]: StateManager<boolean> = useState<boolean>(true);
 
     useEffect(() => {
         let isMounted: boolean = true;
-
         user.findByUsername(from)
             .then((userObj: IUser): void => {
                 if (isMounted) {
@@ -24,13 +22,13 @@ const UserLink = (props: UserLinkProps): React.JSX.Element => {
                     setLoading(false);
                 }
             })
-            .catch(err => {
+            .catch((): void => {
                 if (isMounted) {
                     setLoading(false);
                 }
             });
 
-        return () => {
+        return (): void => {
             isMounted = false;
         };
     }, [from]);
@@ -45,7 +43,7 @@ const UserLink = (props: UserLinkProps): React.JSX.Element => {
         </Link>;
     }
 
-    const { username, name } = userObj;
+    const { username, name }: IUser = userObj;
 
     return (
         <Link href={resolveUserProfilePageURL(username)} {...props}>
