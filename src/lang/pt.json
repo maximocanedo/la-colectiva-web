@@ -1,0 +1,107 @@
+{
+  "test": "Este é um teste. ",
+  "actions": {
+    "next": "Próximo"
+  },
+  "pages": {
+    "signup": {
+      "title": "Criar uma conta",
+      "tabs": {
+        "personal": {
+          "title": "Básico",
+          "labels": {
+            "name": "Nome de usuário",
+            "username": "Nome de usuário",
+            "birth": "Data de nascimento"
+          }
+        },
+        "account": {
+          "title": "Conta",
+          "labels": {
+            "email": "Endereço de e-mail",
+            "password": "Senha",
+            "reenterPassword": "Reinserir a senha"
+          }
+        },
+        "more": {
+          "title": "Adicional",
+          "labels": {
+            "bio": "Biografia"
+          }
+        }
+      },
+      "actions": {
+        "signup": "Terminar"
+      },
+      "err": {
+        "creatingAccount": "Ocorreu um erro ao tentar criar sua conta. ",
+        "tryAgainLater": "Tente mais tarde. ",
+        "loggingIn": "Ocorreu um erro ao tentar fazer login. ",
+        "DoItManually": "Você terá que fazer isso manualmente. "
+      },
+      "ok": {
+        "accountCreated": "Sua conta foi criada com sucesso! ",
+        "loggedIn": "Você está logado. Redirecionando você..."
+      }
+    }
+  },
+  "components": {
+    "user": {
+      "signup": {
+        "NameField": {
+          "label": "Nome",
+          "err": {
+            "atLeastThree": "O nome deve conter pelo menos 3 caracteres. ",
+            "upToTwentyFour": "O nome deve conter até 24 caracteres. "
+          }
+        },
+        "UsernameField": {
+          "label": "Nome de usuário",
+          "err": {
+            "noSpaces": "O nome de usuário não deve conter espaços. ",
+            "lengthNote": "O nome de usuário deve conter entre 3 e 24 caracteres. ",
+            "notAvailable": "Esse nome de usuário não está disponível. ",
+            "checkingAvailability": "Verificando a disponibilidade... ",
+            "unknownErrorWhileValidatingUsernameAvailability": "Ocorreu um erro. Por favor, tente novamente mais tarde. "
+          },
+          "ok": {
+            "available": "O nome de usuário está disponível. "
+          }
+        },
+        "BirthField": {
+          "label": "Data de nascimento",
+          "ok": {
+            "select": "Selecione uma data"
+          }
+        },
+        "MailField": {
+          "label": "Endereço de e-mail",
+          "err": {
+            "nonValid": "O e-mail inserido não é válido. "
+          }
+        },
+        "PasswordField": {
+          "label": "Senha",
+          "err": {
+            "atLeastEight": "A senha deve conter pelo menos 8 caracteres. "
+          }
+        },
+        "RepeatPasswordField": {
+          "label": "Reinsira a senha",
+          "err": {
+            "dontMatch": "As senhas não são iguais. "
+          },
+          "ok": {
+            "match": "As senhas são iguais. "
+          }
+        },
+        "BioField": {
+          "label": "Biografia",
+          "err": {
+            "upToFourtyEight": "A bio pode conter até 48 caracteres. "
+          }
+        }
+      }
+    }
+  }
+}

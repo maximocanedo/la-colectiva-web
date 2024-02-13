@@ -1,5 +1,6 @@
 import React, {FormEventHandler, useState} from "react";
 import {Field, FieldProps, Input} from "@fluentui/react-components";
+import {useTranslation, UseTranslationResponse} from "react-i18next";
 
 interface RepeatPasswordFieldProps extends FieldProps {
     value: string;
@@ -8,13 +9,14 @@ interface RepeatPasswordFieldProps extends FieldProps {
     onValidationChange: (error: boolean) => void;
 }
 const RepeatPasswordField = (props: RepeatPasswordFieldProps): React.JSX.Element => {
+    const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const [ value, setValue ] = useState<string>(props.value);
     const [ passwordNote, setPasswordNote ] = useState<string>("");
     const [ passwordStatus, setPasswordStatus ] = useState<"error" | "warning" | "success" | "none" | undefined>(undefined);
 
 
     return <Field
-        label="Repita la contraseña"
+        label={t('components.user.signup.RepeatPasswordField.label')}
         validationMessage={passwordNote}
         validationState={passwordStatus}
         {...props}
@@ -27,12 +29,12 @@ const RepeatPasswordField = (props: RepeatPasswordFieldProps): React.JSX.Element
                 setValue(value);
                 props.onValueChange(value);
                 if(props.password !== value) {
-                    setPasswordNote("Las contraseñas no coinciden. ");
+                    setPasswordNote(t('components.user.signup.RepeatPasswordField.err.dontMatch'));
                     setPasswordStatus("error");
                     props.onValidationChange(false);
                 } else {
                     setPasswordStatus("success");
-                    setPasswordNote("Las contraseñas coinciden");
+                    setPasswordNote(t('components.user.signup.RepeatPasswordField.ok.match'));
                     props.onValidationChange(true);
                 }
             }}

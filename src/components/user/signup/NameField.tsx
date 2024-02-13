@@ -1,5 +1,6 @@
 import React, {FormEventHandler, useState} from "react";
 import {Field, FieldProps, Input} from "@fluentui/react-components";
+import {useTranslation, UseTranslationResponse} from "react-i18next";
 
 interface NameFieldProps extends FieldProps {
     value: string;
@@ -7,12 +8,13 @@ interface NameFieldProps extends FieldProps {
     onValidationChange: (error: boolean) => void;
 }
 const NameField = (props: NameFieldProps): React.JSX.Element => {
+    const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const [ name, setName ] = useState<string>(props.value);
     const [ vm, setVM ] = useState<string>("");
     const [ vs, setVS ] = useState<"error" | "warning" | "success" | "none" | undefined>(undefined);
 
     return <Field
-        label="Nombre"
+        label={t('components.user.signup.NameField.label')}
         validationMessage={vm}
         validationState={vs}
         {...props}
@@ -26,11 +28,11 @@ const NameField = (props: NameFieldProps): React.JSX.Element => {
                 setName(ev.target.value);
                 props.onValueChange(e);
                 if(e.length < 3) {
-                    setVM("El nombre debe contener al menos 3 caracteres. ");
+                    setVM(t('components.user.signup.NameField.err.atLeastThree'));
                     setVS("error");
                     props.onValidationChange(false);
                 } else if(e.length > 24) {
-                    setVM("El nombre debe contener hasta 24 caracteres. ");
+                    setVM(t('components.user.signup.NameField.err.upToTwentyFour'));
                     setVS("error");
                     props.onValidationChange(false);
                 } else {

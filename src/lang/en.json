@@ -1,0 +1,109 @@
+{
+  "test": "This is a test. ",
+  "actions": {
+    "next": "Next"
+  },
+  "pages": {
+    "signup": {
+      "title": "Create an account",
+      "tabs": {
+        "personal": {
+          "title": "Personal info",
+          "labels": {
+            "name": "Name",
+            "username": "Username",
+            "birth": "Birth date"
+          }
+        },
+        "account": {
+          "title": "Account",
+          "labels": {
+            "email": "E-mail address",
+            "password": "Password",
+            "reenterPassword": "Re-enter password"
+          }
+        },
+        "more": {
+          "title": "More",
+          "labels": {
+            "bio": "Bio"
+          }
+        }
+      },
+      "actions": {
+        "signup": "Finish"
+      },
+      "err": {
+        "creatingAccount": "There was an error trying to create your account. ",
+        "tryAgainLater": "Try again later. ",
+        "loggingIn": "There was an error trying to log in. ",
+        "DoItManually": "You will have to do it manually. "
+      },
+      "ok": {
+        "accountCreated": "Your account was created successfully! ",
+        "loggedIn": "You are logged in. Redirecting you..."
+      }
+    }
+  },
+  "components": {
+    "user": {
+      "signup": {
+        "NameField": {
+          "label": "Name",
+          "err": {
+            "atLeastThree": "Name must contain at least 3 characters. ",
+            "upToTwentyFour": "Name must contain up to 24 characters. "
+          }
+        },
+        "UsernameField": {
+          "label": "Username",
+          "err": {
+            "noSpaces": "Username must not contain spaces. ",
+            "lengthNote": "Username must contain between 3-24 characters. ",
+            "notAvailable": "This username is not available. ",
+            "checkingAvailability": "Checking availability... ",
+            "unknownErrorWhileValidatingUsernameAvailability": "An error occurred. Please try again later. "
+          },
+          "ok": {
+            "available": "Username is available. "
+          }
+        },
+        "BirthField": {
+          "label": "Birth date",
+          "err": {},
+          "ok": {
+            "select": "Select a date"
+          }
+        },
+        "MailField": {
+          "label": "E-mail address",
+          "err": {
+            "nonValid": "E-mail entered is not valid. "
+          }
+        },
+        "PasswordField": {
+          "label": "Password",
+          "err": {
+            "atLeastEight": "Password must contain at least 8 characters. "
+          }
+        },
+        "RepeatPasswordField": {
+          "label": "Re-enter password",
+          "err": {
+            "dontMatch": "Passwords don't match. "
+          },
+          "ok": {
+            "match": "Passwords match. "
+          }
+        },
+        "BioField": {
+          "label": "Bio",
+          "err": {
+            "upToFourtyEight": "Bio can contain up to 48 characters. "
+          },
+          "ok": {}
+        }
+      }
+    }
+  }
+}

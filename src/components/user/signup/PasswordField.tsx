@@ -1,5 +1,6 @@
 import React, {FormEventHandler, useState} from "react";
 import {Field, FieldProps, Input} from "@fluentui/react-components";
+import {useTranslation, UseTranslationResponse} from "react-i18next";
 
 interface PasswordFieldProps extends FieldProps {
     value: string;
@@ -7,13 +8,14 @@ interface PasswordFieldProps extends FieldProps {
     onValidationChange: (error: boolean) => void;
 }
 const PasswordField = (props: PasswordFieldProps): React.JSX.Element => {
+    const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const [ value, setValue ] = useState<string>(props.value);
     const [ passwordNote, setPasswordNote ] = useState<string>("");
     const [ passwordStatus, setPasswordStatus ] = useState<"error" | "warning" | "success" | "none" | undefined>(undefined);
 
 
     return <Field
-        label="Contraseña"
+        label={t('components.user.signup.PasswordField.label')}
         validationMessage={passwordNote}
         validationState={passwordStatus}
         {...props}
@@ -27,7 +29,7 @@ const PasswordField = (props: PasswordFieldProps): React.JSX.Element => {
                 setValue(value);
                 props.onValueChange(value);
                 if(value.length < 8) {
-                    setPasswordNote("La contraseña debe tener 8 caracteres como mínimo. ");
+                    setPasswordNote(t('components.user.signup.PasswordField.err.atLeastEight'));
                     setPasswordStatus("error");
                     props.onValidationChange(false);
                 } else {

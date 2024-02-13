@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Field, FieldProps, Input} from "@fluentui/react-components";
 import * as users from "./../../../data/actions/user";
+import {useTranslation, UseTranslationResponse} from "react-i18next";
 
 interface UsernameFieldProps extends FieldProps {
     value: string;
@@ -8,11 +9,12 @@ interface UsernameFieldProps extends FieldProps {
     onValidationChange: (error: boolean) => void;
 }
 const UsernameField = (props: UsernameFieldProps): React.JSX.Element => {
+    const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const [ value, setValue ] = useState<string>(props.value);
     const [ vm, setVM ] = useState<string>("");
     const [ vs, setVS ] = useState<"error" | "warning" | "success" | "none" | undefined>(undefined);
     return <Field
-        label="Nombre de usuario"
+        label={t('components.user.signup.UsernameField.label')}
         validationMessage={vm}
         validationState={vs}
         {...props}
@@ -32,32 +34,32 @@ const UsernameField = (props: UsernameFieldProps): React.JSX.Element => {
                     props.onValidationChange(false);
                     setVS("error")
                     if(e.indexOf(" ") !== -1)
-                        setVM("El nombre de usuario no debe contener espacios. ");
+                        setVM(t('components.user.signup.UsernameField.err.noSpaces'));
                     else
-                        setVM("El nombre de usuario debe contener entre 3 y 24 caracteres. ");
+                        setVM(t('components.user.signup.UsernameField.err.lengthNote'));
                 }
                 props.onValueChange(e);
         }}
         onBlur={(ev) => {
             const e: string = ev.target.value;
             if (e.match(/^[a-zA-Z0-9_.]{3,24}$/)) {
-                setVM("Comprobando... ");
+                setVM(t('components.user.signup.UsernameField.err.checkingAvailability'));
                 setVS("warning");
                 users.usernameExists(e)
                     .then((exists: boolean) => {
                         if (exists) {
-                            setVM("Ese nombre de usuario no está disponible. ");
+                            setVM(t('components.user.signup.UsernameField.err.notAvailable'));
                             setVS("error");
                             props.onValidationChange(false);
                         } else {
-                            setVM("Nombre de usuario disponible");
+                            setVM(t('components.user.signup.UsernameField.ok.available'));
                             setVS("success");
                             props.onValidationChange(true);
                         }
                     })
                     .catch(() => {
                         setVS("warning");
-                        setVM("Ocurrió un error inesperado, intente de nuevo más tarde. ");
+                        setVM(t('components.user.signup.UsernameField.err.unknownErrorWhileValidatingUsernameAvailability'));
                         props.onValidationChange(false);
                     });
             }

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Field, FieldProps, Input} from "@fluentui/react-components";
+import {useTranslation, UseTranslationResponse} from "react-i18next";
 
 interface MailFieldProps extends FieldProps {
     value: string;
@@ -7,12 +8,13 @@ interface MailFieldProps extends FieldProps {
     onValidationChange: (error: boolean) => void;
 }
 const MailField = (props: MailFieldProps): React.JSX.Element => {
+    const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const [ value, setValue ] = useState<string>(props.value);
     const [ vm, setVM ] = useState<string>("");
     const [ vs, setVS ] = useState<"error" | "warning" | "success" | "none" | undefined>(undefined);
 
     return <Field
-        label="Dirección de correo electrónico"
+        label={t('components.user.signup.MailField.label')}
         validationMessage={vm}
         validationState={vs}
         {...props}
@@ -28,7 +30,7 @@ const MailField = (props: MailFieldProps): React.JSX.Element => {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
                 if (!emailRegex.test(email)) {
-                    setVM("La dirección de correo electrónico ingresada no es válida.");
+                    setVM(t('components.user.signup.MailField.err.nonValid'));
                     setVS("error");
                     props.onValidationChange(false);
                 } else {
