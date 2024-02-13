@@ -36,3 +36,29 @@ const getName = ({ name }: MyFunctionData): string => name; // También
 const badFunction = (data) => { ... } // No.
 const anotherBadFunction = (data: any): any => { ... } // Tampoco.
 ```
+
+### Internacionalización
+Es obligatorio internacionalizar cada componente. 
+Los idiomas de La Colectiva son: Español, inglés y portugués.
+
+Para internacionalizar un componente, se deberá editar cada uno de los .json en la carpeta `/src/lang/`, y en la sección `components` añadir un elemento con el nombre del componente. El contenido de ese elemento será un objeto con la siguiente estructura: 
+```javascript
+{
+  "label": "", // Opcional, si se trata de un campo de texto.
+  "title": "", // Opcional
+  "actions": { /* ... */ } // Listado de acciones
+  "err": { /* ... */ } // Listado de errores
+  "ok": { /* ... */ } // Listado de mensajes exitosos.
+  "misc": { /* ... */ } // Otros
+}
+```
+
+Y luego en el componente se usará de la siguiente forma: 
+```typescript
+interface MiComponenteProps { /* ... */ }
+const MiComponente = (props: MiComponenteProps): React.JSX.Element => {
+  const { t } = useTranslation();
+  /* ... */
+  return (<span class="titulo"> { t('components.MiComponente.title') } </span>);
+};
+```
