@@ -44,6 +44,20 @@
         "accountCreated": "Your account was created successfully! ",
         "loggedIn": "You are logged in. Redirecting you..."
       }
+    },
+    "login": {
+      "title": "Log in",
+      "actions": {
+        "login": "Sign in",
+        "signup": "Sign up"
+      },
+      "err": {
+        "unauthorized": "Invalid credentials. ",
+        "unknown": "An error occurred while trying to sign you in. "
+      },
+      "ok": {
+        "loginSuccessful": "Welcome back!"
+      }
     }
   },
   "components": {
@@ -114,6 +128,23 @@
         },
         "err": {
           "notFound": "User not found. "
+        }
+      },
+      "login": {
+        "IdentifierField": {
+          "label": {
+            "neither": "E-mail or username",
+            "email": "E-mail address",
+            "username": "Username"
+          },
+          "err": {
+            "invalidIdentifier": "Enter a valid e-mail address or username. "
+          }
+        },
+        "PasswordField": {
+          "err": {
+            "enterPassword": "Enter a password. "
+          }
         }
       }
     }
