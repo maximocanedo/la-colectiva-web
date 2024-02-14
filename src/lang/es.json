@@ -50,6 +50,13 @@
       "actions": {
         "login": "Ingresar",
         "signup": "Crear cuenta"
+      },
+      "err": {
+        "unauthorized": "Credenciales incorrectas. ",
+        "unknown": "Ocurrió un error al intentar iniciar sesión. "
+      },
+      "ok": {
+        "loginSuccessful": "¡Bienvenido de nuevo!"
       }
     }
   },

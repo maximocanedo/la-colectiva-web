@@ -26,10 +26,13 @@ const IdentifierField = (props: IdentifierFieldProps): React.JSX.Element => {
         props.onTypeChange(type);
     }, [props, type]);
 
+    useEffect((): void => {
+        props.onValueChange(value);
+    }, [ value, props ]);
+
     const onFieldChange = (ev: React.ChangeEvent<HTMLInputElement>): void => {
         const e: string = ev.target.value;
         setValue(e);
-        props.onValueChange(value);
     };
     const onFieldBlur = (_ev: React.FocusEvent<HTMLInputElement, Element>): void => {
         if(type === "neither") {
