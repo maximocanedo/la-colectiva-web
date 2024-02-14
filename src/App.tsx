@@ -11,6 +11,7 @@ import NotFoundPage from "./page/NotFoundPage";
 import SignUpPage from "./page/SignUpPage";
 import i18n from "./lang";
 import {I18nextProvider} from "react-i18next";
+import LoginPage from "./page/LoginPage";
 
 function App(): ReactElement {
 	const toasterId: string = useId("toaster");
@@ -23,6 +24,7 @@ function App(): ReactElement {
 						<Routes>
 							<Route path={"/"} element={HomePage} />
 							<Route path={"/signup"} element={<SignUpPage toasterId={toasterId}  />} />
+							<Route path={"/login"} element={<LoginPage toasterId={toasterId} />} />
 							<Route path={"/users/:username"} element={<UserProfile />} />
 							<Route path={"*"} element={NotFoundPage} />
 						</Routes>
