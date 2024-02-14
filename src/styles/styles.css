@@ -33,3 +33,32 @@ main {
     width: 100%;
     gap: 15px;
 }
+
+.flex-down {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+}
+
+.jBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.jBar .l {
+    justify-self: flex-start;
+    align-self: center;
+}
+.jBar .r {
+    justify-self: flex-end;
+    align-self: center;
+}
+.page-content {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}

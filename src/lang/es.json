@@ -146,6 +146,23 @@
             "enterPassword": "Ingrese una contraseña"
           }
         }
+      },
+      "user-page": {
+        "RoleSelector": {
+          "label": "Rol",
+          "roles": {
+            "observer": "Observador",
+            "normal": "Usuario regular",
+            "moderator": "Moderador",
+            "admin": "Administrador"
+          },
+          "ok": {
+            "updated": "Actualizado correctamente. "
+          },
+          "err": {
+            "noUpdated": "No se pudo actualizar. "
+          }
+        }
       }
     }
   }
