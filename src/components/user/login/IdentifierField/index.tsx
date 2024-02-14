@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Field, FieldProps, Input} from "@fluentui/react-components";
+import {Field, Input} from "@fluentui/react-components";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
 import {StateManager} from "../../../../page/SignUpPage/defs";
 import {IdentifierFieldProps, IdentifierType} from "./defs";
@@ -33,14 +33,14 @@ const IdentifierField = (props: IdentifierFieldProps): React.JSX.Element => {
     };
     const onFieldBlur = (_ev: React.FocusEvent<HTMLInputElement, Element>): void => {
         if(type === "neither") {
-            setVM("Ingrese un nombre de usuario o correo válido. ");
+            setVM(t('components.user.login.IdentifierField.err.invalidIdentifier'));
             setVS("error");
         }
     };
 
-    const label: string = (type === "email" && "Correo electrónico")
-    || (type === "username" && "Nombre de usuario")
-    || "Correo o nombre de usuario"
+    const label: string = (type === "email" && t('components.user.login.IdentifierField.label.email'))
+    || (type === "username" && t('components.user.login.IdentifierField.label.username'))
+    || t('components.user.login.IdentifierField.label.neither');
 
     return (<Field
         label={label}

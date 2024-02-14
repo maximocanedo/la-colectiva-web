@@ -1,12 +1,9 @@
-import React, {FormEventHandler, useState} from "react";
-import {Field, FieldProps, Input} from "@fluentui/react-components";
+import React, {useState} from "react";
+import {Field, Input} from "@fluentui/react-components";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
+import {PasswordFieldProps} from "./defs";
 
-interface PasswordFieldProps extends FieldProps {
-    value: string;
-    onValueChange: (value: string) => void;
-    onValidationChange: (error: boolean) => void;
-}
+
 const PasswordField = (props: PasswordFieldProps): React.JSX.Element => {
     const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const [ value, setValue ] = useState<string>(props.value);
@@ -29,7 +26,7 @@ const PasswordField = (props: PasswordFieldProps): React.JSX.Element => {
                 setValue(value);
                 props.onValueChange(value);
                 if(value.trim().length === 0) {
-                    setPasswordNote("Ingrese una contraseña");
+                    setPasswordNote(t('components.user.login.PasswordField.err.enterPassword'));
                     setPasswordStatus("error");
                     props.onValidationChange(false);
                 } else {

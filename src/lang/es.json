@@ -44,6 +44,13 @@
         "accountCreated": "¡Tu cuenta fue creada con éxito!",
         "loggedIn": "Iniciaste sesión. Redirigiéndote... "
       }
+    },
+    "login": {
+      "title": "Iniciar sesión",
+      "actions": {
+        "login": "Ingresar",
+        "signup": "Crear cuenta"
+      }
     }
   },
   "components": {
@@ -114,6 +121,23 @@
         },
         "err": {
           "notFound": "Usuario no encontrado. "
+        }
+      },
+      "login": {
+        "IdentifierField": {
+          "label": {
+            "neither": "Correo o nombre de usuario",
+            "email": "Correo electrónico",
+            "username": "Nombre de usuario"
+          },
+          "err": {
+            "invalidIdentifier": "Ingrese un nombre de usuario o correo válido. "
+          }
+        },
+        "PasswordField": {
+          "err": {
+            "enterPassword": "Ingrese una contraseña"
+          }
         }
       }
     }
