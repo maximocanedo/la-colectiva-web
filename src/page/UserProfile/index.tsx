@@ -5,6 +5,7 @@ import {IUser} from "../../data/models/user";
 import {Err} from "../../data/error";
 import {Avatar, Persona} from "@fluentui/react-components";
 import RoleSelector from "../../components/user/user-page/RoleSelector";
+import EmailSection from "../../components/user/user-page/EmailSection";
 const UserProfile = (): React.JSX.Element => {
     const username: string = useParams<{ username: string }>().username as string;
     const [user, setUser] = useState<IUser | null>(null);
@@ -56,8 +57,9 @@ const UserProfile = (): React.JSX.Element => {
                 avatar={<Avatar name={user.name} />}
                 secondaryText={"@" + user.username}
             />
-            <br/><br/>
+            <br/>
             <RoleSelector user={user} me={me} />
+            <EmailSection user={user} me={me} />
         </div>
     );
 };
