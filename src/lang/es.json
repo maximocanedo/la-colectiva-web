@@ -162,6 +162,29 @@
           "err": {
             "noUpdated": "No se pudo actualizar. "
           }
+        },
+        "EmailSection": {
+          "label": {
+            "send": "Enviar código",
+            "sending": "Enviando...",
+            "email": "Correo electrónico: ",
+            "new": "Nuevo correo electrónico",
+            "prefixExample": "Ej.: ",
+            "editEmail": "Editar correo",
+            "enterCodeSent": "Ingrese el código enviado",
+            "cancel": "Cancelar",
+            "change": "Cambiar",
+            "verifying": "Validando...",
+            "verify": "Verificar"
+          },
+          "err": {
+            "invalidEmail": "El correo ingresado no es correcto. ",
+            "incorrectCode": "Código incorrecto. ",
+            "unknown": "Ocurrió un error desconocido. "
+          },
+          "ok": {
+            "validated": "Correo validado con éxito. "
+          }
         }
       }
     }
