@@ -44,6 +44,16 @@ main {
 .button-loading-spinner {
     gap: 10px;
 }
+.button-loading-spinner {
+    gap: 10px;
+}
+.flex-edtbl-dt {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+}
 
 .jBar {
     display: flex;
