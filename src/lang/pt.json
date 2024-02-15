@@ -160,7 +160,31 @@
           "err": {
             "noUpdated": "Não foi possível atualizar. "
           }
+        },
+        "EmailSection": {
+          "label": {
+            "send": "Enviar código",
+            "sending": "Enviando...",
+            "email": "Endereço de e-mail: ",
+            "new": "Novo endereço de e-mail",
+            "prefixExample": "Ex.: ",
+            "editEmail": "Editar e-mail",
+            "enterCodeSent": "Inserir código",
+            "cancel": "Cancelar",
+            "change": "Atualizar",
+            "verifying": "Verificando...",
+            "verify": "Verificar"
+          },
+          "err": {
+            "invalidEmail": "O endereço de e-mail não é válido. ",
+            "incorrectCode": "Código incorreto. ",
+            "unknown": "Erro desconhecido. "
+          },
+          "ok": {
+            "validated": "Verificado!"
+          }
         }
+
       }
     }
   }
