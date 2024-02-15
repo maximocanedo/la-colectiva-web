@@ -19,11 +19,11 @@ const BioSection = (props: BioSectionProps): React.JSX.Element => {
     const [ updated, setUpdated ] = useState<boolean>(false);
     if(user === null || !user.email || me === null) return <></>;
     const myRole: Role = me.role?? Role.OBSERVER;
-    if(me.username !== user.username && (myRole === Role.ADMINISTRATOR || myRole === Role.MODERATOR))
+    if(me.username !== user.username)
         return <>
             <div className="jBar">
                 <span className="l">Biografía</span>
-                <span className="r">{user.bio}</span>
+                <span className="r">{bio}</span>
             </div>
         </>
     else if(me.username !== user.username)

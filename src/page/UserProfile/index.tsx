@@ -58,7 +58,7 @@ const UserProfile = (): React.JSX.Element => {
                 avatar={<Avatar name={user.name} />}
                 secondaryText={"@" + user.username}
             />
-            <br/><br/>
+            <br/>
             <BioSection user={user} me={me} />
             <RoleSelector user={user} me={me} />
             <EmailSection user={user} me={me} />
