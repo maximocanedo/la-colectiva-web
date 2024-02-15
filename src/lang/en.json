@@ -162,6 +162,29 @@
           "err": {
             "noUpdated": "Couldn't update it. "
           }
+        },
+        "EmailSection": {
+          "label": {
+            "send": "Send code",
+            "sending": "Sending...",
+            "email": "E-mail address: ",
+            "new": "New e-mail address",
+            "prefixExample": "Ex.: ",
+            "editEmail": "Edit e-mail",
+            "enterCodeSent": "Enter code",
+            "cancel": "Cancel",
+            "change": "Update",
+            "verifying": "Verifying...",
+            "verify": "Verify"
+          },
+          "err": {
+            "invalidEmail": "E-mail address is not valid. ",
+            "incorrectCode": "Wrong code. ",
+            "unknown": "Unknown error. "
+          },
+          "ok": {
+            "validated": "Verified!"
+          }
         }
       }
     }

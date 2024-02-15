@@ -33,13 +33,16 @@ main {
     width: 100%;
     gap: 15px;
 }
-
+.fullWidth { width: 100% }
 .flex-down {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
     gap: 15px;
+}
+.button-loading-spinner {
+    gap: 10px;
 }
 
 .jBar {
