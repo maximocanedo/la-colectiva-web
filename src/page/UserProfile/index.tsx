@@ -9,6 +9,7 @@ import BioSection from "../../components/user/user-page/BioSection";
 import NameSection from "../../components/user/user-page/NameSection";
 import BirthSection from "../../components/user/user-page/BirthSection";
 import {useTranslation} from "react-i18next";
+import PasswordSection from "../../components/user/user-page/PasswordSection";
 const LANG_PATH: string = "pages.UserProfile";
 const UserProfile = (): React.JSX.Element => {
     const username: string = useParams<{ username: string }>().username as string;
@@ -83,7 +84,7 @@ const UserProfile = (): React.JSX.Element => {
             <EmailSection user={user} me={me} />
         </div> }
         { tab === "actions" && <div className={"tab-cnt flex-down"}>
-            Acciones
+            <PasswordSection user={user} me={me} />
         </div>}
     </div>);
 };
