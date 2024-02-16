@@ -6,9 +6,13 @@ import { Edit16Filled } from "@fluentui/react-icons";
 import {FieldValidationStatus} from "../RoleSelector/defs";
 import * as users from "../../../../data/actions/user";
 import {CommonResponse} from "../../../../data/utils";
+import {useTranslation} from "react-i18next";
 
+const LANG_PATH = "components.user.user-page.BioSection";
 const BioSection = (props: BioSectionProps): React.JSX.Element => {
     const { user, me }: BioSectionProps = props;
+    const { t: translationService } = useTranslation();
+    const t = (path: string): string => translationService(LANG_PATH + "." + path);
     const _bio: string = (user !== null && !!user.bio) ? user.bio : "";
     const [ editMode, setEditMode ] = useState<boolean>(false);
     const [ fieldMessage, setFieldMessage ] = useState<string>("");
@@ -17,12 +21,12 @@ const BioSection = (props: BioSectionProps): React.JSX.Element => {
     const [ saving, setSaving ] = useState<boolean>(false);
     const [ newBio, setNewBio ] = useState<string>(_bio);
     const [ updated, setUpdated ] = useState<boolean>(false);
-    if(user === null || !user.email || me === null) return <></>;
+    if(user === null || !user.name || me === null) return <></>;
     const myRole: Role = me.role?? Role.OBSERVER;
     if(me.username !== user.username)
         return <>
             <div className="jBar">
-                <span className="l">Biografía</span>
+                <span className="l">{t('label')}</span>
                 <span className="r">{bio}</span>
             </div>
         </>
@@ -37,22 +41,21 @@ const BioSection = (props: BioSectionProps): React.JSX.Element => {
     };
 
     const save = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-        const _fn: string = itsMe ? "editMyself" : "edit";
         setSaving(true);
         const p = itsMe ? users.editMyself({ bio: newBio }) : users.edit(user.username, { bio: newBio });
             p.then((response: CommonResponse): void => {
                 if(response.success) {
-                    setFieldMessage("Actualizado con éxito. ");
+                    setFieldMessage(t('ok.updated'));
                     setFieldState("success");
                     setUpdated(true);
                     setBio(newBio);
                 } else {
-                    setFieldMessage("No se pudo actualizar. ");
+                    setFieldMessage('err.couldntUpdate');
                     setFieldState("error");
                 }
             })
             .catch((error): void => {
-                setFieldMessage(error.message + " (" + error.code?? "S/N" + ")");
+                setFieldMessage(error.message + " (" + (error.code?? "S/N") + ")");
                 setFieldState("error");
             })
             .finally((): void => {
@@ -68,7 +71,7 @@ const BioSection = (props: BioSectionProps): React.JSX.Element => {
 
     return (<>
         <div className="jBar">
-            <span className="l">Biografía:</span>
+            <span className="l">{t('label')}</span>
             <div className="r flex-edtbl-dt">
             {!editMode && <span>{bio}</span> }
             {!editMode &&  <Button onClick={startEditMode} appearance={"subtle"} size={"small"} icon={<Edit16Filled />} />}</div>
@@ -86,12 +89,12 @@ const BioSection = (props: BioSectionProps): React.JSX.Element => {
                 onClick={save}
                 disabled={newBio === bio}
             >{ saving && <Spinner size={"extra-tiny"} /> }
-                { saving ? "Guardando..." : "Guardar" }
+                { saving ? t('st.saving') : t('st.save') }
             </Button>
             <Button
                 onClick={cancel}
                 appearance={(updated && newBio === bio) ? "primary" : "secondary"}>
-                { (updated && newBio === bio) ? "Cerrar" : "Cancelar" }
+                { (updated && newBio === bio) ? t('st.close') : t('st.cancel') }
             </Button>
         </div>}
     </>);

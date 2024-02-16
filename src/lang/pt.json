@@ -183,7 +183,23 @@
           "ok": {
             "validated": "Verificado!"
           }
+        },
+        "BioSection": {
+          "label": "Bio:",
+          "st": {
+            "saving": "Salvando... ",
+            "save": "Salvar",
+            "close": "Fechar",
+            "cancel": "Cancelar"
+          },
+          "ok": {
+            "updated": "Atualizado com sucesso. "
+          },
+          "err": {
+            "couldntUpdate": "Não foi possível atualizar. "
+          }
         }
+
 
       }
     }

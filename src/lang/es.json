@@ -185,6 +185,22 @@
           "ok": {
             "validated": "Correo validado con éxito. "
           }
+        },
+        "BioSection": {
+          "label": "Biografía:",
+          "st": {
+            "saving": "Guardando... ",
+            "save": "Guardar",
+            "close": "Cerrar",
+            "cancel": "Cancelar"
+          },
+          "ok": {
+            "updated": "Actualizado correctamente. "
+          },
+          "err": {
+            "couldntUpdate": "No se pudo actualizar. "
+          }
+        },
         }
       }
     }

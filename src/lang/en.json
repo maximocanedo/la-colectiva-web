@@ -185,6 +185,21 @@
           "ok": {
             "validated": "Verified!"
           }
+        },
+        "BioSection": {
+          "label": "Bio:",
+          "st": {
+            "saving": "Saving... ",
+            "save": "Save",
+            "close": "Close",
+            "cancel": "Cancel"
+          },
+          "ok": {
+            "updated": "Updated successfully. "
+          },
+          "err": {
+            "couldntUpdate": "Couldn't update. "
+          }
         }
       }
     }
