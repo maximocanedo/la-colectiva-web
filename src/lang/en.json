@@ -58,6 +58,16 @@
       "ok": {
         "loginSuccessful": "Welcome back!"
       }
+    },
+    "UserProfile": {
+      "title": "",
+      "tabs": {
+        "personal": "Personal info",
+        "more": "More"
+      },
+      "err": {
+        "notFound": "User not found"
+      }
     }
   },
   "components": {
@@ -203,6 +213,21 @@
         },
         "NameSection": {
           "label": "Name:",
+          "st": {
+            "saving": "Saving... ",
+            "save": "Save",
+            "close": "Close",
+            "cancel": "Cancel"
+          },
+          "ok": {
+            "updated": "Updated successfully. "
+          },
+          "err": {
+            "couldntUpdate": "Couldn't update. "
+          }
+        },
+        "BirthSection": {
+          "label": "Birth date:",
           "st": {
             "saving": "Saving... ",
             "save": "Save",

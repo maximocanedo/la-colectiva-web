@@ -74,7 +74,7 @@ export enum Role {
      */
     ADMINISTRATOR = 3
 }
-type Birth = Date | string | number;
+export type Birth = Date | string | number;
 /**
  * Datos necesarios para crear una cuenta. 
  */

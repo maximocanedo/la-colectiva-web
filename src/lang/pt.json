@@ -58,6 +58,16 @@
       "ok": {
         "loginSuccessful": "Bem vindo de novo! "
       }
+    },
+    "UserProfile": {
+      "title": "",
+      "tabs": {
+        "personal": "Informação pessoal",
+        "more": "Mais"
+      },
+      "err": {
+        "notFound": "Usuário não encontrado"
+      }
     }
   },
   "components": {
@@ -201,6 +211,21 @@
         },
         "NameSection": {
           "label": "Nome:",
+          "st": {
+            "saving": "Salvando... ",
+            "save": "Salvar",
+            "close": "Fechar",
+            "cancel": "Cancelar"
+          },
+          "ok": {
+            "updated": "Atualizado com sucesso. "
+          },
+          "err": {
+            "couldntUpdate": "Não foi possível atualizar. "
+          }
+        },
+        "BirthSection": {
+          "label": "Data de nascimento:",
           "st": {
             "saving": "Salvando... ",
             "save": "Salvar",
