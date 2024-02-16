@@ -2,7 +2,16 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import * as users from "../../data/actions/user";
 import {IUser} from "../../data/models/user";
-import {Avatar, Persona, SelectTabData, SelectTabEvent, Tab, TabList, TabValue} from "@fluentui/react-components";
+import {
+    Avatar,
+    Persona,
+    SelectTabData,
+    SelectTabEvent,
+    Tab,
+    TabList,
+    TabValue, Toast, ToastBody, ToastIntent, ToastTitle,
+    useToastController
+} from "@fluentui/react-components";
 import RoleSelector from "../../components/user/user-page/RoleSelector";
 import EmailSection from "../../components/user/user-page/EmailSection";
 import BioSection from "../../components/user/user-page/BioSection";
@@ -12,8 +21,9 @@ import {useTranslation} from "react-i18next";
 import PasswordSection from "../../components/user/user-page/PasswordSection";
 import ActiveSection from "../../components/user/user-page/ActiveSection";
 import { DesignToken } from '@microsoft/fast-foundation';
+import {UserProfileProps} from "./defs";
 const LANG_PATH: string = "pages.UserProfile";
-const UserProfile = (): React.JSX.Element => {
+const UserProfile = (props: UserProfileProps): React.JSX.Element => {
     const username: string = useParams<{ username: string }>().username as string;
     const { t: translationService } = useTranslation();
     const t = (path: string): string => translationService(LANG_PATH + "." + path);
@@ -41,6 +51,17 @@ const UserProfile = (): React.JSX.Element => {
             });
         setLoaded(true);
     }, []);
+
+    const { toasterId }: UserProfileProps = props;
+    const { dispatchToast } = useToastController(toasterId);
+    const notify = (message: string, type: ToastIntent, description?: string) =>
+        dispatchToast(
+            <Toast>
+                <ToastTitle>{message}</ToastTitle>
+                { description && <ToastBody subtitle="Subtitle">{ description }</ToastBody> }
+            </Toast>,
+            { intent: type }
+        );
 
     if (!loaded) {
         return (
@@ -88,7 +109,7 @@ const UserProfile = (): React.JSX.Element => {
         </div> }
         { tab === "actions" && <div className={"tab-cnt flex-down"}>
             <PasswordSection user={user} me={me} />
-            <ActiveSection user={user} me={me} />
+            <ActiveSection user={user} me={me} notify={notify} />
         </div>}
     </div>);
 };

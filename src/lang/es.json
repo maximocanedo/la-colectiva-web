@@ -263,6 +263,28 @@
             "eq": "Las contraseñas no coinciden. ",
             "update": "No se actualizó la contraseña. "
           }
+        },
+        "ActiveSection": {
+          "title": "Deshabilitar cuenta",
+          "labels": {
+            "btnDisable": "Deshabilitar",
+            "sure": "Deshabilitar esta cuenta",
+            "back": "Volver"
+          },
+          "p": {
+            "dialog": {
+              "title": "¿Deshabilitar esta cuenta?",
+              "description": "Al deshabilitar esta cuenta, no se podrá iniciar sesión con sus credenciales, y el correo y nombre de usuario no podrán volver a usarse para crear otra cuenta. "
+            }
+          },
+          "ok": {
+            "disabled": "Cuenta deshabilitada correctamente. "
+          },
+          "err": {
+            "disable": "No se pudo deshabilitar la cuenta. ",
+            "err": "Error",
+            "try": "Intentá de nuevo más tarde. "
+          }
         }
       }
     }

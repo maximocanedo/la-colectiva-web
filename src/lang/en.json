@@ -263,6 +263,28 @@
             "eq": "Passwords do not match. ",
             "update": "Couldn't update password. "
           }
+        },
+        "ActiveSection": {
+          "title": "Disable this account",
+          "labels": {
+            "btnDisable": "Disable",
+            "sure": "Sure, disable this account",
+            "back": "Back"
+          },
+          "p": {
+            "dialog": {
+              "title": "Disable this account?",
+              "description": "By disabling this account, you will not be able to log in with your credentials, and the email and username cannot be used again to create another account. "
+            }
+          },
+          "ok": {
+            "disabled": "Account disabled successfully. "
+          },
+          "err": {
+            "disable": "Could not disable the account. ",
+            "err": "Error",
+            "try": "Try again later. "
+          }
         }
       }
     }

@@ -25,7 +25,7 @@ function App(): ReactElement {
 							<Route path={"/"} element={HomePage} />
 							<Route path={"/signup"} element={<SignUpPage toasterId={toasterId}  />} />
 							<Route path={"/login"} element={<LoginPage toasterId={toasterId} />} />
-							<Route path={"/users/:username"} element={<UserProfile />} />
+							<Route path={"/users/:username"} element={<UserProfile toasterId={toasterId} />} />
 							<Route path={"*"} element={NotFoundPage} />
 						</Routes>
 					</main>

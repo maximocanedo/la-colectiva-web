@@ -1,3 +1,5 @@
 
 
-export {};
+export interface UserProfileProps {
+    toasterId: string;
+}

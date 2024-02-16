@@ -261,10 +261,29 @@
             "eq": "As senhas não correspondem. ",
             "update": "Não foi possível atualizar a senha. "
           }
+        },
+        "ActiveSection": {
+          "title": "Desativar conta",
+          "labels": {
+            "btnDisable": "Desativar",
+            "sure": "Desativar esta conta",
+            "back": "Voltar"
+          },
+          "p": {
+            "dialog": {
+              "title": "Desativar esta conta?",
+              "description": "Ao desativar esta conta, não será possível fazer login com suas credenciais, e o e-mail e nome de usuário não poderão ser usados novamente para criar outra conta. "
+            }
+          },
+          "ok": {
+            "disabled": "Conta desativada com sucesso. "
+          },
+          "err": {
+            "disable": "Não foi possível desativar a conta. ",
+            "err": "Erro",
+            "try": "Tente novamente mais tarde. "
+          }
         }
-
-
-
       }
     }
   }
