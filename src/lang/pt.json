@@ -238,7 +238,31 @@
           "err": {
             "couldntUpdate": "Não foi possível atualizar. "
           }
+        },
+        "PasswordSection": {
+          "title": "Senha",
+          "label": {
+            "p": "Digite a nova senha",
+            "r": "Digite novamente a senha"
+          },
+          "st": {
+            "updating": "Atualizando...",
+            "update": "Atualizar senha",
+            "close": "Fechar",
+            "cancel": "Cancelar",
+            "change": "Alterar senha"
+          },
+          "ok": {
+            "updated": "Senha atualizada com sucesso. ",
+            "eq": "Senhas correspondem. "
+          },
+          "err": {
+            "len": "A senha deve conter pelo menos 8 caracteres. ",
+            "eq": "As senhas não correspondem. ",
+            "update": "Não foi possível atualizar a senha. "
+          }
         }
+
 
 
       }

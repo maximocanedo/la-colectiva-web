@@ -240,6 +240,29 @@
           "err": {
             "couldntUpdate": "No se pudo actualizar. "
           }
+        },
+        "PasswordSection": {
+          "title": "Contraseña",
+          "label": {
+            "p": "Ingrese una nueva contraseña",
+            "r": "Vuelva a ingresar la contraseña"
+          },
+          "st": {
+            "updating": "Actualizando...",
+            "update": "Actualizar contraseña",
+            "close": "Cerrar",
+            "cancel": "Cancelar",
+            "change": "Cambiar contraseña"
+          },
+          "ok": {
+            "updated": "La contraseña se actualizó correctamente. ",
+            "eq": "Las contraseñas coinciden. "
+          },
+          "err": {
+            "len": "La contraseña debe tener como mínimo 8 caracteres. ",
+            "eq": "Las contraseñas no coinciden. ",
+            "update": "No se actualizó la contraseña. "
+          }
         }
       }
     }

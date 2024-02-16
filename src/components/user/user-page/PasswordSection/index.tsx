@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {PasswordSectionProps} from "./defs";
 import {Button, Field, Input, Spinner} from "@fluentui/react-components";
-import {IMailSentFinalResponse, Role} from "../../../../data/models/user";
 import {useTranslation} from "react-i18next";
 import {StateManager} from "../../../../page/SignUpPage/defs";
 import * as users from "../../../../data/actions/user";
@@ -54,7 +53,7 @@ const PasswordSection = (props: PasswordSectionProps): React.JSX.Element => {
     useEffect((): void => {
         const passwordIsOK = (x: string): boolean => x.trim().length >= 8;
         if(password.trim() !== "" && !passwordIsOK(password)) {
-            err("La contraseña debe tener como mínimo 8 caracteres. ");
+            err(t('err.len'));
         } else {
             cl();
         }
@@ -66,9 +65,9 @@ const PasswordSection = (props: PasswordSectionProps): React.JSX.Element => {
             return;
         }
         if(rpassword.trim() !== password.trim()) {
-            _err("Las contraseñas no coinciden. ");
+            _err(t('err.eq'));
         } else {
-            _ok("Las contraseñas coinciden. ");
+            _ok(t('ok.eq'));
         }
     }, [password, rpassword]);
 
@@ -90,10 +89,10 @@ const PasswordSection = (props: PasswordSectionProps): React.JSX.Element => {
             .then((response: CommonResponse): void => {
                 if(response.success) {
                     setUpdated(true);
-                    setFinalMessage("La contraseña se actualizó correctamente. ");
+                    setFinalMessage(t('ok.updated'));
                     clearAll();
                 } else {
-                    err("No se actualizó la contraseña. ");
+                    err(t('err.update'));
                 }
             })
             .catch((error): void => {
@@ -107,18 +106,18 @@ const PasswordSection = (props: PasswordSectionProps): React.JSX.Element => {
 
     return (<>
         <div className="jBar">
-            <span className="l">Contraseña</span>
+            <span className="l">{t('title')}</span>
             {!showEditSection && <Button appearance="secondary" onClick={(e) => {
                 setShowEditSection(true);
             }}>
-                Cambiar contraseña
+                {t('st.change')}
             </Button>}
         </div>
         {showEditSection && <>
         {!updated && <><div className="jBar">
                 <Field
                     className="fullWidth"
-                    label={"Ingrese una nueva contraseña"}
+                    label={t('label.p')}
                     validationMessage={passwordValidationMessage}
                     validationState={passwordValidationStatus}
                 >
@@ -133,7 +132,7 @@ const PasswordSection = (props: PasswordSectionProps): React.JSX.Element => {
             <div className="jBar">
                 <Field
                     className="fullWidth"
-                    label={"Vuelva a ingresar la contraseña"}
+                    label={t('label.r')}
                     validationMessage={rpasswordValidationMessage}
                     validationState={rpasswordValidationStatus}
                 >
@@ -152,12 +151,12 @@ const PasswordSection = (props: PasswordSectionProps): React.JSX.Element => {
                     setUpdated(false);
                     clearAll();
                 }}>
-                    {updated ? "Cerrar" : "Cancelar" }
+                    {updated ? t('st.close') : t('st.cancel') }
                 </Button>}
                 {
                     !updated && <Button onClick={updatePassword} className={"button-loading-spinner"} disabled={!updatable} appearance={"primary"}>
                         { updating && <Spinner size={"extra-tiny"} /> }
-                        { updating ? "Actualizando..." : "Cambiar contraseña" }
+                        { updating ? t('st.updating') : t('st.update') }
                     </Button>
                 }
             </div>

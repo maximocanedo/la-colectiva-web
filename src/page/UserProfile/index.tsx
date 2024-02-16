@@ -10,6 +10,8 @@ import NameSection from "../../components/user/user-page/NameSection";
 import BirthSection from "../../components/user/user-page/BirthSection";
 import {useTranslation} from "react-i18next";
 import PasswordSection from "../../components/user/user-page/PasswordSection";
+import ActiveSection from "../../components/user/user-page/ActiveSection";
+import { DesignToken } from '@microsoft/fast-foundation';
 const LANG_PATH: string = "pages.UserProfile";
 const UserProfile = (): React.JSX.Element => {
     const username: string = useParams<{ username: string }>().username as string;
@@ -62,6 +64,7 @@ const UserProfile = (): React.JSX.Element => {
         setTab(data.value);
     };
 
+
     return (<div className={"page-content flex-down"}>
         <div className="flex-down">
             <Persona
@@ -85,6 +88,7 @@ const UserProfile = (): React.JSX.Element => {
         </div> }
         { tab === "actions" && <div className={"tab-cnt flex-down"}>
             <PasswordSection user={user} me={me} />
+            <ActiveSection user={user} me={me} />
         </div>}
     </div>);
 };
