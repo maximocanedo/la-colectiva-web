@@ -201,6 +201,20 @@
             "couldntUpdate": "No se pudo actualizar. "
           }
         },
+        "NameSection": {
+          "label": "Nombre:",
+          "st": {
+            "saving": "Guardando... ",
+            "save": "Guardar",
+            "close": "Cerrar",
+            "cancel": "Cancelar"
+          },
+          "ok": {
+            "updated": "Actualizado correctamente. "
+          },
+          "err": {
+            "couldntUpdate": "No se pudo actualizar. "
+          }
         }
       }
     }

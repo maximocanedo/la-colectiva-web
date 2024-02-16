@@ -200,6 +200,21 @@
           "err": {
             "couldntUpdate": "Couldn't update. "
           }
+        },
+        "NameSection": {
+          "label": "Name:",
+          "st": {
+            "saving": "Saving... ",
+            "save": "Save",
+            "close": "Close",
+            "cancel": "Cancel"
+          },
+          "ok": {
+            "updated": "Updated successfully. "
+          },
+          "err": {
+            "couldntUpdate": "Couldn't update. "
+          }
         }
       }
     }

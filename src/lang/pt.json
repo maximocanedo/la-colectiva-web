@@ -198,6 +198,21 @@
           "err": {
             "couldntUpdate": "Não foi possível atualizar. "
           }
+        },
+        "NameSection": {
+          "label": "Nome:",
+          "st": {
+            "saving": "Salvando... ",
+            "save": "Salvar",
+            "close": "Fechar",
+            "cancel": "Cancelar"
+          },
+          "ok": {
+            "updated": "Atualizado com sucesso. "
+          },
+          "err": {
+            "couldntUpdate": "Não foi possível atualizar. "
+          }
         }
 
 
