@@ -8,7 +8,7 @@ import {TFunction} from "i18next";
 import {UserButtonProps} from "./defs";
 
 
-const USER_PROFILE_PAGE: string = "/users?username=";
+const USER_PROFILE_PAGE: string = "/users/";
 const resolveUserProfilePageURL = (username: string): string => USER_PROFILE_PAGE + username;
 
 const UserButton = (props: UserButtonProps): React.JSX.Element => {

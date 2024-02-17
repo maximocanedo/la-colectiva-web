@@ -8,6 +8,21 @@ header {
     width: 100%;
     height: 72px;
     border-bottom: var(--strokeWidthThin) solid var(--colorNeutralStroke1);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 15px;
+
+}
+header nav {
+    min-width: 72px;
+    height: 72px;
+}
+header .space {
+}
+header .hdr-cnt-chl {
+    display: grid;
+    place-items: center;
 }
 main {
     position: fixed;

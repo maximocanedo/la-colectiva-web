@@ -19,7 +19,7 @@ function App(): ReactElement {
 		<Router>
 			<I18nextProvider i18n={i18n}>
 				<FluentProvider theme={webLightTheme}>
-					<Header />
+					<Header toasterId={toasterId} />
 					<main>
 						<Routes>
 							<Route path={"/"} element={HomePage} />

@@ -18,10 +18,12 @@ import * as auth from "../../data/auth";
 import {Credentials} from "../../data/auth";
 import {CommonResponse, IError} from "../../data/utils";
 import {Err} from "../../data/error";
+import {useSearchParams} from "react-router-dom";
 
 
 
 const LoginPage = ({ toasterId }: LoginPageProps): React.JSX.Element => {
+    const [searchParams, setSearchParams] = useSearchParams();
     const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const [ identifier, setIdentifier ]: StateManager<string> = useState<string>("");
     const [ identifierType, setIdentifierType ]: StateManager<IdentifierType> = useState<IdentifierType>("empty");
@@ -30,7 +32,7 @@ const LoginPage = ({ toasterId }: LoginPageProps): React.JSX.Element => {
 
     const validCredentials: boolean = !((identifierType !== "email" && identifierType !== "username") || !passwordOK);
     const { dispatchToast } = useToastController(toasterId);
-
+    const nextPage: string = searchParams.get("next") !== null ? searchParams.get("next") as string : "/";
     useEffect((): void => {
     }, [ identifier ]);
     const notify = (message: string, type: ToastIntent, description?: string) =>
@@ -70,7 +72,7 @@ const LoginPage = ({ toasterId }: LoginPageProps): React.JSX.Element => {
                     auth.login(credentials)
                         .then((response: CommonResponse): void => {
                             notify(t('pages.login.ok.loginSuccessful'), "success");
-                            window.location.href = '/';
+                            window.location.href = nextPage;
                         })
                         .catch((error): void => {
                             console.log(error.code);
