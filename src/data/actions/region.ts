@@ -31,10 +31,20 @@ export const edit = async (id: string, data: RegionEditData): Promise<CommonResp
  */
 export const del = async (id: string): Promise<CommonResponse> => {
     const call: Response = await u.del(getPrefix(id), {});
-    const { status }: Response = call;
-    if(status === 200) return {
+    if(call.ok) return {
         success: true,
         message: "Eliminación exitosa. "
+    };
+    else {
+        const { error }: { error: IError } = await call.json();
+        throw new Err(error);
+    }
+};
+export const enable = async (id: string): Promise<CommonResponse> => {
+    const call: Response = await u.post(getPrefix(id), {});
+    if(call.ok) return {
+        success: true,
+        message: "Habilitación exitosa. "
     };
     else {
         const { error }: { error: IError } = await call.json();

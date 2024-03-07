@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {getRegionTypeLangPathNameFor, RegionPageProps, RegionTypeLangPathNames} from "./defs";
+import {getRegionTypeLangPathNameFor, RegionPageProps, RegionTypeLangPathNames, useStyles} from "./defs";
 import {useParams} from "react-router-dom";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
 import * as regions from "../../data/actions/region";
@@ -15,6 +15,9 @@ import UserLink from "../../components/user/UserLink";
 import VoteManager from "../../components/basic/VoteManager";
 import CommentHandler from "../../components/basic/CommentHandler";
 import {
+    Breadcrumb,
+    BreadcrumbButton, BreadcrumbDivider,
+    BreadcrumbItem, Button,
     makeStyles, mergeClasses, Overflow, OverflowItem,
     SelectTabData,
     SelectTabEvent,
@@ -36,6 +39,7 @@ import {
 import OverflowMenu from "../../components/basic/OverflowMenu";
 import TabHandler from "../../components/basic/TabHandler";
 import {TabData} from "../../components/basic/TabHandler/defs";
+import {CommonResponse} from "../../data/utils";
 
 
 const LANG_PATH: string = "pages.Region";
@@ -48,6 +52,7 @@ const HistoryIcon: FluentIcon = bundleIcon(History24Filled, History24Regular);
 
 
 const RegionPage = (props: RegionPageProps): React.JSX.Element => {
+    const styles = useStyles();
     const id: string = useParams<{ id: string }>().id as string;
     const { t: _translate }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const t = (key: string): string =>  _translate(LANG_PATH + "." + key);
@@ -58,6 +63,7 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
     const [ type, setType ]: StateManager<RegionType> = useState<RegionType>(
         region === null || region.type === undefined ? 0 : region.type
     );
+    const [ active, updateStatus ] = useState<boolean>(true);
     const [ tab, setTab ] = useState<string>("basic");
     const tabs: TabData[] = [
         {
@@ -88,6 +94,7 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
                 setRegion(response);
                 setName(response.name as string);
                 setType(response.type as RegionType);
+                updateStatus(response.active as boolean);
             })
             .catch((error): void => {
                 console.error(error);
@@ -103,9 +110,41 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
 
     const regionType: string = typeof region.type !== 'undefined' ? getRegionTypeLangPathNameFor(region.type) : "models.region.types.unknown";
 
+    const updSt = (): void => {
+        const newStatus: boolean = !active;
+        regions[active ? "del" : "enable"](id)
+            .then((response: CommonResponse) => {
+                if(response.success) {
+                    updateStatus(newStatus);
+                }
+            }).catch(err => console.error(err)).finally((): void => {
+
+        });
+    };
+
+    const formattedDate: string = new Intl.DateTimeFormat(_translate("defLang"), {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        weekday: 'long',
+        hour: 'numeric',
+        minute: 'numeric'
+    }).format(new Date(region.uploadDate?? ""));
 
     return (<>
         <div className={"page-content flex-down"}>
+            <Breadcrumb
+                aria-label="Small breadcrumb example with buttons"
+                size="small"
+            >
+                <BreadcrumbItem>
+                    <BreadcrumbButton>Regiones</BreadcrumbButton>
+                </BreadcrumbItem>
+                <BreadcrumbDivider />
+                <BreadcrumbItem>
+                    <BreadcrumbButton>{_translate(regionType) + " "}{name}</BreadcrumbButton>
+                </BreadcrumbItem>
+            </Breadcrumb>
             <RegionIconRep name={name} type={type} region={region}/>
             <center>
                 <VoteManager me={me} id={id} fetcher={regions.votes.get} upvoter={regions.votes.upvote}
@@ -127,9 +166,22 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
                         <UserLink data={null} from={(region.user as any).username}/>
                     </div>
                 </div>
+                <div className="jBar">
+                    <div className="l">{t("st.uploaded")}</div>
+                    <div className="r">{formattedDate}</div>
+                </div>
+                {canEdit && <div className="jBar">
+                    <Button className={active ? styles.disableBtn : styles.enableBtn } onClick={(e): void => updSt()} appearance={"secondary"}>
+                        {active ? t("actions.disable") : t("actions.enable")}
+                    </Button>
+                </div>}
             </>}
-            {tab === "comments" && <><CommentHandler id={id} fetcher={regions.comments.get} me={me}
-                                                     remover={regions.comments.del} poster={regions.comments.post}/></>}
+            {tab === "comments" &&
+                <CommentHandler
+                    id={id} me={me}
+                    fetcher={regions.comments.get}
+                    remover={regions.comments.del}
+                    poster={regions.comments.post} />}
             {tab === "history" && <HistoryHandler id={id} fetcher={regions.fetchHistory} me={me}/>}
 
         </div>

@@ -1,3 +1,4 @@
+import {makeStyles, tokens} from "@fluentui/react-components";
 
 export interface RegionPageProps {
     toasterId: string;
@@ -39,3 +40,12 @@ export const getRegionTypeLangPathNameFor = (i: number): string => [
 export interface RegionPageParams {
     id: string;
 }
+
+export const useStyles = makeStyles({
+    disableBtn: {
+        color: tokens.colorPaletteRedBackground3
+    },
+    enableBtn: {
+        color: tokens.colorPaletteGreenBackground3
+    }
+});

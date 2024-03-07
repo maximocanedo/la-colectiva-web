@@ -70,6 +70,7 @@ export interface IRegion {
     name: string;
     user?: string | IUser;
     type?: RegionType;
+    active?: boolean;
     uploadDate?: Date | string;
     __v?: number;
 }

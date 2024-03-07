@@ -13,6 +13,7 @@ import SignUpPage from "./page/SignUpPage";
 import i18n from "./lang";
 import {I18nextProvider} from "react-i18next";
 import LoginPage from "./page/LoginPage";
+import RegionSearch from "./page/RegionSearch";
 
 function App(): ReactElement {
 	const toasterId: string = useId("toaster");
@@ -28,6 +29,7 @@ function App(): ReactElement {
 							<Route path={"/login"} element={<LoginPage toasterId={toasterId} />} />
 							<Route path={"/users/:username"} element={<UserProfile toasterId={toasterId} />} />
 							<Route path={"/regions/:id"} element={<RegionPage toasterId={toasterId} />} />
+							<Route path={"/regions"} element={<RegionSearch toasterId={toasterId} />} />
 							<Route path={"*"} element={NotFoundPage} />
 						</Routes>
 					</main>

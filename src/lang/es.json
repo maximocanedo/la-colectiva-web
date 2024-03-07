@@ -96,12 +96,23 @@
     },
     "Region": {
       "st": {
-        "registeredBy": "Registrado por: "
+        "registeredBy": "Registrado por: ",
+        "uploaded": "Creado el: "
+      },
+      "actions": {
+        "disable": "Deshabilitar",
+        "enable": "Habilitar recurso"
       },
       "tabs": {
         "basic": "Información básica",
         "comments": "Comentarios",
         "history": "Historial de cambios"
+      }
+    },
+    "Regions": {
+      "label": {
+        "search": "Buscar regiones",
+        "allregions": "Todas las categorías"
       }
     }
   },
