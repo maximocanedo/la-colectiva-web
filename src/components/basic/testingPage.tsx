@@ -36,7 +36,7 @@ export function DialogSignUp (props: InputProps) {
 
 export default function TestPage() {
     return (<div>
-            <UserLink from={"root"} />
+            <UserLink data={null} from={"root"} />
         </div>
     );
 }

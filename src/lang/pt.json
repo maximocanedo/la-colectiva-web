@@ -1,8 +1,32 @@
 {
+  "defLang": "pt-BR",
+  "now": "Agora mesmo",
   "test": "Este é um teste. ",
   "loading": "Carregando... ",
   "actions": {
+    "loadMore": "Carregar mais",
     "next": "Próximo"
+  },
+  "models": {
+    "region": {
+      "types": {
+        "river": "Rio",
+        "stream": "Córrego",
+        "brook": "Riacho",
+        "canal": "Canal",
+        "lake": "Lago",
+        "pond": "Lagoa",
+        "lagoon": "Lagoa",
+        "reservoir": "Reservatório",
+        "swamp": "Pântano",
+        "well": "Poço",
+        "aquifer": "Aquífero",
+        "bay": "Baía",
+        "gulf": "Golfo",
+        "sea": "Mar",
+        "ocean": "Oceano"
+      }
+    }
   },
   "pages": {
     "signup": {
@@ -67,6 +91,16 @@
       },
       "err": {
         "notFound": "Usuário não encontrado"
+      }
+    },
+    "Region": {
+      "st": {
+        "registeredBy": "Registrado por: "
+      },
+      "tabs": {
+        "basic": "Informações básicas",
+        "comments": "Comentários",
+        "history": "Histórico"
       }
     }
   },
@@ -283,6 +317,80 @@
             "err": "Erro",
             "try": "Tente novamente mais tarde. "
           }
+        }
+      }
+    },
+    "region": {
+      "RegionName": {
+        "label": "Nome:",
+        "st": {
+          "saving": "Salvando... ",
+          "save": "Salvar",
+          "close": "Fechar",
+          "cancel": "Cancelar"
+        },
+        "ok": {
+          "updated": "Atualizado com sucesso. "
+        },
+        "err": {
+          "couldntUpdate": "Não foi possível atualizar. ",
+          "invalid": "O valor do campo não é válido. "
+        }
+      },
+      "RegionType": {
+        "label": "Tipo: ",
+        "st": {
+          "saving": "Salvando... ",
+          "save": "Salvar",
+          "close": "Fechar",
+          "cancel": "Cancelar"
+        },
+        "ok": {
+          "updated": "Atualizado com sucesso. "
+        },
+        "err": {
+          "couldntUpdate": "Não foi possível atualizar. ",
+          "invalid": "O valor do campo não é válido. "
+        }
+      }
+    },
+    "comments": {
+      "handler": {
+        "st": {
+          "loading": "Carregando... ",
+          "more": "Carregar mais"
+        },
+        "textarea": {
+          "placeholder": "Deixe um comentário"
+        }
+      },
+      "comment": {
+        "menu": {
+          "label": "Mais",
+          "options": {
+            "edit": "Editar",
+            "delete": "Excluir",
+            "report": "Reportar"
+          }
+        },
+        "dialog": {
+          "title": "Excluir este comentário?",
+          "description": "Esta ação não pode ser desfeita. "
+        },
+        "st": {
+          "edited": "Editado"
+        },
+        "edit": {
+          "btnEdit": "Editar",
+          "btnCancel": "Cancelar",
+          "btnClose": "Fechar"
+        }
+      }
+    },
+    "history": {
+      "handler": {
+        "st": {
+          "more": "Carregar mais"
         }
       }
     }

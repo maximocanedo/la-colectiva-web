@@ -6,15 +6,20 @@ import {UserLinkProps} from "./defs";
 import {StateManager} from "../../../page/SignUpPage/defs";
 
 
-const USER_PROFILE_PAGE: string = "/users?username=";
+const USER_PROFILE_PAGE: string = "/users/";
 const resolveUserProfilePageURL = (username: string): string => USER_PROFILE_PAGE + username;
 const UserLink = (props: UserLinkProps): React.JSX.Element => {
-    const { from }: UserLinkProps = props;
+    const { from, data }: UserLinkProps = props;
     const [userObj, setUserObj]: StateManager<IUser | null> = useState<IUser | null>(null);
     const [loading, setLoading]: StateManager<boolean> = useState<boolean>(true);
 
     useEffect(() => {
         let isMounted: boolean = true;
+        if(data !== null || from === undefined) {
+            setUserObj(data as IUser);
+            setLoading(false);
+            return;
+        }
         user.findByUsername(from)
             .then((userObj: IUser): void => {
                 if (isMounted) {
@@ -31,19 +36,20 @@ const UserLink = (props: UserLinkProps): React.JSX.Element => {
         return (): void => {
             isMounted = false;
         };
-    }, [from]);
+    }, [from, data]);
 
     if (loading) {
         return <Spinner size={"extra-tiny"}  />;
     }
+    const username: string = from === undefined ? (data as IUser).username : from;
 
     if (!userObj) {
-        return <Link disabled={true} href={resolveUserProfilePageURL(from)} {...props}>
+        return <Link disabled={true} href={resolveUserProfilePageURL(username)} {...props}>
            <s>@{from}</s>
         </Link>;
     }
 
-    const { username, name }: IUser = userObj;
+    const { name }: IUser = userObj;
 
     return (
         <Link href={resolveUserProfilePageURL(username)} {...props}>

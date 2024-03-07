@@ -1,8 +1,33 @@
 {
+  "defLang": "es-AR",
+  "now": "Ahora mismo",
   "loading": "Cargando... ",
   "test": "Esto es una prueba.",
   "actions": {
-    "next": "Siguiente"
+    "next": "Siguiente",
+    "loadMore": "Cargar más"
+  },
+  "models": {
+    "region": {
+      "types": {
+        "river": "Río",
+        "stream": "Arroyo",
+        "brook": "Riachuelo",
+        "canal": "Canal",
+        "lake": "Lago",
+        "pond": "Estanque",
+        "lagoon": "Laguna",
+        "reservoir": "Embalse",
+        "swamp": "Pantano",
+        "well": "Pozo",
+        "aquifer": "Acuífero",
+        "bay": "Bahía",
+        "gulf": "Golfo",
+        "sea": "Mar",
+        "ocean": "Océano",
+        "unknown": "Desconocido"
+      }
+    }
   },
   "pages": {
     "signup": {
@@ -67,6 +92,16 @@
       },
       "err": {
         "notFound": "Usuario no encontrado"
+      }
+    },
+    "Region": {
+      "st": {
+        "registeredBy": "Registrado por: "
+      },
+      "tabs": {
+        "basic": "Información básica",
+        "comments": "Comentarios",
+        "history": "Historial de cambios"
       }
     }
   },
@@ -285,6 +320,80 @@
             "err": "Error",
             "try": "Intentá de nuevo más tarde. "
           }
+        }
+      }
+    },
+    "region": {
+      "RegionName": {
+        "label": "Nombre:",
+        "st": {
+          "saving": "Guardando... ",
+          "save": "Guardar",
+          "close": "Cerrar",
+          "cancel": "Cancelar"
+        },
+        "ok": {
+          "updated": "Actualizado correctamente. "
+        },
+        "err": {
+          "couldntUpdate": "No se pudo actualizar. ",
+          "invalid": "El campo debe contener entre 3 y 48 caracteres. "
+        }
+      },
+      "RegionType": {
+        "label": "Tipo: ",
+        "st": {
+          "saving": "Guardando... ",
+          "save": "Guardar",
+          "close": "Cerrar",
+          "cancel": "Cancelar"
+        },
+        "ok": {
+          "updated": "Actualizado correctamente. "
+        },
+        "err": {
+          "couldntUpdate": "No se pudo actualizar. ",
+          "invalid": "El campo debe contener entre 3 y 48 caracteres. "
+        }
+      }
+    },
+    "comments": {
+      "handler": {
+        "st": {
+          "loading": "Cargando... ",
+          "more": "Cargar más"
+        },
+        "textarea": {
+          "placeholder": "Dejá un comentario"
+        }
+      },
+      "comment": {
+        "menu": {
+          "label": "Más",
+          "options": {
+            "edit": "Editar",
+            "delete": "Eliminar",
+            "report": "Reportar"
+          }
+        },
+        "dialog": {
+          "title": "¿Eliminar este comentario?",
+          "description": "Esta acción no se puede deshacer. "
+        },
+        "st": {
+          "edited": "Editado"
+        },
+        "edit": {
+          "btnEdit": "Editar",
+          "btnCancel": "Cancelar",
+          "btnClose": "Cerrar"
+        }
+      }
+    },
+    "history": {
+      "handler": {
+        "st": {
+          "more": "Cargar más"
         }
       }
     }

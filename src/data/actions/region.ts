@@ -3,19 +3,20 @@ import {Err} from "../error";
 import {IComment, ICommentFetchResponse, IPaginator} from "../models/comment";
 import { downvote, getVotes, upvote } from "./vote";
 import * as comment from "../actions/comment";
+import * as history from "../actions/history";
 import {IRegion, IRegionCreate, RegionType} from "../models/region";
 import {VoteStatus} from "../models/vote";
+import {IHistoryEvent} from "../models/IHistoryEvent";
 const getPrefix = (id: string): string => "regions/" + id;
+type RegionEditData = { name: string } | { type: RegionType } | { name: string, type: RegionType };
 /**
  * Edita un registro de región.
  * @param id ID del registro.
- * @param name Nombre nuevo.
- * @param type Tipo de región nuevo.
+ * @param data Datos a actualizar.
  */
-export const edit = async (id: string, name: string, type: RegionType): Promise<CommonResponse> => {
-    const call: Response = await u.put(getPrefix(id), { name, type });
-    const { status }: Response = call;
-    if(status === 200) return {
+export const edit = async (id: string, data: RegionEditData): Promise<CommonResponse> => {
+    const call: Response = await u.patch(getPrefix(id), data);
+    if(call.ok) return {
         success: true,
         message: "Edición exitosa. "
     };
@@ -96,3 +97,6 @@ export const comments = {
     del: async (id: string, commentId: string): Promise<CommonResponse> =>
         comment.del(getPrefix(id), commentId)
 };
+
+export const fetchHistory = async (id: string, paginator: IPaginator = { p: 0, itemsPerPage: 5 }): Promise<IHistoryEvent[]> =>
+        history.fetch(getPrefix(id), paginator);

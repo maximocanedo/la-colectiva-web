@@ -7,6 +7,7 @@ import Header from "./components/basic/Header";
 import Footer from "./components/basic/Footer";
 import HomePage from "./page/HomePage";
 import UserProfile from "./page/UserProfile";
+import RegionPage from "./page/RegionPage";
 import NotFoundPage from "./page/NotFoundPage";
 import SignUpPage from "./page/SignUpPage";
 import i18n from "./lang";
@@ -26,6 +27,7 @@ function App(): ReactElement {
 							<Route path={"/signup"} element={<SignUpPage toasterId={toasterId}  />} />
 							<Route path={"/login"} element={<LoginPage toasterId={toasterId} />} />
 							<Route path={"/users/:username"} element={<UserProfile toasterId={toasterId} />} />
+							<Route path={"/regions/:id"} element={<RegionPage toasterId={toasterId} />} />
 							<Route path={"*"} element={NotFoundPage} />
 						</Routes>
 					</main>

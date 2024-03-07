@@ -58,6 +58,6 @@ export const fetch = async (prefix: string, paginator: IPaginator = { p: 0, item
     const call: Response = await u.get(prefix + `/comments?p=${paginator.p}&itemsPerPage=${paginator.itemsPerPage}`);
     const { status }: Response = call;
     const data = await call.json();
-    if(status === 200) return data;
+    if(status === 200) return data.comments;
     else throw new Err(data.error as IError);
 };

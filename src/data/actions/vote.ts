@@ -9,7 +9,7 @@ import { Err } from "../error";
 const vote = async (type: VoteType, pre: string): Promise<VoteStatus> => {
     const isUp: boolean = type === VoteType.UP,
         isNone: boolean = type === VoteType.NONE;
-    const call: Response = await u[isNone ? "del" : "post"](`${pre}/vote/${(isUp&&"up")||"down"}vote`, {});
+    const call: Response = await u[isNone ? "del" : "post"](`${pre}/votes/${(isUp&&"up")||"down"}vote`, {});
     const data = await call.json();
     if(call.ok) {
         return data;
@@ -22,7 +22,7 @@ const vote = async (type: VoteType, pre: string): Promise<VoteStatus> => {
  * @param pre Prefijo de la URL del recurso en cuestión.
  */
 export const getVotes = async (pre: string): Promise<VoteStatus> => {
-    const call: Response = await u.get(`${pre}/vote`);
+    const call: Response = await u.get(`${pre}/votes`);
     const data = await call.json();
     if(call.ok) {
         return data;

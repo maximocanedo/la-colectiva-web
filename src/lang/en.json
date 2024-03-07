@@ -1,8 +1,32 @@
 {
+  "defLang": "en-US",
+  "now": "Just now",
   "test": "This is a test. ",
   "loading": "Loading... ",
   "actions": {
+    "loadMore": "Load more",
     "next": "Next"
+  },
+  "models": {
+    "region": {
+      "types": {
+        "river": "River",
+        "stream": "Stream",
+        "brook": "Brook",
+        "canal": "Canal",
+        "lake": "Lake",
+        "pond": "Pond",
+        "lagoon": "Lagoon",
+        "reservoir": "Reservoir",
+        "swamp": "Swamp",
+        "well": "Well",
+        "aquifer": "Aquifer",
+        "bay": "Bay",
+        "gulf": "Gulf",
+        "sea": "Sea",
+        "ocean": "Ocean"
+      }
+    }
   },
   "pages": {
     "signup": {
@@ -67,6 +91,16 @@
       },
       "err": {
         "notFound": "User not found"
+      }
+    },
+    "Region": {
+      "st": {
+        "registeredBy": "Registered by: "
+      },
+      "tabs": {
+        "basic": "Basic info",
+        "comments": "Comments",
+        "history": "History"
       }
     }
   },
@@ -287,6 +321,82 @@
           }
         }
       }
+    },
+    "region": {
+      "RegionName": {
+        "label": "Name:",
+        "st": {
+          "saving": "Saving... ",
+          "save": "Save",
+          "close": "Close",
+          "cancel": "Cancel"
+        },
+        "ok": {
+          "updated": "Successfully updated. "
+        },
+        "err": {
+          "couldntUpdate": "Couldn't update. ",
+          "invalid": "Field value is not valid. "
+        }
+      },
+      "RegionType": {
+        "label": "Type: ",
+        "st": {
+          "saving": "Saving... ",
+          "save": "Save",
+          "close": "Close",
+          "cancel": "Cancel"
+        },
+        "ok": {
+          "updated": "Successfully updated. "
+        },
+        "err": {
+          "couldntUpdate": "Couldn't update. ",
+          "invalid": "Field value is not valid. "
+        }
+      }
+    },
+    "comments": {
+      "handler": {
+        "st": {
+          "loading": "Loading... ",
+          "more": "Load more"
+        },
+        "textarea": {
+          "placeholder": "Leave a comment"
+        }
+      },
+      "comment": {
+        "menu": {
+          "label": "More",
+          "options": {
+            "edit": "Edit",
+            "delete": "Delete",
+            "report": "Report"
+          }
+        },
+        "dialog": {
+          "title": "Delete this comment?",
+          "description": "This action cannot be undone. "
+        },
+        "st": {
+          "edited": "Edited"
+        },
+        "edit": {
+          "btnEdit": "Edit",
+          "btnCancel": "Cancel",
+          "btnClose": "Close"
+        }
+      }
+    },
+    "history": {
+      "handler": {
+        "st": {
+          "loading": "Loading...",
+          "more": "Load more"
+        }
+      }
     }
+
   }
 }

@@ -1,7 +1,6 @@
-'use strict';
 import {ConnectionError, Err} from "./error";
 
-const baseUrl = 'https://colectiva.com.ar:5050/';
+const baseUrl: string = 'https://colectiva.com.ar:5050/';
 const call = async (url: string, body: any, method: string): Promise<Response> => {
     try {
         const call: Response | null = await fetch(baseUrl + url, {
