@@ -58,7 +58,7 @@ export const enable = async (id: string): Promise<CommonResponse> => {
 export const create = async (data: IRegionCreate): Promise<IRegion> => {
     const call: Response = await u.post("regions", data);
     const { status }: Response = call;
-    if(status === 201) {
+    if(call.ok) {
         const data = await call.json();
         return {
             ...data,

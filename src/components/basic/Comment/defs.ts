@@ -7,6 +7,7 @@ export interface IUserMinimal {
 }
 export interface ICommentComponentProps {
     id: string;
+    handlerId: string;
     content: string;
     uploaded: Date;
     __v: number;

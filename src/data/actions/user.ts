@@ -9,6 +9,7 @@ import {
 } from "../models/user";
 import { CommonResponse, IError, u } from "../utils";
 import { ConnectionError, Err } from "../error";
+import {Myself, UserLogged} from "../../App";
 /**
  * **Actualizar rol**
  *
@@ -163,11 +164,11 @@ export const findByUsername = async (username: string): Promise<IUser> => {
  * @Last-tested Feb 09 morning
  * @author Máximo Canedo (@maximocanedo)
  */
-export const myself = async (): Promise<IUser> => {
+export const myself = async (): Promise<UserLogged> => {
     const call: Response | null = await u.get(`users/me`);
     if(call != null) {
         const { status }: Response = call;
-        if(status === 200) return await call.json() as IUser;
+        if(status === 200) return await call.json() as UserLogged;
         else {
             const e: IError = (await call.json()).error as IError;
             throw new Err(e);

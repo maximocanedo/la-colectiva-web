@@ -20,15 +20,14 @@ import BirthSection from "../../components/user/user-page/BirthSection";
 import {useTranslation} from "react-i18next";
 import PasswordSection from "../../components/user/user-page/PasswordSection";
 import ActiveSection from "../../components/user/user-page/ActiveSection";
-import { DesignToken } from '@microsoft/fast-foundation';
 import {UserProfileProps} from "./defs";
 const LANG_PATH: string = "pages.UserProfile";
 const UserProfile = (props: UserProfileProps): React.JSX.Element => {
     const username: string = useParams<{ username: string }>().username as string;
     const { t: translationService } = useTranslation();
+    const { me }: UserProfileProps = props;
     const t = (path: string): string => translationService(LANG_PATH + "." + path);
     const [user, setUser] = useState<IUser | null>(null);
-    const [me, setMe] = useState<IUser | null>(null);
     const [ loaded, setLoaded ] = useState<boolean>(false);
     const [ name, setName ] = useState<string>("");
     const [ tab, setTab ] = useState<TabValue>("personal");
@@ -40,14 +39,6 @@ const UserProfile = (props: UserProfileProps): React.JSX.Element => {
             })
             .catch((error): void => {
                 console.error(error);
-            });
-        users.myself()
-            .then((response: IUser): void => {
-                setMe(response);
-            })
-            .catch((error): void => {
-                console.error(error);
-                setMe(null);
             });
         setLoaded(true);
     }, []);

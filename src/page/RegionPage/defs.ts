@@ -1,7 +1,9 @@
 import {makeStyles, tokens} from "@fluentui/react-components";
+import {Myself} from "../../App";
 
 export interface RegionPageProps {
     toasterId: string;
+    me: Myself;
 }
 export const RegionTypeLangPathNames = {
     river: "models.region.types.river",

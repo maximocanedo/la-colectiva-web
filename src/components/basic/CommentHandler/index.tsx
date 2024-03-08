@@ -4,7 +4,7 @@ import {StateManager} from "../../../page/SignUpPage/defs";
 import {IComment, ICommentFetchResponse} from "../../../data/models/comment";
 import Comment from "../Comment";
 import {IUserMinimal} from "../Comment/defs";
-import {Button, Spinner, Textarea} from "@fluentui/react-components";
+import {Button, Spinner, Textarea, useId} from "@fluentui/react-components";
 import {Send24Filled} from "@fluentui/react-icons";
 import {useTranslation} from "react-i18next";
 import LoadMoreButton from "../buttons/LoadMoreButton";
@@ -38,6 +38,7 @@ const commentsReducer = (state: IComment[], action: { type: string, payload: ICo
 
 const CommentHandler = ({ id, fetcher, remover, poster, me }: ICommentHandlerProps): React.JSX.Element => {
     const LANG_PATH = "components.comments.handler";
+    const handlerId: string = useId("commentHandler");
     const { t: translationService } = useTranslation();
     const t = (path: string): string => translationService(LANG_PATH + "." + path);
     const [ page, setPage ]: StateManager<number> = useState<number>(1);
@@ -57,7 +58,6 @@ const CommentHandler = ({ id, fetcher, remover, poster, me }: ICommentHandlerPro
         setDownloadingState(true);
         fetcher(id, { p, itemsPerPage })
             .then((arr: IComment[]): void => {
-                console.log(arr);
                 arr.map((co: IComment) => add(co));
             }).catch(err => {}).finally((): void => {
                 setDownloadingState(false);
@@ -84,10 +84,9 @@ const CommentHandler = ({ id, fetcher, remover, poster, me }: ICommentHandlerPro
     };
 
     return <div>
-            { comments.map((c: IComment) => (<Comment __v={c.__v} parentId={id} id={c._id} me={me} author={c.user as IUserMinimal} remover={remover} content={c.content} uploaded={new Date(c.uploadDate)} />)) }
+            { comments.map((c: IComment) => (<Comment __v={c.__v} key={c._id} handlerId={handlerId} parentId={id} id={c._id} me={me} author={c.user as IUserMinimal} remover={remover} content={c.content} uploaded={new Date(c.uploadDate)} />)) }
             <LoadMoreButton loading={downloading} onClick={more} />
-        {canCreate && <div className="comments_createBox">
-
+        {canCreate && <div  className="comments_createBox">
                 <Textarea disabled={posting} className="cbx_textarea" placeholder={t("textarea.placeholder")} value={draft} onChange={(e) => setDraft(e.target.value)} />
                 <Button onClick={publish} disabled={posting} appearance={"primary"} icon={posting ? <Spinner size={"extra-tiny"} /> : <Send24Filled />} />
         </div>}

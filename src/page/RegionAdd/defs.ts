@@ -1,7 +1,6 @@
 import {Myself} from "../../App";
 
-
-export interface UserProfileProps {
+export interface IRegionAddProps {
     me: Myself;
     toasterId: string;
 }

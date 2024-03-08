@@ -6,6 +6,7 @@ import {StateManager} from "../../../page/SignUpPage/defs";
 import {useTranslation} from "react-i18next";
 import {TFunction} from "i18next";
 import {UserButtonProps} from "./defs";
+import {NavigateFunction, useNavigate} from "react-router-dom";
 
 
 const USER_PROFILE_PAGE: string = "/users/";
@@ -14,6 +15,7 @@ const resolveUserProfilePageURL = (username: string): string => USER_PROFILE_PAG
 const UserButton = (props: UserButtonProps): React.JSX.Element => {
     const { t }: { t: TFunction<"translation", undefined> } = useTranslation();
     const { from }: UserButtonProps = props;
+    const navigate: NavigateFunction = useNavigate();
     const [userObj, setUserObj]: StateManager<IUser | null> = useState<IUser | null>(null);
     const [loading, setLoading]: StateManager<boolean> = useState<boolean>(true);
 
@@ -47,7 +49,7 @@ const UserButton = (props: UserButtonProps): React.JSX.Element => {
             secondaryContent={loading ? t('loading') : (!userObj ? t('components.user.UserButton.err.notFound') : role)}
             onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
                 if(userObj !== null)
-                    window.location.href = resolveUserProfilePageURL((userObj as IUser).username);
+                    navigate(resolveUserProfilePageURL((userObj as IUser).username));
             }}
             icon={loading ? <Spinner size={"extra-tiny"}  /> : <Avatar name={!userObj ? "?" : userObj.name} />}
             iconPosition={"before"}

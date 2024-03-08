@@ -16,7 +16,7 @@ import {
     DialogContent,
     DialogBody,
     DialogActions,
-    Textarea
+    Textarea, useId
 } from "@fluentui/react-components";
 import UserLink from "../../user/UserLink";
 import {useTranslation} from "react-i18next";
@@ -43,8 +43,9 @@ function getTimePassed(date: Date): [number, Intl.RelativeTimeFormatUnit] {
         return [ 0 - Math.floor(diff / 31556952000), 'years'];
     }
 }
-const Comment = ({ id, parentId, __v: ver, content: c, author, me, uploaded, remover }: ICommentComponentProps): React.JSX.Element => {
+const Comment = ({ id, parentId, handlerId, __v: ver, content: c, author, me, uploaded, remover }: ICommentComponentProps): React.JSX.Element => {
     const LANG_PATH = "components.comments.comment";
+    const commentComponentId: string = useId("Handler$" + handlerId + "_Comment$" + id);
     const { t: translationService } = useTranslation();
     const t = (path: string): string => translationService(LANG_PATH + "." + path);
     const [ content, setContent ] = useState<string>(c);
@@ -88,13 +89,13 @@ const Comment = ({ id, parentId, __v: ver, content: c, author, me, uploaded, rem
 
     if(deleted) return (<></>);
     return (
-        <div className="comment">
+        <div id={commentComponentId} key={commentComponentId} className="comment">
             <div className="comment_start">
                 <Avatar name={author.name} size={32} />
             </div>
             <div className="comment_content">
                 <div className="rw">
-                    {!editing && <p><UserLink data={author} from={author.username}/> {content}</p> }
+                    {!editing && <div><UserLink data={author} from={author.username}/> {content}</div> }
                     {editing && <>
                         <UserLink data={author} from={author.username} />
                         <div className="editingContainer">

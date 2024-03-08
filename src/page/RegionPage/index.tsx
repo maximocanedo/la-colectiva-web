@@ -10,25 +10,10 @@ import RegionIconRep from "../../components/region/RegionIconRep";
 import {IUser, Role} from "../../data/models/user";
 import RegionName from "../../components/region/RegionName";
 import RegionTypeField from "../../components/region/RegionTypeField";
-import UserButton from "../../components/user/UserButton";
-import UserLink from "../../components/user/UserLink";
 import VoteManager from "../../components/basic/VoteManager";
 import CommentHandler from "../../components/basic/CommentHandler";
-import {
-    Breadcrumb,
-    BreadcrumbButton, BreadcrumbDivider,
-    BreadcrumbItem, Button,
-    makeStyles, mergeClasses, Overflow, OverflowItem,
-    SelectTabData,
-    SelectTabEvent,
-    shorthands,
-    Tab,
-    TabList,
-    TabValue,
-    tokens
-} from "@fluentui/react-components";
+import {Button} from "@fluentui/react-components";
 import HistoryHandler from "../../components/basic/HistoryHandler";
-import {ExampleTab} from "../../components/basic/OverflowMenuItem/defs";
 import {
     bundleIcon, CommentMultiple24Filled, CommentMultiple24Regular,
     FluentIcon,
@@ -36,10 +21,11 @@ import {
     TextBulletListSquare24Filled,
     TextBulletListSquare24Regular
 } from "@fluentui/react-icons";
-import OverflowMenu from "../../components/basic/OverflowMenu";
 import TabHandler from "../../components/basic/TabHandler";
 import {TabData} from "../../components/basic/TabHandler/defs";
 import {CommonResponse} from "../../data/utils";
+import UploadedBySection from "../../components/basic/UploadedBySection";
+import UploadDateSection from "../../components/basic/UploadDateSection";
 
 
 const LANG_PATH: string = "pages.Region";
@@ -49,16 +35,22 @@ const TextBulletIcon: FluentIcon = bundleIcon(TextBulletListSquare24Filled, Text
 const CommentsIcon: FluentIcon = bundleIcon(CommentMultiple24Filled, CommentMultiple24Regular);
 const HistoryIcon: FluentIcon = bundleIcon(History24Filled, History24Regular);
 
-
+const strings = {
+    tabs: {
+        basic: "tabs.basic",
+        comments: "tabs.comments",
+        history: "tabs.history"
+    }
+};
 
 const RegionPage = (props: RegionPageProps): React.JSX.Element => {
     const styles = useStyles();
+    const { me }: RegionPageProps = props;
     const id: string = useParams<{ id: string }>().id as string;
     const { t: _translate }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const t = (key: string): string =>  _translate(LANG_PATH + "." + key);
     const [ loading, setLoading ]: StateManager<boolean> = useState<boolean>(false);
     const [ region, setRegion ]: StateManager<IRegion | null> = useState<IRegion | null>(null);
-    const [ me, loadActualUser ]: StateManager<IUser | null> = useState<IUser | null>(null);
     const [ name, setName ]: StateManager<string> = useState<string>("");
     const [ type, setType ]: StateManager<RegionType> = useState<RegionType>(
         region === null || region.type === undefined ? 0 : region.type
@@ -68,15 +60,15 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
     const tabs: TabData[] = [
         {
             id: "basic",
-            name: t("tabs.basic"),
+            name: t(strings.tabs.basic),
             icon: <TextBulletIcon />
         }, {
             id: "comments",
-            name: t("tabs.comments"),
+            name: t(strings.tabs.comments),
             icon: <CommentsIcon />
         }, {
             id: "history",
-            name: t("tabs.history"),
+            name: t(strings.tabs.history),
             icon: <HistoryIcon />
         }
     ];
@@ -84,13 +76,8 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
     useEffect((): void => {
         setLoading(true);
 
-        users.myself()
-            .then((response: IUser): void => {
-                loadActualUser(response);
-            }).catch((err: unknown): void => {});
         regions.find(id)
             .then((response: IRegion): void => {
-                console.log(response);
                 setRegion(response);
                 setName(response.name as string);
                 setType(response.type as RegionType);
@@ -106,9 +93,8 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
 
 
     if(region === null) return <></>;
-    const canEdit: boolean = (me !== undefined && me !== null && region.user !== undefined && region.user !== null && me.active === true) && (((me._id === region.user) && (me.role as Role >= 2)) || (me.role === 3));
+    const canEdit: boolean = (me !== null && region.user !== undefined && region.user !== null && me.active) && (((me._id === region.user) && (me.role as Role >= 2)) || (me.role === 3));
 
-    const regionType: string = typeof region.type !== 'undefined' ? getRegionTypeLangPathNameFor(region.type) : "models.region.types.unknown";
 
     const updSt = (): void => {
         const newStatus: boolean = !active;
@@ -122,33 +108,17 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
         });
     };
 
-    const formattedDate: string = new Intl.DateTimeFormat(_translate("defLang"), {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        weekday: 'long',
-        hour: 'numeric',
-        minute: 'numeric'
-    }).format(new Date(region.uploadDate?? ""));
+
 
     return (<>
         <div className={"page-content flex-down"}>
-            <Breadcrumb
-                aria-label="Small breadcrumb example with buttons"
-                size="small"
-            >
-                <BreadcrumbItem>
-                    <BreadcrumbButton>Regiones</BreadcrumbButton>
-                </BreadcrumbItem>
-                <BreadcrumbDivider />
-                <BreadcrumbItem>
-                    <BreadcrumbButton>{_translate(regionType) + " "}{name}</BreadcrumbButton>
-                </BreadcrumbItem>
-            </Breadcrumb>
-            <RegionIconRep name={name} type={type} region={region}/>
+            <RegionIconRep name={name} type={type} region={region} />
             <center>
-                <VoteManager me={me} id={id} fetcher={regions.votes.get} upvoter={regions.votes.upvote}
-                             downvoter={regions.votes.downvote}/>
+                <VoteManager
+                    me={me} id={id}
+                    fetcher={regions.votes.get}
+                    upvoter={regions.votes.upvote}
+                    downvoter={regions.votes.downvote} />
             </center>
             <TabHandler
                 tab={tab}
@@ -156,32 +126,38 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
                 tabs={tabs}
                 minimumVisible={2} />
             {tab === "basic" && <>
-                <RegionName id={region._id} type={type} name={name} onUpdate={(x: string): void => setName(x)}
-                            author={region.user as IUser} me={me}/>
-                <RegionTypeField id={region._id} initialValue={type} editable={canEdit}
-                                 onUpdate={(x: RegionType) => setType(x)}/>
-                <div className="jBar">
-                    <div className="l">{t("st.registeredBy")}</div>
-                    <div className="r">
-                        <UserLink data={null} from={(region.user as any).username}/>
-                    </div>
-                </div>
-                <div className="jBar">
-                    <div className="l">{t("st.uploaded")}</div>
-                    <div className="r">{formattedDate}</div>
-                </div>
-                {canEdit && <div className="jBar">
-                    <Button className={active ? styles.disableBtn : styles.enableBtn } onClick={(e): void => updSt()} appearance={"secondary"}>
+                <RegionName
+                    id={region._id}
+                    type={type}
+                    name={name}
+                    onUpdate={(x: string): void => setName(x)}
+                    author={region.user as IUser} me={me} />
+                <RegionTypeField
+                    id={region._id}
+                    initialValue={type}
+                    editable={canEdit}
+                    onUpdate={(x: RegionType) => setType(x)} />
+                <UploadDateSection date={region.uploadDate?? ""} />
+                <UploadedBySection
+                    user={region.user?? null}
+                    username={(region.user as IUser).username} />
+                {canEdit && (<div className="jBar">
+                    <Button
+                        className={active ? styles.disableBtn : styles.enableBtn }
+                        onClick={(e): void => updSt()}
+                        appearance={"secondary"}>
                         {active ? t("actions.disable") : t("actions.enable")}
                     </Button>
-                </div>}
-            </>}
+                </div>)}
+                </>
+            }
             {tab === "comments" &&
                 <CommentHandler
                     id={id} me={me}
                     fetcher={regions.comments.get}
                     remover={regions.comments.del}
                     poster={regions.comments.post} />}
+
             {tab === "history" && <HistoryHandler id={id} fetcher={regions.fetchHistory} me={me}/>}
 
         </div>

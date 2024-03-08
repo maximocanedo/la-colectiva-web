@@ -95,6 +95,7 @@ export interface IUser {
     birth?: Birth | null;
     role?: Role;
     active?: boolean;
+    __v?: number;
 
 }
 export interface IUserEditRequest {
