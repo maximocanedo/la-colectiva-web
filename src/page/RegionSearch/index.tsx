@@ -37,7 +37,7 @@ const resultsReducer = (state: IRegion[], action: { type: string, payload: IRegi
         }
     }
 }
-const RegionSearch = ({ toasterId }: RegionSearchPageProps): React.JSX.Element => {
+const RegionSearch = ({ toasterId, me }: RegionSearchPageProps): React.JSX.Element => {
     const { t: translate } = useTranslation();
     const navigate: NavigateFunction = useNavigate();
     const t = (key: string): string => translate(LANG_PATH + "." + key);
@@ -46,6 +46,10 @@ const RegionSearch = ({ toasterId }: RegionSearchPageProps): React.JSX.Element =
     const [ results, dispatchResults ] = useReducer(resultsReducer, []);
     const [ page, setPage ] = useState<number>(0);
     const [ size, setSize ] = useState<number>(10);
+
+    const canCreate: boolean =
+        me !== undefined && me !== null
+        && (me.active && me.role >= 2);
 
     const search = (p: number = page, itemsPerPage: number = size): void => {
         setSearchingState(true);
@@ -67,15 +71,6 @@ const RegionSearch = ({ toasterId }: RegionSearchPageProps): React.JSX.Element =
     };
 /// <BreadcrumbDivider />
     return (<div className={"page-content flex-down"}>
-        <Breadcrumb
-            aria-label="Small breadcrumb example with buttons"
-            size="small"
-        >
-            <BreadcrumbItem>
-                <BreadcrumbButton>Regiones</BreadcrumbButton>
-            </BreadcrumbItem>
-
-        </Breadcrumb>
         <div className="searchbar">
             <div className="_row">
                 <Input
@@ -86,23 +81,24 @@ const RegionSearch = ({ toasterId }: RegionSearchPageProps): React.JSX.Element =
                     placeholder={t("label.search")}
                     aria-label={t("label.search")} />
                 <Button size={"large"} appearance={"primary"} onClick={(e): void => {
-
                     dispatchResults({ type: "RESET", payload: []});
                     search();
                 }}><Search20Filled /></Button>
             </div>
         </div>
-        <div className="jBar">
-            <div className="r">
-                <Button
-                    onClick={(e): void => {
-                        navigate("/regions/add");
-                    }}
-                    appearance={"primary"}
-                    icon={<Add24Filled />}>Registrar una región</Button></div>
-        </div>
+        {
+            canCreate && <div className="jBar">
+                <div className="r">
+                    <Button
+                        onClick={(e): void => {
+                            navigate("/regions/add");
+                        }}
+                        appearance={"primary"}
+                        icon={<Add24Filled/>}>Registrar una región</Button></div>
+            </div>
+        }
         <div className={"searchresults"}>
-            { results.map((result: IRegion) => {
+            {results.map((result: IRegion) => {
                 const typel: string = result.type === undefined ? "" : translate(getRegionTypeLangPathNameFor((result.type) as number));
                 return <Button key={"regionSearchPage_item$" + result._id} onClick={(_e) => {
                     navigate("/regions/" + result._id);

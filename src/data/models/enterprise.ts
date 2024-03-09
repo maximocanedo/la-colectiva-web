@@ -19,8 +19,8 @@ export interface IEnterpriseCreate {
     phones?: [string];
 }
 export interface IEnterpriseEdit {
-    name: string;
-    cuit: number;
-    description: string;
-    foundationDate: Date;
+    name?: string;
+    cuit?: number;
+    description?: string;
+    foundationDate?: Date;
 }

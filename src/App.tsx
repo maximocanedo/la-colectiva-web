@@ -17,6 +17,7 @@ import RegionSearch from "./page/RegionSearch";
 import RegionAdd from "./page/RegionAdd";
 import * as users from "./data/actions/user";
 import {IUser, Role} from "./data/models/user";
+import EnterprisePage from "./page/enterprises/EnterprisePage";
 
 export interface UserLogged {
 	_id: string;
@@ -53,6 +54,7 @@ function App(): ReactElement {
 							<Route path={"/regions/add"} element={<RegionAdd me={me} toasterId={toasterId} />} />
 							<Route path={"/regions/:id"} element={<RegionPage me={me} toasterId={toasterId} />} />
 							<Route path={"/regions"} element={<RegionSearch me={me} toasterId={toasterId} />} />
+							<Route path={"/enterprises/:id"} element={<EnterprisePage me={me} toasterId={toasterId} />} />
 							<Route path={"*"} element={NotFoundPage} />
 						</Routes>
 					</main>

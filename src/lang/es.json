@@ -7,6 +7,12 @@
     "next": "Siguiente",
     "loadMore": "Cargar más"
   },
+  "err": {
+    "GottaLoginFirst": {
+      "title": "Iniciá sesión para acceder a esta página.",
+      "description": "Oops, parece que has llegado a una página restringida. Por favor, inicia sesión con tu cuenta para continuar. "
+    }
+  },
   "models": {
     "region": {
       "types": {
@@ -30,6 +36,23 @@
     }
   },
   "pages": {
+    "enterprises": {
+      "Enterprise": {
+        "st": {
+          "registeredBy": "Registrado por: ",
+          "uploaded": "Creado el: "
+        },
+        "actions": {
+          "disable": "Deshabilitar",
+          "enable": "Habilitar recurso"
+        },
+        "tabs": {
+          "basic": "Información básica",
+          "comments": "Comentarios",
+          "history": "Historial de cambios"
+        }
+      }
+    },
     "signup": {
       "title": "Crear cuenta",
       "tabs": {
@@ -114,6 +137,11 @@
         "search": "Buscar regiones",
         "allregions": "Todas las categorías"
       }
+    },
+    "RegionAdd": {
+      "title": "Registrar una región",
+      "registering": "Guardando",
+      "register": "Guardar"
     }
   },
   "components": {
@@ -339,6 +367,70 @@
             "err": "Error",
             "try": "Intentá de nuevo más tarde. "
           }
+        }
+      }
+    },
+    "enterprise": {
+      "FoundationField": {
+        "label": "Fundado el:",
+        "st": {
+          "saving": "Guardando... ",
+          "save": "Guardar",
+          "close": "Cerrar",
+          "cancel": "Cancelar"
+        },
+        "ok": {
+          "updated": "Actualizado correctamente. "
+        },
+        "err": {
+          "couldntUpdate": "No se pudo actualizar. "
+        }
+      },
+      "EnterpriseName": {
+        "label": "Nombre:",
+        "st": {
+          "saving": "Guardando... ",
+          "save": "Guardar",
+          "close": "Cerrar",
+          "cancel": "Cancelar"
+        },
+        "ok": {
+          "updated": "Actualizado correctamente. "
+        },
+        "err": {
+          "couldntUpdate": "No se pudo actualizar. ",
+          "invalid": "El campo debe contener entre 3 y 48 caracteres. "
+        }
+      },
+      "EnterpriseCUIT": {
+        "label": "Número de CUIT:",
+        "st": {
+          "saving": "Guardando... ",
+          "save": "Guardar",
+          "close": "Cerrar",
+          "cancel": "Cancelar"
+        },
+        "ok": {
+          "updated": "Actualizado correctamente. "
+        },
+        "err": {
+          "couldntUpdate": "No se pudo actualizar. "
+        }
+      },
+      "EnterpriseDescription": {
+        "label": "Descripción:",
+        "st": {
+          "saving": "Guardando... ",
+          "save": "Guardar",
+          "close": "Cerrar",
+          "cancel": "Cancelar"
+        },
+        "ok": {
+          "updated": "Actualizado correctamente. "
+        },
+        "err": {
+          "couldntUpdate": "No se pudo actualizar. ",
+          "invalid": "El campo debe contener entre 3 y 48 caracteres. "
         }
       }
     },

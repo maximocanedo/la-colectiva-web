@@ -7,6 +7,7 @@ import {useTranslation} from "react-i18next";
 import {TFunction} from "i18next";
 import {CurrentUserSectionProps} from "./defs";
 import {useStyles} from "./styles";
+import SignInSignUpButtonPair from "../../auth/SignInSignUpButtonPair";
 
 
 const USER_PROFILE_PAGE: string = "/users/";
@@ -50,10 +51,7 @@ const CurrentUserSection = (props: CurrentUserSectionProps): React.JSX.Element =
         </div>)
     }
     if(!user) {
-        return (<div className={"rtlCell"}>
-            <Button onClick={login} appearance={"secondary"}>{t('pages.login.actions.login')}</Button>
-            <Button onClick={signup} appearance={"primary"}>{t('pages.login.actions.signup')}</Button>
-        </div>)
+        return (<SignInSignUpButtonPair />)
     }
 
 

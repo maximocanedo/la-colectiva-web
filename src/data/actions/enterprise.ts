@@ -5,6 +5,8 @@ import {VoteStatus} from "../models/vote";
 import {downvote, getVotes, upvote} from "./vote";
 import {IComment, ICommentFetchResponse, IPaginator} from "../models/comment";
 import * as comment from "./comment";
+import {IHistoryEvent} from "../models/IHistoryEvent";
+import * as history from "./history";
 
 const getPrefix = (id: string): string => `enterprises/${id}`;
 /**
@@ -14,8 +16,7 @@ const getPrefix = (id: string): string => `enterprises/${id}`;
  */
 export const edit = async (id: string, data: IEnterpriseEdit): Promise<CommonResponse> => {
     const call: Response = await u.put(getPrefix(id), data);
-    const { status }: Response = call;
-    if(status === 200) return {
+    if(call.ok) return {
         success: true,
         message: "Edición exitosa. "
     };
@@ -31,7 +32,19 @@ export const edit = async (id: string, data: IEnterpriseEdit): Promise<CommonRes
 export const disable = async (id: string): Promise<CommonResponse> => {
     const call: Response = await u.del(getPrefix(id), {});
     const { status }: Response = call;
-    if(status === 200) return {
+    if(call.ok) return {
+        success: true,
+        message: "Eliminación exitosa. "
+    };
+    else {
+        const { error }: { error: IError } = await call.json();
+        throw new Err(error);
+    }
+};
+export const enable = async (id: string): Promise<CommonResponse> => {
+    const call: Response = await u.post(getPrefix(id), {});
+    const { status }: Response = call;
+    if(call.ok) return {
         success: true,
         message: "Eliminación exitosa. "
     };
@@ -131,6 +144,15 @@ export const deletePhone = async (id: string, phone: string): Promise<CommonResp
         throw new Err(error);
     }
 };
+export const formatThousands = (x: number | string): string => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+export const formatCUIT = (cuit: number): string => {
+    const str: string = cuit.toString();
+    if(str.length < 4) return str;
+    const prefix: string = str[0] + str[1];
+    const suffix: string = str[str.length - 1];
+    const body: string = formatThousands(str.substring(2, str.length - 1));
+    return `${prefix}-${body}-${suffix}`;
+};
 export const votes = {
     get: async (id: string): Promise<VoteStatus> => getVotes(getPrefix(id)),
     upvote: async (id: string): Promise<VoteStatus> => upvote(getPrefix(id)),
@@ -144,3 +166,5 @@ export const comments = {
     del: async (id: string, commentId: string): Promise<CommonResponse> =>
         comment.del(getPrefix(id), commentId)
 };
+export const fetchHistory = async (id: string, paginator: IPaginator = { p: 0, itemsPerPage: 5 }): Promise<IHistoryEvent[]> =>
+    history.fetch(getPrefix(id), paginator);

@@ -76,9 +76,10 @@ const EditableField = (props: IEditableFieldProps<string>): React.JSX.Element =>
             <Button
                 appearance={"primary"}
                 onClick={save}
-                disabled={initialValue === value}
-            >{ saving && <Spinner size={"extra-tiny"} /> }
-                { saving ? t('st.saving') : t('st.save') }
+                iconPosition={"before"}
+                icon={saving ? <Spinner size={"extra-tiny"} /> : null}
+                disabled={saving || initialValue === value}
+            >{ saving ? t('st.saving') : t('st.save') }
             </Button>
             <Button
                 onClick={cancel}
