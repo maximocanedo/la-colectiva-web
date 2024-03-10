@@ -59,7 +59,7 @@ const HistoryHandler = ({ id, fetcher, me }: IHistoryHandlerProps): React.JSX.El
     };
 
     return <div>
-            { events.map((c: IHistoryEvent) => (<HistoryEvent {...c} time={new Date(c.time)} />)) }
+            { events.map((c: IHistoryEvent) => (<HistoryEvent key={"HistoryEvent$" + c._id} {...c} time={new Date(c.time)} />)) }
             <LoadMoreButton loading={downloading} onClick={more} />
     </div>;
 };

@@ -59,12 +59,11 @@ export const enable = async (id: string): Promise<CommonResponse> => {
  */
 export const create = async (enterprise: IEnterpriseCreate): Promise<IEnterprise> => {
     const call: Response = await u.post("enterprises", enterprise);
-    const { status }: Response = call;
     const data = await call.json();
-    if(status === 201) {
+    if(call.ok) {
         return {
             ...enterprise,
-            _id: data._id
+            _id: data._id?? data.id
         };
     }
     else {
@@ -86,11 +85,10 @@ export const find = async (id: string): Promise<IEnterprise> => {
 /**
  * Listar empresas.
  */
-export const list = async (): Promise<IEnterprise[]> => {
-    const call: Response = await u.get("enterprises");
-    const { status }: Response = call;
+export const search = async (q: string, paginator: IPaginator): Promise<IEnterprise[]> => {
+    const call: Response = await u.get("enterprises/?q=" + encodeURIComponent(q?? "") + "&p=" + paginator.p + "&itemsPerPage=" + paginator.itemsPerPage);
     const data = await call.json();
-    if(status === 200) {
+    if(call.ok) {
         return data.data;
     } throw new Err(data.error);
 };
@@ -111,17 +109,13 @@ export const getPhones = async (id: string): Promise<string[]> => {
  * @param id ID de la empresa.
  * @param phone Número de teléfono.
  */
-export const addPhone = async (id: string, phone: string): Promise<CommonResponse> => {
+export const addPhone = async (id: string, phone: string): Promise<string[]> => {
     const call: Response = await u.post(getPrefix(id) + "/phones", { phone });
-    if(call == null) return {
-        success: false,
-        message: "Error de conexión. "
-    };
-    const { status }: Response = call;
-    if(status === 200) return {
-        success: true,
-        message: "Teléfono agregado. "
-    };
+    if(call === null) throw new Err({ code: "", message: "No hay conexión. ", details: "" });
+    if(call.ok) {
+        const { phones } = await call.json();
+        return phones;
+    }
     else {
         const { error }: { error: IError } = await call.json();
         throw new Err(error);
@@ -132,13 +126,10 @@ export const addPhone = async (id: string, phone: string): Promise<CommonRespons
  * @param id ID de la empresa.
  * @param phone Número de teléfono a eliminar.
  */
-export const deletePhone = async (id: string, phone: string): Promise<CommonResponse> => {
+export const deletePhone = async (id: string, phone: string): Promise<string[]> => {
     const call: Response = await u.del(getPrefix(id) + "/phones", { phone });
-    const { status }: Response = call;
-    if(status === 200) return {
-        success: true,
-        message: "Teléfono eliminado. "
-    };
+    const { phones } = await call.json();
+    if(call.ok) return phones;
     else {
         const { error }: { error: IError } = await call.json();
         throw new Err(error);

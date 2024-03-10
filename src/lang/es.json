@@ -37,6 +37,11 @@
   },
   "pages": {
     "enterprises": {
+      "Register": {
+        "title": "Registrar una empresa",
+        "registering": "Guardando",
+        "register": "Guardar"
+      },
       "Enterprise": {
         "st": {
           "registeredBy": "Registrado por: ",
@@ -135,6 +140,12 @@
     "Regions": {
       "label": {
         "search": "Buscar regiones",
+        "allregions": "Todas las categorías"
+      }
+    },
+    "Enterprises": {
+      "label": {
+        "search": "Buscar empresas",
         "allregions": "Todas las categorías"
       }
     },
@@ -371,6 +382,64 @@
       }
     },
     "enterprise": {
+      "EnterpriseNameField": {
+        "label": "Nombre: ",
+        "err": {
+          "ok": "Nombre válido. ",
+          "min": "El nombre debe contener al menos tres caracteres. ",
+          "max": "El nombre no puede tener más de 48 caracteres. "
+        }
+      },
+      "EnterpriseFoundationDateField": {
+        "label": "Fecha de fundación: ",
+        "err": {
+          "future": "Seleccione una fecha anterior al día de hoy. ",
+          "invalid": "Fecha inválida. "
+        }
+      },
+      "EnterpriseDescriptionField": {
+        "label": "Descripción: ",
+        "err": {
+          "ok": "",
+          "min": "La descripción debe contener al menos tres caracteres. ",
+          "max": "La descripción no puede tener más de 128 caracteres. "
+        }
+      },
+      "EnterpriseCUITField": {
+        "label": "Número de C.U.I.T.:",
+        "err": {
+          "min": "Ingrese un número de C.U.I.T. válido. ",
+          "max": "Valor inválido. "
+        }
+      },
+      "EnterprisePhoneHandler": {
+        "item": {
+          "actions": {
+            "copy": "Copiar",
+            "rem": "Eliminar"
+          },
+          "tooltips": {
+            "call": "Marcar"
+          }
+        },
+        "title": "Teléfonos",
+        "actions": {
+          "add": "Añadir"
+        },
+        "add": {
+          "label": "Ingrese un número de teléfono"
+        },
+        "err": {
+          "no15prefix": "No se aceptan los prefijos 15 ni 015. ",
+          "invalidNumber": "Número inválido. ",
+          "externalNumber": "El número ingresado no es de Argentina. "
+        },
+        "tooltips": {
+          "firstvalid": "Corregí el número antes de agregarlo. ",
+          "add": "Agregar",
+          "cancel": "Cerrar"
+        }
+      },
       "FoundationField": {
         "label": "Fundado el:",
         "st": {

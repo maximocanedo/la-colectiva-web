@@ -75,8 +75,7 @@ const UserProfile = (props: UserProfileProps): React.JSX.Element => {
     const onTabChange = (_e: SelectTabEvent<HTMLElement>, data: SelectTabData): void => {
         setTab(data.value);
     };
-
-
+    const canModify: boolean = (user !== null && me !== null) && me.active && (me.role === 3 || (me._id === user._id));
     return (<div className={"page-content flex-down"}>
         <div className="flex-down">
             <Persona
@@ -89,7 +88,7 @@ const UserProfile = (props: UserProfileProps): React.JSX.Element => {
         </div>
         <TabList className={""} defaultSelectedValue={tab} onTabSelect={onTabChange}>
             <Tab value="personal">{t('tabs.personal')}</Tab>
-            <Tab value="actions">{t('tabs.more')}</Tab>
+            {canModify && <Tab value="actions">{t('tabs.more')}</Tab> }
         </TabList>
         { tab === "personal" && <div className={"tab-cnt flex-down"}>
             <NameSection user={user} me={me} onChange={(newName: string): void => setName(newName)} />

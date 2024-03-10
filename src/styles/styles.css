@@ -258,3 +258,37 @@ main {
     justify-content: flex-start !important;
     align-items: center !important;
 }
+
+
+.qphones {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    .list-of-phones {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        height: max-content;
+        justify-content: center;
+        align-items: center;
+        .phone-item {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            width: 100%;
+            .phone-data {
+                width: 100%;
+                display: flex;
+                justify-content: start;
+                align-items: center;
+            }
+        }
+    }
+}
+.heightAuto {
+    height: max-content !important;
+}

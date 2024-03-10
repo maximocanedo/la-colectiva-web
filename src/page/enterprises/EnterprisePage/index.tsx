@@ -29,6 +29,7 @@ import {UserLogged} from "../../../App";
 import EnterpriseDescriptionPageField from "../../../components/enterprise/EnterpriseDescriptionPageField";
 import EnterpriseCUITPageField from "../../../components/enterprise/EnterpriseCUITPageField";
 import EnterpriseFoundationDatePageField from "../../../components/enterprise/EnterpriseFoundationDatePageField";
+import EnterprisePhoneHandler from "../../../components/enterprise/EnterprisePhoneHandler";
 
 
 const LANG_PATH: string = "pages.enterprises.Enterprise";
@@ -103,7 +104,7 @@ const EnterprisePage = (props: EnterprisePageProps): React.JSX.Element => {
 
 
     if(enterprise === null) return <></>;
-    const canEdit: boolean = (me !== null && enterprise.user !== undefined && enterprise.user !== null && me.active) && (((me._id === enterprise.user) && (me.role as Role >= 2)) || (me.role === 3));
+    const canEdit: boolean = (me !== null && enterprise.user !== undefined && enterprise.user !== null && me.active) && (((me._id === (enterprise.user as { _id: string })._id) && (me.role as Role >= 2)) || (me.role === 3));
 
 
     const updSt = (): void => {
@@ -154,6 +155,7 @@ const EnterprisePage = (props: EnterprisePageProps): React.JSX.Element => {
                 <UploadedBySection
                     user={enterprise.user?? null}
                     username={(enterprise.user as IUser).username} />
+                <EnterprisePhoneHandler me={me} author={enterprise.user as UserLogged} id={id} />
                 {canEdit && (<div className="jBar">
                     <Button
                         className={active ? styles.disableBtn : styles.enableBtn }
