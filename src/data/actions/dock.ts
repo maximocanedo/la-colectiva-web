@@ -7,6 +7,7 @@ import {downvote, getVotes, upvote} from "./vote";
 import * as comment from "./comment";
 import * as picture from "./picture";
 import {IPictureDetails} from "../models/picture";
+import {OnPostResponse} from "./picture";
 const getPrefix = (id: string): string => "docks/" + id;
 /**
  * Edita un registro de muelle.
@@ -123,6 +124,7 @@ export const comments = {
         comment.del(getPrefix(id), commentId)
 };
 export const pictures = {
-    upload: async (id: string, image: Blob, description: string): Promise<CommonResponse> => picture.upload(getPrefix(id), image, description),
-    list: async (id: string): Promise<IPictureDetails[]> => picture.list(getPrefix(id))
+    upload: async (id: string, image: Blob, description: string): Promise<OnPostResponse> => picture.upload(getPrefix(id), image, description),
+    list: async (id: string, paginator: IPaginator): Promise<IPictureDetails[]> => picture.list(getPrefix(id), paginator),
+    rem: async (id: string, photoId: string): Promise<void> => picture.remove(getPrefix(id), photoId)
 };

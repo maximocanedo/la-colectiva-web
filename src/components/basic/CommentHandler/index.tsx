@@ -83,7 +83,7 @@ const CommentHandler = ({ id, fetcher, remover, poster, me }: ICommentHandlerPro
         });
     };
 
-    return <div>
+    return <div className={"commentHandler"}>
             { comments.map((c: IComment) => (<Comment __v={c.__v} key={c._id} handlerId={handlerId} parentId={id} id={c._id} me={me} author={c.user as IUserMinimal} remover={remover} content={c.content} uploaded={new Date(c.uploadDate)} />)) }
             <LoadMoreButton loading={downloading} onClick={more} />
         {canCreate && <div  className="comments_createBox">

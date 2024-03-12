@@ -7,6 +7,9 @@ import {downvote, getVotes, upvote} from "./vote";
 import * as comment from "./comment";
 import * as picture from "./picture";
 import {IPictureDetails} from "../models/picture";
+import {IHistoryEvent} from "../models/IHistoryEvent";
+import * as history from "./history";
+import {OnPostResponse} from "./picture";
 const getPrefix = (id: string): string => "boats/" + id;
 /**
  * **Editar embarcación**
@@ -16,12 +19,13 @@ const getPrefix = (id: string): string => "boats/" + id;
  * @param data Datos a actualizar.
  */
 export const edit = async (id: string, data: IBoatEdit): Promise<CommonResponse> => {
-    const { status, json }: Response = await u.put(getPrefix(id), data);
-    const { error } = await json();
-    if(status === 200) return {
+    const call: Response = await u.patch(getPrefix(id), data);
+    if(call.ok) return {
         success: true,
         message: "El barco ha sido editado con éxito. "
-    }; throw new Err(error);
+    };
+    const { error } = await call.json();
+    throw new Err(error);
 };
 /**
  * **Eliminar embarcación**
@@ -30,11 +34,20 @@ export const edit = async (id: string, data: IBoatEdit): Promise<CommonResponse>
  * @param id ID de la embarcación.
  */
 export const del = async (id: string): Promise<CommonResponse> => {
-    const { status, json }: Response = await u.del(getPrefix(id));
-    const { error } = await json();
-    if(status === 200) return {
+    const call: Response = await u.del(getPrefix(id));
+    const { error } = await call.json();
+    if(call.ok) return {
         success: true,
         message: "El barco ha sido eliminado con éxito. "
+    }; throw new Err(error);
+};
+
+export const enable = async (id: string): Promise<CommonResponse> => {
+    const call: Response = await u.post(getPrefix(id), {});
+    const { error } = await call.json();
+    if(call.ok) return {
+        success: true,
+        message: "El barco ha sido rehabilitado con éxito. "
     }; throw new Err(error);
 };
 /**
@@ -44,9 +57,9 @@ export const del = async (id: string): Promise<CommonResponse> => {
  * @param boat Datos de la embarcación.
  */
 export const create = async (boat: IBoatCreate): Promise<IBoat> => {
-    const { status, json }: Response = await u.post("boats", boat);
-    const { _id, error } = await json();
-    if(status === 201) return { ...boat, _id } as IBoat;
+    const call: Response = await u.post("boats", boat);
+    const { _id, error } = await call.json();
+    if(call.ok) return { ...boat, _id } as IBoat;
     throw new Err(error);
 };
 /**
@@ -56,9 +69,9 @@ export const create = async (boat: IBoatCreate): Promise<IBoat> => {
  * @param id ID de la embarcación.
  */
 export const find = async (id: string): Promise<IBoat> => {
-    const { status, json }: Response = await u.get(getPrefix(id));
-    const { data, error } = await json();
-    if(status === 200) return data;
+    const call: Response = await u.get(getPrefix(id));
+    const { data, error } = await call.json();
+    if(call.ok) return data;
     throw new Err(error);
 };
 /**
@@ -70,9 +83,9 @@ export const find = async (id: string): Promise<IBoat> => {
  * @param itemsPerPage Elementos por página.
  */
 export const search = async (q: string = "", { p, itemsPerPage }: IPaginator = { p: 0, itemsPerPage: 10 }): Promise<IBoat[]> => {
-    const { status, json }: Response = await u.get(`boats/?q=${q}&p=${p}&itemsPerPage=${itemsPerPage}`);
-    const { data, error } = await json();
-    if(status === 200) return data;
+    const call: Response = await u.get(`boats/?q=${q}&p=${p}&itemsPerPage=${itemsPerPage}`);
+    const { data, error } = await call.json();
+    if(call.ok) return data;
     throw new Err(error);
 };
 
@@ -90,6 +103,9 @@ export const comments = {
         comment.del(getPrefix(id), commentId)
 };
 export const pictures = {
-    upload: async (id: string, image: Blob, description: string): Promise<CommonResponse> => picture.upload(getPrefix(id), image, description),
-    list: async (id: string): Promise<IPictureDetails[]> => picture.list(getPrefix(id))
+    upload: async (id: string, image: Blob, description: string): Promise<OnPostResponse> => picture.upload(getPrefix(id), image, description),
+    list: async (id: string, paginator: IPaginator): Promise<IPictureDetails[]> => picture.list(getPrefix(id), paginator),
+    rem: async (id: string, photoId: string): Promise<void> => picture.remove(getPrefix(id), photoId)
 };
+export const fetchHistory = async (id: string, paginator: IPaginator = { p: 0, itemsPerPage: 5 }): Promise<IHistoryEvent[]> =>
+    history.fetch(getPrefix(id), paginator);

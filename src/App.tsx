@@ -20,6 +20,7 @@ import {IUser, Role} from "./data/models/user";
 import EnterprisePage from "./page/enterprises/EnterprisePage";
 import EnterpriseSearch from "./page/enterprises/EnterpriseSearch";
 import EnterpriseAdd from "./page/enterprises/EnterpriseAdd";
+import BoatPage from "./page/boats/BoatPage";
 
 export interface UserLogged {
 	_id: string;
@@ -49,7 +50,7 @@ function App(): ReactElement {
 					<Header toasterId={toasterId} />
 					<main>
 						<Routes>
-							<Route path={"/"} element={HomePage} />
+							<Route path={"/"} element={<HomePage />} />
 							<Route path={"/signup"} element={<SignUpPage toasterId={toasterId}  />} />
 							<Route path={"/login"} element={<LoginPage toasterId={toasterId} />} />
 							<Route path={"/users/:username"} element={<UserProfile me={me} toasterId={toasterId} />} />
@@ -59,6 +60,9 @@ function App(): ReactElement {
 							<Route path={"/enterprises/add"} element={<EnterpriseAdd me={me} toasterId={toasterId} />} />
 							<Route path={"/enterprises/:id"} element={<EnterprisePage me={me} toasterId={toasterId} />} />
 							<Route path={"/enterprises"} element={<EnterpriseSearch me={me} toasterId={toasterId} />} />
+							<Route path={"/boats/add"} element={NotFoundPage} />
+							<Route path={"/boats/:id"} element={<BoatPage toasterId={toasterId} me={me} />} />
+							<Route path={"/boats"} element={NotFoundPage} />
 							<Route path={"*"} element={NotFoundPage} />
 						</Routes>
 					</main>

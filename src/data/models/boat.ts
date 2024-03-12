@@ -9,6 +9,7 @@ export interface IBoat {
     enterprise?: IEnterprise | string;
     user?: IUser | string;
     uploadDate?: Date;
+    active?: boolean;
     __v?: number;
 }
 

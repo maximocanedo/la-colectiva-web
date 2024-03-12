@@ -86,7 +86,7 @@ const EnterpriseSearch = ({ toasterId, me }: IEnterpriseSearchProps): React.JSX.
                             navigate("/enterprises/add");
                         }}
                         appearance={"primary"}
-                        icon={<Add24Filled/>}>Registrar una empresa</Button></div>
+                        icon={<Add24Filled/>}>{t("label.register")}</Button></div>
             </div>
         }
         <div className={"searchresults"}>

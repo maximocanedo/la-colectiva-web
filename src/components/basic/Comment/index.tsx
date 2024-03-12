@@ -24,7 +24,7 @@ import {IUser} from "../../../data/models/user";
 import * as comments from "../../../data/actions/comment";
 import {IComment} from "../../../data/models/comment";
 import {CommonResponse} from "../../../data/utils";
-function getTimePassed(date: Date): [number, Intl.RelativeTimeFormatUnit] {
+export function getTimePassed(date: Date): [number, Intl.RelativeTimeFormatUnit] {
     const now = Date.now();
     const diff =  (now - date.getTime());
     if (diff < 60000) { // Menos de un minuto

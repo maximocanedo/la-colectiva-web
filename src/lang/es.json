@@ -36,6 +36,24 @@
     }
   },
   "pages": {
+    "boats": {
+      "Boat": {
+        "st": {
+          "registeredBy": "Registrado por: ",
+          "uploaded": "Creado el: "
+        },
+        "actions": {
+          "disable": "Deshabilitar",
+          "enable": "Habilitar recurso"
+        },
+        "tabs": {
+          "basic": "Información básica",
+          "comments": "Comentarios",
+          "history": "Historial de cambios",
+          "pics": "Imágenes"
+        }
+      }
+    },
     "enterprises": {
       "Register": {
         "title": "Registrar una empresa",
@@ -146,6 +164,7 @@
     "Enterprises": {
       "label": {
         "search": "Buscar empresas",
+        "register": "Registrar una empresa",
         "allregions": "Todas las categorías"
       }
     },
@@ -156,6 +175,45 @@
     }
   },
   "components": {
+    "pics": {
+      "card": {
+        "st": {
+          "removing": "Eliminando..."
+        },
+        "actions": {
+          "download": "Descargar",
+          "gotoProfile": "Ver perfil",
+          "remove": "Eliminar",
+          "close": "Cancelar"
+        },
+        "dialog": {
+          "remove": {
+            "title": "¿Estás seguro de eliminar esta imagen?",
+            "description": "Esta acción no se puede deshacer. "
+          }
+        }
+      },
+      "poster": {
+        "actions": {
+          "cancel": "Cancelar",
+          "post": "Publicar una imagen",
+          "submit": "Publicar",
+          "upload": "Subir",
+          "change": "Cambiar"
+        },
+        "st": {
+          "publishing": "Publicando",
+          "publishingDes": "Esto puede tomar un momento",
+          "noImage": "Subí una imagen para comenzar",
+          "draft": "Borrador",
+          "chNi": "Publicá una imagen",
+          "uploading": "Subiendo"
+        },
+        "label": {
+          "description": "Describí esta imagen para alguien que no pueda verla."
+        }
+      }
+    },
     "basics": {
       "UploadedBySection": {
         "label": "Registrado por: "
@@ -382,6 +440,9 @@
       }
     },
     "enterprise": {
+      "EnterpriseSelector": {
+        "placeholder": "Seleccione una empresa"
+      },
       "EnterpriseNameField": {
         "label": "Nombre: ",
         "err": {
@@ -488,6 +549,49 @@
       },
       "EnterpriseDescription": {
         "label": "Descripción:",
+        "st": {
+          "saving": "Guardando... ",
+          "save": "Guardar",
+          "close": "Cerrar",
+          "cancel": "Cancelar"
+        },
+        "ok": {
+          "updated": "Actualizado correctamente. "
+        },
+        "err": {
+          "couldntUpdate": "No se pudo actualizar. ",
+          "invalid": "El campo debe contener entre 3 y 48 caracteres. "
+        }
+      }
+    },
+    "boat": {
+      "BoatEnterprisePageField": {
+        "label": "Propiedad de: ",
+        "st": {
+          "saving": "Guardando",
+          "save": "Guardar",
+          "close": "Cerrar",
+          "cancel": "Cancelar"
+        }
+      },
+      "BoatMatPageField": {
+        "label": "Matrícula:",
+        "st": {
+          "saving": "Guardando... ",
+          "save": "Guardar",
+          "close": "Cerrar",
+          "cancel": "Cancelar"
+        },
+        "ok": {
+          "updated": "Actualizado correctamente. "
+        },
+        "err": {
+          "couldntUpdate": "No se pudo actualizar. ",
+          "invalid": "El campo debe contener entre 3 y 48 caracteres. "
+        }
+      },
+      "BoatNamePageField": {
+        "label": "Nombre:",
         "st": {
           "saving": "Guardando... ",
           "save": "Guardar",

@@ -292,3 +292,30 @@ main {
 .heightAuto {
     height: max-content !important;
 }
+.load_moreBtn {
+    width: 90%;
+}
+
+
+
+.pic_all {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .rw {
+        width: 100%;
+        height: max-content;
+        display: flex;
+        justify-content: space-between;
+        .commentHandler {
+            width: 100%;
+            height: max-content;
+        }
+    }
+}
+.fx-rw {
+    display: flex;
+    gap: 10px;
+}

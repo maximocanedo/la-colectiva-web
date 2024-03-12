@@ -57,21 +57,24 @@ const EnterpriseAdd = ({ me }: EnterpriseAddProps): React.JSX.Element => {
     return (<>
         <div className={"page-content flex-down"}>
             <Title2 align={"center"}>{t(strings.title)}</Title2>
-            <br/><br/>
-            <EnterpriseNameField value={name} onChange={(x) => setName(x)} onCheck={(x) => setNameValidity(x)} />
-            <EnterpriseCUITField value={CUIT} onChange={(x) => setCUIT(x)} onCheck={(x) => setCUITValidity(x)} />
-            <EnterpriseDescriptionField value={description} onChange={(x) => setDescription(x)} onCheck={(x) => setDescriptionValidity(x)} />
-            <EnterpriseFoundationDateField value={foundationDate} onChange={x => setFoundationDate(x)} onCheck={x => setFoundationDateValidity(x)} />
+            <br/>
+            <EnterpriseNameField value={name} onChange={(x) => setName(x)} onCheck={(x) => setNameValidity(x)}/>
+            <EnterpriseCUITField value={CUIT} onChange={(x) => setCUIT(x)} onCheck={(x) => setCUITValidity(x)}/>
+            <EnterpriseDescriptionField value={description} onChange={(x) => setDescription(x)}
+                                        onCheck={(x) => setDescriptionValidity(x)}/>
+            <EnterpriseFoundationDateField value={foundationDate} onChange={x => setFoundationDate(x)}
+                                           onCheck={x => setFoundationDateValidity(x)}/>
+            <br/>
             <div className="jBar">
                 <div className="l"></div>
                 <div className="r">
                     <Button
                         iconPosition={"before"}
-                        icon={loading ? <Spinner size={"extra-tiny"} /> : null}
+                        icon={loading ? <Spinner size={"extra-tiny"}/> : null}
                         appearance={"primary"}
                         disabled={loading || !nameIsOK || !CUITIsOK}
                         onClick={e => register()}>
-                        { loading ? t(strings.registering) : t(strings.register) }
+                        {loading ? t(strings.registering) : t(strings.register)}
                     </Button>
                 </div>
             </div>
