@@ -1,6 +1,8 @@
 import {IUser} from "../../../data/models/user";
 import {RegionType} from "../../../data/models/region";
-import {Myself, UserLogged} from "../../../App";
+
+
+import {Myself, UserLogged} from "../../page/definitions";
 
 export interface IBoatNamePageFieldProps {
     name: string;

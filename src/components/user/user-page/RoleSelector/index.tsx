@@ -7,7 +7,9 @@ import {CommonResponse} from "../../../../data/utils";
 import {StateManager} from "../../../../page/SignUpPage/defs";
 import {useTranslation} from "react-i18next";
 import {Err} from "../../../../data/error";
+import {log} from "../../../page/definitions";
 const RoleSelector = (props: RoleSelectorProps): React.JSX.Element => {
+    log("RoleSelector");
     const labelId: string = useId("roleSelector__labelId");
     const { t } = useTranslation();
     const { user, me }: RoleSelectorProps = props;

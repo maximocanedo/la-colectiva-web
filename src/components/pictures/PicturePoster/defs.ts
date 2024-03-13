@@ -1,7 +1,8 @@
-import {Myself} from "../../../App";
 import {CommonResponse} from "../../../data/utils";
 import {IPictureDetails} from "../../../data/models/picture";
 import {OnPostResponse} from "../../../data/actions/picture";
+
+import {Myself} from "../../page/definitions";
 
 export interface IPicturePosterProps {
     id: string;

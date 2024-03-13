@@ -1,29 +1,10 @@
-import React, {useState} from "react";
-import {IHistoryEventProps, IUserMinimal} from "./defs";
-import {
-    Avatar,
-    Menu,
-    MenuItem,
-    MenuTrigger,
-    MenuPopover,
-    MenuList,
-    Button,
-    Link,
-    Dialog,
-    DialogTrigger,
-    DialogSurface,
-    DialogTitle,
-    DialogContent,
-    DialogBody,
-    DialogActions,
-    Textarea
-} from "@fluentui/react-components";
+import React from "react";
+import {IHistoryEventProps} from "./defs";
+import {Avatar} from "@fluentui/react-components";
 import UserLink from "../../user/UserLink";
 import {useTranslation} from "react-i18next";
-import {IUser} from "../../../data/models/user";
-import * as comments from "../../../data/actions/comment";
-import {IComment} from "../../../data/models/comment";
-import {CommonResponse} from "../../../data/utils";
+import {log} from "../../page/definitions";
+
 function getTimePassed(date: Date): [number, Intl.RelativeTimeFormatUnit] {
     const now = Date.now();
     const diff =  (now - date.getTime());
@@ -44,6 +25,7 @@ function getTimePassed(date: Date): [number, Intl.RelativeTimeFormatUnit] {
     }
 }
 const HistoryEvent = ({ _id: id, time: uploaded, content, user }: IHistoryEventProps): React.JSX.Element => {
+    log("HistoryEvent");
     const LANG_PATH = "components.history.event";
     const { t: translationService } = useTranslation();
     const t = (path: string): string => translationService(LANG_PATH + "." + path);

@@ -1,21 +1,9 @@
 import React, {useEffect, useReducer, useState} from "react";
 import {RegionSearchPageProps} from "./defs";
-import {
-    Avatar,
-    Breadcrumb,
-    BreadcrumbButton, BreadcrumbDivider,
-    BreadcrumbItem,
-    Button,
-    Combobox,
-    Input,
-    Option,
-    Persona
-} from "@fluentui/react-components";
+import {Avatar, Button, Input, Persona} from "@fluentui/react-components";
 import {useTranslation} from "react-i18next";
 import {Add24Filled, Search20Filled, Water20Filled} from "@fluentui/react-icons";
-import {IRegion, RegionType} from "../../data/models/region";
-import RegionTypeSelector from "../../components/region/RegionTypeSelector";
-import {NullableRegionType} from "../../components/region/RegionTypeSelector/defs";
+import {IRegion} from "../../data/models/region";
 import * as regions from "../../data/actions/region";
 import LoadMoreButton from "../../components/basic/buttons/LoadMoreButton";
 import {getRegionTypeLangPathNameFor} from "../RegionPage/defs";
@@ -37,15 +25,16 @@ const resultsReducer = (state: IRegion[], action: { type: string, payload: IRegi
         }
     }
 }
-const RegionSearch = ({ toasterId, me }: RegionSearchPageProps): React.JSX.Element => {
+const RegionSearch = ({ me }: RegionSearchPageProps): React.JSX.Element => {
     const { t: translate } = useTranslation();
+
     const navigate: NavigateFunction = useNavigate();
     const t = (key: string): string => translate(LANG_PATH + "." + key);
     const [ query, setQuery ] = useState<string>("");
     const [ searching, setSearchingState ] = useState<boolean>(false);
     const [ results, dispatchResults ] = useReducer(resultsReducer, []);
     const [ page, setPage ] = useState<number>(0);
-    const [ size, setSize ] = useState<number>(10);
+    const [ size, ] = useState<number>(10);
 
     const canCreate: boolean =
         me !== undefined && me !== null
@@ -63,6 +52,7 @@ const RegionSearch = ({ toasterId, me }: RegionSearchPageProps): React.JSX.Eleme
     };
     useEffect(() => {
         search(0, 10);
+        // eslint-disable-next-line
     }, [ ]);
 
     const more = (): void => {
@@ -80,7 +70,7 @@ const RegionSearch = ({ toasterId, me }: RegionSearchPageProps): React.JSX.Eleme
                     onChange={(ev): void => setQuery(ev.target.value)}
                     placeholder={t("label.search")}
                     aria-label={t("label.search")} />
-                <Button size={"large"} appearance={"primary"} onClick={(e): void => {
+                <Button size={"large"} appearance={"primary"} onClick={(_e): void => {
                     dispatchResults({ type: "RESET", payload: []});
                     search();
                 }}><Search20Filled /></Button>
@@ -90,7 +80,7 @@ const RegionSearch = ({ toasterId, me }: RegionSearchPageProps): React.JSX.Eleme
             canCreate && <div className="jBar">
                 <div className="r">
                     <Button
-                        onClick={(e): void => {
+                        onClick={(_e): void => {
                             navigate("/regions/add");
                         }}
                         appearance={"primary"}

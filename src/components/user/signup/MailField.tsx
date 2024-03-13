@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Field, FieldProps, Input} from "@fluentui/react-components";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
+import {log} from "../../page/definitions";
 
 interface MailFieldProps extends FieldProps {
     value: string;
@@ -8,6 +9,7 @@ interface MailFieldProps extends FieldProps {
     onValidationChange: (error: boolean) => void;
 }
 const MailField = (props: MailFieldProps): React.JSX.Element => {
+    log("MailField");
     const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const [ value, setValue ] = useState<string>(props.value);
     const [ vm, setVM ] = useState<string>("");

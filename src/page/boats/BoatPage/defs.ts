@@ -1,10 +1,9 @@
 import {makeStyles, tokens} from "@fluentui/react-components";
-import {Myself} from "../../../App";
 
-export interface IBoatPageProps {
-    toasterId: string;
-    me: Myself;
-}
+
+import {ICommonPageProps} from "../../../components/page/definitions";
+
+export interface IBoatPageProps extends ICommonPageProps {}
 
 export const useStyles = makeStyles({
     disableBtn: {

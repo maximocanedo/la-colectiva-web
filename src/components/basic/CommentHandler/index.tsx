@@ -8,6 +8,7 @@ import {Button, Spinner, Textarea, useId} from "@fluentui/react-components";
 import {Send24Filled} from "@fluentui/react-icons";
 import {useTranslation} from "react-i18next";
 import LoadMoreButton from "../buttons/LoadMoreButton";
+import {log} from "../../page/definitions";
 
 const commentsReducer = (state: IComment[], action: { type: string, payload: IComment | string }): IComment[] => {
     switch(action.type) {
@@ -37,6 +38,7 @@ const commentsReducer = (state: IComment[], action: { type: string, payload: ICo
 
 
 const CommentHandler = ({ id, fetcher, remover, poster, me }: ICommentHandlerProps): React.JSX.Element => {
+    log("CommentHandler");
     const LANG_PATH = "components.comments.handler";
     const handlerId: string = useId("commentHandler");
     const { t: translationService } = useTranslation();

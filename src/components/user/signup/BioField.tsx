@@ -1,6 +1,7 @@
 import React, {FormEventHandler, useState} from "react";
 import {Field, FieldProps, Input, Textarea} from "@fluentui/react-components";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
+import {log} from "../../page/definitions";
 
 interface BioFieldProps extends FieldProps {
     value: string;
@@ -8,6 +9,7 @@ interface BioFieldProps extends FieldProps {
     onValidationChange: (error: boolean) => void;
 }
 const BioField = (props: BioFieldProps): React.JSX.Element => {
+    log("BioField");
     const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const [ value, setValue ] = useState<string>(props.value);
     const [ vm, setVM ] = useState<string>("");

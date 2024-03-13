@@ -37,6 +37,11 @@
   },
   "pages": {
     "boats": {
+      "SearchPage": {
+        "label": {
+          "search": "Buscar"
+        }
+      },
       "Boat": {
         "st": {
           "registeredBy": "Registrado por: ",

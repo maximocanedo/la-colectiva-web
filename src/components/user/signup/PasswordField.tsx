@@ -1,6 +1,7 @@
 import React, {FormEventHandler, useState} from "react";
 import {Field, FieldProps, Input} from "@fluentui/react-components";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
+import {log} from "../../page/definitions";
 
 interface PasswordFieldProps extends FieldProps {
     value: string;
@@ -8,6 +9,7 @@ interface PasswordFieldProps extends FieldProps {
     onValidationChange: (error: boolean) => void;
 }
 const PasswordField = (props: PasswordFieldProps): React.JSX.Element => {
+    log("PasswordField");
     const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const [ value, setValue ] = useState<string>(props.value);
     const [ passwordNote, setPasswordNote ] = useState<string>("");

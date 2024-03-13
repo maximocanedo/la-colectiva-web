@@ -1,12 +1,14 @@
 import React from "react";
 import {useTranslation} from "react-i18next";
 import {IUploadDateSectionProps} from "./defs";
+import {log} from "../../page/definitions";
 
 const LANG_PATH: string = "components.basics.UploadDateSection";
 const strings = {
     label: "label"
 };
 const UploadDateSection = ({ date }: IUploadDateSectionProps): React.JSX.Element => {
+    log("UploadDateSection");
     const { t: translate } = useTranslation();
     const t = (key: string): string => translate(`${LANG_PATH}.${key}`);
     const formattedDate: string = new Intl.DateTimeFormat(translate("defLang"), {

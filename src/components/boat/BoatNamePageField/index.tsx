@@ -6,9 +6,11 @@ import { IEditableFieldValidationStatus } from "../../basic/EditableField/defs";
 import * as boats from "../../../data/actions/boat";
 import {CommonResponse} from "../../../data/utils";
 import {Role} from "../../../data/models/user";
+import {log} from "../../page/definitions";
 
 const BoatNamePageField = ({me, name: n, onUpdate, author, id }: IBoatNamePageFieldProps): React.JSX.Element => {
 
+    log("BoatNamePageField");
     const [ name, setName ]: StateManager<string> = useState<string>(n);
     const [ value, setValue ]: StateManager<string> = useState<string>(n);
 

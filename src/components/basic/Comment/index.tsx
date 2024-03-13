@@ -24,6 +24,7 @@ import {IUser} from "../../../data/models/user";
 import * as comments from "../../../data/actions/comment";
 import {IComment} from "../../../data/models/comment";
 import {CommonResponse} from "../../../data/utils";
+import {log} from "../../page/definitions";
 export function getTimePassed(date: Date): [number, Intl.RelativeTimeFormatUnit] {
     const now = Date.now();
     const diff =  (now - date.getTime());
@@ -44,6 +45,7 @@ export function getTimePassed(date: Date): [number, Intl.RelativeTimeFormatUnit]
     }
 }
 const Comment = ({ id, parentId, handlerId, __v: ver, content: c, author, me, uploaded, remover }: ICommentComponentProps): React.JSX.Element => {
+    log("Comment");
     const LANG_PATH = "components.comments.comment";
     const commentComponentId: string = useId("Handler$" + handlerId + "_Comment$" + id);
     const { t: translationService } = useTranslation();
@@ -94,7 +96,7 @@ const Comment = ({ id, parentId, handlerId, __v: ver, content: c, author, me, up
                 <Avatar name={author.name} size={32} />
             </div>
             <div className="comment_content">
-                <div className="rw">
+                <div className="comment_rw">
                     {!editing && <div><UserLink data={author} from={author.username}/> {content}</div> }
                     {editing && <>
                         <UserLink data={author} from={author.username} />

@@ -1,7 +1,9 @@
 import {MenuItem, useIsOverflowItemVisible} from "@fluentui/react-components";
 import {OverflowMenuItemProps} from "./defs";
+import {log} from "../../page/definitions";
 
 const OverflowMenuItem = (props: OverflowMenuItemProps) => {
+    log("OverflowMenuItem");
     const { tab, onClick } = props;
     const isVisible = useIsOverflowItemVisible(tab.id);
 

@@ -6,9 +6,11 @@ import {FieldValidationStatus} from "../RoleSelector/defs";
 import * as users from "../../../../data/actions/user";
 import {CommonResponse} from "../../../../data/utils";
 import {useTranslation} from "react-i18next";
+import {log} from "../../../page/definitions";
 
 const LANG_PATH = "components.user.user-page.NameSection";
 const NameSection = (props: NameSectionProps): React.JSX.Element => {
+    log("NameSection");
     const { user, me, onChange }: NameSectionProps = props;
     const { t: translationService } = useTranslation();
     const t = (path: string): string => translationService(LANG_PATH + "." + path);

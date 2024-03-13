@@ -1,10 +1,7 @@
 import {makeStyles, tokens} from "@fluentui/react-components";
-import {Myself} from "../../../App";
+import {ICommonPageProps} from "../../../components/page/definitions";
 
-export interface EnterprisePageProps {
-    toasterId: string;
-    me: Myself;
-}
+export interface EnterprisePageProps extends ICommonPageProps {}
 export const RegionTypeLangPathNames = {
     river: "models.region.types.river",
     stream: "models.region.types.stream",

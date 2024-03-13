@@ -8,6 +8,7 @@ import {PhoneNumberFormat, PhoneNumberUtil} from "google-libphonenumber";
 import {FieldValidationStatus} from "../../user/user-page/RoleSelector/defs";
 import {AddRegular, CallAddFilled, DismissFilled} from "@fluentui/react-icons";
 import {CommonResponse} from "../../../data/utils";
+import {log} from "../../page/definitions";
 
 const LANG_PATH: string = "components.enterprise.EnterprisePhoneHandler";
 const strings = {
@@ -45,6 +46,7 @@ const phonesReducer = (state: string[], action: { type: string, payload: string}
     }
 };
 const EnterprisePhoneHandler = ({ me, author, id }: IEnterprisePhoneHandlerProps): React.JSX.Element => {
+    log("EnterprisePhoneHandler");
     const { t: translate } = useTranslation();
     const t = (key: string): string => translate(`${LANG_PATH}.${key}`);
     const canDelete: boolean = me !== null && me !== undefined && author !== null && author !== undefined

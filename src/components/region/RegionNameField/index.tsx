@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Field, Input} from "@fluentui/react-components";
+import {log} from "../../page/definitions";
 type validityState = "none" | "error" | "warning" | "success" | undefined;
 export interface RegionNameFieldProps {
     disabled?: boolean;
@@ -9,6 +10,7 @@ export interface RegionNameFieldProps {
 }
 const RegionNameField = ({ disabled, value, onChange, onCheck }: RegionNameFieldProps): React.JSX.Element => {
 
+    log("RegionNameField");
     const [ state, setState ] = useState<validityState>("none");
     const [ message, setMessage ] = useState<string>("");
 

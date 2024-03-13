@@ -4,8 +4,10 @@ import {VehicleShipFilled} from "@fluentui/react-icons";
 import React from "react";
 import * as enterprises from "../../../data/actions/enterprise";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
+import {log} from "../../page/definitions";
 
 const BoatIconRep = (props: IBoatIconRepProps): React.JSX.Element => {
+    log("BoatIconRep");
     const { name, mat, show }: IBoatIconRepProps = props;
     const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
 

@@ -6,10 +6,14 @@ import {Button, Field, Input, Spinner} from "@fluentui/react-components";
 import {Edit16Filled} from "@fluentui/react-icons";
 import * as enterprises from "../../../data/actions/enterprise";
 import {CommonResponse} from "../../../data/utils";
+import {log} from "../../page/definitions";
 
 const LANG_PATH: string = "components.enterprise.EnterpriseCUIT";
 const strings = {};
 const EnterpriseCUITPageField = ({ id, value: outValue, onChange, me, author }: IEnterpriseCUITPageFieldProps): React.JSX.Element => {
+
+    log("EnterpriseCUITPageField");
+
     const { t: translate } = useTranslation();
     const t = (key: string): string => translate(`${LANG_PATH}.${key}`);
     // Values

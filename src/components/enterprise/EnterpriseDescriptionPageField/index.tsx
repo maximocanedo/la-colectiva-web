@@ -6,9 +6,11 @@ import { IEditableFieldValidationStatus } from "../../basic/EditableField/defs";
 import {CommonResponse} from "../../../data/utils";
 import {Role} from "../../../data/models/user";
 import * as enterprises from "../../../data/actions/enterprise";
+import {log} from "../../page/definitions";
 
 const EnterpriseDescriptionPageField = ({me, description: n, onUpdate, author, id }: IEnterpriseDescriptionPageFieldProps): React.JSX.Element => {
 
+    log("EnterpriseDescriptionField");
     const [ description, setDescription ]: StateManager<string> = useState<string>(n);
     const [ value, setValue ]: StateManager<string> = useState<string>(n);
 

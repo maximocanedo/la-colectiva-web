@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Field, FieldProps, Input} from "@fluentui/react-components";
 import * as users from "./../../../data/actions/user";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
+import {log} from "../../page/definitions";
 
 interface UsernameFieldProps extends FieldProps {
     value: string;
@@ -9,6 +10,7 @@ interface UsernameFieldProps extends FieldProps {
     onValidationChange: (error: boolean) => void;
 }
 const UsernameField = (props: UsernameFieldProps): React.JSX.Element => {
+    log("UsernameField");
     const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const [ value, setValue ] = useState<string>(props.value);
     const [ vm, setVM ] = useState<string>("");

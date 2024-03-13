@@ -7,12 +7,14 @@ import {useTranslation} from "react-i18next";
 import {TFunction} from "i18next";
 import {UserButtonProps} from "./defs";
 import {NavigateFunction, useNavigate} from "react-router-dom";
+import {log} from "../../page/definitions";
 
 
 const USER_PROFILE_PAGE: string = "/users/";
 const resolveUserProfilePageURL = (username: string): string => USER_PROFILE_PAGE + username;
 
 const UserButton = (props: UserButtonProps): React.JSX.Element => {
+    log("UserButton");
     const { t }: { t: TFunction<"translation", undefined> } = useTranslation();
     const { from }: UserButtonProps = props;
     const navigate: NavigateFunction = useNavigate();

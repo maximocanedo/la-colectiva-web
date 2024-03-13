@@ -35,20 +35,22 @@ export const edit = async (id: string, data: IBoatEdit): Promise<CommonResponse>
  */
 export const del = async (id: string): Promise<CommonResponse> => {
     const call: Response = await u.del(getPrefix(id));
-    const { error } = await call.json();
     if(call.ok) return {
         success: true,
         message: "El barco ha sido eliminado con éxito. "
-    }; throw new Err(error);
+    };
+    const { error } = await call.json();
+    throw new Err(error);
 };
 
 export const enable = async (id: string): Promise<CommonResponse> => {
     const call: Response = await u.post(getPrefix(id), {});
-    const { error } = await call.json();
     if(call.ok) return {
         success: true,
         message: "El barco ha sido rehabilitado con éxito. "
-    }; throw new Err(error);
+    };
+    const { error } = await call.json();
+    throw new Err(error);
 };
 /**
  * **Crear embarcación**
@@ -82,8 +84,8 @@ export const find = async (id: string): Promise<IBoat> => {
  * @param p Número de página.
  * @param itemsPerPage Elementos por página.
  */
-export const search = async (q: string = "", { p, itemsPerPage }: IPaginator = { p: 0, itemsPerPage: 10 }): Promise<IBoat[]> => {
-    const call: Response = await u.get(`boats/?q=${q}&p=${p}&itemsPerPage=${itemsPerPage}`);
+export const search = async (q: string = "", { p, itemsPerPage }: IPaginator = { p: 0, itemsPerPage: 10 }, enterprise?: string): Promise<IBoat[]> => {
+    const call: Response = await u.get(`boats/?q=${q}&p=${p}&itemsPerPage=${itemsPerPage}` + (enterprise === undefined ? "" : "&enterprise=" + enterprise));
     const { data, error } = await call.json();
     if(call.ok) return data;
     throw new Err(error);

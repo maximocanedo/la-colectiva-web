@@ -2,6 +2,7 @@ import React from "react";
 import {ISignUpRequest} from "../../data/models/user";
 import {TabValue, ToastIntent} from "@fluentui/react-components";
 import {TFunction} from "i18next";
+import {ICommonPageProps, ToastSenderFunction} from "../../components/page/definitions";
 
 export type StateManager<T> = [ T, React.Dispatch<React.SetStateAction<T>> ];
 export type SignUpTabValues = "personal" | "account" | "more";
@@ -10,8 +11,7 @@ export type TabSwitchFunction = React.Dispatch<React.SetStateAction<SignUpTabVal
 export interface ITranslatableMethod {
     t: TFunction<"translation", undefined>;
 }
-export interface SignUpPageProps {
-    toasterId: string;
+export interface SignUpPageProps extends ICommonPageProps {
 }
 export interface TabPersonalStates {
     name: string;

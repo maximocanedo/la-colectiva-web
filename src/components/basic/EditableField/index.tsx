@@ -5,8 +5,10 @@ import {Edit16Filled} from "@fluentui/react-icons";
 import {StateManager} from "../../../page/SignUpPage/defs";
 import {FieldValidationStatus} from "../../user/user-page/RoleSelector/defs";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
+import {log} from "../../page/definitions";
 
 const EditableField = (props: IEditableFieldProps<string>): React.JSX.Element => {
+    log("EditableField");
     const { initialValue, editable, onChange, onUpdate, validator, langPath, onValid, onInvalid, onSaving }: IEditableFieldProps<string> = props;
     // Translation functions
     const { t: _translate }: UseTranslationResponse<"translation", undefined> = useTranslation();

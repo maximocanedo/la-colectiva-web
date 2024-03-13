@@ -4,8 +4,10 @@ import {Water32Filled} from "@fluentui/react-icons";
 import React from "react";
 import {getRegionTypeLangPathNameFor} from "../../../page/RegionPage/defs";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
+import {log} from "../../page/definitions";
 
 const RegionIconRep = (props: RegionIconRepProps): React.JSX.Element => {
+    log("RegionIconRep");
     const { name, type, region }: RegionIconRepProps = props;
     const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
 

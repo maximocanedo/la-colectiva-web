@@ -7,9 +7,11 @@ import {StateManager} from "../../../../page/SignUpPage/defs";
 import * as users from "../../../../data/actions/user";
 import {CommonResponse} from "../../../../data/utils";
 import {FieldValidationStatus} from "../RoleSelector/defs";
+import {log} from "../../../page/definitions";
 
 const LANG_PATH = "components.user.user-page.EmailSection";
 const EmailSection = (props: EmailSectionProps): React.JSX.Element => {
+    log("EmailSection");
     const {user, me}: EmailSectionProps = props;
     const { t: translationService } = useTranslation();
     const t = (path: string): string => translationService(LANG_PATH + "." + path);

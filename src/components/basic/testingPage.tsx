@@ -11,6 +11,7 @@ import {
 } from "@fluentui/react-components";
 import * as React from "react";
 import UserLink from "../user/UserLink";
+import {log} from "../page/definitions";
 
 const useStyles = makeStyles({
     root: {
@@ -35,6 +36,7 @@ export function DialogSignUp (props: InputProps) {
 }
 
 export default function TestPage() {
+    log("TestPage");
     return (<div>
             <UserLink data={null} from={"root"} />
         </div>

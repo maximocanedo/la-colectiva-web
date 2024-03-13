@@ -144,7 +144,7 @@ main {
     .comment_content {
         padding-top: 2px;
         width: 100%;
-        .rw {
+        .comment_rw {
             text-align: start;
             width: 100%;
             .editingContainer {
@@ -180,7 +180,7 @@ main {
 }
 .loadMoreBtn {
     width: 100%;
-    margin: 10px;
+    margin: 10px 0px;
     & button {
         width: 100%;
     }
@@ -318,4 +318,8 @@ main {
 .fx-rw {
     display: flex;
     gap: 10px;
+}
+
+.reg-vertical-list {
+
 }

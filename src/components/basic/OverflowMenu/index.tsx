@@ -12,6 +12,7 @@ import React from "react";
 import {OverflowMenuProps} from "./defs";
 import OverflowMenuItem from "../OverflowMenuItem";
 import {bundleIcon, FluentIcon, MoreHorizontalFilled, MoreHorizontalRegular} from "@fluentui/react-icons";
+import {log} from "../../page/definitions";
 
 
 
@@ -28,6 +29,7 @@ const useOverflowMenuStyles = makeStyles({
     },
 });
 const OverflowMenu = (props: OverflowMenuProps): React.JSX.Element => {
+    log("OverflowMenu");
     const { onTabSelect, tabs }: OverflowMenuProps = props;
     const { ref, isOverflowing, overflowCount } =
         useOverflowMenu<HTMLButtonElement>();

@@ -4,8 +4,10 @@ import {Building32Filled} from "@fluentui/react-icons";
 import React from "react";
 import * as enterprises from "../../../data/actions/enterprise";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
+import {log} from "../../page/definitions";
 
 const EnterpriseIconRep = (props: IEnterpriseIconRepProps): React.JSX.Element => {
+    log("EnterpriseIconRep");
     const { name, cuit, show }: IEnterpriseIconRepProps = props;
     const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
 

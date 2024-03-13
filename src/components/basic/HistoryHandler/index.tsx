@@ -10,6 +10,7 @@ import {useTranslation} from "react-i18next";
 import {IHistoryEvent} from "../../../data/models/IHistoryEvent";
 import HistoryEvent from "../HistoryEvent";
 import LoadMoreButton from "../buttons/LoadMoreButton";
+import {log} from "../../page/definitions";
 
 const eventsReducer = (state: IHistoryEvent[], action: { type: string, payload: IHistoryEvent | string }): IHistoryEvent[] => {
     switch(action.type) {
@@ -30,6 +31,7 @@ const eventsReducer = (state: IHistoryEvent[], action: { type: string, payload: 
 
 
 const HistoryHandler = ({ id, fetcher, me }: IHistoryHandlerProps): React.JSX.Element => {
+    log("HistoryHandler");
     const LANG_PATH = "components.history.handler";
     const { t: translationService } = useTranslation();
     const t = (path: string): string => translationService(LANG_PATH + "." + path);
