@@ -28,6 +28,8 @@ import DockPage from "./page/docks/DockPage";
 import DockAdd from "./page/docks/DockAdd";
 import DockExplore from "./page/docks/DockExplore";
 import PathCreate from "./page/paths/PathCreate";
+import PathPage from "./page/paths/PathPage";
+import PathSearch from "./page/paths/PathSearch";
 
 function App(): ReactElement {
 	log("App");
@@ -76,8 +78,8 @@ function App(): ReactElement {
 							<Route path={"/docks/:id"} element={<DockPage {...pageProps} />} />
 							<Route path={"/docks"} element={<DockExplore {...pageProps} />} />
 							<Route path={"/paths/add"} element={<PathCreate {...pageProps} />} />
-							<Route path={"/paths/:id"} element={NotFoundPage} />
-							<Route path={"/paths/"} element={NotFoundPage} />
+							<Route path={"/paths/:id"} element={<PathPage {...pageProps} />} />
+							<Route path={"/paths/"} element={<PathSearch {...pageProps} />} />
 							<Route path={"*"} element={NotFoundPage} />
 						</Routes>
 					</main>

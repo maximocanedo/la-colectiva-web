@@ -9,14 +9,27 @@
 		"save": "Guardar",
 		"register": "Registrar",
 		"cancel": "Cancelar",
+		"close": "Cerrar",
+		"delete": "Eliminar",
 		"enable": "Habilitar",
 		"disable": "Deshabilitar"
 	},
 	"err": {
+		"couldntUpdate": "No se pudo actualizar. ",
 		"GottaLoginFirst": {
 			"title": "Iniciá sesión para acceder a esta página.",
 			"description": "Oops, parece que has llegado a una página restringida. Por favor, inicia sesión con tu cuenta para continuar. "
 		}
+	},
+	"av": {
+		"monday": "Lunes",
+		"tuesday": "Martes",
+		"wednesday": "Miércoles",
+		"thursday": "Jueves",
+		"friday": "Viernes",
+		"saturday": "Sábados",
+		"sunday": "Domingos",
+		"holiday": "Feriados"
 	},
 	"dockStatus": {
 		"private": "Privado",
@@ -60,6 +73,15 @@
 	},
 	"pages": {
 		"paths": {
+			"PathPage": {
+				"tabs": {
+					"basic": "Información básica",
+					"comments": "Comentarios",
+					"history": "Historial de cambios",
+					"schedules": "Horarios",
+					"availabilities": "Disponibilidad"
+				}
+			},
 			"PathCreate": {
 				"title": "Registrar un recorrido"
 			}
@@ -211,6 +233,12 @@
 				"allregions": "Todas las categorías"
 			}
 		},
+		"Paths": {
+			"label": {
+				"search": "Buscar recorridos",
+				"register": "Registrar un recorrido"
+			}
+		},
 		"Enterprises": {
 			"label": {
 				"search": "Buscar empresas",
@@ -226,6 +254,41 @@
 	},
 	"components": {
 		"paths": {
+			"i": {
+				"TitleField": {
+					"label": "Título: ",
+					"ok": {
+						"updated": "Actualizado correctamente. "
+					},
+					"err": {
+						"couldntUpdate": "No se pudo actualizar. ",
+						"invalid": "El título debe tener entre 3 y 48 caracteres. "
+					}
+				},
+				"DescriptionField": {
+					"label": "Descripción: ",
+					"ok": {
+						"updated": "Actualizado correctamente. "
+					},
+					"err": {
+						"couldntUpdate": "No se pudo actualizar. ",
+						"invalid": "La descripción debe tener entre 3 y 128 caracteres. "
+					}
+				},
+				"NotesField": {
+					"label": "Observaciones: ",
+					"ok": {
+						"updated": "Actualizado correctamente. "
+					},
+					"err": {
+						"couldntUpdate": "No se pudo actualizar. ",
+						"invalid": "El campo debe tener entre 1 y 256 caracteres. "
+					}
+				},
+				"BoatField": {
+					"label": "Embarcación: "
+				}
+			},
 			"c": {
 				"TitleField": {
 					"label": "Título: ",
@@ -885,6 +948,7 @@
 	},
 	"status": {
 		"saving": "Guardando",
-		"registering": "Registrando"
+		"registering": "Registrando",
+		"updated": "Actualizado correctamente. "
 	}
 }

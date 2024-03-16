@@ -388,3 +388,38 @@ main {
     align-items: start;
     justify-content: center;
 }
+.av_handler {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+}
+.av_item {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100%;
+    .a {
+        width: max-content;
+        display: grid;
+        place-items: center;
+    }
+    .b {
+        display: flex;
+        width: 100%;
+        height: max-content;
+        flex-direction: column;
+        .t {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .ac {
+            margin-top: 10px;
+            display: none;
+        }
+    }
+}
+.av_item:hover .b .ac {
+    display: block;
+}

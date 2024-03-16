@@ -22,6 +22,7 @@ const EditableField = (props: IEditableFieldProps<string>): React.JSX.Element =>
     const [ editMode, setEditMode ]: StateManager<boolean> = useState<boolean>(false);
 
     // Validation
+    const [ isValid, setValidState ] = useState<boolean>(false);
     const [ fieldMessage, setFieldMessage ]: StateManager<string> = useState<string>("");
     const [ fieldState, setFieldState ]: StateManager<FieldValidationStatus> = useState<FieldValidationStatus>();
     const validate = (message: string, state: FieldValidationStatus): void => {
@@ -32,6 +33,7 @@ const EditableField = (props: IEditableFieldProps<string>): React.JSX.Element =>
     useEffect((): void => {
         onChange(value);
         const { state, valid, path }: IEditableFieldValidationStatus = validator(value);
+        setValidState(valid);
         validate( path === "" ? "" : t(path), state);
         valid  ? onValid(value) : onInvalid(value);
     }, [onChange, onInvalid, onValid, t, validator, value]);
@@ -79,13 +81,13 @@ const EditableField = (props: IEditableFieldProps<string>): React.JSX.Element =>
                 onClick={save}
                 iconPosition={"before"}
                 icon={saving ? <Spinner size={"extra-tiny"} /> : null}
-                disabled={saving || initialValue === value}
-            >{ saving ? t('st.saving') : t('st.save') }
+                disabled={!isValid || saving || initialValue === value}
+            >{ saving ? _translate('status.saving') : _translate('actions.save') }
             </Button>
             <Button
                 onClick={cancel}
                 appearance={(updated && initialValue === value) ? "primary" : "secondary"}>
-                { (updated && initialValue === value) ? t('st.close') : t('st.cancel') }
+                { (updated && initialValue === value) ? _translate('actions.close') : _translate('actions.cancel') }
             </Button>
         </div>}
     </>);
