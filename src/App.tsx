@@ -27,6 +27,7 @@ import BoatAdd from "./page/boats/BoatAdd";
 import DockPage from "./page/docks/DockPage";
 import DockAdd from "./page/docks/DockAdd";
 import DockExplore from "./page/docks/DockExplore";
+import PathCreate from "./page/paths/PathCreate";
 
 function App(): ReactElement {
 	log("App");
@@ -58,9 +59,7 @@ function App(): ReactElement {
 					<Header me={me} toasterId={toasterId} />
 					<main>
 						<Routes>
-							<Route
-								path={"/"}
-								element={<HomePage />} />
+							<Route path={"/"} element={<HomePage />} />
 							<Route path={"/signup"} element={<SignUpPage {...pageProps}  />} />
 							<Route path={"/login"} element={<LoginPage {...pageProps} />} />
 							<Route path={"/users/:username"} element={<UserProfile {...pageProps} />} />
@@ -76,6 +75,9 @@ function App(): ReactElement {
 							<Route path={"/docks/add"} element={<DockAdd {...pageProps} />} />
 							<Route path={"/docks/:id"} element={<DockPage {...pageProps} />} />
 							<Route path={"/docks"} element={<DockExplore {...pageProps} />} />
+							<Route path={"/paths/add"} element={<PathCreate {...pageProps} />} />
+							<Route path={"/paths/:id"} element={NotFoundPage} />
+							<Route path={"/paths/"} element={NotFoundPage} />
 							<Route path={"*"} element={NotFoundPage} />
 						</Routes>
 					</main>

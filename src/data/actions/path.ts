@@ -13,9 +13,9 @@ const getPrefix = (id: string): string => "paths/" + id;
  * @param data Datos del recorrido.
  */
 export const create = async (data: IPathCreate): Promise<IPath> => {
-    const { status, json }: Response = await u.post("paths", data);
-    const { _id, error } = await json();
-    if(status === 201) return { ...data, _id };
+    const call: Response = await u.post("paths", data);
+    const { _id, error } = await call.json();
+    if(call.ok) return { ...data, _id };
     throw new Err(error);
 };
 /**
@@ -26,9 +26,9 @@ export const create = async (data: IPathCreate): Promise<IPath> => {
  * @param data Datos a actualizar.
  */
 export const edit = async (id: string, data: IPathEdit): Promise<CommonResponse> => {
-    const { status, json }: Response = await u.put(getPrefix(id), data);
-    const { error } = await json();
-    if(status === 200) return { success: true, message: "Editado con éxito. " };
+    const call: Response = await u.put(getPrefix(id), data);
+    const { error } = await call.json();
+    if(call.ok) return { success: true, message: "Editado con éxito. " };
     throw new Err(error);
 };
 /**
@@ -38,9 +38,9 @@ export const edit = async (id: string, data: IPathEdit): Promise<CommonResponse>
  * @param id ID del recorrido.
  */
 export const del = async (id: string): Promise<CommonResponse> => {
-    const { status, json }: Response = await u.del(getPrefix(id));
-    const { error } = await json();
-    if(status === 200) return { success: true, message: "Eliminado con éxito. " };
+    const call: Response = await u.del(getPrefix(id));
+    const { error } = await call.json();
+    if(call.ok) return { success: true, message: "Eliminado con éxito. " };
     throw new Err(error);
 };
 interface IAvalabilitiesActions {
@@ -56,9 +56,9 @@ export const availabilities: IAvalabilitiesActions = {
      * @param avId ID de la disponibilidad.
      */
     get: async (avId: string): Promise<IAvailability> => {
-        const { status, json }: Response = await u.get("availabilities/" + avId);
-        const { error, ...data } = await json();
-        if(status === 200) return data;
+        const call: Response = await u.get("availabilities/" + avId);
+        const { error, ...data } = await call.json();
+        if(call.ok) return data;
         throw new Err(error);
     },
     /**
@@ -68,9 +68,9 @@ export const availabilities: IAvalabilitiesActions = {
      * @param availability Detalle sobre la disponibilidad.
      */
     add: async (availability: IAvailabilityCreate): Promise<IAvailability> => {
-        const { status, json }: Response = await u.post("availabilities/", availability);
-        const { _id, error } = await json();
-        if(status === 201) return { ...availability, _id };
+        const call: Response = await u.post("availabilities/", availability);
+        const { _id, error } = await call.json();
+        if(call.ok) return { ...availability, _id };
         throw new Err(error);
     },
     /**
@@ -80,9 +80,9 @@ export const availabilities: IAvalabilitiesActions = {
      * @param avId ID de la disponibilidad.
      */
     del: async (avId: string): Promise<CommonResponse> => {
-        const { status, json }: Response = await u.del("availabilities/" + avId);
-        const { error } = await json();
-        if(status === 200) return { success: true, message: "Eliminado correctamente. " };
+        const call: Response = await u.del("availabilities/" + avId);
+        const { error } = await call.json();
+        if(call.ok) return { success: true, message: "Eliminado correctamente. " };
         throw new Err(error);
     }
 };
@@ -93,9 +93,9 @@ export const availabilities: IAvalabilitiesActions = {
  * @param id ID del recorrido.
  */
 export const find = async (id: string): Promise<IPath> => {
-    const { status, json }: Response = await u.get(getPrefix(id));
-    const { data, error } = await json();
-    if(status === 200) return data[0];
+    const call: Response = await u.get(getPrefix(id));
+    const { data, error } = await call.json();
+    if(call.ok) return data[0];
     throw new Err(error);
 };
 /**
@@ -107,9 +107,9 @@ export const find = async (id: string): Promise<IPath> => {
  * @param itemsPerPage Elementos por página.
  */
 export const search = async (q: string = "", { p, itemsPerPage }: IPaginator = { p: 0, itemsPerPage: 10 }): Promise<IPath[]> => {
-    const { status, json }: Response = await u.get(`paths/?q=${q}&p=${p}&itemsPerPage=${itemsPerPage}`);
-    const { data, error } = await json();
-    if(status === 200) return data;
+    const call: Response = await u.get(`paths/?q=${q}&p=${p}&itemsPerPage=${itemsPerPage}`);
+    const { data, error } = await call.json();
+    if(call.ok) return data;
     throw new Err(error);
 };
 export const votes = {

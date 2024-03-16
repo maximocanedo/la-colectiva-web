@@ -59,6 +59,11 @@
 		}
 	},
 	"pages": {
+		"paths": {
+			"PathCreate": {
+				"title": "Registrar un recorrido"
+			}
+		},
 		"docks": {
 			"DockAdd": {
 				"title": "Registrar muelle"
@@ -220,6 +225,37 @@
 		}
 	},
 	"components": {
+		"paths": {
+			"c": {
+				"TitleField": {
+					"label": "Título: ",
+					"err": {
+						"minlength": "Mínimo 3 caracteres. ",
+						"maxlength": "Máximo 48 caracteres. "
+					}
+				},
+				"BoatField": {
+					"label": "Embarcación designada: ",
+					"err": {
+						"nul": "Debe seleccionar una embarcación. "
+					}
+				},
+				"DescriptionField": {
+					"label": "Descripción: ",
+					"err": {
+						"minlength": "Mínimo 3 caracteres. ",
+						"maxlength": "Máximo 128 caracteres. "
+					}
+				},
+				"NotesField": {
+					"label": "Observaciones: ",
+					"err": {
+						"minlength": "No puede dejar este campo en blanco. ",
+						"maxlength": "Máximo 256 caracteres. "
+					}
+				}
+			}
+		},
 		"PlaceSelector": {
 			"label": {
 				"selectInMap": "Seleccionar en el mapa",
@@ -707,6 +743,9 @@
 			}
 		},
 		"boat": {
+			"BoatSelector": {
+				"placeholder": "Seleccione una embarcación"
+			},
 			"NameField": {
 				"err": "El nombre debe contener entre 3 y 48 caracteres.",
 				"label": "Nombre:",

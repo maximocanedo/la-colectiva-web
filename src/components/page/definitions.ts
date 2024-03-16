@@ -1,7 +1,7 @@
 import {Role} from "../../data/models/user";
 import {ToastIntent} from "@fluentui/react-components";
 import React from "react";
-import * as settings from "../../data/settings";
+import * as settings from "./../../data/settings";
 
 
 export interface IToastNotification {
