@@ -9,7 +9,9 @@ import {
 } from "../models/user";
 import { CommonResponse, IError, u } from "../utils";
 import { ConnectionError, Err } from "../error";
-import {Myself, UserLogged} from "../../App";
+
+
+import {Myself, UserLogged} from "../../components/page/definitions";
 /**
  * **Actualizar rol**
  *

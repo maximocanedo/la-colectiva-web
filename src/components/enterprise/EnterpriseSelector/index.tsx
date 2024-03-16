@@ -6,6 +6,7 @@ import {IEnterprise} from "../../../data/models/enterprise";
 import LoadMoreButton from "../../basic/buttons/LoadMoreButton";
 import {IPaginator} from "../../../data/models/comment";
 import * as enterprises from "../../../data/actions/enterprise";
+import {log} from "../../page/definitions";
 
 const LANG_PATH: string = "components.enterprise.EnterpriseSelector";
 const strings = {
@@ -25,6 +26,7 @@ const CLEAR: string = "CLEAR";
  }
 
 const EnterpriseSelector = ({ selected, onSelect }: IEnterpriseSelectorProps): React.JSX.Element => {
+    log("EnterpriseSelector");
     const comboId = useId();
     const { t: translate } = useTranslation();
     const t = (key: string): string => translate(`${LANG_PATH}.${key}`);

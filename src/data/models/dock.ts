@@ -1,9 +1,11 @@
-import { IRegion } from "./region";
-import { IUser } from "./user";
+import {IRegion, RegionType} from "./region";
+import {IUser} from "./user";
+import {IUserMinimal} from "../../components/basic/Comment/defs";
+
 /**
  * Categorías de muelles según su propiedad.
  */
-enum DockPropertyStatus {
+export enum DockPropertyStatus {
     /**
      * **Privado**. Muelle de uso privado.
      */
@@ -48,11 +50,12 @@ export interface IDock {
     __v?: number;
 }
 export interface IDockEdit {
-    name: string;
-    address: number;
-    region: string;
-    notes: string;
-    coordinates: [number, number];
+    name?: string;
+    address?: number;
+    region?: string;
+    status?: DockPropertyStatus;
+    notes?: string;
+    coordinates?: [number, number];
 }
 export interface IDockCreate {
     name: string;
@@ -61,4 +64,18 @@ export interface IDockCreate {
     notes: string;
     status: DockPropertyStatus;
     coordinates: [number, number];
+}
+
+export interface IDockView {
+    _id: string;
+    name: string;
+    address: number;
+    region: { _id: string, name: string, type: RegionType };
+    notes: string;
+    status: DockPropertyStatus;
+    user: IUserMinimal;
+    uploadDate: Date | string;
+    active: boolean;
+    coordinates: [number, number];
+    _v: number;
 }

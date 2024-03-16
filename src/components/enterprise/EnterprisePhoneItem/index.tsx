@@ -8,6 +8,7 @@ import * as enterprises from "../../../data/actions/enterprise";
 import {CommonResponse} from "../../../data/utils";
 import { useNavigate } from "react-router-dom";
 import {Tooltip} from "@fluentui/react-components";
+import {log} from "../../page/definitions";
 
 function copyToClipboard(text: string): void {
     const tempTextArea = document.createElement("textarea");
@@ -32,6 +33,8 @@ const strings = {
     }
 };
 const EnterprisePhoneItem = ({phone, id, deletable, onDeleted }: IEnterprisePhoneItemProps): React.JSX.Element => {
+
+    log("EnterprisePhoneItem");
     const { t: translate } = useTranslation();
     const navigate = useNavigate();
     const t = (key: string): string => translate(`${LANG_PATH}.${key}`);

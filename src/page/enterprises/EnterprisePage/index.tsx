@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {EnterprisePageProps, useStyles} from "./defs";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
 import * as enterprises from "../../../data/actions/enterprise";
 import {StateManager} from "../../SignUpPage/defs";
@@ -25,11 +25,14 @@ import UploadDateSection from "../../../components/basic/UploadDateSection";
 import {IEnterprise} from "../../../data/models/enterprise";
 import EnterpriseIconRep from "../../../components/enterprise/EnterpriseIconRep";
 import EnterpriseNamePageField from "../../../components/enterprise/EnterpriseNamePageField";
-import {UserLogged} from "../../../App";
 import EnterpriseDescriptionPageField from "../../../components/enterprise/EnterpriseDescriptionPageField";
 import EnterpriseCUITPageField from "../../../components/enterprise/EnterpriseCUITPageField";
 import EnterpriseFoundationDatePageField from "../../../components/enterprise/EnterpriseFoundationDatePageField";
 import EnterprisePhoneHandler from "../../../components/enterprise/EnterprisePhoneHandler";
+
+import {UserLogged} from "../../../components/page/definitions";
+import BoatListForEnterprise from "../../../components/boat/BoatListForEnterprise";
+import {IBoat} from "../../../data/models/boat";
 
 
 const LANG_PATH: string = "pages.enterprises.Enterprise";
@@ -54,7 +57,7 @@ const EnterprisePage = (props: EnterprisePageProps): React.JSX.Element => {
     const id: string = useParams<{ id: string }>().id as string;
     const { t: _translate }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const t = (key: string): string =>  _translate(LANG_PATH + "." + key);
-    const [ loading, setLoading ]: StateManager<boolean> = useState<boolean>(false);
+    const [ , setLoading ]: StateManager<boolean> = useState<boolean>(false);
     const [ enterprise, setEnterprise ]: StateManager<IEnterprise | null> = useState<IEnterprise | null>(null);
     const [ name, setName ]: StateManager<string> = useState<string>("");
     const [ cuit, setCUIT ] = useState<number>(0);
@@ -63,6 +66,7 @@ const EnterprisePage = (props: EnterprisePageProps): React.JSX.Element => {
     const [ active, updateStatus ] = useState<boolean>(true);
     const [ tab, setTab ] = useState<string>("basic");
 
+    const navigate = useNavigate();
     const tabs: TabData[] = [
         {
             id: "basic",
@@ -100,7 +104,7 @@ const EnterprisePage = (props: EnterprisePageProps): React.JSX.Element => {
             .finally((): void => {
                 setLoading(false);
             });
-    }, []);
+    }, [id]);
 
 
     if(enterprise === null) return <></>;
@@ -136,6 +140,10 @@ const EnterprisePage = (props: EnterprisePageProps): React.JSX.Element => {
                 onTabSelect={(id: string): void => setTab(id)}
                 tabs={tabs}
                 minimumVisible={2} />
+            { tab === "boats" && <BoatListForEnterprise enterprise={(enterprise as IEnterprise)._id?? ""} onClick={({ _id }: IBoat): void => {
+                navigate("/boats/" + _id);
+            }
+            } /> }
             {tab === "basic" && <>
                 <EnterpriseNamePageField
                     name={name}
@@ -159,7 +167,7 @@ const EnterprisePage = (props: EnterprisePageProps): React.JSX.Element => {
                 {canEdit && (<div className="jBar">
                     <Button
                         className={active ? styles.disableBtn : styles.enableBtn }
-                        onClick={(e): void => updSt()}
+                        onClick={(_e): void => updSt()}
                         appearance={"secondary"}>
                         {active ? t("actions.disable") : t("actions.enable")}
                     </Button>

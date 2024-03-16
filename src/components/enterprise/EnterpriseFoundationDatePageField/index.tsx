@@ -7,11 +7,13 @@ import {DatePicker} from "@fluentui/react-datepicker-compat";
 import {FieldValidationStatus} from "../../user/user-page/RoleSelector/defs";
 import * as enterprises from "../../../data/actions/enterprise";
 import {CommonResponse} from "../../../data/utils";
+import {log} from "../../page/definitions";
 
 const LANG_PATH = "components.enterprise.FoundationField";
 const EnterpriseFoundationDatePageField = (props: IEnterpriseFoundationDatePageFieldProps): React.JSX.Element => {
     const { me, id, date, onChange, user }: IEnterpriseFoundationDatePageFieldProps = props;
     const { t: translationService } = useTranslation();
+    log("EnterpriseFoundationDatePageField");
     const t = (path: string): string => translationService(LANG_PATH + "." + path);
     const [ editMode, setEditMode ] = useState<boolean>(false);
     const [ fieldMessage, setFieldMessage ] = useState<string>("");

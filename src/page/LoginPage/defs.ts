@@ -1,4 +1,3 @@
+import {ICommonPageProps} from "../../components/page/definitions";
 
-export interface LoginPageProps {
-    toasterId: string;
-}
+export interface LoginPageProps extends ICommonPageProps {}

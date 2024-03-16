@@ -1,7 +1,4 @@
-import {Myself} from "../../App";
+import {ICommonPageProps} from "../../components/page/definitions";
 
 
-export interface UserProfileProps {
-    me: Myself;
-    toasterId: string;
-}
+export interface UserProfileProps extends ICommonPageProps {}

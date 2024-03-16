@@ -3,9 +3,11 @@ import UserLink from "../../user/UserLink";
 import {IUser} from "../../../data/models/user";
 import {IUploadedBySectionProps} from "./defs";
 import {useTranslation} from "react-i18next";
+import {log} from "../../page/definitions";
 
 const LANG_PATH: string = "components.basics.UploadedBySection";
 const UploadedBySection = ({ user, username }: IUploadedBySectionProps): React.JSX.Element => {
+    log("UploadedBySection");
     const { t: translate } = useTranslation();
     const t = (key: string): string => translate(LANG_PATH + "." + key);
 

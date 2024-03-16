@@ -5,11 +5,13 @@ import {Link, Spinner} from "@fluentui/react-components";
 import {UserLinkProps} from "./defs";
 import {StateManager} from "../../../page/SignUpPage/defs";
 import {NavigateFunction, useNavigate} from "react-router-dom";
+import {log} from "../../page/definitions";
 
 
 const USER_PROFILE_PAGE: string = "/users/";
 const resolveUserProfilePageURL = (username: string): string => USER_PROFILE_PAGE + username;
 const UserLink = (props: UserLinkProps): React.JSX.Element => {
+    log("UserLink");
     const { from, data }: UserLinkProps = props;
     const navigate: NavigateFunction = useNavigate();
     const [userObj, setUserObj]: StateManager<IUser | null> = useState<IUser | null>(null);

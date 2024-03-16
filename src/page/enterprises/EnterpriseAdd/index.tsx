@@ -1,17 +1,16 @@
 import {EnterpriseAddProps} from "./defs";
 import React, {useState} from "react";
 import {Button, Spinner, Title2} from "@fluentui/react-components";
-import {IRegion, RegionType} from "../../../data/models/region";
 import * as enterprises from "../../../data/actions/enterprise";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import GottaLoginFirst from "../../err/GottaLoginFirst";
-import {UserLogged} from "../../../App";
 import {useTranslation} from "react-i18next";
 import EnterpriseNameField from "./EnterpriseNameField";
 import EnterpriseCUITField from "./EnterpriseCUITField";
 import EnterpriseDescriptionField from "./EnterpriseDescriptionField";
 import EnterpriseFoundationDateField from "./EnterpriseFoundationDateField";
 import {IEnterprise} from "../../../data/models/enterprise";
+import {UserLogged} from "../../../components/page/definitions";
 
 const LANG_PATH: string = "pages.enterprises.Register";
 const strings = {
@@ -52,6 +51,10 @@ const EnterpriseAdd = ({ me }: EnterpriseAddProps): React.JSX.Element => {
     const loggedIn: boolean =
         me !== undefined && me !== null && me.active;
     const canCreate: boolean = loggedIn && ((me as UserLogged).role) >= 2;
+    if(!canCreate) {
+        // TODO Show a banner
+        return <></>;
+    }
     if(!loggedIn) return <GottaLoginFirst />;
 
     return (<>
@@ -73,7 +76,7 @@ const EnterpriseAdd = ({ me }: EnterpriseAddProps): React.JSX.Element => {
                         icon={loading ? <Spinner size={"extra-tiny"}/> : null}
                         appearance={"primary"}
                         disabled={loading || !nameIsOK || !CUITIsOK}
-                        onClick={e => register()}>
+                        onClick={_e => register()}>
                         {loading ? t(strings.registering) : t(strings.register)}
                     </Button>
                 </div>

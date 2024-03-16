@@ -1,685 +1,851 @@
 {
-  "defLang": "es-AR",
-  "now": "Ahora mismo",
-  "loading": "Cargando... ",
-  "test": "Esto es una prueba.",
-  "actions": {
-    "next": "Siguiente",
-    "loadMore": "Cargar más"
-  },
-  "err": {
-    "GottaLoginFirst": {
-      "title": "Iniciá sesión para acceder a esta página.",
-      "description": "Oops, parece que has llegado a una página restringida. Por favor, inicia sesión con tu cuenta para continuar. "
-    }
-  },
-  "models": {
-    "region": {
-      "types": {
-        "river": "Río",
-        "stream": "Arroyo",
-        "brook": "Riachuelo",
-        "canal": "Canal",
-        "lake": "Lago",
-        "pond": "Estanque",
-        "lagoon": "Laguna",
-        "reservoir": "Embalse",
-        "swamp": "Pantano",
-        "well": "Pozo",
-        "aquifer": "Acuífero",
-        "bay": "Bahía",
-        "gulf": "Golfo",
-        "sea": "Mar",
-        "ocean": "Océano",
-        "unknown": "Desconocido"
-      }
-    }
-  },
-  "pages": {
-    "boats": {
-      "Boat": {
-        "st": {
-          "registeredBy": "Registrado por: ",
-          "uploaded": "Creado el: "
-        },
-        "actions": {
-          "disable": "Deshabilitar",
-          "enable": "Habilitar recurso"
-        },
-        "tabs": {
-          "basic": "Información básica",
-          "comments": "Comentarios",
-          "history": "Historial de cambios",
-          "pics": "Imágenes"
-        }
-      }
-    },
-    "enterprises": {
-      "Register": {
-        "title": "Registrar una empresa",
-        "registering": "Guardando",
-        "register": "Guardar"
-      },
-      "Enterprise": {
-        "st": {
-          "registeredBy": "Registrado por: ",
-          "uploaded": "Creado el: "
-        },
-        "actions": {
-          "disable": "Deshabilitar",
-          "enable": "Habilitar recurso"
-        },
-        "tabs": {
-          "basic": "Información básica",
-          "comments": "Comentarios",
-          "history": "Historial de cambios"
-        }
-      }
-    },
-    "signup": {
-      "title": "Crear cuenta",
-      "tabs": {
-        "personal": {
-          "title": "Datos personales",
-          "labels": {
-            "name": "Nombre",
-            "username": "Nombre de usuario",
-            "birth": "Fecha de nacimiento"
-          }
-        },
-        "account": {
-          "title": "Cuenta",
-          "labels": {
-            "email": "Dirección de correo electrónico",
-            "password": "Contraseña",
-            "reenterPassword": "Repita la contraseña"
-          }
-        },
-        "more": {
-          "title": "Más",
-          "labels": {
-            "bio": "Biografía"
-          }
-        }
-      },
-      "actions": {
-        "signup": "Finalizar"
-      },
-      "err": {
-        "creatingAccount": "Hubo un error al intentar crear tu cuenta. ",
-        "tryAgainLater": "Intente de nuevo más tarde. ",
-        "loggingIn": "Hubo un error al intentar iniciar sesión. ",
-        "DoItManually": "Deberás hacerlo manualmente. "
-      },
-      "ok": {
-        "accountCreated": "¡Tu cuenta fue creada con éxito!",
-        "loggedIn": "Iniciaste sesión. Redirigiéndote... "
-      }
-    },
-    "login": {
-      "title": "Iniciar sesión",
-      "actions": {
-        "login": "Ingresar",
-        "signup": "Crear cuenta"
-      },
-      "err": {
-        "unauthorized": "Credenciales incorrectas. ",
-        "unknown": "Ocurrió un error al intentar iniciar sesión. "
-      },
-      "ok": {
-        "loginSuccessful": "¡Bienvenido de nuevo!"
-      }
-    },
-    "UserProfile": {
-      "title": "",
-      "tabs": {
-        "personal": "Información personal",
-        "more": "Más"
-      },
-      "err": {
-        "notFound": "Usuario no encontrado"
-      }
-    },
-    "Region": {
-      "st": {
-        "registeredBy": "Registrado por: ",
-        "uploaded": "Creado el: "
-      },
-      "actions": {
-        "disable": "Deshabilitar",
-        "enable": "Habilitar recurso"
-      },
-      "tabs": {
-        "basic": "Información básica",
-        "comments": "Comentarios",
-        "history": "Historial de cambios"
-      }
-    },
-    "Regions": {
-      "label": {
-        "search": "Buscar regiones",
-        "allregions": "Todas las categorías"
-      }
-    },
-    "Enterprises": {
-      "label": {
-        "search": "Buscar empresas",
-        "register": "Registrar una empresa",
-        "allregions": "Todas las categorías"
-      }
-    },
-    "RegionAdd": {
-      "title": "Registrar una región",
-      "registering": "Guardando",
-      "register": "Guardar"
-    }
-  },
-  "components": {
-    "pics": {
-      "card": {
-        "st": {
-          "removing": "Eliminando..."
-        },
-        "actions": {
-          "download": "Descargar",
-          "gotoProfile": "Ver perfil",
-          "remove": "Eliminar",
-          "close": "Cancelar"
-        },
-        "dialog": {
-          "remove": {
-            "title": "¿Estás seguro de eliminar esta imagen?",
-            "description": "Esta acción no se puede deshacer. "
-          }
-        }
-      },
-      "poster": {
-        "actions": {
-          "cancel": "Cancelar",
-          "post": "Publicar una imagen",
-          "submit": "Publicar",
-          "upload": "Subir",
-          "change": "Cambiar"
-        },
-        "st": {
-          "publishing": "Publicando",
-          "publishingDes": "Esto puede tomar un momento",
-          "noImage": "Subí una imagen para comenzar",
-          "draft": "Borrador",
-          "chNi": "Publicá una imagen",
-          "uploading": "Subiendo"
-        },
-        "label": {
-          "description": "Describí esta imagen para alguien que no pueda verla."
-        }
-      }
-    },
-    "basics": {
-      "UploadedBySection": {
-        "label": "Registrado por: "
-      },
-      "UploadDateSection": {
-        "label": "Creado el: "
-      }
-    },
-    "user": {
-      "signup": {
-        "NameField": {
-          "label": "Nombre",
-          "err": {
-            "atLeastThree": "El nombre debe tener al menos 3 caracteres.",
-            "upToTwentyFour": "El nombre no debe tener más de 24 caracteres."
-          }
-        },
-        "UsernameField": {
-          "label": "Nombre de usuario",
-          "err": {
-            "noSpaces": "El nombre de usuario no debe tener espacios",
-            "lengthNote": "El nombre de usuario debe tener entre 3-24 caracteres.",
-            "notAvailable": "Este nombre de usuario no está disponible.",
-            "checkingAvailability": "Comprobando disponibilidad...",
-            "unknownErrorWhileValidatingUsernameAvailability": "Ocurrió un error. Intente de nuevo más tarde."
-          },
-          "ok": {
-            "available": "Nombre de usuario disponible."
-          }
-        },
-        "BirthField": {
-          "label": "Fecha de nacimiento",
-          "err": {},
-          "ok": {
-            "select": "Seleccione una fecha"
-          }
-        },
-        "MailField": {
-          "label": "Dirección de correo electrónico",
-          "err": {
-            "nonValid": "El correo electrónico ingresado no es válido."
-          }
-        },
-        "PasswordField": {
-          "label": "Contraseña",
-          "err": {
-            "atLeastEight": "La contraseña debe tener al menos 8 caracteres. "
-          }
-        },
-        "RepeatPasswordField": {
-          "label": "Repita la contraseña",
-          "err": {
-            "dontMatch": "Las contraseñas no coinciden. "
-          },
-          "ok": {
-            "match": "Las contraseñas coinciden. "
-          }
-        },
-        "BioField": {
-          "label": "Biografía",
-          "err": {
-            "upToFourtyEight": "La biografía no puede tener más de 48 caracteres."
-          },
-          "ok": {}
-        }
-      },
-      "UserButton": {
-        "roles": {
-          "observer": "Observador",
-          "normal": "Usuario",
-          "moderator": "Moderador",
-          "admin": "Administrador"
-        },
-        "err": {
-          "notFound": "Usuario no encontrado. "
-        }
-      },
-      "login": {
-        "IdentifierField": {
-          "label": {
-            "neither": "Correo o nombre de usuario",
-            "email": "Correo electrónico",
-            "username": "Nombre de usuario"
-          },
-          "err": {
-            "invalidIdentifier": "Ingrese un nombre de usuario o correo válido. "
-          }
-        },
-        "PasswordField": {
-          "err": {
-            "enterPassword": "Ingrese una contraseña"
-          }
-        }
-      },
-      "user-page": {
-        "RoleSelector": {
-          "label": "Rol",
-          "roles": {
-            "observer": "Observador",
-            "normal": "Usuario regular",
-            "moderator": "Moderador",
-            "admin": "Administrador"
-          },
-          "ok": {
-            "updated": "Actualizado correctamente. "
-          },
-          "err": {
-            "noUpdated": "No se pudo actualizar. "
-          }
-        },
-        "EmailSection": {
-          "label": {
-            "send": "Enviar código",
-            "sending": "Enviando...",
-            "email": "Correo electrónico: ",
-            "new": "Nuevo correo electrónico",
-            "prefixExample": "Ej.: ",
-            "editEmail": "Editar correo",
-            "enterCodeSent": "Ingrese el código enviado",
-            "cancel": "Cancelar",
-            "change": "Cambiar",
-            "verifying": "Validando...",
-            "verify": "Verificar"
-          },
-          "err": {
-            "invalidEmail": "El correo ingresado no es correcto. ",
-            "incorrectCode": "Código incorrecto. ",
-            "unknown": "Ocurrió un error desconocido. "
-          },
-          "ok": {
-            "validated": "Correo validado con éxito. "
-          }
-        },
-        "BioSection": {
-          "label": "Biografía:",
-          "st": {
-            "saving": "Guardando... ",
-            "save": "Guardar",
-            "close": "Cerrar",
-            "cancel": "Cancelar"
-          },
-          "ok": {
-            "updated": "Actualizado correctamente. "
-          },
-          "err": {
-            "couldntUpdate": "No se pudo actualizar. "
-          }
-        },
-        "NameSection": {
-          "label": "Nombre:",
-          "st": {
-            "saving": "Guardando... ",
-            "save": "Guardar",
-            "close": "Cerrar",
-            "cancel": "Cancelar"
-          },
-          "ok": {
-            "updated": "Actualizado correctamente. "
-          },
-          "err": {
-            "couldntUpdate": "No se pudo actualizar. "
-          }
-        },
-        "BirthSection": {
-          "label": "Fecha de nacimiento:",
-          "st": {
-            "saving": "Guardando... ",
-            "save": "Guardar",
-            "close": "Cerrar",
-            "cancel": "Cancelar"
-          },
-          "ok": {
-            "updated": "Actualizado correctamente. "
-          },
-          "err": {
-            "couldntUpdate": "No se pudo actualizar. "
-          }
-        },
-        "PasswordSection": {
-          "title": "Contraseña",
-          "label": {
-            "p": "Ingrese una nueva contraseña",
-            "r": "Vuelva a ingresar la contraseña"
-          },
-          "st": {
-            "updating": "Actualizando...",
-            "update": "Actualizar contraseña",
-            "close": "Cerrar",
-            "cancel": "Cancelar",
-            "change": "Cambiar contraseña"
-          },
-          "ok": {
-            "updated": "La contraseña se actualizó correctamente. ",
-            "eq": "Las contraseñas coinciden. "
-          },
-          "err": {
-            "len": "La contraseña debe tener como mínimo 8 caracteres. ",
-            "eq": "Las contraseñas no coinciden. ",
-            "update": "No se actualizó la contraseña. "
-          }
-        },
-        "ActiveSection": {
-          "title": "Deshabilitar cuenta",
-          "labels": {
-            "btnDisable": "Deshabilitar",
-            "sure": "Deshabilitar esta cuenta",
-            "back": "Volver"
-          },
-          "p": {
-            "dialog": {
-              "title": "¿Deshabilitar esta cuenta?",
-              "description": "Al deshabilitar esta cuenta, no se podrá iniciar sesión con sus credenciales, y el correo y nombre de usuario no podrán volver a usarse para crear otra cuenta. "
-            }
-          },
-          "ok": {
-            "disabled": "Cuenta deshabilitada correctamente. "
-          },
-          "err": {
-            "disable": "No se pudo deshabilitar la cuenta. ",
-            "err": "Error",
-            "try": "Intentá de nuevo más tarde. "
-          }
-        }
-      }
-    },
-    "enterprise": {
-      "EnterpriseSelector": {
-        "placeholder": "Seleccione una empresa"
-      },
-      "EnterpriseNameField": {
-        "label": "Nombre: ",
-        "err": {
-          "ok": "Nombre válido. ",
-          "min": "El nombre debe contener al menos tres caracteres. ",
-          "max": "El nombre no puede tener más de 48 caracteres. "
-        }
-      },
-      "EnterpriseFoundationDateField": {
-        "label": "Fecha de fundación: ",
-        "err": {
-          "future": "Seleccione una fecha anterior al día de hoy. ",
-          "invalid": "Fecha inválida. "
-        }
-      },
-      "EnterpriseDescriptionField": {
-        "label": "Descripción: ",
-        "err": {
-          "ok": "",
-          "min": "La descripción debe contener al menos tres caracteres. ",
-          "max": "La descripción no puede tener más de 128 caracteres. "
-        }
-      },
-      "EnterpriseCUITField": {
-        "label": "Número de C.U.I.T.:",
-        "err": {
-          "min": "Ingrese un número de C.U.I.T. válido. ",
-          "max": "Valor inválido. "
-        }
-      },
-      "EnterprisePhoneHandler": {
-        "item": {
-          "actions": {
-            "copy": "Copiar",
-            "rem": "Eliminar"
-          },
-          "tooltips": {
-            "call": "Marcar"
-          }
-        },
-        "title": "Teléfonos",
-        "actions": {
-          "add": "Añadir"
-        },
-        "add": {
-          "label": "Ingrese un número de teléfono"
-        },
-        "err": {
-          "no15prefix": "No se aceptan los prefijos 15 ni 015. ",
-          "invalidNumber": "Número inválido. ",
-          "externalNumber": "El número ingresado no es de Argentina. "
-        },
-        "tooltips": {
-          "firstvalid": "Corregí el número antes de agregarlo. ",
-          "add": "Agregar",
-          "cancel": "Cerrar"
-        }
-      },
-      "FoundationField": {
-        "label": "Fundado el:",
-        "st": {
-          "saving": "Guardando... ",
-          "save": "Guardar",
-          "close": "Cerrar",
-          "cancel": "Cancelar"
-        },
-        "ok": {
-          "updated": "Actualizado correctamente. "
-        },
-        "err": {
-          "couldntUpdate": "No se pudo actualizar. "
-        }
-      },
-      "EnterpriseName": {
-        "label": "Nombre:",
-        "st": {
-          "saving": "Guardando... ",
-          "save": "Guardar",
-          "close": "Cerrar",
-          "cancel": "Cancelar"
-        },
-        "ok": {
-          "updated": "Actualizado correctamente. "
-        },
-        "err": {
-          "couldntUpdate": "No se pudo actualizar. ",
-          "invalid": "El campo debe contener entre 3 y 48 caracteres. "
-        }
-      },
-      "EnterpriseCUIT": {
-        "label": "Número de CUIT:",
-        "st": {
-          "saving": "Guardando... ",
-          "save": "Guardar",
-          "close": "Cerrar",
-          "cancel": "Cancelar"
-        },
-        "ok": {
-          "updated": "Actualizado correctamente. "
-        },
-        "err": {
-          "couldntUpdate": "No se pudo actualizar. "
-        }
-      },
-      "EnterpriseDescription": {
-        "label": "Descripción:",
-        "st": {
-          "saving": "Guardando... ",
-          "save": "Guardar",
-          "close": "Cerrar",
-          "cancel": "Cancelar"
-        },
-        "ok": {
-          "updated": "Actualizado correctamente. "
-        },
-        "err": {
-          "couldntUpdate": "No se pudo actualizar. ",
-          "invalid": "El campo debe contener entre 3 y 48 caracteres. "
-        }
-      }
-    },
-    "boat": {
-      "BoatEnterprisePageField": {
-        "label": "Propiedad de: ",
-        "st": {
-          "saving": "Guardando",
-          "save": "Guardar",
-          "close": "Cerrar",
-          "cancel": "Cancelar"
-        }
-      },
-      "BoatMatPageField": {
-        "label": "Matrícula:",
-        "st": {
-          "saving": "Guardando... ",
-          "save": "Guardar",
-          "close": "Cerrar",
-          "cancel": "Cancelar"
-        },
-        "ok": {
-          "updated": "Actualizado correctamente. "
-        },
-        "err": {
-          "couldntUpdate": "No se pudo actualizar. ",
-          "invalid": "El campo debe contener entre 3 y 48 caracteres. "
-        }
-      },
-      "BoatNamePageField": {
-        "label": "Nombre:",
-        "st": {
-          "saving": "Guardando... ",
-          "save": "Guardar",
-          "close": "Cerrar",
-          "cancel": "Cancelar"
-        },
-        "ok": {
-          "updated": "Actualizado correctamente. "
-        },
-        "err": {
-          "couldntUpdate": "No se pudo actualizar. ",
-          "invalid": "El campo debe contener entre 3 y 48 caracteres. "
-        }
-      }
-    },
-    "region": {
-      "RegionName": {
-        "label": "Nombre:",
-        "st": {
-          "saving": "Guardando... ",
-          "save": "Guardar",
-          "close": "Cerrar",
-          "cancel": "Cancelar"
-        },
-        "ok": {
-          "updated": "Actualizado correctamente. "
-        },
-        "err": {
-          "couldntUpdate": "No se pudo actualizar. ",
-          "invalid": "El campo debe contener entre 3 y 48 caracteres. "
-        }
-      },
-      "RegionType": {
-        "label": "Tipo: ",
-        "st": {
-          "saving": "Guardando... ",
-          "save": "Guardar",
-          "close": "Cerrar",
-          "cancel": "Cancelar"
-        },
-        "ok": {
-          "updated": "Actualizado correctamente. "
-        },
-        "err": {
-          "couldntUpdate": "No se pudo actualizar. ",
-          "invalid": "El campo debe contener entre 3 y 48 caracteres. "
-        }
-      }
-    },
-    "comments": {
-      "handler": {
-        "st": {
-          "loading": "Cargando... ",
-          "more": "Cargar más"
-        },
-        "textarea": {
-          "placeholder": "Dejá un comentario"
-        }
-      },
-      "comment": {
-        "menu": {
-          "label": "Más",
-          "options": {
-            "edit": "Editar",
-            "delete": "Eliminar",
-            "report": "Reportar"
-          }
-        },
-        "dialog": {
-          "title": "¿Eliminar este comentario?",
-          "description": "Esta acción no se puede deshacer. "
-        },
-        "st": {
-          "edited": "Editado"
-        },
-        "edit": {
-          "btnEdit": "Editar",
-          "btnCancel": "Cancelar",
-          "btnClose": "Cerrar"
-        }
-      }
-    },
-    "history": {
-      "handler": {
-        "st": {
-          "more": "Cargar más"
-        }
-      }
-    }
-  }
+	"defLang": "es-AR",
+	"now": "Ahora mismo",
+	"loading": "Cargando... ",
+	"test": "Esto es una prueba.",
+	"actions": {
+		"next": "Siguiente",
+		"loadMore": "Cargar más",
+		"save": "Guardar",
+		"register": "Registrar",
+		"cancel": "Cancelar",
+		"enable": "Habilitar",
+		"disable": "Deshabilitar"
+	},
+	"err": {
+		"GottaLoginFirst": {
+			"title": "Iniciá sesión para acceder a esta página.",
+			"description": "Oops, parece que has llegado a una página restringida. Por favor, inicia sesión con tu cuenta para continuar. "
+		}
+	},
+	"dockStatus": {
+		"private": "Privado",
+		"public": "Público",
+		"business": "Comercial",
+		"government": "Gubernamental",
+		"neighbourhood": "Vecinal",
+		"other": "Otro tipo de muelle",
+		"unlisted": "Sin especificar"
+	},
+	"dockStatusL": {
+		"private": "Muelle privado",
+		"public": "Muelle público",
+		"business": "Muelle comercial",
+		"government": "Muelle gubernamental",
+		"neighbourhood": "Muelle vecinal",
+		"other": "Muelle",
+		"unlisted": "Muelle"
+	},
+	"models": {
+		"region": {
+			"types": {
+				"river": "Río",
+				"stream": "Arroyo",
+				"brook": "Riachuelo",
+				"canal": "Canal",
+				"lake": "Lago",
+				"pond": "Estanque",
+				"lagoon": "Laguna",
+				"reservoir": "Embalse",
+				"swamp": "Pantano",
+				"well": "Pozo",
+				"aquifer": "Acuífero",
+				"bay": "Bahía",
+				"gulf": "Golfo",
+				"sea": "Mar",
+				"ocean": "Océano",
+				"unknown": "Desconocido"
+			}
+		}
+	},
+	"pages": {
+		"docks": {
+			"DockAdd": {
+				"title": "Registrar muelle"
+			},
+			"DockPage": {
+				"tabs": {
+					"history": "Historial de cambios",
+					"comments": "Comentarios",
+					"pics": "Imágenes",
+					"basic": "Información básica"
+				}
+			}
+		},
+		"boats": {
+			"SearchPage": {
+				"label": {
+					"search": "Buscar",
+					"register": "Registrar una embarcación"
+				}
+			},
+			"BoatAdd": {
+				"title": "Registrar una embarcación"
+			},
+			"Boat": {
+				"st": {
+					"registeredBy": "Registrado por: ",
+					"uploaded": "Creado el: "
+				},
+				"actions": {
+					"disable": "Deshabilitar",
+					"enable": "Habilitar recurso"
+				},
+				"tabs": {
+					"basic": "Información básica",
+					"comments": "Comentarios",
+					"history": "Historial de cambios",
+					"pics": "Imágenes"
+				}
+			}
+		},
+		"enterprises": {
+			"Register": {
+				"title": "Registrar una empresa",
+				"registering": "Guardando",
+				"register": "Guardar"
+			},
+			"Enterprise": {
+				"st": {
+					"registeredBy": "Registrado por: ",
+					"uploaded": "Creado el: "
+				},
+				"actions": {
+					"disable": "Deshabilitar",
+					"enable": "Habilitar recurso"
+				},
+				"tabs": {
+					"basic": "Información básica",
+					"comments": "Comentarios",
+					"history": "Historial de cambios"
+				}
+			}
+		},
+		"signup": {
+			"title": "Crear cuenta",
+			"tabs": {
+				"personal": {
+					"title": "Datos personales",
+					"labels": {
+						"name": "Nombre",
+						"username": "Nombre de usuario",
+						"birth": "Fecha de nacimiento"
+					}
+				},
+				"account": {
+					"title": "Cuenta",
+					"labels": {
+						"email": "Dirección de correo electrónico",
+						"password": "Contraseña",
+						"reenterPassword": "Repita la contraseña"
+					}
+				},
+				"more": {
+					"title": "Más",
+					"labels": {
+						"bio": "Biografía"
+					}
+				}
+			},
+			"actions": {
+				"signup": "Finalizar"
+			},
+			"err": {
+				"creatingAccount": "Hubo un error al intentar crear tu cuenta. ",
+				"tryAgainLater": "Intente de nuevo más tarde. ",
+				"loggingIn": "Hubo un error al intentar iniciar sesión. ",
+				"DoItManually": "Deberás hacerlo manualmente. "
+			},
+			"ok": {
+				"accountCreated": "¡Tu cuenta fue creada con éxito!",
+				"loggedIn": "Iniciaste sesión. Redirigiéndote... "
+			}
+		},
+		"login": {
+			"title": "Iniciar sesión",
+			"actions": {
+				"login": "Ingresar",
+				"signup": "Crear cuenta"
+			},
+			"err": {
+				"unauthorized": "Credenciales incorrectas. ",
+				"unknown": "Ocurrió un error al intentar iniciar sesión. "
+			},
+			"ok": {
+				"loginSuccessful": "¡Bienvenido de nuevo!"
+			}
+		},
+		"UserProfile": {
+			"title": "",
+			"tabs": {
+				"personal": "Información personal",
+				"more": "Más"
+			},
+			"err": {
+				"notFound": "Usuario no encontrado"
+			}
+		},
+		"Region": {
+			"st": {
+				"registeredBy": "Registrado por: ",
+				"uploaded": "Creado el: "
+			},
+			"actions": {
+				"disable": "Deshabilitar",
+				"enable": "Habilitar recurso"
+			},
+			"tabs": {
+				"basic": "Información básica",
+				"comments": "Comentarios",
+				"history": "Historial de cambios"
+			}
+		},
+		"Regions": {
+			"label": {
+				"search": "Buscar regiones",
+				"allregions": "Todas las categorías"
+			}
+		},
+		"Enterprises": {
+			"label": {
+				"search": "Buscar empresas",
+				"register": "Registrar una empresa",
+				"allregions": "Todas las categorías"
+			}
+		},
+		"RegionAdd": {
+			"title": "Registrar una región",
+			"registering": "Guardando",
+			"register": "Guardar"
+		}
+	},
+	"components": {
+		"PlaceSelector": {
+			"label": {
+				"selectInMap": "Seleccionar en el mapa",
+				"type": "Ingresar manualmente",
+				"decimal": "En formato decimal"
+			}
+		},
+		"docks": {
+			"c": {
+				"NameField": {
+					"label": "Nombre: ",
+					"noValid": "El nombre debe contener entre 3 y 48 caracteres. "
+				},
+				"AddressField": {
+					"label": "Altura: ",
+					"noValid": "La altura debe ser un número igual o mayor a 0. "
+				},
+				"RegionField": {
+					"label": "Región: ",
+					"noValid": "Campo requerido. "
+				},
+				"NotesField": {
+					"label": "Observaciones: ",
+					"noValid": "Máximo 128 caracteres. "
+				},
+				"StatusSelField": {
+					"label": "Categoría: ",
+					"noValid": "Valor no válido. "
+				},
+				"LocationField": {
+					"label": "Ubicación: ",
+					"noValid": "Valores no válidos. "
+				}
+			},
+			"i": {
+				"LocationField": {
+					"label": "Ubicación:"
+				},
+				"RegionField": {
+					"label": "Región: ",
+					"ok": "Actualizado correctamente. "
+				},
+				"NameField": {
+					"label": "Nombre: ",
+					"ok": {
+						"updated": "Actualizado correctamente. "
+					},
+					"st": {
+						"saving": "Guardando",
+						"save": "Guardar",
+						"close": "Cerrar",
+						"cancel": "Cancelar"
+					},
+					"err": {
+						"invalid": "El nombre debe contener entre 3 y 48 caracteres. ",
+						"couldntUpdate": "No se pudo actualizar. "
+					}
+				},
+				"StatusModifiableField": {
+					"label": "Categoría: ",
+					"updated": "Actualizado correctamente",
+					"couldntUpdate": "No se pudo actualizar. "
+				},
+				"NotesField": {
+					"label": "Observaciones: ",
+					"ok": {
+						"updated": "Actualizado correctamente. "
+					},
+					"st": {
+						"saving": "Guardando",
+						"save": "Guardar",
+						"close": "Cerrar",
+						"cancel": "Cancelar"
+					},
+					"err": {
+						"invalid": "Máximo 128 caracteres. ",
+						"couldntUpdate": "No se pudo actualizar. "
+					}
+				},
+				"AddressField": {
+					"label": "Altura: ",
+					"ok": {
+						"updated": "Actualizado correctamente. "
+					},
+					"st": {
+						"saving": "Guardando",
+						"save": "Guardar",
+						"close": "Cerrar",
+						"cancel": "Cancelar"
+					},
+					"err": {
+						"invalid": "La altura debe ser un número positivo. ",
+						"couldntUpdate": "No se pudo actualizar. "
+					}
+				}
+			}
+		},
+		"pics": {
+			"card": {
+				"st": {
+					"removing": "Eliminando..."
+				},
+				"actions": {
+					"download": "Descargar",
+					"gotoProfile": "Ver perfil",
+					"remove": "Eliminar",
+					"close": "Cancelar"
+				},
+				"dialog": {
+					"remove": {
+						"title": "¿Estás seguro de eliminar esta imagen?",
+						"description": "Esta acción no se puede deshacer. "
+					}
+				}
+			},
+			"poster": {
+				"actions": {
+					"cancel": "Cancelar",
+					"post": "Publicar una imagen",
+					"submit": "Publicar",
+					"upload": "Subir",
+					"change": "Cambiar"
+				},
+				"st": {
+					"publishing": "Publicando",
+					"publishingDes": "Esto puede tomar un momento",
+					"noImage": "Subí una imagen para comenzar",
+					"draft": "Borrador",
+					"chNi": "Publicá una imagen",
+					"uploading": "Subiendo"
+				},
+				"label": {
+					"description": "Describí esta imagen para alguien que no pueda verla."
+				}
+			}
+		},
+		"basics": {
+			"UploadedBySection": {
+				"label": "Registrado por: "
+			},
+			"UploadDateSection": {
+				"label": "Creado el: "
+			}
+		},
+		"user": {
+			"signup": {
+				"NameField": {
+					"label": "Nombre",
+					"err": {
+						"atLeastThree": "El nombre debe tener al menos 3 caracteres.",
+						"upToTwentyFour": "El nombre no debe tener más de 24 caracteres."
+					}
+				},
+				"UsernameField": {
+					"label": "Nombre de usuario",
+					"err": {
+						"noSpaces": "El nombre de usuario no debe tener espacios",
+						"lengthNote": "El nombre de usuario debe tener entre 3-24 caracteres.",
+						"notAvailable": "Este nombre de usuario no está disponible.",
+						"checkingAvailability": "Comprobando disponibilidad...",
+						"unknownErrorWhileValidatingUsernameAvailability": "Ocurrió un error. Intente de nuevo más tarde."
+					},
+					"ok": {
+						"available": "Nombre de usuario disponible."
+					}
+				},
+				"BirthField": {
+					"label": "Fecha de nacimiento",
+					"err": {},
+					"ok": {
+						"select": "Seleccione una fecha"
+					}
+				},
+				"MailField": {
+					"label": "Dirección de correo electrónico",
+					"err": {
+						"nonValid": "El correo electrónico ingresado no es válido."
+					}
+				},
+				"PasswordField": {
+					"label": "Contraseña",
+					"err": {
+						"atLeastEight": "La contraseña debe tener al menos 8 caracteres. "
+					}
+				},
+				"RepeatPasswordField": {
+					"label": "Repita la contraseña",
+					"err": {
+						"dontMatch": "Las contraseñas no coinciden. "
+					},
+					"ok": {
+						"match": "Las contraseñas coinciden. "
+					}
+				},
+				"BioField": {
+					"label": "Biografía",
+					"err": {
+						"upToFourtyEight": "La biografía no puede tener más de 48 caracteres."
+					},
+					"ok": {}
+				}
+			},
+			"UserButton": {
+				"roles": {
+					"observer": "Observador",
+					"normal": "Usuario",
+					"moderator": "Moderador",
+					"admin": "Administrador"
+				},
+				"err": {
+					"notFound": "Usuario no encontrado. "
+				}
+			},
+			"login": {
+				"IdentifierField": {
+					"label": {
+						"neither": "Correo o nombre de usuario",
+						"email": "Correo electrónico",
+						"username": "Nombre de usuario"
+					},
+					"err": {
+						"invalidIdentifier": "Ingrese un nombre de usuario o correo válido. "
+					}
+				},
+				"PasswordField": {
+					"err": {
+						"enterPassword": "Ingrese una contraseña"
+					}
+				}
+			},
+			"user-page": {
+				"RoleSelector": {
+					"label": "Rol",
+					"roles": {
+						"observer": "Observador",
+						"normal": "Usuario regular",
+						"moderator": "Moderador",
+						"admin": "Administrador"
+					},
+					"ok": {
+						"updated": "Actualizado correctamente. "
+					},
+					"err": {
+						"noUpdated": "No se pudo actualizar. "
+					}
+				},
+				"EmailSection": {
+					"label": {
+						"send": "Enviar código",
+						"sending": "Enviando...",
+						"email": "Correo electrónico: ",
+						"new": "Nuevo correo electrónico",
+						"prefixExample": "Ej.: ",
+						"editEmail": "Editar correo",
+						"enterCodeSent": "Ingrese el código enviado",
+						"cancel": "Cancelar",
+						"change": "Cambiar",
+						"verifying": "Validando...",
+						"verify": "Verificar"
+					},
+					"err": {
+						"invalidEmail": "El correo ingresado no es correcto. ",
+						"incorrectCode": "Código incorrecto. ",
+						"unknown": "Ocurrió un error desconocido. "
+					},
+					"ok": {
+						"validated": "Correo validado con éxito. "
+					}
+				},
+				"BioSection": {
+					"label": "Biografía:",
+					"st": {
+						"saving": "Guardando... ",
+						"save": "Guardar",
+						"close": "Cerrar",
+						"cancel": "Cancelar"
+					},
+					"ok": {
+						"updated": "Actualizado correctamente. "
+					},
+					"err": {
+						"couldntUpdate": "No se pudo actualizar. "
+					}
+				},
+				"NameSection": {
+					"label": "Nombre:",
+					"st": {
+						"saving": "Guardando... ",
+						"save": "Guardar",
+						"close": "Cerrar",
+						"cancel": "Cancelar"
+					},
+					"ok": {
+						"updated": "Actualizado correctamente. "
+					},
+					"err": {
+						"couldntUpdate": "No se pudo actualizar. "
+					}
+				},
+				"BirthSection": {
+					"label": "Fecha de nacimiento:",
+					"st": {
+						"saving": "Guardando... ",
+						"save": "Guardar",
+						"close": "Cerrar",
+						"cancel": "Cancelar"
+					},
+					"ok": {
+						"updated": "Actualizado correctamente. "
+					},
+					"err": {
+						"couldntUpdate": "No se pudo actualizar. "
+					}
+				},
+				"PasswordSection": {
+					"title": "Contraseña",
+					"label": {
+						"p": "Ingrese una nueva contraseña",
+						"r": "Vuelva a ingresar la contraseña"
+					},
+					"st": {
+						"updating": "Actualizando...",
+						"update": "Actualizar contraseña",
+						"close": "Cerrar",
+						"cancel": "Cancelar",
+						"change": "Cambiar contraseña"
+					},
+					"ok": {
+						"updated": "La contraseña se actualizó correctamente. ",
+						"eq": "Las contraseñas coinciden. "
+					},
+					"err": {
+						"len": "La contraseña debe tener como mínimo 8 caracteres. ",
+						"eq": "Las contraseñas no coinciden. ",
+						"update": "No se actualizó la contraseña. "
+					}
+				},
+				"ActiveSection": {
+					"title": "Deshabilitar cuenta",
+					"labels": {
+						"btnDisable": "Deshabilitar",
+						"sure": "Deshabilitar esta cuenta",
+						"back": "Volver"
+					},
+					"p": {
+						"dialog": {
+							"title": "¿Deshabilitar esta cuenta?",
+							"description": "Al deshabilitar esta cuenta, no se podrá iniciar sesión con sus credenciales, y el correo y nombre de usuario no podrán volver a usarse para crear otra cuenta. "
+						}
+					},
+					"ok": {
+						"disabled": "Cuenta deshabilitada correctamente. "
+					},
+					"err": {
+						"disable": "No se pudo deshabilitar la cuenta. ",
+						"err": "Error",
+						"try": "Intentá de nuevo más tarde. "
+					}
+				}
+			}
+		},
+		"enterprise": {
+			"EnterpriseSelector": {
+				"placeholder": "Seleccione una empresa"
+			},
+			"EnterpriseNameField": {
+				"label": "Nombre: ",
+				"err": {
+					"ok": "Nombre válido. ",
+					"min": "El nombre debe contener al menos tres caracteres. ",
+					"max": "El nombre no puede tener más de 48 caracteres. "
+				}
+			},
+			"EnterpriseFoundationDateField": {
+				"label": "Fecha de fundación: ",
+				"err": {
+					"future": "Seleccione una fecha anterior al día de hoy. ",
+					"invalid": "Fecha inválida. "
+				}
+			},
+			"EnterpriseDescriptionField": {
+				"label": "Descripción: ",
+				"err": {
+					"ok": "",
+					"min": "La descripción debe contener al menos tres caracteres. ",
+					"max": "La descripción no puede tener más de 128 caracteres. "
+				}
+			},
+			"EnterpriseCUITField": {
+				"label": "Número de C.U.I.T.:",
+				"err": {
+					"min": "Ingrese un número de C.U.I.T. válido. ",
+					"max": "Valor inválido. "
+				}
+			},
+			"EnterprisePhoneHandler": {
+				"item": {
+					"actions": {
+						"copy": "Copiar",
+						"rem": "Eliminar"
+					},
+					"tooltips": {
+						"call": "Marcar"
+					}
+				},
+				"title": "Teléfonos",
+				"actions": {
+					"add": "Añadir"
+				},
+				"add": {
+					"label": "Ingrese un número de teléfono"
+				},
+				"err": {
+					"no15prefix": "No se aceptan los prefijos 15 ni 015. ",
+					"invalidNumber": "Número inválido. ",
+					"externalNumber": "El número ingresado no es de Argentina. "
+				},
+				"tooltips": {
+					"firstvalid": "Corregí el número antes de agregarlo. ",
+					"add": "Agregar",
+					"cancel": "Cerrar"
+				}
+			},
+			"FoundationField": {
+				"label": "Fundado el:",
+				"st": {
+					"saving": "Guardando... ",
+					"save": "Guardar",
+					"close": "Cerrar",
+					"cancel": "Cancelar"
+				},
+				"ok": {
+					"updated": "Actualizado correctamente. "
+				},
+				"err": {
+					"couldntUpdate": "No se pudo actualizar. "
+				}
+			},
+			"EnterpriseName": {
+				"label": "Nombre:",
+				"st": {
+					"saving": "Guardando... ",
+					"save": "Guardar",
+					"close": "Cerrar",
+					"cancel": "Cancelar"
+				},
+				"ok": {
+					"updated": "Actualizado correctamente. "
+				},
+				"err": {
+					"couldntUpdate": "No se pudo actualizar. ",
+					"invalid": "El campo debe contener entre 3 y 48 caracteres. "
+				}
+			},
+			"EnterpriseCUIT": {
+				"label": "Número de CUIT:",
+				"st": {
+					"saving": "Guardando... ",
+					"save": "Guardar",
+					"close": "Cerrar",
+					"cancel": "Cancelar"
+				},
+				"ok": {
+					"updated": "Actualizado correctamente. "
+				},
+				"err": {
+					"couldntUpdate": "No se pudo actualizar. "
+				}
+			},
+			"EnterpriseDescription": {
+				"label": "Descripción:",
+				"st": {
+					"saving": "Guardando... ",
+					"save": "Guardar",
+					"close": "Cerrar",
+					"cancel": "Cancelar"
+				},
+				"ok": {
+					"updated": "Actualizado correctamente. "
+				},
+				"err": {
+					"couldntUpdate": "No se pudo actualizar. ",
+					"invalid": "El campo debe contener entre 3 y 48 caracteres. "
+				}
+			}
+		},
+		"boat": {
+			"NameField": {
+				"err": "El nombre debe contener entre 3 y 48 caracteres.",
+				"label": "Nombre:",
+				"placeholder": ""
+			},
+			"BoatEnterprisePageField": {
+				"label": "Propiedad de: ",
+				"st": {
+					"saving": "Guardando",
+					"save": "Guardar",
+					"close": "Cerrar",
+					"cancel": "Cancelar"
+				}
+			},
+			"BoatMatPageField": {
+				"label": "Matrícula:",
+				"st": {
+					"saving": "Guardando... ",
+					"save": "Guardar",
+					"close": "Cerrar",
+					"cancel": "Cancelar"
+				},
+				"ok": {
+					"updated": "Actualizado correctamente. "
+				},
+				"err": {
+					"couldntUpdate": "No se pudo actualizar. ",
+					"invalid": "El campo debe contener entre 3 y 48 caracteres. "
+				}
+			},
+			"BoatNamePageField": {
+				"label": "Nombre:",
+				"st": {
+					"saving": "Guardando... ",
+					"save": "Guardar",
+					"close": "Cerrar",
+					"cancel": "Cancelar"
+				},
+				"ok": {
+					"updated": "Actualizado correctamente. "
+				},
+				"err": {
+					"couldntUpdate": "No se pudo actualizar. ",
+					"invalid": "El campo debe contener entre 3 y 48 caracteres. "
+				}
+			},
+			"MatField": {
+				"label": "Matrícula: ",
+				"placeholder": "Ejemplo: ABC-123",
+				"ok": "Matrícula disponible. ",
+				"err": {
+					"chars": "La matrícula debe contener entre 2 y 16 caracteres. ",
+					"exists": "Ya existe una embarcación registrada con esa matrícula. "
+				}
+			},
+			"EnterpriseField": {
+				"label": "Empresa que administra la embarcación: "
+			}
+		},
+		"region": {
+			"RegionSelector": {
+				"placeholder": "Seleccione una región"
+			},
+			"RegionName": {
+				"label": "Nombre:",
+				"st": {
+					"saving": "Guardando... ",
+					"save": "Guardar",
+					"close": "Cerrar",
+					"cancel": "Cancelar"
+				},
+				"ok": {
+					"updated": "Actualizado correctamente. "
+				},
+				"err": {
+					"couldntUpdate": "No se pudo actualizar. ",
+					"invalid": "El campo debe contener entre 3 y 48 caracteres. "
+				}
+			},
+			"RegionType": {
+				"label": "Tipo: ",
+				"st": {
+					"saving": "Guardando... ",
+					"save": "Guardar",
+					"close": "Cerrar",
+					"cancel": "Cancelar"
+				},
+				"ok": {
+					"updated": "Actualizado correctamente. "
+				},
+				"err": {
+					"couldntUpdate": "No se pudo actualizar. ",
+					"invalid": "El campo debe contener entre 3 y 48 caracteres. "
+				}
+			}
+		},
+		"comments": {
+			"handler": {
+				"st": {
+					"loading": "Cargando... ",
+					"more": "Cargar más"
+				},
+				"textarea": {
+					"placeholder": "Dejá un comentario"
+				}
+			},
+			"comment": {
+				"menu": {
+					"label": "Más",
+					"options": {
+						"edit": "Editar",
+						"delete": "Eliminar",
+						"report": "Reportar"
+					}
+				},
+				"dialog": {
+					"title": "¿Eliminar este comentario?",
+					"description": "Esta acción no se puede deshacer. "
+				},
+				"st": {
+					"edited": "Editado"
+				},
+				"edit": {
+					"btnEdit": "Editar",
+					"btnCancel": "Cancelar",
+					"btnClose": "Cerrar"
+				}
+			}
+		},
+		"history": {
+			"handler": {
+				"st": {
+					"more": "Cargar más"
+				}
+			}
+		}
+	},
+	"status": {
+		"saving": "Guardando",
+		"registering": "Registrando"
+	}
 }

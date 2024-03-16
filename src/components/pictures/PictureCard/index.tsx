@@ -26,6 +26,8 @@ import {getTimePassed} from "../../basic/Comment";
 import CommentHandler from "../../basic/CommentHandler";
 import {CommentOffRegular, CommentRegular, MoreHorizontalRegular} from "@fluentui/react-icons";
 import {useNavigate} from "react-router-dom";
+import {log} from "../../page/definitions";
+import {u} from "../../../data/utils";
 
 const LANG_PATH: string = "components.pics.card";
 const strings = {
@@ -47,12 +49,13 @@ const strings = {
 };
 const PictureCard = ({ deletable, _id, url, user, uploadDate, description, me, onDelete, remover, docId }: IPictureCardProps): React.JSX.Element => {
     const { t: translate } = useTranslation();
+    log("PictureCard");
     const t = (key: string): string => translate(`${LANG_PATH}.${key}`);
 
     const lang: string = translate("defLang");
     const rtf1 = new Intl.RelativeTimeFormat(lang, { numeric: 'auto' });
     const [ time, unit ] = getTimePassed(new Date(uploadDate));
-    const [ imageURL, setImageURL ] = useState<string>("");
+    const [ imageURL, setImageURL ] = useState<string>(u.baseUrl + "photos/" + _id + "/view");
     const [ showComments, setCommentShowingState ] = useState<boolean>(false);
     const [ showingRemoveDialog, setRemoveDialogShowingState ] = useState<boolean>(false);
     const [ imageLoaded, setImageLoadedState ] = useState<boolean>(false);
@@ -60,15 +63,7 @@ const PictureCard = ({ deletable, _id, url, user, uploadDate, description, me, o
     const [ removing, setRemovingState ] = useState<boolean>(false);
     const [ removed, setRemovedState ] = useState<boolean>(false);
     const navigate = useNavigate();
-    useEffect(() => {
-        pictures.download(_id)
-            .then((raw: Blob): void => {
-                setImageURL(URL.createObjectURL(raw));
-                setImageLoadedState(true);
-            }).catch(err => console.error(err)).finally((): void => {
 
-        });
-    }, []);
 
     const download = (): void => {
         const a = document.createElement("a");
@@ -95,6 +90,11 @@ const PictureCard = ({ deletable, _id, url, user, uploadDate, description, me, o
         navigate("/users/" + user.username);
     };
     if(removed) return <></>;
+
+    const onLoadImage = (e: React.SyntheticEvent<HTMLImageElement, Event>): void => {
+        console.log("IMAGE IS READY!");
+        setImageLoadedState(true);
+    };
 
     const removeDialog = (<Dialog open={showingRemoveDialog}>
         <DialogSurface>
@@ -127,19 +127,23 @@ const PictureCard = ({ deletable, _id, url, user, uploadDate, description, me, o
                     onClick={(): void => setRemoveDialogShowingState(true)}>{t(strings.actions.remove)}</MenuItem>}
             </MenuList>
         </MenuPopover>
-    </Menu>)
+    </Menu>);
 
     return (<Card appearance={"outline"}>
         {removeDialog}
         <CardHeader
             header={<Body1><b>{user.name?? ""}</b></Body1>}
             description={<Caption1>{removing ? t(strings.st.removing) : f}</Caption1>}
-            action={menu}
+            action={removing ? <Spinner size={"small"} /> : menu}
         />
         <CardPreview style={{ opacity: (removing ? 0.7 : 1)}}>
-            { imageLoaded && <Tooltip content={description.trim() === "" ? "N/A": description} relationship={"description"}>
-                <img src={imageURL} alt={description} />
-            </Tooltip>}
+            <Tooltip content={description.trim() === "" ? "N/A": description} relationship={"description"}>
+                <img
+                    style={{display: imageLoaded ? "block" : "none" }}
+                    src={imageURL}
+                    onLoad={onLoadImage}
+                    alt={description} />
+            </Tooltip>
             {!imageLoaded && <center>
                 <Spinner size={"small"} />
             </center>}
@@ -169,4 +173,4 @@ const PictureCard = ({ deletable, _id, url, user, uploadDate, description, me, o
         </CardFooter> }
     </Card>);
 };
-export default PictureCard;
+export default React.memo(PictureCard);

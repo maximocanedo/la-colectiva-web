@@ -13,9 +13,10 @@ import {
     Textarea, Tooltip
 } from "@fluentui/react-components";
 import {ArrowSyncFilled, ArrowUploadFilled, DeleteRegular, ImageAddFilled, SendCopyFilled} from "@fluentui/react-icons";
-import {UserLogged} from "../../../App";
 import {OnPostResponse} from "../../../data/actions/picture";
 import {u} from "../../../data/utils";
+
+import {log, UserLogged} from "../../page/definitions";
 
 const LANG_PATH: string = "components.pics.poster";
 const strings = {
@@ -39,6 +40,7 @@ const strings = {
     }
 };
 const PicturePoster = ({me, id, poster, onPost}: IPicturePosterProps): React.JSX.Element => {
+    log("PicturePoster");
     const { t: translate } = useTranslation();
     const t = (key: string): string => translate(`${LANG_PATH}.${key}`);
     const [ image, setImage ] = useState<Blob>();

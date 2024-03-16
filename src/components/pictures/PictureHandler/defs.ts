@@ -1,8 +1,9 @@
 import {IPictureDetails} from "../../../data/models/picture";
 import {CommonResponse} from "../../../data/utils";
 import {IPaginator} from "../../../data/models/comment";
-import {Myself} from "../../../App";
 import {OnPostResponse} from "../../../data/actions/picture";
+
+import {Myself} from "../../page/definitions";
 
 export interface IPictureHandlerProps {
     id: string;

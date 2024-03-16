@@ -6,9 +6,11 @@ import {StateManager} from "../../../../page/SignUpPage/defs";
 import * as users from "../../../../data/actions/user";
 import {CommonResponse} from "../../../../data/utils";
 import {FieldValidationStatus} from "../RoleSelector/defs";
+import {log} from "../../../page/definitions";
 
 const LANG_PATH = "components.user.user-page.PasswordSection";
 const PasswordSection = (props: PasswordSectionProps): React.JSX.Element => {
+    log("PasswordSection");
     const {user, me}: PasswordSectionProps = props;
     const { t: translationService } = useTranslation();
     const t = (path: string): string => translationService(LANG_PATH + "." + path);

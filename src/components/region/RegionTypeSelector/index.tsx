@@ -1,12 +1,13 @@
 import React from "react";
 import {RegionTypeSelectorProps} from "./defs";
-import {Button, Combobox, Option} from "@fluentui/react-components";
-import {Search20Filled} from "@fluentui/react-icons";
+import {Combobox, Option} from "@fluentui/react-components";
 import {RegionType} from "../../../data/models/region";
 import {useTranslation} from "react-i18next";
+import {log} from "../../page/definitions";
 
 const RegionTypeSelector = ({ value, requiredEmptyLabelOption, required, onChange, ...props }: RegionTypeSelectorProps): React.JSX.Element => {
     const { t: translate } = useTranslation();
+    log("RegionTypeSelector");
 
     const strToRT = (x: string): RegionType => {
         const e: number = parseInt(x);

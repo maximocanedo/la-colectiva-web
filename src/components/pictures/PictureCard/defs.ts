@@ -1,5 +1,7 @@
 import { IPictureDetails } from "../../../data/models/picture";
-import {Myself} from "../../../App";
+
+
+import {Myself} from "../../page/definitions";
 
 export interface IPictureCardProps extends IPictureDetails {
     me: Myself;

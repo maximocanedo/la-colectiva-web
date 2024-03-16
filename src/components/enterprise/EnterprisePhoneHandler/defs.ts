@@ -1,4 +1,4 @@
-import {Myself, UserLogged} from "../../../App";
+import {Myself, UserLogged} from "../../page/definitions";
 
 export interface IEnterprisePhoneHandlerProps {
     me: Myself;

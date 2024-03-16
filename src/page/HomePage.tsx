@@ -1,18 +1,16 @@
 import React, {ReactNode, useState} from "react";
 import EnterpriseSelector from "../components/enterprise/EnterpriseSelector";
 import {IEnterprise} from "../data/models/enterprise";
+import RegionSelector from "../components/region/RegionSelector";
+import {IRegion} from "../data/models/region";
+import PlaceSelector from "../components/maps/PlaceSelector";
+import {Link} from "@fluentui/react-components";
 const HomePage = (): React.JSX.Element => {
 
-    const [ enterprise, setEnterprise ] = useState<IEnterprise>({
-        "_id": "659b2198d7c57b99f8498643",
-        "name": "Interislander",
-        "cuit": 20455556665
-    });
+    const [ coords, setCoords ] = useState<[number, number]>([-34.6037316, -58.3816109])
 
-    return (<div>
-        <EnterpriseSelector selected={enterprise} onSelect={x => setEnterprise(x)} />
-        <br/><br/>
-        <span>Selected: {enterprise.name}</span>
+    return (<div className={"page-content flex-down"}>
+        <Link href={"/docks"}>Docks</Link>
     </div>)
 }
 export default HomePage;

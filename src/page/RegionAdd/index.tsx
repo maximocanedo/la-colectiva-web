@@ -6,10 +6,11 @@ import {NullableRegionType} from "../../components/region/RegionTypeSelector/def
 import RegionNameField from "../../components/region/RegionNameField";
 import RegionTypeSelectorField from "../../components/region/RegionTypeSelectorField";
 import * as regions from "../../data/actions/region";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import GottaLoginFirst from "../err/GottaLoginFirst";
-import {UserLogged} from "../../App";
 import {useTranslation} from "react-i18next";
+import {UserLogged} from "../../components/page/definitions";
+
 const LANG_PATH: string = "pages.RegionAdd";
 const strings = {
     title: "title",

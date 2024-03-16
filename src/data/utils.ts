@@ -1,8 +1,8 @@
 import {ConnectionError, Err} from "./error";
 
 const baseUrl: string = 'https://colectiva.com.ar:5050/';
-// const baseUrl: string = "http://localhost:5050/";
-const call = async (url: string, body: any, method: string): Promise<Response> => {
+//const baseUrl: string = "http://localhost:5050/";
+const call = async (url: string, body: any, method: string, onProgress?: (percentage: number) => void): Promise<Response> => {
     try {
         const call: Response | null = await fetch(baseUrl + url, {
             method,
@@ -13,6 +13,22 @@ const call = async (url: string, body: any, method: string): Promise<Response> =
             },
             body: body instanceof FormData ? body : ((typeof body === "string") ? body : JSON.stringify(body))
         });
+        if(onProgress !== undefined) {
+            const totalSize: number = parseInt(call.headers.get("Content-Length") || '0', 10);
+            let loadedSize: number = 0;
+
+            const reader = call.body?.getReader();
+            if(!reader) {}
+            else {
+                while(true) {
+                    const { done, value } = await reader.read();
+                    if(done) break;
+                    loadedSize += value.length;
+                    const percentage: number = Math.round((loadedSize / totalSize) * 100);
+                    onProgress(percentage);
+                }
+            }
+        }
         if (call === null) throw new Err(ConnectionError);
         else return call as Response;
     } catch(err) {
@@ -20,7 +36,7 @@ const call = async (url: string, body: any, method: string): Promise<Response> =
     }
     throw new Err(ConnectionError);
 };
-const get = async (url: string): Promise<Response> => {
+const get = async (url: string, onProgress?: (percentage: number) => void): Promise<Response> => {
     try {
         const call: Response | null = await fetch(baseUrl + url, {
             method: "GET",
@@ -29,6 +45,22 @@ const get = async (url: string): Promise<Response> => {
                 'Authorization': 'Bearer ' + localStorage.getItem("la-colectiva-token")
             }
         });
+        if(onProgress !== undefined) {
+            const totalSize: number = parseInt(call.headers.get("Content-Length") || '0', 10);
+            let loadedSize: number = 0;
+
+            const reader = call.body?.getReader();
+            if(!reader) {}
+            else {
+                while(true) {
+                    const { done, value } = await reader.read();
+                    if(done) break;
+                    loadedSize += value.length;
+                    const percentage: number = Math.round((loadedSize / totalSize) * 100);
+                    onProgress(percentage);
+                }
+            }
+        }
         if (call === null) throw new Err(ConnectionError);
         else return call as Response;
     } catch(err) {
@@ -36,10 +68,10 @@ const get = async (url: string): Promise<Response> => {
     }
     throw new Err(ConnectionError);
 };
-const post = async (url: string, body: any): Promise<Response> => await call(url, body, "POST");
-const put = async (url: string, body: any): Promise<Response> => await call(url, body, "PUT");
-const patch = async (url: string, body: any): Promise<Response> => await call(url, body, "PATCH");
-const del = async (url: string, body?: any): Promise<Response> => await call(url, body, "DELETE");
+const post = async (url: string, body: any, onProgress?: (percentage: number) => void): Promise<Response> => await call(url, body, "POST", onProgress);
+const put = async (url: string, body: any, onProgress?: (percentage: number) => void): Promise<Response> => await call(url, body, "PUT", onProgress);
+const patch = async (url: string, body: any, onProgress?: (percentage: number) => void): Promise<Response> => await call(url, body, "PATCH", onProgress);
+const del = async (url: string, body?: any, onProgress?: (percentage: number) => void): Promise<Response> => await call(url, body, "DELETE", onProgress);
 const head = async (url: string): Promise<Response> => {
     try {
         const call: Response | null = await fetch(baseUrl + url, {

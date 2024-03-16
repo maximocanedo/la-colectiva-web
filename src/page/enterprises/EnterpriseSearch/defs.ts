@@ -1,6 +1,3 @@
-import {Myself} from "../../../App";
+import {ICommonPageProps, Myself} from "../../../components/page/definitions";
 
-export interface IEnterpriseSearchProps {
-    toasterId: string;
-    me: Myself;
-}
+export interface IEnterpriseSearchProps extends ICommonPageProps {}

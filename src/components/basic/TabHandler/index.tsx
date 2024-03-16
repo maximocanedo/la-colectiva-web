@@ -2,8 +2,10 @@ import React from "react";
 import {TabHandlerProps, tabHandlerStyles} from "./defs";
 import {mergeClasses, Overflow, OverflowItem, Tab, TabList} from "@fluentui/react-components";
 import OverflowMenu from "../OverflowMenu";
+import {log} from "../../page/definitions";
 
 const TabHandler = ({ tab, onTabSelect, tabs, minimumVisible }: TabHandlerProps): React.JSX.Element => {
+    log("TabHandler");
     const styles = tabHandlerStyles();
 
 

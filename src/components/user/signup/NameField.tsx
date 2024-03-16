@@ -1,6 +1,7 @@
 import React, {FormEventHandler, useState} from "react";
 import {Field, FieldProps, Input} from "@fluentui/react-components";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
+import {log} from "../../page/definitions";
 
 interface NameFieldProps extends FieldProps {
     value: string;
@@ -8,6 +9,7 @@ interface NameFieldProps extends FieldProps {
     onValidationChange: (error: boolean) => void;
 }
 const NameField = (props: NameFieldProps): React.JSX.Element => {
+    log("NameField");
     const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const [ name, setName ] = useState<string>(props.value);
     const [ vm, setVM ] = useState<string>("");

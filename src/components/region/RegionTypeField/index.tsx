@@ -8,8 +8,10 @@ import {Edit16Filled} from "@fluentui/react-icons";
 import {RegionType} from "../../../data/models/region";
 import * as regions from "../../../data/actions/region";
 import {CommonResponse} from "../../../data/utils";
+import {log} from "../../page/definitions";
 
 const RegionTypeField = ({ initialValue, editable, onUpdate, id }: RegionRoleProps): React.JSX.Element => {
+    log("RegionTypeField");
     const langPath: string = "components.region.RegionType";
     // Translation functions
     const { t: _translate }: UseTranslationResponse<"translation", undefined> = useTranslation();

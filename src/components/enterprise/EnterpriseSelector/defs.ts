@@ -1,6 +1,6 @@
 import {IEnterprise} from "../../../data/models/enterprise";
 
 export interface IEnterpriseSelectorProps {
-    selected: IEnterprise;
+    selected: IEnterprise | null;
     onSelect(selected: IEnterprise): void;
 }

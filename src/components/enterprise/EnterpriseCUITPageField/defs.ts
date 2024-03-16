@@ -1,5 +1,7 @@
 import EnterpriseCUITPageField from "./index";
-import {Myself, UserLogged} from "../../../App";
+
+
+import {Myself, UserLogged} from "../../page/definitions";
 
 export interface IEnterpriseCUITPageFieldProps {
     id: string;

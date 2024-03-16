@@ -2,15 +2,7 @@ import React, {useEffect, useState} from "react";
 import {LoginPageProps} from "./defs";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
 import {StateManager} from "../SignUpPage/defs";
-import {
-    Button,
-    Title2,
-    Toast,
-    ToastBody,
-    ToastIntent,
-    ToastTitle,
-    useToastController
-} from "@fluentui/react-components";
+import {Button, Title2} from "@fluentui/react-components";
 import {IdentifierType} from "../../components/user/login/IdentifierField/defs";
 import IdentifierField from "../../components/user/login/IdentifierField/index";
 import PasswordField from "../../components/user/login/PasswordField";
@@ -21,9 +13,8 @@ import {Err} from "../../data/error";
 import {useSearchParams} from "react-router-dom";
 
 
-
-const LoginPage = ({ toasterId }: LoginPageProps): React.JSX.Element => {
-    const [searchParams, setSearchParams] = useSearchParams();
+const LoginPage = ({ sendToast }: LoginPageProps): React.JSX.Element => {
+    const [searchParams, ] = useSearchParams();
     const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const [ identifier, setIdentifier ]: StateManager<string> = useState<string>("");
     const [ identifierType, setIdentifierType ]: StateManager<IdentifierType> = useState<IdentifierType>("empty");
@@ -31,18 +22,10 @@ const LoginPage = ({ toasterId }: LoginPageProps): React.JSX.Element => {
     const [ passwordOK, setPasswordOK ]: StateManager<boolean> = useState<boolean>(false);
 
     const validCredentials: boolean = !((identifierType !== "email" && identifierType !== "username") || !passwordOK);
-    const { dispatchToast } = useToastController(toasterId);
+
     const nextPage: string = searchParams.get("next") !== null ? searchParams.get("next") as string : "/";
     useEffect((): void => {
     }, [ identifier ]);
-    const notify = (message: string, type: ToastIntent, description?: string) =>
-        dispatchToast(
-            <Toast>
-                <ToastTitle>{message}</ToastTitle>
-                { description && <ToastBody subtitle="Subtitle">{ description }</ToastBody> }
-            </Toast>,
-            { intent: type }
-        );
     return (
         <div className={"main"}>
             <br/>
@@ -62,16 +45,19 @@ const LoginPage = ({ toasterId }: LoginPageProps): React.JSX.Element => {
             <br/>
             <br/>
             <div className="rtlCell" >
-                <Button onClick={(e): void => {
+                <Button onClick={(_e): void => {
                     window.location.href = "/signup";
                 }} appearance="secondary">
                     {t('pages.login.actions.signup')}
                 </Button>
-                <Button disabled={!validCredentials} onClick={(e): void => {
+                <Button disabled={!validCredentials} onClick={(_e): void => {
                     const credentials: Credentials = { ...(identifierType === "email" ? { email: identifier } : { username: identifier }), password };
                     auth.login(credentials)
-                        .then((response: CommonResponse): void => {
-                            notify(t('pages.login.ok.loginSuccessful'), "success");
+                        .then((_response: CommonResponse): void => {
+                            sendToast({
+                                title: t('pages.login.ok.loginSuccesful'),
+                                intent: "success"
+                            })
                             window.location.href = nextPage;
                         })
                         .catch((error): void => {
@@ -79,8 +65,14 @@ const LoginPage = ({ toasterId }: LoginPageProps): React.JSX.Element => {
                             console.log(error instanceof Err);
                             if(error instanceof Err) {
                                 const e: IError = error as IError;
-                                if(e.code === "V-01") notify(t('pages.login.err.unauthorized'), "error");
-                                else notify(t('pages.login.err.unknown'), "error");
+                                if(e.code === "V-01") sendToast({
+                                    title: t('pages.login.err.unauthorized'),
+                                    intent: "error"
+                                });
+                                else sendToast({
+                                    title: t('pages.login.err.unknown'),
+                                    intent: "error"
+                                });
                             }
                         });
                         }} appearance="primary">

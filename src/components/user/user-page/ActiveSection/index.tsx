@@ -15,9 +15,11 @@ import {
 import * as users from "../../../../data/actions/user";
 import {CommonResponse} from "../../../../data/utils";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
+import {log} from "../../../page/definitions";
 
 const LANG_PATH: string = "components.user.user-page.ActiveSection";
 const ActiveSection = (props: ActiveSectionProps): React.JSX.Element => {
+    log("ActiveSection");
     const { user, me, notify }: ActiveSectionProps = props;
     const { t: translationService }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const t = (path: string): string => translationService(LANG_PATH + "." + path);

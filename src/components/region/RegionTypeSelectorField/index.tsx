@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Field, Input} from "@fluentui/react-components";
 import {NullableRegionType} from "../RegionTypeSelector/defs";
 import RegionTypeSelector from "../RegionTypeSelector";
+import {log} from "../../page/definitions";
 export interface RegionTypeSelectorFieldProps {
     disabled?: boolean;
     value: NullableRegionType;
@@ -12,6 +13,7 @@ type validityState = "none" | "error" | "warning" | "success" | undefined;
 const RegionTypeSelectorField = ({ disabled, value, onChange, onCheck }: RegionTypeSelectorFieldProps): React.JSX.Element => {
     const [ state, setState ] = useState<validityState>("none");
     const [ message, setMessage ] = useState<string>("");
+    log("RegionTypeSelectorField");
 
     const err = (message: string): void => {
         setState("error");

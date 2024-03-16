@@ -5,6 +5,7 @@ import {IPictureDetails} from "../../../data/models/picture";
 import LoadMoreButton from "../../basic/buttons/LoadMoreButton";
 import PictureCard from "../PictureCard";
 import PicturePoster from "../PicturePoster";
+import {log} from "../../page/definitions";
 
 const LANG_PATH: string = "";
 const strings = {};
@@ -13,6 +14,7 @@ const REMOVE = "REMOVE";
 const CLEAR = "CLEAR";
 const POST: string = "POST";
 const picsReducer = (state: IPictureDetails[], {type, payload}: { type: string, payload: IPictureDetails }): IPictureDetails[] => {
+
     const exists = (obj: IPictureDetails): boolean => state.some(x => x._id === obj._id);
     switch(type) {
         case ADD:
@@ -21,7 +23,11 @@ const picsReducer = (state: IPictureDetails[], {type, payload}: { type: string, 
         case POST:
             console.log({payload});
             if(exists(payload)) return [ ...state ];
-            else return [ payload, ...state ];
+            else {
+                const ns = [ ...state ];
+                ns.unshift(payload);
+                return ns;
+            }
         case REMOVE:
             if(exists(payload)) return state.filter(x => x._id !== payload._id);
             else return [ ...state ];
@@ -32,6 +38,7 @@ const picsReducer = (state: IPictureDetails[], {type, payload}: { type: string, 
     }
 };
 const PictureHandler = ({fetcher, id, poster, me, remover}: IPictureHandlerProps): React.JSX.Element => {
+    log("PictureHandler");
     const { t: translate } = useTranslation();
     const t = (key: string): string => translate(`${LANG_PATH}.${key}`);
     const [ page, setPage ] = useState<number>(0);
@@ -54,6 +61,7 @@ const PictureHandler = ({fetcher, id, poster, me, remover}: IPictureHandlerProps
         fetch();
     }, [ page ]);
 
+
     return (<div>
         { canPost && <PicturePoster poster={poster}  onPost={data => dispatchPics({type: POST, payload: data})} me={me} id={id} /> }
         <br/>
@@ -63,7 +71,7 @@ const PictureHandler = ({fetcher, id, poster, me, remover}: IPictureHandlerProps
                 deletable={isAdmin || (me !== null && me._id === pic.user._id && me.active && me.role >= 2)}
                 remover={remover}
                 onDelete={(): void => dispatchPics({ type: REMOVE, payload: pic })}
-                key={pic._id} me={me} {...pic} /><br /></>) }
+                key={"picCard-" + pic._id} me={me} {...pic} /><br /></>) }
         <LoadMoreButton loading={loading} onClick={() => setPage(page + 1)} />
     </div>);
 };

@@ -2,6 +2,7 @@ import React, {FormEventHandler, useState} from "react";
 import {Field, FieldProps, Input} from "@fluentui/react-components";
 import { DatePicker } from "@fluentui/react-datepicker-compat";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
+import {log} from "../../page/definitions";
 
 interface BirthFieldProps extends FieldProps {
     value: Date;
@@ -9,6 +10,7 @@ interface BirthFieldProps extends FieldProps {
     onValidationChange: (error: boolean) => void;
 }
 const BirthField = (props: BirthFieldProps): React.JSX.Element => {
+    log("BirthField");
     const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const [ value, setValue ] = useState<Date>(props.value);
     const [ vm, setVM ] = useState<string>("");

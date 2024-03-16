@@ -3,8 +3,10 @@ import {Field, Input} from "@fluentui/react-components";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
 import {StateManager} from "../../../../page/SignUpPage/defs";
 import {IdentifierFieldProps, IdentifierType} from "./defs";
+import {log} from "../../../page/definitions";
 
 const IdentifierField = (props: IdentifierFieldProps): React.JSX.Element => {
+    log("IdentifierField");
     const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const [ value, setValue ]: StateManager<string> = useState<string>(props.value);
     const [ vm, setVM ]: StateManager<string> = useState<string>("");

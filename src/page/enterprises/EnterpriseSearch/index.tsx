@@ -29,7 +29,7 @@ const resultsReducer = (state: IEnterprise[], action: { type: string, payload: I
         }
     }
 }
-const EnterpriseSearch = ({ toasterId, me }: IEnterpriseSearchProps): React.JSX.Element => {
+const EnterpriseSearch = ({ me }: IEnterpriseSearchProps): React.JSX.Element => {
     const { t: translate } = useTranslation();
     const navigate: NavigateFunction = useNavigate();
     const t = (key: string): string => translate(LANG_PATH + "." + key);
@@ -37,7 +37,7 @@ const EnterpriseSearch = ({ toasterId, me }: IEnterpriseSearchProps): React.JSX.
     const [ searching, setSearchingState ] = useState<boolean>(false);
     const [ results, dispatchResults ] = useReducer(resultsReducer, []);
     const [ page, setPage ] = useState<number>(0);
-    const [ size, setSize ] = useState<number>(10);
+    const [ size, ] = useState<number>(10);
 
     const canCreate: boolean =
         me !== undefined && me !== null
@@ -72,7 +72,7 @@ const EnterpriseSearch = ({ toasterId, me }: IEnterpriseSearchProps): React.JSX.
                     onChange={(ev): void => setQuery(ev.target.value)}
                     placeholder={t("label.search")}
                     aria-label={t("label.search")} />
-                <Button size={"large"} appearance={"primary"} onClick={(e): void => {
+                <Button size={"large"} appearance={"primary"} onClick={(_e): void => {
                     dispatchResults({ type: "RESET", payload: []});
                     search();
                 }}><Search20Filled /></Button>
@@ -82,7 +82,7 @@ const EnterpriseSearch = ({ toasterId, me }: IEnterpriseSearchProps): React.JSX.
             canCreate && <div className="jBar">
                 <div className="r">
                     <Button
-                        onClick={(e): void => {
+                        onClick={(_e): void => {
                             navigate("/enterprises/add");
                         }}
                         appearance={"primary"}

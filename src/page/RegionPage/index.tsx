@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {getRegionTypeLangPathNameFor, RegionPageProps, RegionTypeLangPathNames, useStyles} from "./defs";
+import {RegionPageProps, useStyles} from "./defs";
 import {useParams} from "react-router-dom";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
 import * as regions from "../../data/actions/region";
-import * as users from "../../data/actions/user";
 import {IRegion, RegionType} from "../../data/models/region";
 import {StateManager} from "../SignUpPage/defs";
 import RegionIconRep from "../../components/region/RegionIconRep";
@@ -15,9 +14,12 @@ import CommentHandler from "../../components/basic/CommentHandler";
 import {Button} from "@fluentui/react-components";
 import HistoryHandler from "../../components/basic/HistoryHandler";
 import {
-    bundleIcon, CommentMultiple24Filled, CommentMultiple24Regular,
+    bundleIcon,
+    CommentMultiple24Filled,
+    CommentMultiple24Regular,
     FluentIcon,
-    History24Filled, History24Regular,
+    History24Filled,
+    History24Regular,
     TextBulletListSquare24Filled,
     TextBulletListSquare24Regular
 } from "@fluentui/react-icons";
@@ -49,7 +51,7 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
     const id: string = useParams<{ id: string }>().id as string;
     const { t: _translate }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const t = (key: string): string =>  _translate(LANG_PATH + "." + key);
-    const [ loading, setLoading ]: StateManager<boolean> = useState<boolean>(false);
+    const [ , setLoading ]: StateManager<boolean> = useState<boolean>(false);
     const [ region, setRegion ]: StateManager<IRegion | null> = useState<IRegion | null>(null);
     const [ name, setName ]: StateManager<string> = useState<string>("");
     const [ type, setType ]: StateManager<RegionType> = useState<RegionType>(
@@ -89,7 +91,7 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
             .finally((): void => {
                 setLoading(false);
             });
-    }, []);
+    }, [id]);
 
 
     if(region === null) return <></>;
@@ -144,7 +146,7 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
                 {canEdit && (<div className="jBar">
                     <Button
                         className={active ? styles.disableBtn : styles.enableBtn }
-                        onClick={(e): void => updSt()}
+                        onClick={(_e): void => updSt()}
                         appearance={"secondary"}>
                         {active ? t("actions.disable") : t("actions.enable")}
                     </Button>

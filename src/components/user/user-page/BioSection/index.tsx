@@ -7,9 +7,11 @@ import {FieldValidationStatus} from "../RoleSelector/defs";
 import * as users from "../../../../data/actions/user";
 import {CommonResponse} from "../../../../data/utils";
 import {useTranslation} from "react-i18next";
+import {log} from "../../../page/definitions";
 
 const LANG_PATH = "components.user.user-page.BioSection";
 const BioSection = (props: BioSectionProps): React.JSX.Element => {
+    log("BioSection");
     const { user, me }: BioSectionProps = props;
     const { t: translationService } = useTranslation();
     const t = (path: string): string => translationService(LANG_PATH + "." + path);

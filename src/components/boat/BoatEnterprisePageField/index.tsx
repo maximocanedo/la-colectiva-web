@@ -7,6 +7,7 @@ import {Edit16Filled} from "@fluentui/react-icons";
 import {Button, Spinner} from "@fluentui/react-components";
 import * as boats from "../../../data/actions/boat";
 import {CommonResponse} from "../../../data/utils";
+import {log} from "../../page/definitions";
 
 const LANG_PATH: string = "components.boat.BoatEnterprisePageField";
 const strings = {
@@ -20,6 +21,7 @@ const strings = {
 };
 const BoatEnterprisePageField = ({ initial, onUpdate, editable, id }: IBoatEnterprisePageFieldProps): React.JSX.Element => {
     const { t: translate } = useTranslation();
+    log("BoatEnterprisePageField");
     const t = (key: string): string => translate(`${LANG_PATH}.${key}`);
     const [ editMode, setEditMode ] = useState<boolean>(false);
     const [ saving, setSavingState ] = useState<boolean>(false);
@@ -50,7 +52,7 @@ const BoatEnterprisePageField = ({ initial, onUpdate, editable, id }: IBoatEnter
     return (<><div className="jBar">
         <div className="l">{t(strings.label)}</div>
         <div className="r flex-edtbl-dt">
-            { editable && !editMode && <span>{initial.name?? ""}</span>}
+            { !editMode && <span>{initial.name?? ""}</span>}
             { editable && !editMode && <Button onClick={(x) => setEditMode(true)} appearance={"subtle"} size={"small"} icon={<Edit16Filled />} />}
 
             { editable && editMode && <EnterpriseSelector selected={value} onSelect={x => setValue(x)} /> }

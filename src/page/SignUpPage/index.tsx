@@ -13,7 +13,8 @@ import {
     Spinner,
     Tab,
     TabList,
-    Title2, Toast, ToastBody, ToastIntent, ToastTitle, useToastController
+    Title2,
+    ToastIntent
 } from "@fluentui/react-components";
 import {ISignUpRequest, ISignUpResponse} from "../../data/models/user";
 import * as users from "../../data/actions/user";
@@ -21,9 +22,13 @@ import * as auth from "../../data/auth";
 import {Credentials} from "../../data/auth";
 import {CommonResponse} from "../../data/utils";
 import {
-    OnSignUpButtonClickFunctions, SignUpPageProps, SignUpTabValue, StateManager,
+    OnSignUpButtonClickFunctions,
+    SignUpPageProps,
+    SignUpTabValue,
+    StateManager,
     TabAccountFunctions,
-    TabAccountStates, TabMoreFunctions,
+    TabAccountStates,
+    TabMoreFunctions,
     TabMoreStates,
     TabPersonalFunctions,
     TabPersonalStates
@@ -136,7 +141,7 @@ const onSignUpButtonClick = (data: ISignUpRequest, functions: OnSignUpButtonClic
         });
 };
 
-const SignUpPage = ({ toasterId }: SignUpPageProps): React.JSX.Element => {
+const SignUpPage = ({ sendToast }: SignUpPageProps): React.JSX.Element => {
     const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
     // Valores
     const [ name, setName ]: StateManager<string> = useState<string>("");
@@ -171,15 +176,11 @@ const SignUpPage = ({ toasterId }: SignUpPageProps): React.JSX.Element => {
         );
     }, [nameIsValid, usernameIsValid, bioIsValid, birthIsValid, passwordValidity, passwordsAreEqual, mailValidity]);
 
-    const { dispatchToast } = useToastController(toasterId);
-    const notify = (message: string, type: ToastIntent, description?: string) =>
-        dispatchToast(
-            <Toast>
-                <ToastTitle>{message}</ToastTitle>
-                { description && <ToastBody subtitle="Subtitle">{ description }</ToastBody> }
-            </Toast>,
-            { intent: type }
-        );
+    const notify = (message: string, type: ToastIntent, description?: string) => sendToast({
+        title: message,
+        intent: type,
+        body: description
+    });
 
 
     const signUpData: ISignUpRequest = { username, bio, password, name, birth, email };
