@@ -8,7 +8,6 @@ import {useTranslation, UseTranslationResponse} from "react-i18next";
 import {log} from "../../page/definitions";
 
 const EditableField = (props: IEditableFieldProps<string>): React.JSX.Element => {
-    log("EditableField");
     const { initialValue, editable, onChange, onUpdate, validator, langPath, onValid, onInvalid, onSaving }: IEditableFieldProps<string> = props;
     // Translation functions
     const { t: _translate }: UseTranslationResponse<"translation", undefined> = useTranslation();

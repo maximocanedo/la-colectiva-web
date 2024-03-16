@@ -1,13 +1,16 @@
 import {CommonResponse, IError, u} from "../utils";
 import {VoteStatus} from "../models/vote";
-import { IComment, ICommentFetchResponse, IPaginator } from "../models/comment";
-import {IDock, IDockCreate, IDockEdit} from "../models/dock";
+import {IComment, ICommentFetchResponse, IPaginator} from "../models/comment";
+import {DockPropertyStatus, IDock, IDockCreate, IDockEdit, IDockView} from "../models/dock";
 import {Err} from "../error";
 import {downvote, getVotes, upvote} from "./vote";
 import * as comment from "./comment";
 import * as picture from "./picture";
-import {IPictureDetails} from "../models/picture";
 import {OnPostResponse} from "./picture";
+import {IPictureDetails} from "../models/picture";
+import {IHistoryEvent} from "../models/IHistoryEvent";
+import * as history from "./history";
+
 const getPrefix = (id: string): string => "docks/" + id;
 /**
  * Edita un registro de muelle.
@@ -15,16 +18,13 @@ const getPrefix = (id: string): string => "docks/" + id;
  * @param data Datos a actualizar.
  */
 export const edit = async (id: string, data: IDockEdit): Promise<CommonResponse> => {
-    const call: Response = await u.put(getPrefix(id), data);
-    const { status }: Response = call;
-    if(status === 200) return {
+    const call: Response = await u.patch(getPrefix(id), data);
+    if(call.ok) return {
         success: true,
         message: "Edición exitosa. "
     };
-    else {
-        const { error }: { error: IError } = await call.json();
-        throw new Err(error);
-    }
+    const { error }: { error: IError } = await call.json();
+    throw new Err(error);
 
 };
 /**
@@ -34,9 +34,22 @@ export const edit = async (id: string, data: IDockEdit): Promise<CommonResponse>
 export const del = async (id: string): Promise<CommonResponse> => {
     const call: Response = await u.del(getPrefix(id), {});
     const { status }: Response = call;
-    if(status === 200) return {
+    if(call.ok) return {
         success: true,
         message: "Eliminación exitosa. "
+    };
+    else {
+        const { error }: { error: IError } = await call.json();
+        throw new Err(error);
+    }
+};
+
+export const enable = async (id: string): Promise<CommonResponse> => {
+    const call: Response = await u.post(getPrefix(id), {});
+    const { status }: Response = call;
+    if(call.ok) return {
+        success: true,
+        message: "Habilitación exitosa. "
     };
     else {
         const { error }: { error: IError } = await call.json();
@@ -50,7 +63,7 @@ export const del = async (id: string): Promise<CommonResponse> => {
 export const create = async (data: IDockCreate): Promise<IDock> => {
     const call: Response = await u.post("docks", data);
     const { status }: Response = call;
-    if(status === 201) {
+    if(call.ok) {
         const data = await call.json();
         return {
             name: data.name,
@@ -68,15 +81,15 @@ export const create = async (data: IDockCreate): Promise<IDock> => {
         throw new Err(error);
     }
 };
+
 /**
  * Buscar registro de muelle por ID.
  * @param id ID del muelle.
  */
-export const find = async (id: string): Promise<IDock> => {
+export const find = async (id: string): Promise<IDockView> => {
     const call: Response = await u.get(getPrefix(id));
-    const { status }: Response = call;
     const data = await call.json();
-    if(status === 200) return data.data;
+    if(call.ok) return data.data;
     else throw new Err(data.error);
 };
 /**
@@ -84,15 +97,20 @@ export const find = async (id: string): Promise<IDock> => {
  * @param q Texto a buscar.
  * @param paginator Paginador.
  */
-export const search = async (q: string = "", paginator: IPaginator = { p: 0, itemsPerPage: 10 }): Promise<IDock[]> => {
+export const search = async (q: string = "", paginator: IPaginator = { p: 0, itemsPerPage: 10 }): Promise<IDockView[]> => {
     const { p, itemsPerPage }: IPaginator = paginator;
     const call: Response = await u.get(`docks/?q=${q}&p=${p}&itemsPerPage=${itemsPerPage}`);
-    const { status }: Response = call;
     const data = await call.json();
-    if(status === 200) {
+    if(call.ok) {
         return data.data;
     } throw new Err(data.error);
 };
+export interface IDockMinimal {
+    _id: string;
+    name: string;
+    status: DockPropertyStatus;
+    coordinates: [ number, number ];
+}
 /**
  * **Explorar muelles cercanos**
  *
@@ -104,10 +122,10 @@ export const search = async (q: string = "", paginator: IPaginator = { p: 0, ite
  * @param p Número de página.
  * @param itemsPerPage Elementos por página.
  */
-export const explore = async (q: string = "", coordinates: [ number, number ], prefer: number = -1, radio: number = 300, { p, itemsPerPage }: IPaginator = { p: 0, itemsPerPage: 10 }): Promise<IDock[]> => {
-    const { status, json }: Response = await u.get(`docks/@${coordinates[0]},${coordinates[1]},${radio}?q=${q}&prefer=${prefer}&p=${p}&itemsPerPage=${itemsPerPage}`);
-    const { data, error } = await json();
-    if(status === 200) return data;
+export const explore = async (q: string = "", coordinates: [ number, number ], prefer: number = -1, radio: number = 300, { p, itemsPerPage }: IPaginator = { p: 0, itemsPerPage: 10 }): Promise<(IDockView | IDockMinimal)[]> => {
+    const call: Response = await u.get(`docks/@${coordinates[0]},${coordinates[1]},${radio}?q=${q}&prefer=${prefer}&p=${p}&itemsPerPage=${itemsPerPage}&light=true`);
+    const { data, error } = await call.json();
+    if(call.ok) return data;
     throw new Err(error);
 };
 export const votes = {
@@ -128,3 +146,5 @@ export const pictures = {
     list: async (id: string, paginator: IPaginator): Promise<IPictureDetails[]> => picture.list(getPrefix(id), paginator),
     rem: async (id: string, photoId: string): Promise<void> => picture.remove(getPrefix(id), photoId)
 };
+export const fetchHistory = async (id: string, paginator: IPaginator = { p: 0, itemsPerPage: 5 }): Promise<IHistoryEvent[]> =>
+    history.fetch(getPrefix(id), paginator);

@@ -44,7 +44,7 @@ const LANG_PATH: string = "pages.boats.Boat";
 const TextBulletIcon: FluentIcon = bundleIcon(TextBulletListSquare24Filled, TextBulletListSquare24Regular);
 const CommentsIcon: FluentIcon = bundleIcon(CommentMultiple24Filled, CommentMultiple24Regular);
 const HistoryIcon: FluentIcon = bundleIcon(History24Filled, History24Regular);
-const ImagesIcon: FluentIcon = bundleIcon(ImageStackFilled, ImageStackRegular)
+const ImagesIcon: FluentIcon = bundleIcon(ImageStackFilled, ImageStackRegular);
 
 const strings = {
     tabs: {

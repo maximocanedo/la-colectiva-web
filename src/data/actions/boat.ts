@@ -76,6 +76,12 @@ export const find = async (id: string): Promise<IBoat> => {
     if(call.ok) return data;
     throw new Err(error);
 };
+export const existsByMat = async (mat: string): Promise<boolean> => {
+    const call: Response = await u.head(getPrefix(mat));
+    if(call.status === 404) return false;
+    if(call.ok) return true;
+    throw new Err({ code: "", message: "No se pudo comprobar si existe el registro. ", details: "" });
+};
 /**
  * **Listar embarcaciones**
  *

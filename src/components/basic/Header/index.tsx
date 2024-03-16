@@ -6,8 +6,9 @@ import {ArrowLeft32Regular, ListFilled} from "@fluentui/react-icons";
 import { useStyles } from "./styles";
 import { useNavigate } from 'react-router-dom';
 import Drawer from "../Drawer";
+import {SearchBox} from "@fluentui/react";
 
-const Header = ({ me }: HeaderProps): React.JSX.Element => {
+const Header = ({ me, showSearchBox, query, onSearch }: HeaderProps): React.JSX.Element => {
     const classes = useStyles();
     const navigate = useNavigate();
     const [ open, setOpen ] = useState<boolean>(false);
@@ -23,6 +24,8 @@ const Header = ({ me }: HeaderProps): React.JSX.Element => {
                 appearance={"subtle"}
                 onClick={() => setOpen(true)}
                 icon={<ListFilled />}></Button>
+
+            { (showSearchBox?? false) && <SearchBox value={query?? ""} onSearch={onSearch} /> }
 
         </nav>
     </header>)

@@ -3,7 +3,7 @@ import {useTranslation} from "react-i18next";
 import {IBoatSearchPageProps} from "./defs";
 import {useStyles} from "./styles";
 import {Avatar, Button, Input, Persona} from "@fluentui/react-components";
-import {Building20Filled, Search20Filled} from "@fluentui/react-icons";
+import {Add24Filled, Building20Filled, Search20Filled} from "@fluentui/react-icons";
 import {IBoat} from "../../../data/models/boat";
 import * as boats from "../../../data/actions/boat";
 import {IEnterprise} from "../../../data/models/enterprise";
@@ -30,7 +30,7 @@ const itemsReducer = (state: IBoat[], { type, payload }: { type: string, payload
             return [ ...state ];
     }
 };
-const BoatSearchPage = ({}: IBoatSearchPageProps): React.JSX.Element => {
+const BoatSearchPage = ({ me }: IBoatSearchPageProps): React.JSX.Element => {
     const {t: translate} = useTranslation();
     const t = (key: string): string => translate(LANG_PATH + "." + key);
     const [ query, setQuery ] = useState<string>("");
@@ -60,7 +60,8 @@ const BoatSearchPage = ({}: IBoatSearchPageProps): React.JSX.Element => {
     }, []);
     const more = (): void => {
         search();
-    }
+    };
+    const canCreate: boolean = (me !== null && me !== undefined && me.active && me.role >= 2);
 
     return (<div className={"page-content flex-down"}>
         <div className="searchbar">
@@ -74,17 +75,26 @@ const BoatSearchPage = ({}: IBoatSearchPageProps): React.JSX.Element => {
                     aria-label={t("label.search")}/>
                 <Button size={"large"} appearance={"primary"} onClick={(_e): void => {
                     setPage(0);
-                    dispatchResults({type: CLEAR, payload: null });
+                    dispatchResults({type: CLEAR, payload: null});
                     search();
                 }}><Search20Filled/></Button>
             </div>
         </div>
-        <BoatList data={results} onClick={({ _id }: IBoat): void => {
+        <div className="jBar">
+            <div className="r">
+                <Button
+                    onClick={(_e): void => {
+                        navigate("/boats/add");
+                    }}
+                    appearance={"primary"}
+                    icon={<Add24Filled/>}>{t("label.register")}</Button></div>
+        </div>
+        <BoatList data={results} onClick={({_id}: IBoat): void => {
             navigate("/boats/" + _id);
-        }} />
+        }}/>
         <LoadMoreButton loading={searching} onClick={() => {
             search();
-        }} />
+        }}/>
     </div>);
 };
 export default BoatSearchPage;

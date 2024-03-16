@@ -1,4 +1,4 @@
-import React, {ReactElement, useEffect, useState} from "react";
+import React, {ReactElement, useEffect, useRef, useState} from "react";
 import "./App.css";
 import "./styles/styles.css";
 import {FluentProvider, Toaster, useId, useToastController, webLightTheme} from "@fluentui/react-components";
@@ -23,10 +23,16 @@ import BoatPage from "./page/boats/BoatPage";
 import {ICommonPageProps, log, Myself, ToastSenderFunction, UserLogged} from "./components/page/definitions";
 import {toastSender} from "./components/page/commons";
 import BoatSearchPage from "./page/boats/BoatSearchPage";
+import BoatAdd from "./page/boats/BoatAdd";
+import DockPage from "./page/docks/DockPage";
+import DockAdd from "./page/docks/DockAdd";
+import DockExplore from "./page/docks/DockExplore";
 
 function App(): ReactElement {
 	log("App");
 	const [ me, loadActualUser ] = useState<Myself>(null);
+	const [ query, setQuery ] = useState<string>("");
+
 	useEffect((): void => {
 		users.myself()
 			.then((response: UserLogged): void => {
@@ -42,6 +48,8 @@ function App(): ReactElement {
 		sendToast,
 		me
 	};
+
+	const refHeader = useRef<typeof Header>(null);
 
 	return (
 		<Router>
@@ -62,9 +70,12 @@ function App(): ReactElement {
 							<Route path={"/enterprises/add"} element={<EnterpriseAdd {...pageProps} />} />
 							<Route path={"/enterprises/:id"} element={<EnterprisePage {...pageProps} />} />
 							<Route path={"/enterprises"} element={<EnterpriseSearch {...pageProps} />} />
-							<Route path={"/boats/add"} element={NotFoundPage} />
+							<Route path={"/boats/add"} element={<BoatAdd {...pageProps} />} />
 							<Route path={"/boats/:id"} element={<BoatPage {...pageProps} />} />
 							<Route path={"/boats"} element={<BoatSearchPage {...pageProps} />} />
+							<Route path={"/docks/add"} element={<DockAdd {...pageProps} />} />
+							<Route path={"/docks/:id"} element={<DockPage {...pageProps} />} />
+							<Route path={"/docks"} element={<DockExplore {...pageProps} />} />
 							<Route path={"*"} element={NotFoundPage} />
 						</Routes>
 					</main>

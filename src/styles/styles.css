@@ -323,3 +323,68 @@ main {
 .reg-vertical-list {
 
 }
+.place-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    min-width: 300px;
+    width: 100%;
+    height: max-content;
+    border: 1px solid transparent;
+    & nav {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        justify-content: space-between;
+    }
+    .place-selector--map {
+
+        height: 250px;
+        width: 100%;
+        border-radius: 8px;
+    }
+}
+
+.dock-selector {
+    position: fixed;
+    top: 72px;
+    left: 0px;
+    width: 100vw;
+    height: calc(100vh - 72px);
+    .dock-selector--map {
+        width: 100vw;
+        height: calc(100vh - 72px);
+        z-index: 1;
+    }
+
+    .map-side {
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        width: max-content;
+        height: max-content;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 2;
+        margin: 25px 15px;
+        align-items: end;
+        justify-content: center;
+    }
+}
+.addSpace {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: max-content;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 3;
+    margin: 25px 15px;
+    align-items: start;
+    justify-content: center;
+}
