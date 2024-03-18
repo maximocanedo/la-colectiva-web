@@ -1,7 +1,14 @@
 import React, {ReactElement, useEffect, useRef, useState} from "react";
 import "./App.css";
 import "./styles/styles.css";
-import {FluentProvider, Toaster, useId, useToastController, webLightTheme} from "@fluentui/react-components";
+import {
+	FluentProvider,
+	Toaster,
+	useId,
+	useToastController,
+	webDarkTheme,
+	webLightTheme
+} from "@fluentui/react-components";
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Header from "./components/basic/Header";
 import Footer from "./components/basic/Footer";
@@ -31,7 +38,10 @@ import PathCreate from "./page/paths/PathCreate";
 import PathPage from "./page/paths/PathPage";
 import PathSearch from "./page/paths/PathSearch";
 import PathMap from "./page/paths/PathMap";
-
+import Next from "./page/Next";
+function isDarkModeEnabled(): boolean {
+	return ('matchMedia' in window && window.matchMedia('(prefers-color-scheme: dark)').matches);
+}
 function App(): ReactElement {
 	log("App");
 	const [ me, loadActualUser ] = useState<Myself>(null);
@@ -57,7 +67,7 @@ function App(): ReactElement {
 	return (
 		<Router>
 			<I18nextProvider i18n={i18n}>
-				<FluentProvider theme={webLightTheme}>
+				<FluentProvider theme={isDarkModeEnabled() ? webDarkTheme : webLightTheme}>
 					<Header me={me} toasterId={toasterId} />
 					<main>
 						<Routes>
@@ -81,6 +91,7 @@ function App(): ReactElement {
 							<Route path={"/paths/:id/map"} element={<PathMap {...pageProps} />} />
 							<Route path={"/paths/:id"} element={<PathPage {...pageProps} />} />
 							<Route path={"/paths/"} element={<PathSearch {...pageProps} />} />
+							<Route path={"/next/from/:from/to/:to"} element={<Next {...pageProps} />} />
 							<Route path={"*"} element={NotFoundPage} />
 						</Routes>
 					</main>

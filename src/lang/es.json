@@ -14,7 +14,10 @@
 		"close": "Cerrar",
 		"delete": "Eliminar",
 		"enable": "Habilitar",
-		"disable": "Deshabilitar"
+		"disable": "Deshabilitar",
+		"continue": "Continuar",
+		"options": "Opciones",
+		"explore": "Explorar"
 	},
 	"err": {
 		"couldntUpdate": "No se pudo actualizar. ",
@@ -76,6 +79,10 @@
 	"pages": {
 		"paths": {
 			"PathPage": {
+				"explorer": {
+					"title": "Navegá por el mapa",
+					"des": "Chequeá todos los horarios del recorrido"
+				},
 				"tabs": {
 					"basic": "Información básica",
 					"comments": "Comentarios",
@@ -256,6 +263,14 @@
 	},
 	"components": {
 		"schedules": {
+			"SchedulePair": {
+				"moreInfo": "Más información: ",
+				"links": {
+					"outSchedule": "Horario de salida",
+					"arrivalSchedule": "Horario de llegada",
+					"path": "Recorrido"
+				}
+			},
 			"res": {
 				"noSchedulesRegistered": "Sin horarios registrados. "
 			},

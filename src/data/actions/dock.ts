@@ -122,8 +122,8 @@ export interface IDockMinimal {
  * @param p Número de página.
  * @param itemsPerPage Elementos por página.
  */
-export const explore = async (q: string = "", coordinates: [ number, number ], prefer: number = -1, radio: number = 300, { p, itemsPerPage }: IPaginator = { p: 0, itemsPerPage: 10 }): Promise<(IDockView | IDockMinimal)[]> => {
-    const call: Response = await u.get(`docks/@${coordinates[0]},${coordinates[1]},${radio}?q=${q}&prefer=${prefer}&p=${p}&itemsPerPage=${itemsPerPage}&light=true`);
+export const explore = async (q: string = "", coordinates: [ number, number ], prefer: number = -1, radio: number = 300, { p, itemsPerPage }: IPaginator = { p: 0, itemsPerPage: 10 }, light: boolean = true): Promise<(IDockView | IDockMinimal)[]> => {
+    const call: Response = await u.get(`docks/@${coordinates[0]},${coordinates[1]},${radio}?q=${q}&prefer=${prefer}&p=${p}&itemsPerPage=${itemsPerPage}&light=${light}`);
     const { data, error } = await call.json();
     if(call.ok) return data;
     throw new Err(error);

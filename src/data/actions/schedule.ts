@@ -2,6 +2,8 @@ import {ISchedule, IScheduleCreate, IScheduleEdit, IScheduleLight, ScheduleGroup
 import {CommonResponse, u} from "../utils";
 import {Err} from "../error";
 import {IPaginator} from "../models/comment";
+import {VoteStatus} from "../models/vote";
+import {downvote, getVotes, upvote} from "./vote";
 
 const getPrefix = (id: string): string => "schedules/" + id;
 /**
@@ -89,4 +91,9 @@ export const next = async (departure: string, arrival: string, time: string, con
     const { data, error } = await call.json();
     if(call.ok) return data;
     throw new Err(error);
+};
+export const votes = {
+    get: async (id: string): Promise<VoteStatus> => getVotes(getPrefix(id)),
+    upvote: async (id: string): Promise<VoteStatus> => upvote(getPrefix(id)),
+    downvote: async (id: string): Promise<VoteStatus> => downvote(getPrefix(id))
 };

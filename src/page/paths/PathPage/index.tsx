@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {IPathPageProps} from "./defs";
 import {useStyles} from "./styles";
-import {Button, mergeClasses, Title2} from "@fluentui/react-components";
+import {Button, Caption1, Card, CardHeader, mergeClasses, Subtitle2Stronger, Title2} from "@fluentui/react-components";
 import {
     bundleIcon, ClockFilled, ClockRegular,
     CommentMultiple24Filled,
@@ -11,7 +11,7 @@ import {
     DocumentLandscapeDataRegular,
     FluentIcon,
     History24Filled,
-    History24Regular,
+    History24Regular, MapFilled,
     TextBulletListSquare24Filled,
     TextBulletListSquare24Regular
 } from "@fluentui/react-icons";
@@ -51,6 +51,10 @@ const strings = {
         history: "tabs.history",
         schedules: "tabs.schedules",
         availabilities: "tabs.availabilities"
+    },
+    explorer: {
+        title: "explorer.title",
+        des: "explorer.des"
     }
 };
 const PathPage = ({ me }: IPathPageProps): React.JSX.Element => {
@@ -139,6 +143,7 @@ const PathPage = ({ me }: IPathPageProps): React.JSX.Element => {
             tab={tab}
             onTabSelect={(id: string): void => setTab(id)}
             tabs={tabs}
+
             minimumVisible={2} />
         { tab === "basic" && <>
             <TitleField id={id} formalValue={title} onUpdate={setTitle} editable={canEdit} />
@@ -157,7 +162,20 @@ const PathPage = ({ me }: IPathPageProps): React.JSX.Element => {
                 </Button>
             </div>)}
         </>}
-        { tab === "schedules" && <ScheduleLightHandler id={id} /> }
+        { tab === "schedules" && <>
+            <Card appearance={"outline"}>
+                <CardHeader
+                    header={<Subtitle2Stronger>
+                        {t(strings.explorer.title)}
+                    </Subtitle2Stronger>}
+                    description={<Caption1>
+                        {t(strings.explorer.des)}
+                    </Caption1>}
+                    action={<Button appearance={"primary"} icon={<MapFilled />}>{translate("actions.explore")}</Button>}
+                />
+            </Card>
+            <ScheduleLightHandler id={id} />
+        </> }
         { tab === "comments" && <CommentHandler id={id} me={me} fetcher={paths.comments.get} poster={paths.comments.post} remover={paths.comments.del} /> }
         { tab === "history" && <HistoryHandler id={id} me={me} fetcher={paths.fetchHistory} /> }
         { tab === "availabilities" && <AvailabilityHandler me={me} id={id} editable={canEdit} /> }

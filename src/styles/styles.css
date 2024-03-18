@@ -502,3 +502,284 @@ footer {
         }
     }
 }
+.map-header-container {
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    height: calc(104px + 16px + 32px);
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    padding-left: 72px;
+    padding-right: 16px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    align-items: center;
+    justify-content: flex-start;
+
+}
+.map-header-subcontainer {
+    width: 100%;
+    max-width: 460px;
+    display: flex;
+    flex-direction: column;
+    .btns {
+        width: 100%;
+        height: max-content;
+        display: flex;
+        gap: 10px;
+        flex-direction: row;
+        justify-content: end;
+        align-items: center;
+    }
+}
+@media screen and (max-width: 500px) {
+    .map-header-container {
+        width: 100%;
+        padding: 0px 16px 0px 72px;
+    }
+}
+@media screen and (min-width: 500px) {
+    .map-header-container {
+        width: 100%;
+        padding: 0px 16px 0px;
+    }
+}
+.map-header {
+    display: flex;
+    flex-direction: row;
+    height: 104px;
+    gap: 5px;
+    width: max-content;
+    min-width: 100%;
+    .draw_c {
+        width: 12px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 15px;
+        .a {
+            height: 28px;
+            min-height: 28px;
+        }
+        .b {
+            height: 5px;
+            display: grid;
+            place-items: center;
+            .firstDot {
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+            }
+        }
+        .c {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            .line {
+                width: 1px;
+                height: 100%;
+            }
+        }
+        .d {
+            height: 12px;
+            display: grid;
+            place-items: center;
+            .lastDot {
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+            }
+        }
+        .e {
+            height: 26px;
+            min-height: 26px;
+        }
+    }
+    .sels {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        .ldsSpace {
+            width: 100%;
+            height: 16px;
+        }
+        .ldsMid {
+            width: 100%;
+            height: 16px;
+        }
+        .lightDockSelector {
+            width: 100%;
+        }
+    }
+}
+
+.schedule-pair {
+    width: 100%;
+    height: max-content;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .header {
+        width: 100%;
+        height: max-content;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        .col {
+            height: 100%;
+            .boldLine {
+                font-weight: 500;
+                display: flex;
+                gap: 5px;
+                align-items: center;
+            }
+            .lightLine {
+                font-weight: 400;
+            }
+        }
+        .col.full-width {
+            width: 100% !important;
+        }
+        .col.btn {
+            display: grid;
+            place-items: center;
+        }
+    }
+    .body {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: max-content;
+        justify-content: center;
+        align-items: center;
+        padding-top: 15px;
+        min-height: 120px;
+        .parnt, .footer {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: max-content;
+            min-height: 100% !important;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            .co-draw {
+                min-width: 50px;
+                min-height: 100% !important;
+                padding: 12px 15px 15px;
+                flex-grow: 1;
+                align-self: normal;
+                display: flex;
+                flex-direction: row;
+                justify-content: end;
+                align-items: end;
+                .draw-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    width: 12px;
+                    height: 100%;
+                    min-height: 100% !important;
+                    .e_R {
+                        width: 12px;
+                        height: 5px;
+                        display: grid;
+                        place-items: center;
+                        i.sP {
+                            width: 6px;
+                            height: 6px;
+                            border-radius: 50%;
+                        }
+                    }
+                    .e_L {
+                        width: 12px;
+                        height: 100% !important;
+                        min-height: 100% !important;
+                        display: grid;
+                        place-items: center;
+                        .line {
+                            border-width: 1px;
+                            border-style: dashed;
+                            width: 0px;
+                            height: 100%;
+                            min-height: 100% !important;
+                        }
+                    }
+                    .e_D {
+                        width: 12px;
+                        height: 6px;
+                        display: grid;
+                        place-items: center;
+                        i.sD {
+                            width: 8px;
+                            height: 8px;
+                            border-radius: 50%;
+                        }
+                    }
+                }
+            }
+            .co-data {
+                width: 100%;
+                height: max-content;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: start;
+                gap: 5px;
+                .firstScheduleData, .lastScheduleData {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: start;
+                    align-items: start;
+                    .line {
+
+                    }
+                }
+                .firstScheduleData.f {
+                    padding-top: 5px;
+                }
+                .firstScheduleData {
+                    gap: 5px;
+                }
+                .spaceBetween {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    min-height: 100%;
+                    justify-content: end;
+                    align-items: start;
+                    .estimatedTime {
+                        opacity: 0.4;
+
+                    }
+                    .estimatedTime::first-letter {
+                        text-transform: capitalize;
+                    }
+                }
+            }
+        }
+
+        .parnt {
+            min-height: 99px !important;
+        }
+    }
+}
+
+
+.noDisplay {
+    display: none !important;
+}
