@@ -15,19 +15,15 @@ const Header = ({ me, showSearchBox, query, onSearch }: HeaderProps): React.JSX.
     const back = () => {
         navigate(-1);
     }
-    return (<header>
+    return (<>
         <Drawer me={me} open={open} onUpdateOpenStatus={x => setOpen(x)} />
-        <nav className={classes.leftNav}>
-            <Button
-                iconPosition={"before"}
-                size={"large"}
-                appearance={"subtle"}
-                onClick={() => setOpen(true)}
-                icon={<ListFilled />}></Button>
-
-            { (showSearchBox?? false) && <SearchBox value={query?? ""} onSearch={onSearch} /> }
-
-        </nav>
-    </header>)
+        <Button
+            iconPosition={"before"}
+            size={"large"}
+            className={"fixed--drawer-button"}
+            appearance={"secondary"}
+            onClick={() => setOpen(true)}
+            icon={<ListFilled />}></Button>
+    </>)
 };
 export default Header;
