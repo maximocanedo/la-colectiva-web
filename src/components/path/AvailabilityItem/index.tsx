@@ -36,7 +36,7 @@ const AvailabilityItem = ({ me, _id, available, condition, active, user, uploadD
         </div>
         <div className="b">
             <div className="t">{translate(tcn(condition))}</div>
-            <div className="u">Según <UserLink data={user?? null} from={(user as IUser).username?? "0"} /></div>
+            <div className="u">{ translate("selons") + " "} <UserLink data={user?? null} from={(user as IUser).username?? "0"} /></div>
             { editable && <div className="ac">
                 <Button
                     appearance={"secondary"}

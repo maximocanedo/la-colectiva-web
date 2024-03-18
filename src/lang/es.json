@@ -3,12 +3,14 @@
 	"now": "Ahora mismo",
 	"loading": "Cargando... ",
 	"test": "Esto es una prueba.",
+	"selons": "Según",
 	"actions": {
 		"next": "Siguiente",
 		"loadMore": "Cargar más",
 		"save": "Guardar",
 		"register": "Registrar",
 		"cancel": "Cancelar",
+		"add": "Agregar",
 		"close": "Cerrar",
 		"delete": "Eliminar",
 		"enable": "Habilitar",
@@ -253,7 +255,26 @@
 		}
 	},
 	"components": {
+		"schedules": {
+			"res": {
+				"noSchedulesRegistered": "Sin horarios registrados. "
+			},
+			"ScheduleLightItem": {
+				"conf": {
+					"del": "¿Seguro de eliminar este horario?"
+				}
+			}
+		},
 		"paths": {
+			"PathMap": {
+
+			},
+			"AvailabilityHandler": {
+				"label": {
+					"givenCondition": "Condición dada: ",
+					"doneGivenCondition": "El recorrido se realiza cuando se da esta condición"
+				}
+			},
 			"i": {
 				"TitleField": {
 					"label": "Título: ",
@@ -950,5 +971,22 @@
 		"saving": "Guardando",
 		"registering": "Registrando",
 		"updated": "Actualizado correctamente. "
+	},
+	"footer": {
+		"st": {
+			"nosession": "No iniciaste sesión. "
+		},
+		"actions": {
+			"login": "Ingresá",
+			"signup": "Registrate",
+			"leave": "Cerrar sesión"
+		},
+		"links": {
+			"boats": "Embarcaciones",
+			"docks": "Muelles",
+			"enterprises": "Empresas de transporte",
+			"paths": "Recorridos",
+			"regions": "Regiones"
+		}
 	}
 }

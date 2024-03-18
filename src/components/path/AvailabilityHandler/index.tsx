@@ -7,8 +7,13 @@ import {AvailabilityCondition, IAvailability} from "../../../data/models/path";
 import {Button, Checkbox, Combobox, Field, mergeClasses, Option} from "@fluentui/react-components";
 import AvailabilityItem from "../AvailabilityItem";
 
-const LANG_PATH: string = "components.AvailabilityHandler";
-const strings = {};
+const LANG_PATH: string = "components.paths.AvailabilityHandler";
+const strings = {
+    label: {
+        givenCondition: "label.givenCondition",
+        doneGivenCondition: "label.doneGivenCondition",
+    }
+};
 const AvailabilityHandler = ({ id, editable, me }: IAvailabilityHandlerProps): React.JSX.Element => {
     const {t: translate} = useTranslation();
     const t = (key: string): string => translate(LANG_PATH + "." + key);
@@ -70,8 +75,8 @@ const AvailabilityHandler = ({ id, editable, me }: IAvailabilityHandlerProps): R
     }, [ data ]);
 
     return (<div className={mergeClasses(styles.root, "av_handler")}>
-        {addMode && noMentioned.length > 0 && <div className="add">
-            <Field label={"Condición dada: "}>
+        { editable && addMode && noMentioned.length > 0 && <div className="add">
+            <Field label={t(strings.label.givenCondition)}>
                 <Combobox
                     defaultValue={translate(tcn(noMentioned[0]))}
                     defaultSelectedOptions={[tct(noMentioned[0])]}
@@ -84,7 +89,7 @@ const AvailabilityHandler = ({ id, editable, me }: IAvailabilityHandlerProps): R
                     })}
                 </Combobox>
             </Field>
-            <Checkbox label={"Recorrido se realiza dada la condición "} onChange={(e,d) => {setConditionRuns(d.checked as boolean)}} checked={conditionRuns}/>
+            <Checkbox label={t(strings.label.doneGivenCondition)} onChange={(e,d) => {setConditionRuns(d.checked as boolean)}} checked={conditionRuns}/>
             <div className="jBar">
                 <div className="l">
                 </div>
@@ -93,21 +98,21 @@ const AvailabilityHandler = ({ id, editable, me }: IAvailabilityHandlerProps): R
                     <Button
                         onClick={() => setAddMode(false)}
                         appearance={"secondary"}>
-                        Cancelar
+                        {translate("actions.cancel")}
                     </Button>
                     <Button
                         onClick={() => add()}
                         appearance={"primary"}>
-                        Agregar
+                        { translate("actions.add") }
                     </Button>
 
                 </div>
             </div>
         </div>}
-        {!addMode && noMentioned.length >0 && <Button
+        {editable && !addMode && noMentioned.length > 0 && <Button
             onClick={() => setAddMode(true)}
             appearance={"primary"}>
-            Agregar
+            { translate("actions.add") }
         </Button> }
         {data.map(x => <AvailabilityItem {...x} editable={editable} me={me}/>)}
     </div>);

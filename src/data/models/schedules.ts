@@ -9,6 +9,15 @@ export interface ISchedule {
     user: IUser | string,
     active: boolean
 }
+export interface IScheduleView {
+    _id: string;
+    path: IPath;
+    dock: IDock;
+    user: IUser;
+    uploadDate: Date | string;
+    active: boolean;
+    time: string;
+}
 export interface IScheduleLight {
     _id: string,
     path: string,

@@ -12,9 +12,9 @@ const getPrefix = (id: string): string => "schedules/" + id;
  * @param data Datos del horario.
  */
 export const create = async ({ path, ...data }: IScheduleCreate): Promise<IScheduleLight> => {
-    const { status, json }: Response = await u.post(`paths/${path}/schedules`, data);
-    const { _id, error } = await json();
-    if(status === 201) return { ...data, path, _id };
+    const call: Response = await u.post(`paths/${path}/schedules`, data);
+    const { _id, error } = await call.json();
+    if(call.ok) return { ...data, path, _id };
     throw new Err(error);
 };
 /**
@@ -25,9 +25,9 @@ export const create = async ({ path, ...data }: IScheduleCreate): Promise<ISched
  * @param data Información a actualizar.
  */
 export const edit = async (id: string, data: IScheduleEdit): Promise<CommonResponse> => {
-    const { status, json }: Response = await u.put(getPrefix(id), data);
-    const { error } = await json();
-    if(status === 200) return { success: true, message: "Horario editado correctamente. " };
+    const call: Response = await u.patch(getPrefix(id), data);
+    const { error } = await call.json();
+    if(call.ok) return { success: true, message: "Horario editado correctamente. " };
     throw new Err(error);
 };
 /**
@@ -37,9 +37,9 @@ export const edit = async (id: string, data: IScheduleEdit): Promise<CommonRespo
  * @param id ID del horario.
  */
 export const del = async (id: string): Promise<CommonResponse> => {
-    const { status, json }: Response = await u.del(getPrefix(id));
-    const { error } = await json();
-    if(status === 200) return { success: true, message: "Horario eliminado correctamente. " };
+    const call: Response = await u.del(getPrefix(id));
+    const { error } = await call.json();
+    if(call.ok) return { success: true, message: "Horario eliminado correctamente. " };
     throw new Err(error);
 };
 /**
@@ -49,9 +49,9 @@ export const del = async (id: string): Promise<CommonResponse> => {
  * @param id ID del horario.
  */
 export const find = async (id: string): Promise<ISchedule> => {
-    const { status, json }: Response = await u.get(getPrefix(id));
-    const { data, error } = await json();
-    if(status === 200) return data[0];
+    const call: Response = await u.get(getPrefix(id));
+    const { data, error } = await call.json();
+    if(call.ok) return data[0];
     throw new Err(error);
 };
 /**
@@ -63,9 +63,9 @@ export const find = async (id: string): Promise<ISchedule> => {
  * @param itemsPerPage Elementos por página.
  */
 export const search = async (q: string, { p, itemsPerPage }: IPaginator = { p: 0, itemsPerPage: 10 }): Promise<ISchedule[]> => {
-    const { status, json }: Response = await u.get(`schedules/?q=${q}&p=${p}&itemsPerPage=${itemsPerPage}`);
-    const { data, error } = await json();
-    if(status === 200) return data;
+    const call: Response = await u.get(`schedules/?q=${q}&p=${p}&itemsPerPage=${itemsPerPage}`);
+    const { data, error } = await call.json();
+    if(call.ok) return data;
     throw new Err(error);
 };
 
@@ -85,8 +85,8 @@ const buildNextURLParams = ({ departure, arrival, time, conditions }: { departur
  * @param conditions Condiciones que se deben cumplir. Mínimo una.
  */
 export const next = async (departure: string, arrival: string, time: string, conditions: string[] = []): Promise<ScheduleGroup[]> => {
-    const { ok, json }: Response = await u.get(`query/next?${buildNextURLParams({ departure, arrival, time, conditions })}`);
-    const { data, error } = await json();
-    if(ok) return data;
+    const call: Response = await u.get(`query/next?${buildNextURLParams({ departure, arrival, time, conditions })}`);
+    const { data, error } = await call.json();
+    if(call.ok) return data;
     throw new Err(error);
 };

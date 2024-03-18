@@ -30,6 +30,7 @@ import DockExplore from "./page/docks/DockExplore";
 import PathCreate from "./page/paths/PathCreate";
 import PathPage from "./page/paths/PathPage";
 import PathSearch from "./page/paths/PathSearch";
+import PathMap from "./page/paths/PathMap";
 
 function App(): ReactElement {
 	log("App");
@@ -52,7 +53,6 @@ function App(): ReactElement {
 		me
 	};
 
-	const refHeader = useRef<typeof Header>(null);
 
 	return (
 		<Router>
@@ -78,13 +78,14 @@ function App(): ReactElement {
 							<Route path={"/docks/:id"} element={<DockPage {...pageProps} />} />
 							<Route path={"/docks"} element={<DockExplore {...pageProps} />} />
 							<Route path={"/paths/add"} element={<PathCreate {...pageProps} />} />
+							<Route path={"/paths/:id/map"} element={<PathMap {...pageProps} />} />
 							<Route path={"/paths/:id"} element={<PathPage {...pageProps} />} />
 							<Route path={"/paths/"} element={<PathSearch {...pageProps} />} />
 							<Route path={"*"} element={NotFoundPage} />
 						</Routes>
 					</main>
 					<Toaster toasterId={toasterId} />
-					<Footer />
+					<Footer me={me} />
 				</FluentProvider>
 			</I18nextProvider>
 		</Router>

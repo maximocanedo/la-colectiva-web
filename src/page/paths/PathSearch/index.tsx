@@ -29,7 +29,7 @@ const resultsReducer = (state: IPath[], action: { type: string, payload: IPath |
             return [ ...state ];
         }
     }
-}
+};
 const EnterpriseSearch = ({ me }: IPathSearchProps): React.JSX.Element => {
     const { t: translate } = useTranslation();
     const navigate: NavigateFunction = useNavigate();

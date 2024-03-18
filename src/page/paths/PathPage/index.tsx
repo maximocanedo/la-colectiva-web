@@ -35,6 +35,7 @@ import IconRep from "../../../components/path/i/IconRep";
 import * as docks from "../../../data/actions/dock";
 import {CommonResponse} from "../../../data/utils";
 import AvailabilityHandler from "../../../components/path/AvailabilityHandler";
+import ScheduleLightHandler from "../../../components/path/ScheduleLightHandler";
 
 const LANG_PATH: string = "pages.paths.PathPage";
 const TextBulletIcon: FluentIcon = bundleIcon(TextBulletListSquare24Filled, TextBulletListSquare24Regular);
@@ -156,6 +157,7 @@ const PathPage = ({ me }: IPathPageProps): React.JSX.Element => {
                 </Button>
             </div>)}
         </>}
+        { tab === "schedules" && <ScheduleLightHandler id={id} /> }
         { tab === "comments" && <CommentHandler id={id} me={me} fetcher={paths.comments.get} poster={paths.comments.post} remover={paths.comments.del} /> }
         { tab === "history" && <HistoryHandler id={id} me={me} fetcher={paths.fetchHistory} /> }
         { tab === "availabilities" && <AvailabilityHandler me={me} id={id} editable={canEdit} /> }

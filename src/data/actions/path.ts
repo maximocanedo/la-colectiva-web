@@ -9,6 +9,7 @@ import {IHistoryEvent} from "../models/IHistoryEvent";
 import * as history from "./history";
 import {Myself} from "../../components/page/definitions";
 import {IUser} from "../models/user";
+import {IScheduleView} from "../models/schedules";
 const getPrefix = (id: string): string => "paths/" + id;
 /**
  * **Crear recorrido**
@@ -35,6 +36,13 @@ export const edit = async (id: string, data: IPathEdit): Promise<CommonResponse>
     const { error } = await call.json();
     throw new Err(error);
 };
+export const getSchedules = async (id: string, q: string, {p, itemsPerPage}: IPaginator): Promise<IScheduleView[]> => {
+    const url: string = `${getPrefix(id)}/schedules?q=${q}&p=${p}&itemsPerPage=${itemsPerPage}`;
+    const call: Response = await u.get(url);
+    const { data, error } = await call.json();
+    if(call.ok) return data;
+    throw new Err(error);
+}
 /**
  * **Eliminar recorrido**
  *

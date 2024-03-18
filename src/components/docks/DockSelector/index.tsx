@@ -138,6 +138,7 @@ const DockSelector = ({ onClick, showAddButton, query: q, status: s }: IDockSele
             minZoom={16}
             maxZoom={18}
             center={{lat: defCoords[0], lng: defCoords[1]}}
+            zoomControl={false}
             scrollWheelZoom={true}>
             <X/><ComponentResize />
             <TileLayer
