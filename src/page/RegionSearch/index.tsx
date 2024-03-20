@@ -1,13 +1,15 @@
 import React, {useEffect, useReducer, useState} from "react";
 import {RegionSearchPageProps} from "./defs";
-import {Avatar, Button, Input, Persona} from "@fluentui/react-components";
+import {Avatar, Button, Card, CardPreview, Input, Persona, Subtitle2} from "@fluentui/react-components";
 import {useTranslation} from "react-i18next";
-import {Add24Filled, Search20Filled, Water20Filled} from "@fluentui/react-icons";
+import {Add24Filled, OpenRegular, Search20Filled, Water20Filled} from "@fluentui/react-icons";
 import {IRegion} from "../../data/models/region";
 import * as regions from "../../data/actions/region";
 import LoadMoreButton from "../../components/basic/buttons/LoadMoreButton";
 import {getRegionTypeLangPathNameFor} from "../RegionPage/defs";
 import {NavigateFunction, useNavigate} from "react-router-dom";
+import WelcomingTitle from "../../components/basic/WelcomingTitle";
+import {SearchBox} from "@fluentui/react-search-preview";
 
 const LANG_PATH: string = "pages.Regions";
 const resultsReducer = (state: IRegion[], action: { type: string, payload: IRegion | IRegion[] }): IRegion[] => {
@@ -60,41 +62,48 @@ const RegionSearch = ({ me }: RegionSearchPageProps): React.JSX.Element => {
         search();
     };
 /// <BreadcrumbDivider />
-    return (<div className={"page-content flex-down"}>
-        <div className="searchbar">
-            <div className="_row">
-                <Input
-                    className={"_searchInput"}
-                    size="large"
-                    value={query}
-                    onChange={(ev): void => setQuery(ev.target.value)}
-                    placeholder={t("label.search")}
-                    aria-label={t("label.search")} />
-                <Button size={"large"} appearance={"primary"} onClick={(_e): void => {
-                    dispatchResults({ type: "RESET", payload: []});
-                    search();
-                }}><Search20Filled /></Button>
-            </div>
+    return (<div className={"page-content flex-down v2"}>
+        <WelcomingTitle content={"Regiones"} />
+        <div className="searchBarContainer">
+            <SearchBox
+                className={"preSearchBar"}
+                placeholder={t("label.search")}
+                aria-label={t("label.search")}
+                value={query}
+                onChange={(e,d): void => { setQuery(d.value) }}
+                />
+                <div className="barCol">
+                    <Button className={"min300"}
+                            onClick={(_e): void => {
+                                navigate("/regions/add");
+                            }}
+                            appearance={"secondary"}
+                            icon={<Add24Filled/>}>
+                        {translate("actions.register")}
+                    </Button>
+                    <Button className={"min300"} appearance={"primary"} onClick={(_e): void => {
+                        dispatchResults({ type: "RESET", payload: []});
+                        search();
+                    }}><Search20Filled /></Button>
+                </div>
         </div>
         {
             canCreate && <div className="jBar">
                 <div className="r">
-                    <Button
-                        onClick={(_e): void => {
-                            navigate("/regions/add");
-                        }}
-                        appearance={"primary"}
-                        icon={<Add24Filled/>}>Registrar una región</Button></div>
+                    </div>
             </div>
         }
         <div className={"searchresults"}>
             {results.map((result: IRegion) => {
                 const typel: string = result.type === undefined ? "" : translate(getRegionTypeLangPathNameFor((result.type) as number));
-                return <Button key={"regionSearchPage_item$" + result._id} onClick={(_e) => {
-                    navigate("/regions/" + result._id);
-                }} className={"fullWidth fstart"} appearance={"subtle"}>
-                    <Persona textPosition={"after"} avatar={<Avatar className={"_avtar"} size={48} icon={<Water20Filled/>}/>} name={result.name} secondaryText={typel} />
-                </Button>
+                const fullName: string = translate("models.region.longName").replace("%type", typel).replace("%name", result.name);
+
+                return <Card onClick={(): void => {
+                    navigate("/regions/" + result._id)
+                }} appearance={"subtle"} className={"regionCard"}>
+                    <Subtitle2>{fullName}</Subtitle2>
+                    <Button appearance={"subtle"} icon={<OpenRegular />}></Button>
+                </Card>
             })}
             <LoadMoreButton loading={searching} onClick={more} />
         </div>

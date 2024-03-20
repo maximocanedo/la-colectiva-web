@@ -7,6 +7,7 @@
     "@fluentui/react-components": "^9.46.4",
     "@fluentui/react-datepicker-compat": "^0.4.23",
     "@fluentui/react-icons": "^2.0.227",
+    "@fluentui/react-search-preview": "^0.1.49",
     "@fluentui/react-timepicker-compat": "^0.2.3",
     "@microsoft/fast-foundation": "^2.49.5",
     "@testing-library/jest-dom": "^5.17.0",

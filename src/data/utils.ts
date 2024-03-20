@@ -1,7 +1,16 @@
 import {ConnectionError, Err} from "./error";
 
 const baseUrl: string = 'https://colectiva.com.ar:5050/';
-// const baseUrl: string = "http://localhost:5050/";
+//const baseUrl: string = "http://localhost:5050/";
+export const encodeObj = (obj: { [key: string]: any }): string => {
+    const params: string[] = [];
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key) && obj[key] !== undefined && obj[key] !== null) {
+            params.push(`${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`);
+        }
+    }
+    return params.join('&');
+};
 const call = async (url: string, body: any, method: string, onProgress?: (percentage: number) => void): Promise<Response> => {
     try {
         const call: Response | null = await fetch(baseUrl + url, {

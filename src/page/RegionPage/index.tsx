@@ -11,7 +11,7 @@ import RegionName from "../../components/region/RegionName";
 import RegionTypeField from "../../components/region/RegionTypeField";
 import VoteManager from "../../components/basic/VoteManager";
 import CommentHandler from "../../components/basic/CommentHandler";
-import {Button} from "@fluentui/react-components";
+import {Button, Link} from "@fluentui/react-components";
 import HistoryHandler from "../../components/basic/HistoryHandler";
 import {
     bundleIcon,
@@ -47,7 +47,7 @@ const strings = {
 
 const RegionPage = (props: RegionPageProps): React.JSX.Element => {
     const styles = useStyles();
-    const { me }: RegionPageProps = props;
+    const { me, sendReport }: RegionPageProps = props;
     const id: string = useParams<{ id: string }>().id as string;
     const { t: _translate }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const t = (key: string): string =>  _translate(LANG_PATH + "." + key);
@@ -113,7 +113,7 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
 
 
     return (<>
-        <div className={"page-content flex-down"}>
+        <center>
             <RegionIconRep name={name} type={type} region={region} />
             <center>
                 <VoteManager
@@ -122,11 +122,17 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
                     upvoter={regions.votes.upvote}
                     downvoter={regions.votes.downvote} />
             </center>
-            <TabHandler
-                tab={tab}
-                onTabSelect={(id: string): void => setTab(id)}
-                tabs={tabs}
-                minimumVisible={2} />
+            <div className="page-header">
+                <div className="s-title">Lorem ipsum dolor sit amet</div>
+                <TabHandler
+                    tab={tab}
+                    onTabSelect={(id: string): void => setTab(id)}
+                    tabs={tabs}
+                    minimumVisible={2} />
+            </div>
+        </center>
+        <div className={"page-content flex-down"}>
+
             {tab === "basic" && <>
                 <RegionName
                     id={region._id}
@@ -151,6 +157,9 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
                         {active ? t("actions.disable") : t("actions.enable")}
                     </Button>
                 </div>)}
+                <br/><br/>
+                <Link onClick={(_e): void => sendReport(id, "region")}>{_translate("actions.report")}</Link>
+
                 </>
             }
             {tab === "comments" &&

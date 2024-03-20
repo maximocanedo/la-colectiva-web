@@ -143,7 +143,6 @@ const PathPage = ({ me }: IPathPageProps): React.JSX.Element => {
             tab={tab}
             onTabSelect={(id: string): void => setTab(id)}
             tabs={tabs}
-
             minimumVisible={2} />
         { tab === "basic" && <>
             <TitleField id={id} formalValue={title} onUpdate={setTitle} editable={canEdit} />

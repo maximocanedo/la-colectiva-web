@@ -2,6 +2,7 @@ import {Role} from "../../data/models/user";
 import {ToastIntent} from "@fluentui/react-components";
 import React from "react";
 import * as settings from "./../../data/settings";
+import {RecordCategory} from "../../data/actions/reports";
 
 
 export interface IToastNotification {
@@ -34,6 +35,7 @@ export type Myself = UserLogged | null;
 export interface ICommonPageProps {
     sendToast: ToastSenderFunction;
     me: Myself;
+    sendReport(id: string, category: RecordCategory): void;
 }
 
 export const log = (componentName?: string): void => {

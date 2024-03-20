@@ -9,8 +9,8 @@ const TabHandler = ({ tab, onTabSelect, tabs, minimumVisible }: TabHandlerProps)
     const styles = tabHandlerStyles();
 
 
-    return <div className={mergeClasses(styles.example, styles.horizontal)}>
-        <Overflow minimumVisible={minimumVisible}>
+    return <div className={mergeClasses(styles.example, styles.horizontal, "tabHandlerHandler")}>
+        <Overflow  minimumVisible={minimumVisible}>
             <TabList
                 selectedValue={tab}
                 onTabSelect={(_, d) => onTabSelect(d.value as string)}

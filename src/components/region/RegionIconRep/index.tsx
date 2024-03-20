@@ -5,6 +5,8 @@ import React from "react";
 import {getRegionTypeLangPathNameFor} from "../../../page/RegionPage/defs";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
 import {log} from "../../page/definitions";
+import WelcomingTitle from "../../basic/WelcomingTitle";
+import WelcomingTitle2 from "../../basic/WelcomingTitle2";
 
 const RegionIconRep = (props: RegionIconRepProps): React.JSX.Element => {
     log("RegionIconRep");
@@ -13,11 +15,8 @@ const RegionIconRep = (props: RegionIconRepProps): React.JSX.Element => {
 
     if(region === null) return (<></>);
     const regionType: string = typeof type !== 'undefined' ? getRegionTypeLangPathNameFor(type) : "models.region.types.unknown";
-    return (
-        <div className="flex-down flx-cnt visual-rep">
-            <Avatar className={"_avtar"} size={48} icon={<Water32Filled/>}/>
-            <Subtitle1>{name}</Subtitle1>
-            <Body1>{t(regionType)}</Body1>
-        </div>);
+    const fullName: string = t("models.region.longName").replace("%type", t(regionType)).replace("%name", name);
+
+    return (<WelcomingTitle2 content={fullName} />);
 };
 export default RegionIconRep;

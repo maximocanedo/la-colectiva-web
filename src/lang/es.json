@@ -4,7 +4,93 @@
 	"loading": "Cargando... ",
 	"test": "Esto es una prueba.",
 	"selons": "Según",
+	"report": {
+		"pageTitle": "Reportes",
+		"pageSearchPlaceholder": "Buscá entre todos los reportes",
+		"dialog": {
+			"title": "Enviar un reporte",
+			"label": {
+				"reason": "Motivo del reporte: ",
+				"details": "Brindá más detalles: ",
+				"ofm": "Responder reporte: ",
+				"eofm": "Responder"
+			}
+		},
+		"type": {
+			"availability": "Disponibilidad",
+			"boat": "Embarcación",
+			"comment": "Comentario",
+			"dock": "Muelle",
+			"enterprise": "Empresa de transporte fluvial",
+			"path": "Recorrido",
+			"picture": "Imagen",
+			"schedule": "Horario",
+			"user": "Usuario",
+			"region": "Región",
+			"other": "Otros"
+		},
+		"card": {
+			"label": {
+				"reason": "Motivo: ",
+				"details": "Detalles: ",
+				"status": "Estado: ",
+				"admin": "Atendido por: ",
+				"response": "Respuesta: "
+			}
+		},
+		"status": {
+			"all": "Todos los estados",
+			"i0": {
+				"det": "Tu reporte fue enviado. ",
+				"st": "Pendiente de revisar"
+			},
+			"i1": {
+				"det": "Un administrador vio tu reporte y está al tanto del mismo. Pronto se encargará del mismo. ",
+				"st": "Visto"
+			},
+			"i2": {
+				"det": "El administrador está trabajando para solucionar tu problema. ",
+				"st": "Trabajando"
+			},
+			"i3": {
+				"det": "Reporte resuelto. ",
+				"st": "Resuelto"
+			},
+			"i4": {
+				"det": "El reporte fue cerrado. ",
+				"st": "Cerrado"
+			},
+			"i5": {
+				"det": "Se cerró el reporte dado que se considera que es inapropiado, o basado en información falsa. ",
+				"st": "Contrarreportado"
+			}
+		},
+		"reason": {
+			"all": "Todos los motivos",
+			"i0": {
+				"short": "Contenido sin relación al tema",
+				"des": "El registro reportado no está relacionado con el tema principal."
+			},
+			"i1": {
+				"short": "Spam",
+				"des": "Contenido repetitivo, publicidad, etc. "
+			},
+			"i2": {
+				"short": "Contenido inapropiado",
+				"des": "El registro reportado contiene información o imágenes sensibles o subidas de tono. "
+			},
+			"i3": {
+				"short": "Contenido violento",
+				"des": "El registro reportado contiene contenido violento, como amenazas o insultos. "
+			},
+			"i4": {
+				"short": "Otro",
+				"des": "Otras razones."
+			}
+		}
+	},
 	"actions": {
+		"report": "Reportar",
 		"next": "Siguiente",
 		"loadMore": "Cargar más",
 		"save": "Guardar",
@@ -14,6 +100,7 @@
 		"close": "Cerrar",
 		"delete": "Eliminar",
 		"enable": "Habilitar",
+		"search": "Buscar",
 		"disable": "Deshabilitar",
 		"continue": "Continuar",
 		"options": "Opciones",
@@ -56,6 +143,7 @@
 	},
 	"models": {
 		"region": {
+			"longName": "%type %name",
 			"types": {
 				"river": "Río",
 				"stream": "Arroyo",
@@ -238,7 +326,7 @@
 		},
 		"Regions": {
 			"label": {
-				"search": "Buscar regiones",
+				"search": "Buscar por nombre",
 				"allregions": "Todas las categorías"
 			}
 		},
@@ -985,6 +1073,7 @@
 	"status": {
 		"saving": "Guardando",
 		"registering": "Registrando",
+		"reporting": "Enviando reporte",
 		"updated": "Actualizado correctamente. "
 	},
 	"footer": {
@@ -1005,3 +1094,4 @@
 		}
 	}
 }
+

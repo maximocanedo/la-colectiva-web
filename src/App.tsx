@@ -2,8 +2,11 @@ import React, {ReactElement, useEffect, useRef, useState} from "react";
 import "./App.css";
 import "./styles/styles.css";
 import {
-	FluentProvider,
-	Toaster,
+	BrandVariants,
+	createDarkTheme,
+	createLightTheme,
+	FluentProvider, shorthands, Theme,
+	Toaster, tokens,
 	useId,
 	useToastController,
 	webDarkTheme,
@@ -39,13 +42,61 @@ import PathPage from "./page/paths/PathPage";
 import PathSearch from "./page/paths/PathSearch";
 import PathMap from "./page/paths/PathMap";
 import Next from "./page/Next";
+import {RecordCategory} from "./data/actions/reports";
+import ReportDialog from "./components/basic/ReportDialog";
+import Reports from "./page/Reports";
+import { makeStyles } from '@fluentui/react-components';
+
+const useStyles = makeStyles({
+	root: {
+		backgroundColor: tokens.colorNeutralBackground2
+	},
+});
 function isDarkModeEnabled(): boolean {
 	return ('matchMedia' in window && window.matchMedia('(prefers-color-scheme: dark)').matches);
 }
+const colectiva: BrandVariants = {
+	10: "#010307",
+	20: "#08182A",
+	30: "#002848",
+	40: "#00345B",
+	50: "#00406F",
+	60: "#004D84",
+	70: "#005B99",
+	80: "#0069AF",
+	90: "#0077C6",
+	100: "#0085DD",
+	110: "#1B94F1",
+	120: "#3CA2FF",
+	130: "#6AB0FF",
+	140: "#8BBDFF",
+	150: "#A8CBFF",
+	160: "#C2DAFF"
+};
+
+const lightTheme: Theme = {
+	...createLightTheme(colectiva),
+};
+
+const darkTheme: Theme = {
+	...createDarkTheme(colectiva),
+};
+
+
+darkTheme.colorBrandForeground1 = colectiva[110];
+darkTheme.colorBrandForeground2 = colectiva[120];
 function App(): ReactElement {
-	log("App");
+	const styles = useStyles();
 	const [ me, loadActualUser ] = useState<Myself>(null);
-	const [ query, setQuery ] = useState<string>("");
+	const [ reportedId, setReportedId ] = useState<string>("");
+	const [ reportedCat, setReportedCat ] = useState<RecordCategory>("other");
+	const [ reporting, setReportingState ] = useState<boolean>(false);
+
+	const sendReport = (id: string, category: RecordCategory): void => {
+		setReportedId(id);
+		setReportedCat(category);
+		setReportingState(true);
+	}
 
 	useEffect((): void => {
 		users.myself()
@@ -60,14 +111,16 @@ function App(): ReactElement {
 
 	const pageProps: ICommonPageProps = {
 		sendToast,
-		me
+		me,
+		sendReport
 	};
 
 
 	return (
 		<Router>
 			<I18nextProvider i18n={i18n}>
-				<FluentProvider theme={isDarkModeEnabled() ? webDarkTheme : webLightTheme}>
+				<FluentProvider className={styles.root} theme={isDarkModeEnabled() ? darkTheme : lightTheme}>
+					<div className="root-background"></div>
 					<Header me={me} toasterId={toasterId} />
 					<main>
 						<Routes>
@@ -92,11 +145,14 @@ function App(): ReactElement {
 							<Route path={"/paths/:id"} element={<PathPage {...pageProps} />} />
 							<Route path={"/paths/"} element={<PathSearch {...pageProps} />} />
 							<Route path={"/next/from/:from/to/:to"} element={<Next {...pageProps} />} />
+							<Route path={"/reports/"} element={<Reports {...pageProps} />} />
 							<Route path={"*"} element={NotFoundPage} />
 						</Routes>
 					</main>
 					<Toaster toasterId={toasterId} />
 					<Footer me={me} />
+					<ReportDialog id={reportedId} open={reporting} type={reportedCat} close={(): void => setReportingState(false)} />
+
 				</FluentProvider>
 			</I18nextProvider>
 		</Router>

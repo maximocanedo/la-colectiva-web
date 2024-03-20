@@ -1,4 +1,4 @@
-import {makeStyles, shorthands} from "@fluentui/react-components";
+import {makeStyles, shorthands, tokens} from "@fluentui/react-components";
 export type TabData = {
     id: string;
     name: string;
@@ -13,7 +13,8 @@ export type TabHandlerProps = {
 export const tabHandlerStyles = makeStyles({
     example: {
         ...shorthands.overflow("hidden"),
-        ...shorthands.padding("0px"),
+        backgroundColor: tokens.colorNeutralBackground2,
+        ...shorthands.borderBottom("1px", "solid", tokens.colorNeutralBackground2Pressed),
         zIndex: 0, //stop the browser resize handle from piercing the overflow menu
     },
     horizontal: {
