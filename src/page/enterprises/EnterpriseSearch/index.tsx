@@ -12,6 +12,8 @@ import {IEnterprise} from "../../../data/models/enterprise";
 import * as enterprises from "../../../data/actions/enterprise";
 import LoadMoreButton from "../../../components/basic/buttons/LoadMoreButton";
 import {NavigateFunction, useNavigate} from "react-router-dom";
+import WelcomingTitle from "../../../components/basic/WelcomingTitle";
+import {SearchBox} from "@fluentui/react-search-preview";
 
 const LANG_PATH: string = "pages.Enterprises";
 const resultsReducer = (state: IEnterprise[], action: { type: string, payload: IEnterprise | IEnterprise[] }): IEnterprise[] => {
@@ -62,43 +64,51 @@ const EnterpriseSearch = ({ me }: IEnterpriseSearchProps): React.JSX.Element => 
         search();
     };
 /// <BreadcrumbDivider />
-    return (<div className={"page-content flex-down"}>
-        <div className="searchbar">
-            <div className="_row">
-                <Input
-                    className={"_searchInput"}
-                    size="large"
-                    value={query}
-                    onChange={(ev): void => setQuery(ev.target.value)}
-                    placeholder={t("label.search")}
-                    aria-label={t("label.search")} />
-                <Button size={"large"} appearance={"primary"} onClick={(_e): void => {
-                    dispatchResults({ type: "RESET", payload: []});
-                    search();
-                }}><Search20Filled /></Button>
+    return (<div className={"page-content flex-down v2"}>
+        <WelcomingTitle content={t("title")}/>
+        <div className="searchBarContainer">
+            <SearchBox
+                className={"preSearchBar"}
+                placeholder={t("label.search")}
+                aria-label={t("label.search")}
+                value={query}
+                onChange={(e, d): void => {
+                    setQuery(d.value)
+                }}
+            />
+            <div className="barCol">
+                {
+                    canCreate && <Button className={"min300"}
+                                         onClick={(_e): void => {
+                                             navigate("/enterprises/add");
+                                         }}
+                                         appearance={"secondary"}
+                                         icon={<Add24Filled/>}>
+                        {translate("actions.register")}
+                    </Button>
+                }
+                <Button
+                    className={"min300"}
+                    appearance={"primary"}
+                    icon={<Search20Filled/>}
+                    onClick={(_e): void => {
+                        dispatchResults({type: "RESET", payload: []});
+                        search();
+                    }}>{translate("actions.search")}</Button>
             </div>
         </div>
-        {
-            canCreate && <div className="jBar">
-                <div className="r">
-                    <Button
-                        onClick={(_e): void => {
-                            navigate("/enterprises/add");
-                        }}
-                        appearance={"primary"}
-                        icon={<Add24Filled/>}>{t("label.register")}</Button></div>
-            </div>
-        }
         <div className={"searchresults"}>
             {results.map((result: IEnterprise) => {
                 const typel: string = enterprises.formatCUIT(result.cuit as number);
                 return <Button key={"enterpriseSearchPage_item$" + result._id} onClick={(_e) => {
                     navigate("/enterprises/" + result._id);
                 }} className={"fullWidth fstart"} appearance={"subtle"}>
-                    <Persona textPosition={"after"} avatar={<Avatar className={"_avtar"} size={48} icon={<Building20Filled />}/>} name={result.name} secondaryText={typel} />
+                    <Persona textPosition={"after"}
+                             avatar={<Avatar className={"_avtar"} size={48} icon={<Building20Filled/>}/>}
+                             name={result.name} secondaryText={typel}/>
                 </Button>
             })}
-            <LoadMoreButton loading={searching} onClick={more} />
+            <LoadMoreButton loading={searching} onClick={more}/>
         </div>
     </div>)
 };

@@ -35,9 +35,13 @@ import IconRep from "../../../components/docks/i/IconRep";
 import StatusModifiableField from "../../../components/docks/i/StatusModifiableField";
 import UploadDateSection from "../../../components/basic/UploadDateSection";
 import UploadedBySection from "../../../components/basic/UploadedBySection";
-import {Button} from "@fluentui/react-components";
+import {Button, Link} from "@fluentui/react-components";
 import * as regions from "../../../data/actions/region";
 import {CommonResponse} from "../../../data/utils";
+import ResourceCommonHeader from "../../../components/page/ResourceCommonHeader";
+import ResourcePage from "../../../components/page/ResourcePage";
+import ResourcePageBody from "../../../components/page/ResourcePageBody";
+import DisableButton from "../../../components/basic/buttons/DisableButton";
 
 const TextBulletIcon: FluentIcon = bundleIcon(TextBulletListSquare24Filled, TextBulletListSquare24Regular);
 const CommentsIcon: FluentIcon = bundleIcon(CommentMultiple24Filled, CommentMultiple24Regular);
@@ -53,7 +57,7 @@ const strings = {
     }
 };
 
-const DockPage = ({ me }: IDockPageProps): React.JSX.Element => {
+const DockPage = ({ me, sendReport }: IDockPageProps): React.JSX.Element => {
     const {t: translate} = useTranslation();
     const t = (key: string): string => translate(LANG_PATH + "." + key);
     const styles = useStyles();
@@ -128,7 +132,10 @@ const DockPage = ({ me }: IDockPageProps): React.JSX.Element => {
     const canEdit: boolean = me !== null && me !== undefined && user !== null && user !== undefined
         && me.active && ((me._id === user._id && me.role === 2) || (me.role === 3));
     if(data === null) return <></>;
-    return (<div className={styles.root + " page-content flex-down"}>
+
+
+
+    const oldPage = (<div className={styles.root + " page-content flex-down"}>
         <IconRep name={name} status={status} />
         <center>
             <VoteManager
@@ -169,18 +176,56 @@ const DockPage = ({ me }: IDockPageProps): React.JSX.Element => {
                 </Button>
             </div>)}
         </> }
-        { tab === "pics" && <PictureHandler
-            key={id + "$PictureHandler"} me={me} id={id}
-            fetcher={docks.pictures.list}
-            poster={docks.pictures.upload}
-            remover={docks.pictures.rem}
-        /> }
-        { tab === "comments" && <CommentHandler
-            id={id} me={me}
-            fetcher={docks.comments.get}
-            remover={docks.comments.del}
-            poster={docks.comments.post} /> }
-        { tab === "history" && <HistoryHandler id={id} fetcher={docks.fetchHistory} me={me}/> }
     </div>);
+
+    return <ResourcePage>
+        <ResourceCommonHeader
+            voteFeature={docks.votes}
+            title={name}
+            onTabSelect={setTab}
+            {...{ tabs, tab, me, id }} />
+        <ResourcePageBody>
+            { tab === "basic" && <div className="resource-page-field-container">
+                <NameField
+                    id={id}
+                    name={name}
+                    onUpdate={x => setName(x)}
+                    editable={canEdit} />
+                <AddressField
+                    id={id}
+                    value={address}
+                    onUpdate={x => setAddress(x)}
+                    editable={canEdit} />
+                <RegionField editable={canEdit} value={region as IRegion} onChange={x => setRegion(x)} id={id} />
+                <NotesField id={id} notes={notes} onUpdate={x => setNotes(x)} editable={canEdit} />
+                <StatusModifiableField value={status} onUpdate={x => setStatus(x)} editable={canEdit} id={id} />
+                <LocationField editable={canEdit} value={coordinates} onUpdate={x => setCoordinates(x)} id={id} />
+                <UploadDateSection date={uploadDate} />
+                <UploadedBySection user={user} />
+                <br/><br/>
+                <DisableButton onClick={updSt} status={active} />
+                <br/>
+                <Link onClick={(_e): void => sendReport(id, "enterprise")}>{translate("actions.report")}</Link>
+            </div> }
+            { tab === "pics" && <div className="resource-page-field-container">
+                <PictureHandler
+                    key={id + "$PictureHandler"} me={me} id={id}
+                    fetcher={docks.pictures.list}
+                    poster={docks.pictures.upload}
+                    remover={docks.pictures.rem}
+                />
+            </div> }
+            { tab === "comments" && <div className="resource-page-field-container">
+                <CommentHandler
+                    id={id} me={me}
+                    fetcher={docks.comments.get}
+                    remover={docks.comments.del}
+                    poster={docks.comments.post} />
+            </div> }
+            { tab === "history" && <div className="resource-page-field-container">
+                <HistoryHandler id={id} fetcher={docks.fetchHistory} me={me} />
+            </div> }
+        </ResourcePageBody>
+    </ResourcePage>
 };
 export default DockPage;

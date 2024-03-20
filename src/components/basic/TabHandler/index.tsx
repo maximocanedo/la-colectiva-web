@@ -4,14 +4,14 @@ import {mergeClasses, Overflow, OverflowItem, Tab, TabList} from "@fluentui/reac
 import OverflowMenu from "../OverflowMenu";
 import {log} from "../../page/definitions";
 
-const TabHandler = ({ tab, onTabSelect, tabs, minimumVisible }: TabHandlerProps): React.JSX.Element => {
+const TabHandler = ({ tab, onTabSelect, tabs, minimumVisible, vertical }: TabHandlerProps): React.JSX.Element => {
     log("TabHandler");
     const styles = tabHandlerStyles();
 
-
-    return <div className={mergeClasses(styles.example, styles.horizontal, "tabHandlerHandler")}>
-        <Overflow  minimumVisible={minimumVisible}>
+    return <div className={mergeClasses(styles.example, (vertical ? styles.vertical : styles.horizontal), "tabHandlerHandler")}>
+        <Overflow  minimumVisible={minimumVisible + (vertical?1:0)}>
             <TabList
+                vertical={vertical?? false}
                 selectedValue={tab}
                 onTabSelect={(_, d) => onTabSelect(d.value as string)}
             >

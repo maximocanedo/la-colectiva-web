@@ -11,6 +11,8 @@ import * as enterprises from "../../../data/actions/enterprise";
 import LoadMoreButton from "../../../components/basic/buttons/LoadMoreButton";
 import {useNavigate} from "react-router-dom";
 import BoatList from "../../../components/boat/BoatList";
+import WelcomingTitle from "../../../components/basic/WelcomingTitle";
+import {SearchBox} from "@fluentui/react-search-preview";
 
 const LANG_PATH: string = "pages.boats.SearchPage";
 const strings = {};
@@ -64,30 +66,38 @@ const BoatSearchPage = ({ me }: IBoatSearchPageProps): React.JSX.Element => {
     const canCreate: boolean = (me !== null && me !== undefined && me.active && me.role >= 2);
 
     return (<div className={"page-content flex-down"}>
-        <div className="searchbar">
-            <div className="_row">
-                <Input
-                    className={"_searchInput"}
-                    size="large"
-                    value={query}
-                    onChange={(ev): void => setQuery(ev.target.value)}
-                    placeholder={t("label.search")}
-                    aria-label={t("label.search")}/>
-                <Button size={"large"} appearance={"primary"} onClick={(_e): void => {
-                    setPage(0);
-                    dispatchResults({type: CLEAR, payload: null});
-                    search();
-                }}><Search20Filled/></Button>
-            </div>
-        </div>
-        <div className="jBar">
-            <div className="r">
+        <WelcomingTitle content={t("title")}/>
+        <div className="searchBarContainer">
+            <SearchBox
+                className={"preSearchBar"}
+                placeholder={t("label.search")}
+                aria-label={t("label.search")}
+                value={query}
+                onChange={(e, d): void => {
+                    setQuery(d.value)
+                }}
+            />
+            <div className="barCol">
+                {
+                    canCreate && <Button
+                        className={"min300"}
+                        onClick={(_e): void => {
+                            navigate("/boats/add");
+                        }}
+                        appearance={"secondary"}
+                        icon={<Add24Filled/>}>
+                        {translate("actions.register")}
+                    </Button>
+                }
                 <Button
-                    onClick={(_e): void => {
-                        navigate("/boats/add");
-                    }}
+                    className={"min300"}
                     appearance={"primary"}
-                    icon={<Add24Filled/>}>{t("label.register")}</Button></div>
+                    icon={<Search20Filled/>}
+                    onClick={(_e): void => {
+                        dispatchResults({type: "RESET", payload: null});
+                        search();
+                    }}>{translate("actions.search")}</Button>
+            </div>
         </div>
         <BoatList data={results} onClick={({_id}: IBoat): void => {
             navigate("/boats/" + _id);

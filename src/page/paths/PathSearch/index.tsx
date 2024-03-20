@@ -13,6 +13,8 @@ import * as paths from "../../../data/actions/path";
 import LoadMoreButton from "../../../components/basic/buttons/LoadMoreButton";
 import {NavigateFunction, useNavigate} from "react-router-dom";
 import {IBoat} from "../../../data/models/boat";
+import WelcomingTitle from "../../../components/basic/WelcomingTitle";
+import {SearchBox} from "@fluentui/react-search-preview";
 
 const LANG_PATH: string = "pages.Paths";
 const resultsReducer = (state: IPath[], action: { type: string, payload: IPath | IPath[] }): IPath[] => {
@@ -64,32 +66,38 @@ const EnterpriseSearch = ({ me }: IPathSearchProps): React.JSX.Element => {
     };
 /// <BreadcrumbDivider />
     return (<div className={"page-content flex-down"}>
-        <div className="searchbar">
-            <div className="_row">
-                <Input
-                    className={"_searchInput"}
-                    size="large"
-                    value={query}
-                    onChange={(ev): void => setQuery(ev.target.value)}
-                    placeholder={t("label.search")}
-                    aria-label={t("label.search")} />
-                <Button size={"large"} appearance={"primary"} onClick={(_e): void => {
-                    dispatchResults({ type: "RESET", payload: []});
-                    search();
-                }}><Search20Filled /></Button>
+        <WelcomingTitle content={t("title")}/>
+        <div className="searchBarContainer">
+            <SearchBox
+                className={"preSearchBar"}
+                placeholder={t("label.search")}
+                aria-label={t("label.search")}
+                value={query}
+                onChange={(e, d): void => {
+                    setQuery(d.value)
+                }}
+            />
+            <div className="barCol">
+                {
+                    canCreate && <Button className={"min300"}
+                                         onClick={(_e): void => {
+                                             navigate("/paths/add");
+                                         }}
+                                         appearance={"secondary"}
+                                         icon={<Add24Filled/>}>
+                        {translate("actions.register")}
+                    </Button>
+                }
+                <Button
+                    className={"min300"}
+                    appearance={"primary"}
+                    icon={<Search20Filled/>}
+                    onClick={(_e): void => {
+                        dispatchResults({type: "RESET", payload: []});
+                        search();
+                    }}>{translate("actions.search")}</Button>
             </div>
         </div>
-        {
-            canCreate && <div className="jBar">
-                <div className="r">
-                    <Button
-                        onClick={(_e): void => {
-                            navigate("/paths/add");
-                        }}
-                        appearance={"primary"}
-                        icon={<Add24Filled/>}>{t("label.register")}</Button></div>
-            </div>
-        }
         <div className={"searchresults"}>
             {results.map((result: IPath) => {
                 const typel: string = (result.boat as IBoat).name?? "";

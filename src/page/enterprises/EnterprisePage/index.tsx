@@ -7,7 +7,7 @@ import {StateManager} from "../../SignUpPage/defs";
 import {IUser, Role} from "../../../data/models/user";
 import VoteManager from "../../../components/basic/VoteManager";
 import CommentHandler from "../../../components/basic/CommentHandler";
-import {Button} from "@fluentui/react-components";
+import {Button, Link} from "@fluentui/react-components";
 import HistoryHandler from "../../../components/basic/HistoryHandler";
 import {
     bundleIcon, CommentMultiple24Filled, CommentMultiple24Regular,
@@ -33,6 +33,10 @@ import EnterprisePhoneHandler from "../../../components/enterprise/EnterprisePho
 import {UserLogged} from "../../../components/page/definitions";
 import BoatListForEnterprise from "../../../components/boat/BoatListForEnterprise";
 import {IBoat} from "../../../data/models/boat";
+import ResourcePage from "../../../components/page/ResourcePage";
+import ResourceCommonHeader from "../../../components/page/ResourceCommonHeader";
+import ResourcePageBody from "../../../components/page/ResourcePageBody";
+import DisableButton from "../../../components/basic/buttons/DisableButton";
 
 
 const LANG_PATH: string = "pages.enterprises.Enterprise";
@@ -53,7 +57,7 @@ const strings = {
 
 const EnterprisePage = (props: EnterprisePageProps): React.JSX.Element => {
     const styles = useStyles();
-    const { me }: EnterprisePageProps = props;
+    const { me, sendReport }: EnterprisePageProps = props;
     const id: string = useParams<{ id: string }>().id as string;
     const { t: _translate }: UseTranslationResponse<"translation", undefined> = useTranslation();
     const t = (key: string): string =>  _translate(LANG_PATH + "." + key);
@@ -125,65 +129,55 @@ const EnterprisePage = (props: EnterprisePageProps): React.JSX.Element => {
 
 
 
-    return (<>
-        <div className={"page-content flex-down"}>
-            <EnterpriseIconRep name={name} cuit={cuit} />
-            <center>
-                <VoteManager
-                    me={me} id={id}
-                    fetcher={enterprises.votes.get}
-                    upvoter={enterprises.votes.upvote}
-                    downvoter={enterprises.votes.downvote} />
-            </center>
-            <TabHandler
-                tab={tab}
-                onTabSelect={(id: string): void => setTab(id)}
-                tabs={tabs}
-                minimumVisible={2} />
-            { tab === "boats" && <BoatListForEnterprise enterprise={(enterprise as IEnterprise)._id?? ""} onClick={({ _id }: IBoat): void => {
-                navigate("/boats/" + _id);
-            }
-            } /> }
-            {tab === "basic" && <>
+    return <ResourcePage>
+        <ResourceCommonHeader
+            voteFeature={enterprises.votes}
+            title={name}
+            onTabSelect={setTab}
+            {...{ tab, tabs, me, id }} />
+        <ResourcePageBody>
+            { tab === "basic" && <div className="resource-page-field-container">
                 <EnterpriseNamePageField
                     name={name}
                     onUpdate={newName => setName(newName)}
-                    author={enterprise.user as UserLogged} me={me} id={id} />
+                    author={enterprise.user as UserLogged} me={me} id={id}/>
                 <EnterpriseDescriptionPageField
                     description={description}
                     onUpdate={x => setDescription(x)}
-                    author={enterprise.user as UserLogged} me={me} id={id} />
+                    author={enterprise.user as UserLogged} me={me} id={id}/>
                 <EnterpriseCUITPageField
                     id={id}
                     value={cuit}
                     onChange={x => setCUIT(x)}
-                    me={me} author={enterprise.user as UserLogged} />
-                <EnterpriseFoundationDatePageField user={enterprise.user as UserLogged} me={me} date={foundationDate} onChange={x => setFoundationDate(x)} id={id} />
-                <UploadDateSection date={enterprise.uploadDate?? ""} />
+                    me={me} author={enterprise.user as UserLogged}/>
+                <EnterpriseFoundationDatePageField user={enterprise.user as UserLogged} me={me} date={foundationDate}
+                                                   onChange={x => setFoundationDate(x)} id={id}/>
+                <UploadDateSection date={enterprise.uploadDate ?? ""}/>
                 <UploadedBySection
-                    user={enterprise.user?? null}
-                    username={(enterprise.user as IUser).username} />
-                <EnterprisePhoneHandler me={me} author={enterprise.user as UserLogged} id={id} />
-                {canEdit && (<div className="jBar">
-                    <Button
-                        className={active ? styles.disableBtn : styles.enableBtn }
-                        onClick={(_e): void => updSt()}
-                        appearance={"secondary"}>
-                        {active ? t("actions.disable") : t("actions.enable")}
-                    </Button>
-                </div>)}
-                </>
-            }
-            {tab === "comments" &&
+                    user={enterprise.user ?? null}
+                    username={(enterprise.user as IUser).username}/>
+                <EnterprisePhoneHandler me={me} author={enterprise.user as UserLogged} id={id}/>
+                <br/><br/>
+                {canEdit && (<DisableButton onClick={updSt} status={active}/>)}
+                <br/>
+                <Link onClick={(_e): void => sendReport(id, "enterprise")}>{_translate("actions.report")}</Link>
+            </div>}
+            {tab === "boats" && <div className="resource-page-field-container">
+                <BoatListForEnterprise
+                    enterprise={(enterprise as IEnterprise)._id ?? ""}
+                    onClick={({_id}: IBoat): void => {navigate("/boats/" + _id);}} />
+            </div> }
+            { tab === "comments" && <div className="resource-page-field-container">
                 <CommentHandler
                     id={id} me={me}
                     fetcher={enterprises.comments.get}
                     remover={enterprises.comments.del}
-                    poster={enterprises.comments.post} />}
-
-            {tab === "history" && <HistoryHandler id={id} fetcher={enterprises.fetchHistory} me={me}/>}
-
-        </div>
-    </>);
+                    poster={enterprises.comments.post} />
+            </div> }
+            { tab === "history" && <div className="resource-page-field-container">
+                <HistoryHandler id={id} fetcher={enterprises.fetchHistory} me={me}/>
+            </div> }
+        </ResourcePageBody>
+    </ResourcePage>
 };
 export default EnterprisePage;

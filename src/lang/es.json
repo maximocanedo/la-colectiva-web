@@ -198,6 +198,7 @@
 		},
 		"boats": {
 			"SearchPage": {
+				"title": "Embarcaciones",
 				"label": {
 					"search": "Buscar",
 					"register": "Registrar una embarcación"
@@ -325,20 +326,23 @@
 			}
 		},
 		"Regions": {
+			"title": "Regiones",
 			"label": {
 				"search": "Buscar por nombre",
 				"allregions": "Todas las categorías"
 			}
 		},
 		"Paths": {
+			"title": "Recorridos",
 			"label": {
-				"search": "Buscar recorridos",
+				"search": "Buscar por nombre, descripción",
 				"register": "Registrar un recorrido"
 			}
 		},
 		"Enterprises": {
+			"title": "Empresas de transporte fluvial",
 			"label": {
-				"search": "Buscar empresas",
+				"search": "Buscar por nombre o CUIT ",
 				"register": "Registrar una empresa",
 				"allregions": "Todas las categorías"
 			}

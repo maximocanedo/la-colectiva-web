@@ -63,7 +63,7 @@ const RegionSearch = ({ me }: RegionSearchPageProps): React.JSX.Element => {
     };
 /// <BreadcrumbDivider />
     return (<div className={"page-content flex-down v2"}>
-        <WelcomingTitle content={"Regiones"} />
+        <WelcomingTitle content={t("title")} />
         <div className="searchBarContainer">
             <SearchBox
                 className={"preSearchBar"}
@@ -73,26 +73,27 @@ const RegionSearch = ({ me }: RegionSearchPageProps): React.JSX.Element => {
                 onChange={(e,d): void => { setQuery(d.value) }}
                 />
                 <div className="barCol">
-                    <Button className={"min300"}
-                            onClick={(_e): void => {
-                                navigate("/regions/add");
-                            }}
-                            appearance={"secondary"}
-                            icon={<Add24Filled/>}>
-                        {translate("actions.register")}
-                    </Button>
-                    <Button className={"min300"} appearance={"primary"} onClick={(_e): void => {
-                        dispatchResults({ type: "RESET", payload: []});
-                        search();
-                    }}><Search20Filled /></Button>
+                    {
+                        canCreate && <Button className={"min300"}
+                                             onClick={(_e): void => {
+                                                 navigate("/regions/add");
+                                             }}
+                                             appearance={"secondary"}
+                                             icon={<Add24Filled/>}>
+                            {translate("actions.register")}
+                        </Button>
+                    }
+                    <Button
+                        className={"min300"}
+                        appearance={"primary"}
+                        icon={<Search20Filled />}
+                        onClick={(_e): void => {
+                            dispatchResults({ type: "RESET", payload: []});
+                            search();
+                        }}>{translate("actions.search")}</Button>
                 </div>
         </div>
-        {
-            canCreate && <div className="jBar">
-                <div className="r">
-                    </div>
-            </div>
-        }
+
         <div className={"searchresults"}>
             {results.map((result: IRegion) => {
                 const typel: string = result.type === undefined ? "" : translate(getRegionTypeLangPathNameFor((result.type) as number));

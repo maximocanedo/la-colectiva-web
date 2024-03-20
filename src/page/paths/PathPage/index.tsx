@@ -2,7 +2,16 @@ import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {IPathPageProps} from "./defs";
 import {useStyles} from "./styles";
-import {Button, Caption1, Card, CardHeader, mergeClasses, Subtitle2Stronger, Title2} from "@fluentui/react-components";
+import {
+    Button,
+    Caption1,
+    Card,
+    CardHeader,
+    Link,
+    mergeClasses,
+    Subtitle2Stronger,
+    Title2
+} from "@fluentui/react-components";
 import {
     bundleIcon, ClockFilled, ClockRegular,
     CommentMultiple24Filled,
@@ -36,6 +45,10 @@ import * as docks from "../../../data/actions/dock";
 import {CommonResponse} from "../../../data/utils";
 import AvailabilityHandler from "../../../components/path/AvailabilityHandler";
 import ScheduleLightHandler from "../../../components/path/ScheduleLightHandler";
+import ResourceCommonHeader from "../../../components/page/ResourceCommonHeader";
+import ResourcePage from "../../../components/page/ResourcePage";
+import ResourcePageBody from "../../../components/page/ResourcePageBody";
+import DisableButton from "../../../components/basic/buttons/DisableButton";
 
 const LANG_PATH: string = "pages.paths.PathPage";
 const TextBulletIcon: FluentIcon = bundleIcon(TextBulletListSquare24Filled, TextBulletListSquare24Regular);
@@ -57,7 +70,7 @@ const strings = {
         des: "explorer.des"
     }
 };
-const PathPage = ({ me }: IPathPageProps): React.JSX.Element => {
+const PathPage = ({ me, sendReport }: IPathPageProps): React.JSX.Element => {
     const {t: translate} = useTranslation();
     const t = (key: string): string => translate(LANG_PATH + "." + key);
     const styles = useStyles();
@@ -130,54 +143,49 @@ const PathPage = ({ me }: IPathPageProps): React.JSX.Element => {
     };
 
 
-    return (<div className={mergeClasses(styles.root, "page-content", "flex-down")}>
-        <IconRep name={title} boatName={(boat as IBoat).name as string} />
-        <center>
-            <VoteManager
-                me={me} id={id}
-                fetcher={paths.votes.get}
-                upvoter={paths.votes.upvote}
-                downvoter={paths.votes.downvote}/>
-        </center>
-        <TabHandler
-            tab={tab}
-            onTabSelect={(id: string): void => setTab(id)}
-            tabs={tabs}
-            minimumVisible={2} />
-        { tab === "basic" && <>
-            <TitleField id={id} formalValue={title} onUpdate={setTitle} editable={canEdit} />
-            <DescriptionField id={id} formalValue={description} onUpdate={setDescription} editable={canEdit} />
-            <NotesField id={id} formalValue={notes} onUpdate={setNotes} editable={canEdit} />
-            <BoatField value={boat as IBoat} onChange={setBoat} editable={canEdit} id={id} />
-            <UploadedBySection user={user} />
-            <UploadDateSection date={uploadDate} />
-            <br/>
-            {canEdit && (<div className="jBar">
-                <Button
-                    className={active ? styles.disableBtn : styles.enableBtn }
-                    onClick={(_e): void => updSt()}
-                    appearance={"secondary"}>
-                    {active ? translate("actions.disable") : translate("actions.enable")}
-                </Button>
-            </div>)}
-        </>}
-        { tab === "schedules" && <>
-            <Card appearance={"outline"}>
-                <CardHeader
-                    header={<Subtitle2Stronger>
-                        {t(strings.explorer.title)}
-                    </Subtitle2Stronger>}
-                    description={<Caption1>
-                        {t(strings.explorer.des)}
-                    </Caption1>}
-                    action={<Button appearance={"primary"} icon={<MapFilled />}>{translate("actions.explore")}</Button>}
-                />
-            </Card>
-            <ScheduleLightHandler id={id} />
-        </> }
-        { tab === "comments" && <CommentHandler id={id} me={me} fetcher={paths.comments.get} poster={paths.comments.post} remover={paths.comments.del} /> }
-        { tab === "history" && <HistoryHandler id={id} me={me} fetcher={paths.fetchHistory} /> }
-        { tab === "availabilities" && <AvailabilityHandler me={me} id={id} editable={canEdit} /> }
-    </div>);
+    return <ResourcePage>
+        <ResourceCommonHeader
+            voteFeature={paths.votes}
+            title={title}
+            onTabSelect={setTab}
+            {...{ tabs, tab, id, me }} />
+        <ResourcePageBody>
+            { tab === "basic" && <div className="resource-page-field-container">
+                <TitleField id={id} formalValue={title} onUpdate={setTitle} editable={canEdit} />
+                <DescriptionField id={id} formalValue={description} onUpdate={setDescription} editable={canEdit} />
+                <NotesField id={id} formalValue={notes} onUpdate={setNotes} editable={canEdit} />
+                <BoatField value={boat as IBoat} onChange={setBoat} editable={canEdit} id={id} />
+                <UploadedBySection user={user} />
+                <UploadDateSection date={uploadDate} />
+                <br/><br/>
+                <DisableButton onClick={updSt} status={active} />
+                <br/>
+                <Link onClick={(_e): void => sendReport(id, "path")}>{translate("actions.report")}</Link>
+            </div> }
+            { tab === "schedules" && <div className="resource-page-field-container">
+                <Card appearance={"outline"}>
+                    <CardHeader
+                        header={<Subtitle2Stronger>
+                            {t(strings.explorer.title)}
+                        </Subtitle2Stronger>}
+                        description={<Caption1>
+                            {t(strings.explorer.des)}
+                        </Caption1>}
+                        action={<Button appearance={"primary"} icon={<MapFilled />}>{translate("actions.explore")}</Button>}
+                    />
+                </Card>
+                <ScheduleLightHandler id={id} />
+            </div> }
+            { tab === "availabilities" && <div className="resource-page-field-container">
+                <AvailabilityHandler me={me} id={id} editable={canEdit} />
+            </div> }
+            { tab === "comments" && <div className="resource-page-field-container">
+                <CommentHandler id={id} me={me} fetcher={paths.comments.get} poster={paths.comments.post} remover={paths.comments.del} />
+            </div> }
+            { tab === "history" && <div className="resource-page-field-container">
+                <HistoryHandler id={id} me={me} fetcher={paths.fetchHistory} />
+            </div> }
+        </ResourcePageBody>
+    </ResourcePage>
 };
 export default PathPage;

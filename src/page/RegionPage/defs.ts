@@ -42,10 +42,4 @@ export interface RegionPageParams {
 }
 
 export const useStyles = makeStyles({
-    disableBtn: {
-        color: tokens.colorPaletteRedBackground3
-    },
-    enableBtn: {
-        color: tokens.colorPaletteGreenBackground3
-    }
 });

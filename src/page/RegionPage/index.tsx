@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {RegionPageProps, useStyles} from "./defs";
+import {getRegionTypeLangPathNameFor, RegionPageProps, useStyles} from "./defs";
 import {useParams} from "react-router-dom";
 import {useTranslation, UseTranslationResponse} from "react-i18next";
 import * as regions from "../../data/actions/region";
@@ -11,7 +11,7 @@ import RegionName from "../../components/region/RegionName";
 import RegionTypeField from "../../components/region/RegionTypeField";
 import VoteManager from "../../components/basic/VoteManager";
 import CommentHandler from "../../components/basic/CommentHandler";
-import {Button, Link} from "@fluentui/react-components";
+import {Button, Link, Title3} from "@fluentui/react-components";
 import HistoryHandler from "../../components/basic/HistoryHandler";
 import {
     bundleIcon,
@@ -28,6 +28,10 @@ import {TabData} from "../../components/basic/TabHandler/defs";
 import {CommonResponse} from "../../data/utils";
 import UploadedBySection from "../../components/basic/UploadedBySection";
 import UploadDateSection from "../../components/basic/UploadDateSection";
+import ResourcePage from "../../components/page/ResourcePage";
+import ResourceCommonHeader from "../../components/page/ResourceCommonHeader";
+import ResourcePageBody from "../../components/page/ResourcePageBody";
+import DisableButton from "../../components/basic/buttons/DisableButton";
 
 
 const LANG_PATH: string = "pages.Region";
@@ -45,39 +49,39 @@ const strings = {
     }
 };
 
-const RegionPage = (props: RegionPageProps): React.JSX.Element => {
+
+
+
+const RegionPage = ({ me, sendReport }: RegionPageProps): React.JSX.Element => {
     const styles = useStyles();
-    const { me, sendReport }: RegionPageProps = props;
     const id: string = useParams<{ id: string }>().id as string;
-    const { t: _translate }: UseTranslationResponse<"translation", undefined> = useTranslation();
-    const t = (key: string): string =>  _translate(LANG_PATH + "." + key);
-    const [ , setLoading ]: StateManager<boolean> = useState<boolean>(false);
-    const [ region, setRegion ]: StateManager<IRegion | null> = useState<IRegion | null>(null);
-    const [ name, setName ]: StateManager<string> = useState<string>("");
-    const [ type, setType ]: StateManager<RegionType> = useState<RegionType>(
-        region === null || region.type === undefined ? 0 : region.type
-    );
-    const [ active, updateStatus ] = useState<boolean>(true);
-    const [ tab, setTab ] = useState<string>("basic");
+    const {t: _translate}: UseTranslationResponse<"translation", undefined> = useTranslation();
+    const t = (key: string): string => _translate(LANG_PATH + "." + key);
+
+    const [, setLoading]: StateManager<boolean> = useState<boolean>(false);
+    const [region, setRegion]: StateManager<IRegion | null> = useState<IRegion | null>(null);
+    const [name, setName]: StateManager<string> = useState<string>("");
+    const [type, setType]: StateManager<RegionType> = useState<RegionType>(region === null || region.type === undefined ? 0 : region.type);
+    const [active, updateStatus] = useState<boolean>(true);
+    const [tab, setTab] = useState<string>("basic");
     const tabs: TabData[] = [
         {
             id: "basic",
             name: t(strings.tabs.basic),
-            icon: <TextBulletIcon />
+            icon: <TextBulletIcon/>
         }, {
             id: "comments",
             name: t(strings.tabs.comments),
-            icon: <CommentsIcon />
+            icon: <CommentsIcon/>
         }, {
             id: "history",
             name: t(strings.tabs.history),
-            icon: <HistoryIcon />
+            icon: <HistoryIcon/>
         }
     ];
 
     useEffect((): void => {
         setLoading(true);
-
         regions.find(id)
             .then((response: IRegion): void => {
                 setRegion(response);
@@ -94,7 +98,7 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
     }, [id]);
 
 
-    if(region === null) return <></>;
+    if (region === null) return <></>;
     const canEdit: boolean = (me !== null && region.user !== undefined && region.user !== null && me.active) && (((me._id === region.user) && (me.role as Role >= 2)) || (me.role === 3));
 
 
@@ -102,76 +106,57 @@ const RegionPage = (props: RegionPageProps): React.JSX.Element => {
         const newStatus: boolean = !active;
         regions[active ? "del" : "enable"](id)
             .then((response: CommonResponse) => {
-                if(response.success) {
+                if (response.success) {
                     updateStatus(newStatus);
                 }
             }).catch(err => console.error(err)).finally((): void => {
 
         });
     };
+    const regionType: string = typeof type !== 'undefined' ? getRegionTypeLangPathNameFor(type) : "models.region.types.unknown";
+    const fullName: string = _translate("models.region.longName").replace("%type", _translate(regionType)).replace("%name", name);
 
 
-
-    return (<>
-        <center>
-            <RegionIconRep name={name} type={type} region={region} />
-            <center>
-                <VoteManager
-                    me={me} id={id}
-                    fetcher={regions.votes.get}
-                    upvoter={regions.votes.upvote}
-                    downvoter={regions.votes.downvote} />
-            </center>
-            <div className="page-header">
-                <div className="s-title">Lorem ipsum dolor sit amet</div>
-                <TabHandler
-                    tab={tab}
-                    onTabSelect={(id: string): void => setTab(id)}
-                    tabs={tabs}
-                    minimumVisible={2} />
-            </div>
-        </center>
-        <div className={"page-content flex-down"}>
-
-            {tab === "basic" && <>
+    return (<ResourcePage>
+        <ResourceCommonHeader
+            voteFeature={regions.votes}
+            title={fullName}
+            onTabSelect={setTab}
+            {...{ me, id, tab, tabs }}
+        />
+        <ResourcePageBody>
+            {tab === "basic" && <div className="resource-page-field-container">
                 <RegionName
                     id={region._id}
                     type={type}
                     name={name}
                     onUpdate={(x: string): void => setName(x)}
-                    author={region.user as IUser} me={me} />
+                    author={region.user as IUser} me={me}/>
                 <RegionTypeField
                     id={region._id}
                     initialValue={type}
                     editable={canEdit}
-                    onUpdate={(x: RegionType) => setType(x)} />
-                <UploadDateSection date={region.uploadDate?? ""} />
+                    onUpdate={(x: RegionType) => setType(x)}/>
+                <UploadDateSection date={region.uploadDate ?? ""}/>
                 <UploadedBySection
-                    user={region.user?? null}
-                    username={(region.user as IUser).username} />
-                {canEdit && (<div className="jBar">
-                    <Button
-                        className={active ? styles.disableBtn : styles.enableBtn }
-                        onClick={(_e): void => updSt()}
-                        appearance={"secondary"}>
-                        {active ? t("actions.disable") : t("actions.enable")}
-                    </Button>
-                </div>)}
+                    user={region.user ?? null}
+                    username={(region.user as IUser).username}/>
                 <br/><br/>
+                {canEdit && (<DisableButton onClick={updSt} status={active} />)}
+                <br/>
                 <Link onClick={(_e): void => sendReport(id, "region")}>{_translate("actions.report")}</Link>
-
-                </>
-            }
-            {tab === "comments" &&
+            </div>}
+            {tab === "comments" && <div className="resource-page-field-container">
                 <CommentHandler
                     id={id} me={me}
                     fetcher={regions.comments.get}
                     remover={regions.comments.del}
-                    poster={regions.comments.post} />}
-
-            {tab === "history" && <HistoryHandler id={id} fetcher={regions.fetchHistory} me={me}/>}
-
-        </div>
-    </>);
+                    poster={regions.comments.post}/>
+            </div>}
+            {tab === "history" && <div className="resource-page-field-container">
+                <HistoryHandler id={id} fetcher={regions.fetchHistory} me={me}/>
+            </div>}
+        </ResourcePageBody>
+    </ResourcePage>);
 };
 export default RegionPage;
