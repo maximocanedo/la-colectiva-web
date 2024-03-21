@@ -354,6 +354,22 @@
 		}
 	},
 	"components": {
+		"LoadTriggerButton": {
+			"label": {
+				"loaded": "Cargar más",
+				"loading": "Cargando",
+				"no-data": "Reintentar",
+				"err": "Reintentar",
+				"initial": "Cargar"
+			},
+			"message": {
+				"loaded": "",
+				"loading": "",
+				"no-data": "No hay más elementos",
+				"err": "Ocurrió un error",
+				"initial": ""
+			}
+		},
 		"DisableButton": {
 			"before": {
 				"disable": {
@@ -1053,6 +1069,12 @@
 				"st": {
 					"loading": "Cargando... ",
 					"more": "Cargar más"
+				},
+				"err": {
+					"noComments": {
+						"title": "Sin comentarios",
+						"description": "Se el primero en comentar."
+					}
 				},
 				"textarea": {
 					"placeholder": "Dejá un comentario"

@@ -22,7 +22,6 @@ import {IRegion} from "../../../data/models/region";
 import {IUserMinimal} from "../../../components/basic/Comment/defs";
 import VoteManager from "../../../components/basic/VoteManager";
 import TabHandler from "../../../components/basic/TabHandler";
-import * as boats from "../../../data/actions/boat";
 import PictureHandler from "../../../components/pictures/PictureHandler";
 import CommentHandler from "../../../components/basic/CommentHandler";
 import HistoryHandler from "../../../components/basic/HistoryHandler";
@@ -36,7 +35,6 @@ import StatusModifiableField from "../../../components/docks/i/StatusModifiableF
 import UploadDateSection from "../../../components/basic/UploadDateSection";
 import UploadedBySection from "../../../components/basic/UploadedBySection";
 import {Button, Link} from "@fluentui/react-components";
-import * as regions from "../../../data/actions/region";
 import {CommonResponse} from "../../../data/utils";
 import ResourceCommonHeader from "../../../components/page/ResourceCommonHeader";
 import ResourcePage from "../../../components/page/ResourcePage";
@@ -110,7 +108,6 @@ const DockPage = ({ me, sendReport }: IDockPageProps): React.JSX.Element => {
         setLoadingState(true);
         docks.find(id)
             .then((dock: IDockView): void => {
-                console.log(dock);
                 setData(dock);
                 setName(dock.name);
                 setAddress(dock.address);
@@ -132,51 +129,6 @@ const DockPage = ({ me, sendReport }: IDockPageProps): React.JSX.Element => {
     const canEdit: boolean = me !== null && me !== undefined && user !== null && user !== undefined
         && me.active && ((me._id === user._id && me.role === 2) || (me.role === 3));
     if(data === null) return <></>;
-
-
-
-    const oldPage = (<div className={styles.root + " page-content flex-down"}>
-        <IconRep name={name} status={status} />
-        <center>
-            <VoteManager
-                me={me} id={id}
-                fetcher={docks.votes.get}
-                upvoter={docks.votes.upvote}
-                downvoter={docks.votes.downvote} />
-        </center>
-        <TabHandler
-            tab={tab}
-            onTabSelect={(id: string): void => setTab(id)}
-            tabs={tabs}
-            minimumVisible={2} />
-        { tab === "basic" && <>
-            <NameField
-                id={id}
-                name={name}
-                onUpdate={x => setName(x)}
-                editable={canEdit} />
-            <AddressField
-                id={id}
-                value={address}
-                onUpdate={x => setAddress(x)}
-                editable={canEdit} />
-            <RegionField editable={canEdit} value={region as IRegion} onChange={x => setRegion(x)} id={id} />
-            <NotesField id={id} notes={notes} onUpdate={x => setNotes(x)} editable={canEdit} />
-            <StatusModifiableField value={status} onUpdate={x => setStatus(x)} editable={canEdit} id={id} />
-            <LocationField editable={canEdit} value={coordinates} onUpdate={x => setCoordinates(x)} id={id} />
-            <UploadDateSection date={uploadDate} />
-            <UploadedBySection user={user} />
-            <br/>
-            {canEdit && (<div className="jBar">
-                <Button
-                    className={active ? styles.disableBtn : styles.enableBtn }
-                    onClick={(_e): void => updSt()}
-                    appearance={"secondary"}>
-                    {active ? translate("actions.disable") : translate("actions.enable")}
-                </Button>
-            </div>)}
-        </> }
-    </div>);
 
     return <ResourcePage>
         <ResourceCommonHeader

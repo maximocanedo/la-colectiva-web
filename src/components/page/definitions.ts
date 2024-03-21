@@ -48,3 +48,5 @@ export const log = (componentName?: string): void => {
         console.log("Rendering %c<" + componentName + " />", "background: #cfd8dc; color: #263238");
 
 }
+
+export type LoadState = "loaded" | "loading" | "no-data" | "err" | "initial";

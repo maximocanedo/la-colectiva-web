@@ -8,7 +8,8 @@ import {Button, Spinner, Textarea, useId} from "@fluentui/react-components";
 import {Send24Filled} from "@fluentui/react-icons";
 import {useTranslation} from "react-i18next";
 import LoadMoreButton from "../buttons/LoadMoreButton";
-import {log} from "../../page/definitions";
+import {LoadState, log} from "../../page/definitions";
+import LoadTriggerButton from "../buttons/LoadTriggerButton";
 
 const commentsReducer = (state: IComment[], action: { type: string, payload: IComment | string }): IComment[] => {
     switch(action.type) {
@@ -43,12 +44,17 @@ const CommentHandler = ({ id, fetcher, remover, poster, me, sendReport }: IComme
     const handlerId: string = useId("commentHandler");
     const { t: translationService } = useTranslation();
     const t = (path: string): string => translationService(LANG_PATH + "." + path);
-    const [ page, setPage ]: StateManager<number> = useState<number>(1);
-    const [ size, setSize ]: StateManager<number> = useState<number>(5);
+
+    const [ page, setPage ]: StateManager<number> = useState<number>(0);
+    const size: number = 4;
     const [ draft, setDraft ]: StateManager<string> = useState<string>("");
     const [ posting, setPostingState ]: StateManager<boolean> = useState<boolean>(false);
     const [ downloading, setDownloadingState ]: StateManager<boolean> = useState<boolean>(false);
+    const [ loadState, setLoadState ] = useState<LoadState>("initial");
     const [ comments, dispatchComments ] = useReducer(commentsReducer, []);
+
+    const contentValid: boolean = draft.trim().length > 0;
+
     const nextPage = page + 1;
     const add = (comment: IComment) => dispatchComments({ type: "ADD", payload: comment });
     const rem = (_id: string) => dispatchComments({ type: "REMOVE", payload: _id });
@@ -56,22 +62,28 @@ const CommentHandler = ({ id, fetcher, remover, poster, me, sendReport }: IComme
 
     const canCreate: boolean = me !== undefined && me !== null && (me.role?? 0) > 0;
 
-    const fetch = (p: number, itemsPerPage: number = size): void => {
-        setDownloadingState(true);
-        fetcher(id, { p, itemsPerPage })
+    const fetchComments = (): void => {
+        setLoadState("loading");
+        fetcher(id, { p: page, itemsPerPage: size })
             .then((arr: IComment[]): void => {
                 arr.map((co: IComment) => add(co));
-            }).catch(err => {}).finally((): void => {
-                setDownloadingState(false);
+                if(arr.length === size) {
+                    setPage(page + 1);
+                    setLoadState("loaded");
+                } else {
+                    setLoadState("no-data");
+                }
+            }).catch(err => {
+                console.error(err);
+                setLoadState("err");
         });
     };
     useEffect(() => {
-        fetch(0, 3);
+        fetchComments();
     }, []);
 
     const more = (): void => {
-        setPage(page + 1);
-        fetch(page);
+        fetchComments();
     };
     const publish = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
         setPostingState(true);
@@ -86,13 +98,30 @@ const CommentHandler = ({ id, fetcher, remover, poster, me, sendReport }: IComme
     };
 
     return <div className={"commentHandler"}>
+        {
+            comments.length === 0 && <center>
+                <b>{t("err.noComments.title")}</b>
+                <br/>
+                <p>{t("err.noComments.description")}</p>
+            </center>
+        }
         <div className="commentGroup">
             { comments.map((c: IComment) => (<Comment sendReport={sendReport} __v={c.__v} key={c._id} handlerId={handlerId} parentId={id} id={c._id} me={me} author={c.user as IUserMinimal} remover={remover} content={c.content} uploaded={new Date(c.uploadDate)} />)) }
-            <LoadMoreButton loading={downloading} onClick={more} />
+            <LoadTriggerButton state={loadState} onClick={more} />
         </div>
         {canCreate && <div  className="comments_createBox">
-                <Textarea disabled={posting} className="cbx_textarea" placeholder={t("textarea.placeholder")} value={draft} onChange={(e) => setDraft(e.target.value)} />
-                <Button onClick={publish} disabled={posting} appearance={"primary"} icon={posting ? <Spinner size={"extra-tiny"} /> : <Send24Filled />} />
+                <Textarea
+                    disabled={posting}
+                    className="cbx_textarea"
+                    placeholder={t("textarea.placeholder")}
+                    value={draft}
+                    onChange={(e) => setDraft(e.target.value)} />
+            <Button
+                onClick={publish}
+                disabled={!contentValid || posting}
+                appearance={"primary"}
+                icon={posting ? <Spinner size={"extra-tiny"}/> : <Send24Filled/>}
+            />
         </div>}
     </div>;
 };
