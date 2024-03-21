@@ -203,7 +203,7 @@ const DockPage = ({ me, sendReport }: IDockPageProps): React.JSX.Element => {
                 <UploadDateSection date={uploadDate} />
                 <UploadedBySection user={user} />
                 <br/><br/>
-                <DisableButton onClick={updSt} status={active} />
+                { canEdit && <DisableButton onClick={updSt} status={active}/> }
                 <br/>
                 <Link onClick={(_e): void => sendReport(id, "enterprise")}>{translate("actions.report")}</Link>
             </div> }

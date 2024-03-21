@@ -28,7 +28,7 @@ import {TabData} from "../../../components/basic/TabHandler/defs";
 import VoteManager from "../../../components/basic/VoteManager";
 import * as paths from "../../../data/actions/path";
 import TabHandler from "../../../components/basic/TabHandler";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { IBoat } from "../../../data/models/boat";
 import {IUserMinimal} from "../../../components/basic/Comment/defs";
 import {IPath} from "../../../data/models/path";
@@ -74,6 +74,7 @@ const PathPage = ({ me, sendReport }: IPathPageProps): React.JSX.Element => {
     const {t: translate} = useTranslation();
     const t = (key: string): string => translate(LANG_PATH + "." + key);
     const styles = useStyles();
+    const navigate = useNavigate();
     const id: string = useParams<{ id: string }>().id as string;
     const [ data, setData ] = useState<IPath | null>(null);
     const [ title, setTitle ] = useState<string>("");
@@ -158,7 +159,7 @@ const PathPage = ({ me, sendReport }: IPathPageProps): React.JSX.Element => {
                 <UploadedBySection user={user} />
                 <UploadDateSection date={uploadDate} />
                 <br/><br/>
-                <DisableButton onClick={updSt} status={active} />
+                {canEdit && <DisableButton onClick={updSt} status={active}/>}
                 <br/>
                 <Link onClick={(_e): void => sendReport(id, "path")}>{translate("actions.report")}</Link>
             </div> }
@@ -171,7 +172,7 @@ const PathPage = ({ me, sendReport }: IPathPageProps): React.JSX.Element => {
                         description={<Caption1>
                             {t(strings.explorer.des)}
                         </Caption1>}
-                        action={<Button appearance={"primary"} icon={<MapFilled />}>{translate("actions.explore")}</Button>}
+                        action={<Button appearance={"primary"} onClick={(): void => { navigate("/paths/" + id + "/map"); }} icon={<MapFilled />}>{translate("actions.explore")}</Button>}
                     />
                 </Card>
                 <ScheduleLightHandler id={id} />

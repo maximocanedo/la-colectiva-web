@@ -354,6 +354,18 @@
 		}
 	},
 	"components": {
+		"DisableButton": {
+			"before": {
+				"disable": {
+					"title": "¿Deshabilitar este elemento?",
+					"description": "El elemento no estará disponible para otros usuarios y se omitirá en las búsquedas. "
+				},
+				"enable": {
+					"title": "¿Habilitar este elemento?",
+					"description": "El elemento volverá a estar disponible para otros usuarios y aparecerá en las búsquedas. "
+				}
+			}
+		},
 		"schedules": {
 			"SchedulePair": {
 				"moreInfo": "Más información: ",
@@ -810,6 +822,7 @@
 		},
 		"enterprise": {
 			"EnterpriseSelector": {
+				"noselected": "Ninguna empresa seleccionada",
 				"placeholder": "Seleccione una empresa"
 			},
 			"EnterpriseNameField": {
@@ -935,6 +948,7 @@
 		},
 		"boat": {
 			"BoatSelector": {
+				"noselected": "Ninguna embarcación seleccionada",
 				"placeholder": "Seleccione una embarcación"
 			},
 			"NameField": {
@@ -998,6 +1012,7 @@
 		},
 		"region": {
 			"RegionSelector": {
+				"noselected": "No se seleccionó ninguna región",
 				"placeholder": "Seleccione una región"
 			},
 			"RegionName": {
