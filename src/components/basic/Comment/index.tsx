@@ -16,7 +16,7 @@ import {
     DialogContent,
     DialogBody,
     DialogActions,
-    Textarea, useId
+    Textarea, useId, Card, CardHeader, Caption1, CardFooter
 } from "@fluentui/react-components";
 import UserLink from "../../user/UserLink";
 import {useTranslation} from "react-i18next";
@@ -25,6 +25,7 @@ import * as comments from "../../../data/actions/comment";
 import {IComment} from "../../../data/models/comment";
 import {CommonResponse} from "../../../data/utils";
 import {log} from "../../page/definitions";
+import { MoreVerticalRegular } from "@fluentui/react-icons";
 export function getTimePassed(date: Date): [number, Intl.RelativeTimeFormatUnit] {
     const now = Date.now();
     const diff =  (now - date.getTime());
@@ -44,7 +45,7 @@ export function getTimePassed(date: Date): [number, Intl.RelativeTimeFormatUnit]
         return [ 0 - Math.floor(diff / 31556952000), 'years'];
     }
 }
-const Comment = ({ id, parentId, handlerId, __v: ver, content: c, author, me, uploaded, remover }: ICommentComponentProps): React.JSX.Element => {
+const Comment = ({ id, parentId, handlerId, __v: ver, content: c, author, me, uploaded, remover, sendReport }: ICommentComponentProps): React.JSX.Element => {
     log("Comment");
     const LANG_PATH = "components.comments.comment";
     const commentComponentId: string = useId("Handler$" + handlerId + "_Comment$" + id);
@@ -90,7 +91,7 @@ const Comment = ({ id, parentId, handlerId, __v: ver, content: c, author, me, up
     };
 
     if(deleted) return (<></>);
-    return (
+    const oldElement = (
         <div id={commentComponentId} key={commentComponentId} className="comment">
             <div className="comment_start">
                 <Avatar name={author.name} size={32} />
@@ -101,10 +102,7 @@ const Comment = ({ id, parentId, handlerId, __v: ver, content: c, author, me, up
                     {editing && <>
                         <UserLink data={author} from={author.username} />
                         <div className="editingContainer">
-                            <Textarea
-                                value={value}
-                                onChange={(e): void => setValue(e.target.value)}
-                            />
+
                             <div className="horFlexEnd">
                                 <Button
                                     disabled={content === value}
@@ -133,24 +131,63 @@ const Comment = ({ id, parentId, handlerId, __v: ver, content: c, author, me, up
                         </MenuList>
                     </MenuPopover>
                 </Menu>}</div>
-                { canDelete && <Dialog open={showDeleteDialog} modalType="alert">
-                    <DialogSurface>
-                        <DialogBody>
-                            <DialogTitle>{t("dialog.title")}</DialogTitle>
-                            <DialogContent>
-                                {t("dialog.description")}
-                            </DialogContent>
-                            <DialogActions>
-                                <DialogTrigger disableButtonEnhancement>
-                                    <Button onClick={(_e): void => setDeleteDialogShowing(false)} appearance="secondary">{t("edit.btnClose")}</Button>
-                                </DialogTrigger>
-                                <Button onClick={del} appearance="primary">{t("menu.options.delete")}</Button>
-                            </DialogActions>
-                        </DialogBody>
-                    </DialogSurface>
-                </Dialog>}
+
             </div>
         </div>
     );
+    return <Card appearance={"outline"} className={"comment"}>
+        <CardHeader
+            header={<UserLink data={author} from={author.username}/>}
+            description={<Caption1>{f + "   "}{edited ? "("+t("st.edited")+")   " : ""}</Caption1>}
+            action={ showMenu ? <Menu>
+                <MenuTrigger disableButtonEnhancement>
+                    <Button appearance={"subtle"} icon={<MoreVerticalRegular />}></Button>
+                </MenuTrigger>
+                <MenuPopover>
+                    <MenuList>
+                        { (canEdit && !editing) && <MenuItem onClick={(_e): void => setEditState(true)}>{t("menu.options.edit")}</MenuItem>}
+                        { canDelete && <MenuItem onClick={(_e): void => setDeleteDialogShowing(true)}>{t("menu.options.delete")}</MenuItem>}
+                        <MenuItem onClick={(): void => {
+                            sendReport(id, "comment");
+                        }}>{translationService("actions.report")}</MenuItem>
+                    </MenuList>
+                </MenuPopover>
+            </Menu> : <></> }
+        />
+        { !editing && content }
+        { editing && <Textarea
+            value={value}
+            onChange={(e): void => setValue(e.target.value)}
+        />}
+        { editing && <CardFooter className="horFlexEnd">
+            <Button
+                disabled={content === value}
+                appearance={"primary"}
+                onClick={edit}>
+                {t('edit.btnEdit')}
+            </Button>
+            <Button
+                onClick={closeEditMode}
+                appearance={(content === value) ? "primary" : "secondary"}>
+                {(content === value) ? t("edit.btnClose") : t('edit.btnCancel')}
+            </Button>
+        </CardFooter>}
+        { canDelete && <Dialog open={showDeleteDialog} modalType="alert">
+            <DialogSurface>
+                <DialogBody>
+                    <DialogTitle>{t("dialog.title")}</DialogTitle>
+                    <DialogContent>
+                        {t("dialog.description")}
+                    </DialogContent>
+                    <DialogActions>
+                        <DialogTrigger disableButtonEnhancement>
+                            <Button onClick={(_e): void => setDeleteDialogShowing(false)} appearance="secondary">{t("edit.btnClose")}</Button>
+                        </DialogTrigger>
+                        <Button onClick={del} appearance="primary">{t("menu.options.delete")}</Button>
+                    </DialogActions>
+                </DialogBody>
+            </DialogSurface>
+        </Dialog>}
+    </Card>;
 };
 export default Comment;

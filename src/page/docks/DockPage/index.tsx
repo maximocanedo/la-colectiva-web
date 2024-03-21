@@ -209,7 +209,8 @@ const DockPage = ({ me, sendReport }: IDockPageProps): React.JSX.Element => {
             </div> }
             { tab === "pics" && <div className="resource-page-field-container">
                 <PictureHandler
-                    key={id + "$PictureHandler"} me={me} id={id}
+                    key={id + "$PictureHandler"}
+                    {...{ id, me, sendReport }}
                     fetcher={docks.pictures.list}
                     poster={docks.pictures.upload}
                     remover={docks.pictures.rem}
@@ -217,7 +218,7 @@ const DockPage = ({ me, sendReport }: IDockPageProps): React.JSX.Element => {
             </div> }
             { tab === "comments" && <div className="resource-page-field-container">
                 <CommentHandler
-                    id={id} me={me}
+                    {...{ id, me, sendReport }}
                     fetcher={docks.comments.get}
                     remover={docks.comments.del}
                     poster={docks.comments.post} />

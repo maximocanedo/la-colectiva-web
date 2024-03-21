@@ -148,7 +148,7 @@ const RegionPage = ({ me, sendReport }: RegionPageProps): React.JSX.Element => {
             </div>}
             {tab === "comments" && <div className="resource-page-field-container">
                 <CommentHandler
-                    id={id} me={me}
+                    {...{ id, me, sendReport }}
                     fetcher={regions.comments.get}
                     remover={regions.comments.del}
                     poster={regions.comments.post}/>

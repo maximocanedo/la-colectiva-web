@@ -37,7 +37,7 @@ const commentsReducer = (state: IComment[], action: { type: string, payload: ICo
 };
 
 
-const CommentHandler = ({ id, fetcher, remover, poster, me }: ICommentHandlerProps): React.JSX.Element => {
+const CommentHandler = ({ id, fetcher, remover, poster, me, sendReport }: ICommentHandlerProps): React.JSX.Element => {
     log("CommentHandler");
     const LANG_PATH = "components.comments.handler";
     const handlerId: string = useId("commentHandler");
@@ -86,8 +86,10 @@ const CommentHandler = ({ id, fetcher, remover, poster, me }: ICommentHandlerPro
     };
 
     return <div className={"commentHandler"}>
-            { comments.map((c: IComment) => (<Comment __v={c.__v} key={c._id} handlerId={handlerId} parentId={id} id={c._id} me={me} author={c.user as IUserMinimal} remover={remover} content={c.content} uploaded={new Date(c.uploadDate)} />)) }
+        <div className="commentGroup">
+            { comments.map((c: IComment) => (<Comment sendReport={sendReport} __v={c.__v} key={c._id} handlerId={handlerId} parentId={id} id={c._id} me={me} author={c.user as IUserMinimal} remover={remover} content={c.content} uploaded={new Date(c.uploadDate)} />)) }
             <LoadMoreButton loading={downloading} onClick={more} />
+        </div>
         {canCreate && <div  className="comments_createBox">
                 <Textarea disabled={posting} className="cbx_textarea" placeholder={t("textarea.placeholder")} value={draft} onChange={(e) => setDraft(e.target.value)} />
                 <Button onClick={publish} disabled={posting} appearance={"primary"} icon={posting ? <Spinner size={"extra-tiny"} /> : <Send24Filled />} />

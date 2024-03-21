@@ -152,7 +152,8 @@ const BoatPage = (props: IBoatPageProps): React.JSX.Element => {
             </div> }
             { tab === "pics" && <div className="resource-page-field-container">
                 <PictureHandler
-                    key={id + "$PictureHandler"} me={me} id={id}
+                    key={id + "$PictureHandler"}
+                    {...{ id, me, sendReport }}
                     fetcher={boats.pictures.list}
                     poster={boats.pictures.upload}
                     remover={boats.pictures.rem}
@@ -160,7 +161,7 @@ const BoatPage = (props: IBoatPageProps): React.JSX.Element => {
             </div> }
             { tab === "comments" && <div className="resource-page-field-container">
                 <CommentHandler
-                    id={id} me={me}
+                    {...{ id, me, sendReport }}
                     fetcher={boats.comments.get}
                     remover={boats.comments.del}
                     poster={boats.comments.post} />

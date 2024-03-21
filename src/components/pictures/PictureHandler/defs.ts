@@ -4,6 +4,7 @@ import {IPaginator} from "../../../data/models/comment";
 import {OnPostResponse} from "../../../data/actions/picture";
 
 import {Myself} from "../../page/definitions";
+import {RecordCategory} from "../../../data/actions/reports";
 
 export interface IPictureHandlerProps {
     id: string;
@@ -11,4 +12,5 @@ export interface IPictureHandlerProps {
     fetcher(id: string, paginator: IPaginator): Promise<IPictureDetails[]>;
     poster(id: string, image: Blob, description: string): Promise<OnPostResponse>;
     remover(id: string, photoId: string): Promise<void>;
+    sendReport(id: string, category: RecordCategory): void;
 }

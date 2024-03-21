@@ -42,6 +42,7 @@ const Footer = ({ me }: FooterProps): React.JSX.Element => {
             <Link onClick={(e) => navigate("/paths")}>{t('footer.links.paths')}</Link>
             <Link onClick={(e) => navigate("/regions")}>{t('footer.links.regions')}</Link>
             <Link onClick={(e) => navigate("/enterprises")}>{t('footer.links.enterprises')}</Link>
+            <Link onClick={(e) => navigate("/reports")}>{t('footer.links.reports')}</Link>
         </div>
         <div className="row"><i>© Máximo Tomás Canedo · Todos los derechos reservados </i></div>
     </footer>)

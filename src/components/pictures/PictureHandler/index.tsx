@@ -37,7 +37,7 @@ const picsReducer = (state: IPictureDetails[], {type, payload}: { type: string, 
             return [ ...state ];
     }
 };
-const PictureHandler = ({fetcher, id, poster, me, remover}: IPictureHandlerProps): React.JSX.Element => {
+const PictureHandler = ({fetcher, id, poster, me, remover, sendReport}: IPictureHandlerProps): React.JSX.Element => {
     log("PictureHandler");
     const { t: translate } = useTranslation();
     const t = (key: string): string => translate(`${LANG_PATH}.${key}`);
@@ -68,6 +68,7 @@ const PictureHandler = ({fetcher, id, poster, me, remover}: IPictureHandlerProps
         { pics.map(pic => <>
             <PictureCard
                 docId={id}
+                sendReport={sendReport}
                 deletable={isAdmin || (me !== null && me._id === pic.user._id && me.active && me.role >= 2)}
                 remover={remover}
                 onDelete={(): void => dispatchPics({ type: REMOVE, payload: pic })}

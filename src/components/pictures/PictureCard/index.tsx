@@ -47,7 +47,7 @@ const strings = {
         }
     }
 };
-const PictureCard = ({ deletable, _id, url, user, uploadDate, description, me, onDelete, remover, docId }: IPictureCardProps): React.JSX.Element => {
+const PictureCard = ({ sendReport, deletable, _id, url, user, uploadDate, description, me, onDelete, remover, docId }: IPictureCardProps): React.JSX.Element => {
     const { t: translate } = useTranslation();
     log("PictureCard");
     const t = (key: string): string => translate(`${LANG_PATH}.${key}`);
@@ -122,9 +122,12 @@ const PictureCard = ({ deletable, _id, url, user, uploadDate, description, me, o
             <MenuList>
                 <MenuItem onClick={(): void => download()}>{t(strings.actions.download)}</MenuItem>
                 <MenuItem onClick={(): void => gotoProfile()}>{t(strings.actions.gotoProfile)}</MenuItem>
-                {deletable && <Divider/>}
+                <Divider/>
                 {deletable && <MenuItem
                     onClick={(): void => setRemoveDialogShowingState(true)}>{t(strings.actions.remove)}</MenuItem>}
+                <MenuItem onClick={(): void => {
+                    sendReport(_id, "picture");
+                }}>{translate("actions.report")}</MenuItem>
             </MenuList>
         </MenuPopover>
     </Menu>);
@@ -163,7 +166,7 @@ const PictureCard = ({ deletable, _id, url, user, uploadDate, description, me, o
                 </div>
                 {showComments && <div className={"rw"}>
                     <CommentHandler
-                        id={_id} me={me}
+                        {...{ id: _id, me, sendReport }}
                         fetcher={pictures.comments.get}
                         poster={pictures.comments.post}
                         remover={pictures.comments.del} />

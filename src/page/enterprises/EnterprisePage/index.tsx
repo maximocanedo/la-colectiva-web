@@ -169,7 +169,7 @@ const EnterprisePage = (props: EnterprisePageProps): React.JSX.Element => {
             </div> }
             { tab === "comments" && <div className="resource-page-field-container">
                 <CommentHandler
-                    id={id} me={me}
+                    {...{ id, me, sendReport }}
                     fetcher={enterprises.comments.get}
                     remover={enterprises.comments.del}
                     poster={enterprises.comments.post} />

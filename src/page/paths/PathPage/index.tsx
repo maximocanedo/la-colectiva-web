@@ -181,7 +181,7 @@ const PathPage = ({ me, sendReport }: IPathPageProps): React.JSX.Element => {
                 <AvailabilityHandler me={me} id={id} editable={canEdit} />
             </div> }
             { tab === "comments" && <div className="resource-page-field-container">
-                <CommentHandler id={id} me={me} fetcher={paths.comments.get} poster={paths.comments.post} remover={paths.comments.del} />
+                <CommentHandler {...{ id, me, sendReport }} fetcher={paths.comments.get} poster={paths.comments.post} remover={paths.comments.del} />
             </div> }
             { tab === "history" && <div className="resource-page-field-container">
                 <HistoryHandler id={id} me={me} fetcher={paths.fetchHistory} />

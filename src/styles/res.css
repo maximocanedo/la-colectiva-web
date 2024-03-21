@@ -109,3 +109,11 @@
 .commentHandler, .historyHandler {
     width: 100%;
 }
+.commentHandler .commentGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 5px;
+}
