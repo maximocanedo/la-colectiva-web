@@ -85,6 +85,7 @@ const darkTheme: Theme = {
 
 darkTheme.colorBrandForeground1 = colectiva[110];
 darkTheme.colorBrandForeground2 = colectiva[120];
+
 function App(): ReactElement {
 	const styles = useStyles();
 	const [ me, loadActualUser ] = useState<Myself>(null);
@@ -92,6 +93,10 @@ function App(): ReactElement {
 	const [ reportedCat, setReportedCat ] = useState<RecordCategory>("other");
 	const [ reporting, setReportingState ] = useState<boolean>(false);
 
+	const logout = (): void => {
+		localStorage.removeItem("la-colectiva-token");
+		loadActualUser(null);
+	};
 	const sendReport = (id: string, category: RecordCategory): void => {
 		setReportedId(id);
 		setReportedCat(category);
@@ -150,7 +155,7 @@ function App(): ReactElement {
 						</Routes>
 					</main>
 					<Toaster toasterId={toasterId} />
-					<Footer me={me} />
+					<Footer me={me} logout={logout} />
 					<ReportDialog id={reportedId} open={reporting} type={reportedCat} close={(): void => setReportingState(false)} />
 
 				</FluentProvider>

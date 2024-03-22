@@ -5,6 +5,7 @@ import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 export interface FooterProps {
     me: Myself;
+    logout(): void;
 }
 const strings = {
     nosession: "nosession",
@@ -12,27 +13,25 @@ const strings = {
     signup: "signup",
     leave: "leave"
 }
-const Footer = ({ me }: FooterProps): React.JSX.Element => {
+const Footer = ({ me, logout }: FooterProps): React.JSX.Element => {
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const loc: string = encodeURI(window.location.pathname);
     return (<footer className={""}>
         <div className="row">
             {
                 (me === null || me === undefined) &&
                 <div className={"cell lgd"}>
                     <span>{ t("footer.st.nosession") }</span>
-                    <Link onClick={(e) => navigate("/login")}>{ t("footer.actions.login") }</Link>
-                    <Link onClick={(e) => navigate("/signup")}>{ t("footer.actions.signup") }</Link>
+                    <Link onClick={(e) => navigate("/login?next="+loc)}>{ t("footer.actions.login") }</Link>
+                    <Link onClick={(e) => navigate("/signup?next="+loc)}>{ t("footer.actions.signup") }</Link>
                 </div>
             }
             {
                 me !== null && me !== undefined && me.active &&
                 <div className="cell lgd">
                     <span>{me.name} (@{me.username})</span>
-                    <Link onClick={(e) => {
-                        localStorage.removeItem("la-colectiva-token");
-                        navigate("/");
-                    }}>{ t("footer.actions.leave") }</Link>
+                    <Link onClick={(e) => logout()}>{ t("footer.actions.leave") }</Link>
                 </div>
             }
         </div>

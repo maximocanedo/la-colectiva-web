@@ -7,6 +7,9 @@ import * as history from "../actions/history";
 import {IRegion, IRegionCreate, RegionType} from "../models/region";
 import {VoteStatus} from "../models/vote";
 import {IHistoryEvent} from "../models/IHistoryEvent";
+import {download} from "./picture";
+
+const downloadOnLoad: boolean = true;
 const getPrefix = (id: string): string => "regions/" + id;
 type RegionEditData = { name: string } | { type: RegionType } | { name: string, type: RegionType };
 /**
@@ -57,7 +60,6 @@ export const enable = async (id: string): Promise<CommonResponse> => {
  */
 export const create = async (data: IRegionCreate): Promise<IRegion> => {
     const call: Response = await u.post("regions", data);
-    const { status }: Response = call;
     if(call.ok) {
         const data = await call.json();
         return {
@@ -79,20 +81,119 @@ export const find = async (id: string): Promise<IRegion> => {
     const { status }: Response = call;
     const data = await call.json();
     if(status === 200) {
+        save(data).then(() => {
+            console.log("saved");
+        }).catch(err => console.error(err));
         return data.data[0];
     } else throw new Err(data.error);
 };
+
+
+const open = (): Promise<IDBDatabase> => {
+    const request: IDBOpenDBRequest = indexedDB.open("regions", 1);
+    return new Promise<IDBDatabase>((resolve, reject): void => {
+        request.onupgradeneeded = function(evt: Event): void {
+            const db: IDBDatabase = request.result;
+            const store: IDBObjectStore = db.createObjectStore("regions", { keyPath: "_id" });
+            const nameIndex: IDBIndex = store.createIndex("byName", "name", {});
+            const typeIndex: IDBIndex = store.createIndex("byType", "type", {});
+            const activeIndex: IDBIndex = store.createIndex("byState", "active", {});
+            const uploadIndex: IDBIndex = store.createIndex("byUploadDate", "uploadDate", {});
+            const versionIndex: IDBIndex = store.createIndex("byVersion", "version", {});
+        };
+        request.onsuccess = function(evt: Event): void {
+            resolve(request.result);
+        };
+
+        request.onerror = function(evt: Event): void {
+            reject(request.error);
+        };
+    });
+};
+/**
+ * Guarda un registro en la memoria local para su uso fuera de línea.
+ * @param data Datos a guardar.
+ */
+export const save = async (data: IRegion[]): Promise<void> => {
+    const db: IDBDatabase = await open();
+    return new Promise<void>((resolve, reject): void => {
+        const transaction: IDBTransaction = db.transaction("regions", "readwrite");
+        const store: IDBObjectStore = transaction.objectStore("regions");
+        data.map((item: IRegion) => store.put({...item, downloaded: new Date(Date.now())}));
+        transaction.oncomplete = function(): void {
+            resolve();
+        };
+        transaction.onerror = function(): void {
+            reject(transaction.error);
+        };
+    });
+};
+export const offlineSearch = async (q: string = "", paginator: IPaginator = {p:0,itemsPerPage:10}): Promise<IRegion[]> => {
+    let data: IRegion[] = [];
+    const db: IDBDatabase = await open();
+    return new Promise<IRegion[]>((resolve, reject): void => {
+        const transaction: IDBTransaction = db.transaction("regions", "readonly");
+        const store: IDBObjectStore = transaction.objectStore("regions");
+        // Buscar por nombre únicamente
+        const index: IDBIndex = store.index("byName");
+        const request: IDBRequest<IDBCursorWithValue | null> = index.openCursor();
+        const skip: number = paginator.p * paginator.itemsPerPage;
+        const size: number = paginator.itemsPerPage;
+        let i: number = 0;
+        request.onsuccess = function(): void {
+            const cursor: IDBCursorWithValue | null = request.result;
+            if(cursor) {
+                const value: IRegion = cursor.value as IRegion;
+                if(value.name.search(q) > -1) {
+                    if(i >= skip && data.length < size) data.push(value);
+                    i++;
+                }
+                cursor.continue();
+            } else {
+                resolve(data);
+            }
+        };
+        request.onerror = function(): void {
+            reject(transaction.error);
+        }
+
+    });
+}
+(async (): Promise<void> => {
+    try {
+        const data: IRegion[] = await offlineSearch("", { p: 0, itemsPerPage: 6 });
+        console.table(data);
+    } catch(err) {
+        console.error(err);
+    }
+})();
+
+
 /**
  * Buscar, listar y/o paginar recursos.
  * @param q Texto a buscar.
  * @param paginator Paginador.
  */
 export const search = async (q: string = "", paginator: IPaginator = { p: 0, itemsPerPage: 10 }): Promise<IRegion[]> => {
-    const call: Response = await u.get(`regions/?q=${q}&p=${paginator.p}&itemsPerPage=${paginator.itemsPerPage}`);
-    const { status }: Response = call;
-    const { data, error } = await call.json();
-    if(status === 200) return data;
-    else throw new Err(error);
+    try {
+        const call: Response = await u.get(`regions/?q=${q}&p=${paginator.p}&itemsPerPage=${paginator.itemsPerPage}`);
+        const { status }: Response = call;
+        const { data, error } = await call.json();
+        if(status === 200) {
+            if(downloadOnLoad)
+                save(data).then((): void => { console.log("Saved!"); }).catch(err => console.error(err));
+            return data;
+        } else throw new Err(error);
+    } catch(err: any) {
+        if(!downloadOnLoad && (!err || !('code' in err) || err.code !== "L-01")) throw new Err(err);
+        console.error("Error al intentar cargar registros. Se intentará usar los registros fuera de línea. ");
+        try {
+            const data: IRegion[] = await offlineSearch(q, paginator);
+            return data;
+        } catch(err: any) {
+            throw new Err(err);
+        }
+    }
 };
 export const votes = {
     get: async (id: string): Promise<VoteStatus> => getVotes(getPrefix(id)),

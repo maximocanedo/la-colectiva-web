@@ -73,6 +73,7 @@ export interface IRegion {
     active?: boolean;
     uploadDate?: Date | string;
     __v?: number;
+    downloaded?: Date | string;
 }
 export interface IRegionCreate {
     name: string;

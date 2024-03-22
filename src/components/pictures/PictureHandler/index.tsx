@@ -5,7 +5,8 @@ import {IPictureDetails} from "../../../data/models/picture";
 import LoadMoreButton from "../../basic/buttons/LoadMoreButton";
 import PictureCard from "../PictureCard";
 import PicturePoster from "../PicturePoster";
-import {log} from "../../page/definitions";
+import {LoadState, log} from "../../page/definitions";
+import LoadTriggerButton from "../../basic/buttons/LoadTriggerButton";
 
 const LANG_PATH: string = "";
 const strings = {};
@@ -42,24 +43,30 @@ const PictureHandler = ({fetcher, id, poster, me, remover, sendReport}: IPicture
     const { t: translate } = useTranslation();
     const t = (key: string): string => translate(`${LANG_PATH}.${key}`);
     const [ page, setPage ] = useState<number>(0);
-    const [ size, setSize ] = useState<number>(3);
-    const [ loading, setLoadingState ] = useState<boolean>(false);
+    const size: number = 3;
+    const [ loadState, setLoadState ] = useState<LoadState>("initial");
     const [ pics, dispatchPics ] = useReducer(picsReducer, []);
 
     const canPost: boolean = me !== undefined && me !== null && me.active && me.role >= 2;
     const isAdmin: boolean = me !== undefined && me !== null && me.active && me.role === 3;
-    const fetch = () => {
-        setLoadingState(true);
+    const fetchPictures = (): void => {
+        setLoadState("loading");
         fetcher(id, { p: page, itemsPerPage: size })
             .then((pics: IPictureDetails[]): void => {
                 pics.map(payload => dispatchPics({type: ADD, payload}));
-            }).catch(err => console.error(err)).finally((): void => {
-                setLoadingState(false);
-        })
+                if(pics.length === size) {
+                    setPage(page + 1);
+                    setLoadState("loaded");
+                } else setLoadState("no-data");
+            })
+            .catch(err => {
+                console.error(err);
+                setLoadState("err");
+            });
     };
     useEffect(() => {
-        fetch();
-    }, [ page ]);
+        fetchPictures();
+    }, []);
 
 
     return (<div>
@@ -73,7 +80,7 @@ const PictureHandler = ({fetcher, id, poster, me, remover, sendReport}: IPicture
                 remover={remover}
                 onDelete={(): void => dispatchPics({ type: REMOVE, payload: pic })}
                 key={"picCard-" + pic._id} me={me} {...pic} /><br /></>) }
-        <LoadMoreButton loading={loading} onClick={() => setPage(page + 1)} />
+        <LoadTriggerButton onClick={fetchPictures} state={loadState} />
     </div>);
 };
 export default PictureHandler;

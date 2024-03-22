@@ -3,8 +3,8 @@ import {useTranslation} from "react-i18next";
 import {IRegionFinderProps} from "./defs";
 import {useStyles} from "./styles";
 import {SearchBox} from "@fluentui/react-search-preview";
-import {Button, Card, Subtitle2} from "@fluentui/react-components";
-import {Add24Filled, OpenRegular, Search20Filled} from "@fluentui/react-icons";
+import {Button, Card, Subtitle2, Tag} from "@fluentui/react-components";
+import {Add24Filled, ArrowSyncCheckmarkRegular, CheckmarkUnderlineCircleFilled, OpenRegular, Search20Filled} from "@fluentui/react-icons";
 import {IRegion} from "../../../data/models/region";
 import {getRegionTypeLangPathNameFor} from "../../../page/RegionPage/defs";
 import LoadMoreButton from "../../basic/buttons/LoadMoreButton";
@@ -12,7 +12,6 @@ import * as regions from "../../../data/actions/region";
 import {useNavigate} from "react-router-dom";
 
 const LANG_PATH: string = "pages.Regions";
-const strings = {};
 const resultsReducer = (state: IRegion[], action: { type: string, payload: IRegion | IRegion[] }): IRegion[] => {
     const exists = (_id: string): boolean => !(state.every((x: IRegion): boolean => x._id !== _id));
     switch(action.type) {
@@ -35,7 +34,7 @@ const RegionFinder = ({ creatable, onSelect, icon }: IRegionFinderProps): React.
     const [ searching, setSearchingState ] = useState<boolean>(false);
     const [ results, dispatchResults ] = useReducer(resultsReducer, []);
     const [ page, setPage ] = useState<number>(0);
-    const [ size, ] = useState<number>(10);
+    const [ size, ] = useState<number>(3);
     const navigate = useNavigate();
     const canCreate: boolean = creatable;
     const styles = useStyles();
@@ -50,7 +49,7 @@ const RegionFinder = ({ creatable, onSelect, icon }: IRegionFinderProps): React.
         });
     };
     useEffect(() => {
-        search(0, 10);
+        search(0, 3);
         // eslint-disable-next-line
     }, [ ]);
 
@@ -92,12 +91,17 @@ const RegionFinder = ({ creatable, onSelect, icon }: IRegionFinderProps): React.
         </div>
         <div className={"searchresults"}>
             {results.map((result: IRegion) => {
+                console.log(result);
+
                 const typel: string = result.type === undefined ? "" : translate(getRegionTypeLangPathNameFor((result.type) as number));
                 const fullName: string = translate("models.region.longName").replace("%type", typel).replace("%name", result.name);
 
                 return <Card onClick={(): void => onSelect(result)} appearance={"subtle"} className={"regionCard"}>
-                    <Subtitle2>{fullName}</Subtitle2>
-                    { icon !== null && <Button appearance={"subtle"} icon={icon !== undefined ? icon : <OpenRegular />}></Button>}
+                    <span>
+                        <Subtitle2>{fullName}</Subtitle2>
+                        { result.downloaded !== undefined && <CheckmarkUnderlineCircleFilled /> }
+                    </span>
+                    { icon !== null && <Button appearance={"subtle"} icon={(icon !== undefined ? icon : <OpenRegular />)}></Button>}
                 </Card>
             })}
             <LoadMoreButton loading={searching} onClick={more}/>

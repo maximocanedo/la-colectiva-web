@@ -1,16 +1,12 @@
 import {IHistoryHandlerProps} from "./defs";
 import React, {useEffect, useReducer, useState} from "react";
 import {StateManager} from "../../../page/SignUpPage/defs";
-import {IComment, ICommentFetchResponse} from "../../../data/models/comment";
-import Comment from "../Comment";
-import {IUserMinimal} from "../Comment/defs";
-import {Button, Spinner, Textarea} from "@fluentui/react-components";
-import {Send24Filled} from "@fluentui/react-icons";
 import {useTranslation} from "react-i18next";
 import {IHistoryEvent} from "../../../data/models/IHistoryEvent";
 import HistoryEvent from "../HistoryEvent";
 import LoadMoreButton from "../buttons/LoadMoreButton";
-import {log} from "../../page/definitions";
+import {LoadState, log} from "../../page/definitions";
+import LoadTriggerButton from "../buttons/LoadTriggerButton";
 
 const eventsReducer = (state: IHistoryEvent[], action: { type: string, payload: IHistoryEvent | string }): IHistoryEvent[] => {
     switch(action.type) {
@@ -34,35 +30,35 @@ const HistoryHandler = ({ id, fetcher, me }: IHistoryHandlerProps): React.JSX.El
     log("HistoryHandler");
     const LANG_PATH = "components.history.handler";
     const { t: translationService } = useTranslation();
-    const t = (path: string): string => translationService(LANG_PATH + "." + path);
     const [ page, setPage ]: StateManager<number> = useState<number>(1);
-    const [ size, setSize ]: StateManager<number> = useState<number>(5);
-    const [ downloading, setDownloadingState ]: StateManager<boolean> = useState<boolean>(false);
+    const size: number = 4;
+    const [ loadState, setLoadState ] = useState<LoadState>("initial");
     const [ events, dispatchEvents ] = useReducer(eventsReducer, []);
     const add = (comment: IHistoryEvent) => dispatchEvents({ type: "ADD", payload: comment });
 
 
-    const fetch = (p: number, itemsPerPage: number = size): void => {
-        setDownloadingState(true);
-        fetcher(id, { p, itemsPerPage })
+    const fetchEvents = (): void => {
+        setLoadState("loading");
+        fetcher(id, { p: page, itemsPerPage: size })
             .then((arr: IHistoryEvent[]): void => {
                 arr.map((co: IHistoryEvent) => add(co));
-            }).catch(err => {}).finally((): void => {
-                setDownloadingState(false);
+                if(arr.length === size) {
+                    setPage(page + 1);
+                    setLoadState("loaded");
+                } else setLoadState("no-data");
+            }).catch(err => {
+                console.error(err);
+                setLoadState("err");
         });
     };
     useEffect(() => {
-        fetch(0, 3);
+        fetchEvents();
     }, []);
 
-    const more = (): void => {
-        setPage(page + 1);
-        fetch(page);
-    };
 
-    return <div>
+    return <div className={"historyHandler"}>
             { events.map((c: IHistoryEvent) => (<HistoryEvent key={"HistoryEvent$" + c._id} {...c} time={new Date(c.time)} />)) }
-            <LoadMoreButton loading={downloading} onClick={more} />
+            <LoadTriggerButton state={loadState} onClick={fetchEvents} />
     </div>;
 };
 export default HistoryHandler;
