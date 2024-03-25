@@ -10,6 +10,8 @@ import {useNavigate} from "react-router-dom";
 import GottaLoginFirst from "../err/GottaLoginFirst";
 import {useTranslation} from "react-i18next";
 import {UserLogged} from "../../components/page/definitions";
+import WelcomingTitle from "../../components/basic/WelcomingTitle";
+import InsufficientRole from "../err/InsufficientRole";
 
 const LANG_PATH: string = "pages.RegionAdd";
 const strings = {
@@ -42,10 +44,11 @@ const RegionAdd = ({ me }: IRegionAddProps): React.JSX.Element => {
         me !== undefined && me !== null && me.active;
     const canCreate: boolean = loggedIn && ((me as UserLogged).role) >= 2;
     if(!loggedIn) return <GottaLoginFirst />;
+    if(!canCreate) return <InsufficientRole />;
 
     return (<>
         <div className={"page-content flex-down"}>
-            <Title2 align={"center"}>{t(strings.title)}</Title2>
+            <WelcomingTitle content={t(strings.title)} />
             <br/><br/>
             <RegionNameField disabled={loading} value={name} onChange={value => setName(value)} onCheck={isValid => setNameValidity(isValid)} />
             <RegionTypeSelectorField

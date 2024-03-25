@@ -40,6 +40,7 @@ import ResourceCommonHeader from "../../../components/page/ResourceCommonHeader"
 import ResourcePage from "../../../components/page/ResourcePage";
 import ResourcePageBody from "../../../components/page/ResourcePageBody";
 import DisableButton from "../../../components/basic/buttons/DisableButton";
+import NotFound from "../../err/NotFound";
 
 const TextBulletIcon: FluentIcon = bundleIcon(TextBulletListSquare24Filled, TextBulletListSquare24Regular);
 const CommentsIcon: FluentIcon = bundleIcon(CommentMultiple24Filled, CommentMultiple24Regular);
@@ -128,7 +129,7 @@ const DockPage = ({ me, sendReport }: IDockPageProps): React.JSX.Element => {
 
     const canEdit: boolean = me !== null && me !== undefined && user !== null && user !== undefined
         && me.active && ((me._id === user._id && me.role === 2) || (me.role === 3));
-    if(data === null) return <></>;
+    if(data === null) return <NotFound />;
 
     return <ResourcePage>
         <ResourceCommonHeader

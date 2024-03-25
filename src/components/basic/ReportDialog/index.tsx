@@ -14,10 +14,11 @@ import {IReportDialogProps} from "./defs";
 import {useStyles} from "./styles";
 import {ReportReason} from "../../../data/actions/reports";
 import * as reports from "../../../data/actions/reports";
+import {useNavigate} from "react-router-dom";
 
 const LANG_PATH: string = "report";
 const strings = {};
-const ReportDialog = ({id, open, type, close}: IReportDialogProps): React.JSX.Element => {
+const ReportDialog = ({id, open, type, close, me}: IReportDialogProps): React.JSX.Element => {
     const {t: translate} = useTranslation();
     const t = (key: string): string => translate(LANG_PATH + "." + key);
     const styles = useStyles();
@@ -25,6 +26,7 @@ const ReportDialog = ({id, open, type, close}: IReportDialogProps): React.JSX.El
     const [ details, setDetails ] = useState<string>("");
     const [ reporting, setReportingState ] = useState<boolean>(false);
     const [ valid, setValidity ] = useState<boolean>(false);
+    const navigate = useNavigate();
     const _rt: string[] = [0,1,2,3,4].map(i => "report.reason.i"+i);
     const _short_Label: string[] = _rt.map(e => translate(e + ".short"));
     const _description_Label: string[] = _rt.map(e => translate(e + ".des"));
@@ -43,12 +45,16 @@ const ReportDialog = ({id, open, type, close}: IReportDialogProps): React.JSX.El
                 close();
             });
     };
+    const canReport: boolean = me !== null && me !== undefined && me.active;
 
     return (<Dialog open={open}>
         <DialogSurface>
             <DialogBody>
-                <DialogTitle>{t("dialog.title")}</DialogTitle>
-                <DialogContent>
+                <DialogTitle>{canReport ? t("dialog.title") : t("dialog.nouserTitle")}</DialogTitle>
+                {!canReport && <DialogContent>
+                    {t("dialog.nouserDescription")}
+                </DialogContent>}
+                {canReport && <DialogContent>
                     <Tag>{t("type." + type) + " #" + id}</Tag>
                     <br/><br/>
                     <Field
@@ -61,11 +67,11 @@ const ReportDialog = ({id, open, type, close}: IReportDialogProps): React.JSX.El
                             id={`report-reason-default`}
                             defaultValue={_short_Label[reason]}
                             defaultSelectedOptions={[reason + ""]}
-                            onOptionSelect={(e,d): void => {
+                            onOptionSelect={(e, d): void => {
                                 setReason(Number(d.optionValue));
                             }}
                         >
-                            {_short_Label.map((l, i) => <Option key={l + i} text={l} value={i + ""} >{l}</Option>)}
+                            {_short_Label.map((l, i) => <Option key={l + i} text={l} value={i + ""}>{l}</Option>)}
                         </Dropdown>
                     </Field>
                     <br/>
@@ -78,26 +84,32 @@ const ReportDialog = ({id, open, type, close}: IReportDialogProps): React.JSX.El
                             maxLength={256}
                             value={details}
                             minLength={1}
-                            onChange={(e,d): void => {
+                            onChange={(e, d): void => {
                                 setDetails(d.value);
                             }}
                         ></Textarea>
                     </Field>
                     <br/>
-                </DialogContent>
+                </DialogContent>}
                 <DialogActions>
                     <DialogTrigger disableButtonEnhancement>
                         <Button disabled={reporting} onClick={(): void => close()} appearance="secondary">{translate("actions.cancel")}</Button>
                     </DialogTrigger>
-                    <DialogTrigger disableButtonEnhancement>
-                        <Button
+                        { canReport && <Button
                             disabled={reporting || !valid}
                             appearance="primary"
-                            icon={reporting ? <Spinner size={"extra-tiny"} /> : null}
+                            icon={reporting ? <Spinner size={"extra-tiny"}/> : null}
                             onClick={(): void => report()}>
                             {reporting ? translate("status.reporting") : translate("actions.report")}
-                        </Button>
-                    </DialogTrigger>
+                        </Button>}
+                        {!canReport && <Button
+                            appearance={"primary"}
+                            onClick={(): void => {
+                                close();
+                                navigate("/login?next=" + window.location.pathname);
+                            }}>
+                            {translate("actions.login")}
+                        </Button>}
                 </DialogActions>
             </DialogBody>
         </DialogSurface>

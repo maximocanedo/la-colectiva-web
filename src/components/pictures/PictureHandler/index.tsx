@@ -69,7 +69,7 @@ const PictureHandler = ({fetcher, id, poster, me, remover, sendReport}: IPicture
     }, []);
 
 
-    return (<div>
+    return (<div className={"fullWidth"}>
         { canPost && <PicturePoster poster={poster}  onPost={data => dispatchPics({type: POST, payload: data})} me={me} id={id} /> }
         <br/>
         { pics.map(pic => <>

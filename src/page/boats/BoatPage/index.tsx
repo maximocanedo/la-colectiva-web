@@ -40,6 +40,7 @@ import ResourcePage from "../../../components/page/ResourcePage";
 import ResourceCommonHeader from "../../../components/page/ResourceCommonHeader";
 import ResourcePageBody from "../../../components/page/ResourcePageBody";
 import DisableButton from "../../../components/basic/buttons/DisableButton";
+import NotFound from "../../err/NotFound";
 
 
 const LANG_PATH: string = "pages.boats.Boat";
@@ -113,7 +114,7 @@ const BoatPage = (props: IBoatPageProps): React.JSX.Element => {
     }, [id]);
 
 
-    if(boat === null) return <></>;
+    if(boat === null) return <NotFound />;
     const canEdit: boolean = (me !== null && boat.user !== undefined && boat.user !== null && me.active) && (((me._id === (boat.user as { _id: string })._id) && (me.role as Role >= 2)) || (me.role === 3));
 
 

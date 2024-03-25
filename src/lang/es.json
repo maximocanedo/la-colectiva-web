@@ -9,6 +9,8 @@
 		"pageSearchPlaceholder": "Buscá entre todos los reportes",
 		"dialog": {
 			"title": "Enviar un reporte",
+			"nouserTitle": "Ingresá para realizar un reporte",
+			"nouserDescription": "Para reportar un recurso, necesitás primero iniciar sesión. ",
 			"label": {
 				"reason": "Motivo del reporte: ",
 				"details": "Brindá más detalles: ",
@@ -104,13 +106,23 @@
 		"disable": "Deshabilitar",
 		"continue": "Continuar",
 		"options": "Opciones",
-		"explore": "Explorar"
+		"explore": "Explorar",
+		"login": "Iniciar sesión",
+		"back": "Volver"
 	},
 	"err": {
 		"couldntUpdate": "No se pudo actualizar. ",
 		"GottaLoginFirst": {
 			"title": "Iniciá sesión para acceder a esta página.",
 			"description": "Oops, parece que has llegado a una página restringida. Por favor, inicia sesión con tu cuenta para continuar. "
+		},
+		"InsufficientRole": {
+			"title": "No tenés permiso para acceder a esta página. ",
+			"description": "Solicitá que tu cuenta sea ascendida a Moderador enviando un mensaje privado por medio de cualquiera de las redes sociales de La Colectiva, las cuales encontrarás al final de esta página. "
+		},
+		"NotFound": {
+			"title": "Recurso no encontrado. ",
+			"description": "El recurso al que intentaste acceder no se encuentra disponible. "
 		}
 	},
 	"av": {
@@ -354,6 +366,32 @@
 		}
 	},
 	"components": {
+		"Drawer": {
+			"links": {
+				"home": "Inicio",
+				"boats": "Embarcaciones",
+				"dockmap": "Mapa de muelles",
+				"paths": "Recorridos",
+				"regions": "Regiones",
+				"enterprises": "Empresas"
+			}
+		},
+		"Next": {
+			"err": {
+				"emp": {
+					"title": "No se encontraron horarios",
+					"description": "Probá seleccionando otro muelle cercano. "
+				}
+			},
+			"label": {
+				"optionsDialog": "Opciones",
+				"useActualTime": "Usar la hora actual"
+			},
+			"placeholder": {
+				"from": "¿Dónde estás?",
+				"to": "¿A dónde querés ir?"
+			}
+		},
 		"LoadTriggerButton": {
 			"label": {
 				"loaded": "Cargar más",
@@ -1118,13 +1156,18 @@
 		"updated": "Actualizado correctamente. "
 	},
 	"footer": {
+		"loggingout": {
+			"title": "¿Querés cerrar sesión?",
+			"description": ""
+		},
 		"st": {
 			"nosession": "No iniciaste sesión. "
 		},
 		"actions": {
 			"login": "Ingresá",
 			"signup": "Registrate",
-			"leave": "Cerrar sesión"
+			"leave": "Cerrar sesión",
+			"me": "Mi perfil"
 		},
 		"links": {
 			"boats": "Embarcaciones",
@@ -1133,6 +1176,12 @@
 			"paths": "Recorridos",
 			"regions": "Regiones",
 			"reports": "Reportes"
+		}
+	},
+	"screens": {
+		"NoSchedulesForThisDockScreen": {
+			"title": "No hay horarios para este muelle",
+			"description": "Probá buscando en un muelle cercano. \nSi tenés los permisos correspondientes, registrá un horario para esta ubicación. "
 		}
 	}
 }

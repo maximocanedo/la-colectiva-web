@@ -118,3 +118,67 @@
     gap: 5px;
     padding: 10px 0px;
 }
+.sch_handler {
+    width: 100%;
+    margin-top: 10px;
+}
+.drawer-body {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0px 12px !important;
+    nav {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        width: 100%;
+    }
+    nav.drawer-body--firstNav {
+        height: 100%;
+    }
+}
+
+
+.col-brnd {
+    width: 100%;
+    height: auto;
+    max-height: 48px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 0px 30px;
+    & img {
+        width: 48px;
+        height: 48px;
+    }
+    .l {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .row {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: start;
+        }
+    }
+}
+
+.errPage {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 25px;
+}

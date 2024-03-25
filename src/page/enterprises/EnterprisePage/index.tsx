@@ -37,6 +37,7 @@ import ResourcePage from "../../../components/page/ResourcePage";
 import ResourceCommonHeader from "../../../components/page/ResourceCommonHeader";
 import ResourcePageBody from "../../../components/page/ResourcePageBody";
 import DisableButton from "../../../components/basic/buttons/DisableButton";
+import NotFound from "../../err/NotFound";
 
 
 const LANG_PATH: string = "pages.enterprises.Enterprise";
@@ -111,7 +112,7 @@ const EnterprisePage = (props: EnterprisePageProps): React.JSX.Element => {
     }, [id]);
 
 
-    if(enterprise === null) return <></>;
+    if(enterprise === null) return <NotFound />;
     const canEdit: boolean = (me !== null && enterprise.user !== undefined && enterprise.user !== null && me.active) && (((me._id === (enterprise.user as { _id: string })._id) && (me.role as Role >= 2)) || (me.role === 3));
 
 

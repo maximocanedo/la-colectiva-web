@@ -121,9 +121,9 @@ const PlaceSelector = ({ value, onChange }: IPlaceSelectorProps): React.JSX.Elem
         { showMap && <MapContainer
             className="place-selector--map"
             center={value}
-            zoom={18}
+            zoom={15}
             minZoom={12}
-            maxZoom={20}
+            maxZoom={18}
             scrollWheelZoom={true}>
             <X />
             <TileLayer

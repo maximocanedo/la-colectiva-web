@@ -11,6 +11,8 @@ import EnterpriseDescriptionField from "./EnterpriseDescriptionField";
 import EnterpriseFoundationDateField from "./EnterpriseFoundationDateField";
 import {IEnterprise} from "../../../data/models/enterprise";
 import {UserLogged} from "../../../components/page/definitions";
+import WelcomingTitle from "../../../components/basic/WelcomingTitle";
+import InsufficientRole from "../../err/InsufficientRole";
 
 const LANG_PATH: string = "pages.enterprises.Register";
 const strings = {
@@ -52,14 +54,13 @@ const EnterpriseAdd = ({ me }: EnterpriseAddProps): React.JSX.Element => {
         me !== undefined && me !== null && me.active;
     const canCreate: boolean = loggedIn && ((me as UserLogged).role) >= 2;
     if(!canCreate) {
-        // TODO Show a banner
-        return <></>;
+        return <InsufficientRole />;
     }
     if(!loggedIn) return <GottaLoginFirst />;
 
     return (<>
         <div className={"page-content flex-down"}>
-            <Title2 align={"center"}>{t(strings.title)}</Title2>
+            <WelcomingTitle content={t(strings.title)} />
             <br/>
             <EnterpriseNameField value={name} onChange={(x) => setName(x)} onCheck={(x) => setNameValidity(x)}/>
             <EnterpriseCUITField value={CUIT} onChange={(x) => setCUIT(x)} onCheck={(x) => setCUITValidity(x)}/>

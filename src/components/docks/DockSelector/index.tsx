@@ -57,7 +57,6 @@ const DockSelector = ({ onClick, showAddButton, query: q, status: s }: IDockSele
     const [ query, setQuery ] = useState<string>(q?? "");
     const [ status, setStatus ] = useState<DockPropertyStatus | -1>(s?? -1);
 
-
     const tileURL: string = satelliteMode
         ? "https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.png"
         : (isDarkModeEnabled()
@@ -77,7 +76,7 @@ const DockSelector = ({ onClick, showAddButton, query: q, status: s }: IDockSele
 
 
     useEffect((): void => {
-        docks.explore(query, coordinates, -1, radio, { p: 0, itemsPerPage: 7 })
+        docks.explore(query, coordinates, -1, radio, { p: 0, itemsPerPage: 12 })
             .then((arr: Z[]): void => {
                 arr.map(payload => dispatchDocks({ type: ADD, payload }));
             })

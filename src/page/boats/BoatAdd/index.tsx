@@ -10,6 +10,8 @@ import * as boats from "../../../data/actions/boat";
 import EnterpriseField from "./EnterpriseField";
 import { useNavigate } from "react-router-dom";
 import {IBoat} from "../../../data/models/boat";
+import WelcomingTitle from "../../../components/basic/WelcomingTitle";
+import InsufficientRole from "../../err/InsufficientRole";
 
 const LANG_PATH: string = "pages.boats.BoatAdd";
 const strings = {
@@ -36,7 +38,7 @@ const BoatAdd = ({ me }: IBoatAddProps): React.JSX.Element => {
     const navigate = useNavigate();
 
     const canCreate: boolean = (me !== null && me !== undefined && me.active && me.role >= 2);
-    if(!canCreate) navigate(-1);
+    if(!canCreate) return <InsufficientRole />;
 
     const save = (): void => {
         if(!ableToRegister) return;
@@ -52,7 +54,7 @@ const BoatAdd = ({ me }: IBoatAddProps): React.JSX.Element => {
     };
 
     return (<div className={styles.root + " page-content flex-down"}>
-        <Title2 align={"center"}>{t(strings.title)}</Title2>
+        <WelcomingTitle content={t(strings.title)} />
         <br/>
         <NameField value={name} onChange={x => setName(x)} onCheck={x => setNameValidity(x)} />
         <MatField value={mat} onChange={x => setMat(x)} onCheck={x => setMatValidity(x)} />

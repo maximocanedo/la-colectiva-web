@@ -34,6 +34,7 @@ import {IScheduleLight, IScheduleView} from "../../../data/models/schedules";
 import PathMapDockMarker from "../../../components/maps/PathMapDockMarker";
 import ScheduleLightItem from "../../../components/schedules/l/ScheduleLightItem";
 import locationIcon from "../../../assets/icons/location.svg";
+import NoSchedulesForThisDockScreen from "../../../components/screens/paths/NoSchedulesForThisDockScreen";
 
 const LANG_PATH: string = "components.path.PathMap";
 type Z = (IDockView | IDockMinimal);
@@ -68,7 +69,7 @@ const schedulesReducer = (state: IScheduleView[], { type, payload }: { type: str
     if(type === CLEAR) return [];
     return [ ...state ];
 };
-const PathMap = ({ me }: IPathMapProps): React.JSX.Element => {
+const PathMap = ({ me, sendToast }: IPathMapProps): React.JSX.Element => {
     const {t: translate} = useTranslation();
     const id: string = useParams<{ id: string }>().id as string;
     const t = (key: string): string => translate(LANG_PATH + "." + key);
@@ -214,7 +215,10 @@ const PathMap = ({ me }: IPathMapProps): React.JSX.Element => {
             .then((val: IScheduleLight): void => {
                 dispatchSchedules({ type: ADD, payload: val as unknown as IScheduleView });
                 setOpen(false);
-                setOpen(true);
+                sendToast({
+                    intent: "success",
+                    title: "Saved"
+                });
             })
             .catch(err => console.error(err))
             .finally((): void => {});
@@ -236,7 +240,8 @@ const PathMap = ({ me }: IPathMapProps): React.JSX.Element => {
                     <DialogTitle>{selectedDock.name?? ""}</DialogTitle>
                     <DialogContent>
                         <div className="schs">
-                            { selectedDockSchedules.map(sch => {
+                            { selectedDockSchedules.length === 0 && <NoSchedulesForThisDockScreen />}
+                            { selectedDockSchedules.length > 0 && selectedDockSchedules.map(sch => {
                                 const logged: boolean = me !== null && me !== undefined && me.active;
                                 // @ts-ignore
                                 const canEdit: boolean = logged && (me.role === 3 || (me.role === 2 && me._id === sch.user._id));
@@ -273,6 +278,7 @@ const PathMap = ({ me }: IPathMapProps): React.JSX.Element => {
             zoom={16}
             minZoom={16}
             maxZoom={18}
+            zoomControl={false}
             center={{lat: defCoords[0], lng: defCoords[1]}}
             scrollWheelZoom={true}>
             <X/>

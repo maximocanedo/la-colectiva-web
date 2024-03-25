@@ -74,7 +74,7 @@ const AvailabilityHandler = ({ id, editable, me }: IAvailabilityHandlerProps): R
         setConditionSelected(noMentioned[0]);
     }, [ data ]);
 
-    return (<div className={mergeClasses(styles.root, "av_handler")}>
+    return (<div className={mergeClasses(styles.root, "av_handler", "fullWidth")}>
         { editable && addMode && noMentioned.length > 0 && <div className="add">
             <Field label={t(strings.label.givenCondition)}>
                 <Combobox

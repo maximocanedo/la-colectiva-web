@@ -2,6 +2,14 @@ import React, {ReactElement, useEffect, useRef, useState} from "react";
 import "./App.css";
 import "./styles/styles.css";
 import {
+	Dialog,
+	DialogTrigger,
+	DialogSurface,
+	DialogTitle,
+	DialogBody,
+	DialogActions,
+	DialogContent,
+	Button,
 	BrandVariants,
 	createDarkTheme,
 	createLightTheme,
@@ -92,7 +100,6 @@ function App(): ReactElement {
 	const [ reportedId, setReportedId ] = useState<string>("");
 	const [ reportedCat, setReportedCat ] = useState<RecordCategory>("other");
 	const [ reporting, setReportingState ] = useState<boolean>(false);
-
 	const logout = (): void => {
 		localStorage.removeItem("la-colectiva-token");
 		loadActualUser(null);
@@ -103,11 +110,15 @@ function App(): ReactElement {
 		setReportingState(true);
 	}
 
-	useEffect((): void => {
+	const checkUser = (): void => {
 		users.myself()
 			.then((response: UserLogged): void => {
 				loadActualUser(response);
 			}).catch((_err: unknown): void => {});
+	}
+
+	useEffect((): void => {
+		checkUser();
 	}, []);
 
 	const toasterId: string = useId("toaster");
@@ -131,7 +142,9 @@ function App(): ReactElement {
 						<Routes>
 							<Route path={"/"} element={<HomePage />} />
 							<Route path={"/signup"} element={<SignUpPage {...pageProps}  />} />
-							<Route path={"/login"} element={<LoginPage {...pageProps} />} />
+							<Route path={"/login"} element={<LoginPage sendMe={(e) => {
+								if(e) checkUser();
+							}} {...pageProps} />} />
 							<Route path={"/users/:username"} element={<UserProfile {...pageProps} />} />
 							<Route path={"/regions/add"} element={<RegionAdd {...pageProps} />} />
 							<Route path={"/regions/:id"} element={<RegionPage {...pageProps} />} />
@@ -153,10 +166,11 @@ function App(): ReactElement {
 							<Route path={"/reports/"} element={<Reports {...pageProps} />} />
 							<Route path={"*"} element={NotFoundPage} />
 						</Routes>
+
 					</main>
 					<Toaster toasterId={toasterId} />
 					<Footer me={me} logout={logout} />
-					<ReportDialog id={reportedId} open={reporting} type={reportedCat} close={(): void => setReportingState(false)} />
+					<ReportDialog me={me} id={reportedId} open={reporting} type={reportedCat} close={(): void => setReportingState(false)} />
 
 				</FluentProvider>
 			</I18nextProvider>

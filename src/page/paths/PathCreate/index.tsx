@@ -12,12 +12,15 @@ import * as paths from "../../../data/actions/path";
 import {CommonResponse} from "../../../data/utils";
 import {IPath} from "../../../data/models/path";
 import {useNavigate} from "react-router-dom";
+import {UserLogged} from "../../../components/page/definitions";
+import GottaLoginFirst from "../../err/GottaLoginFirst";
+import InsufficientRole from "../../err/InsufficientRole";
 
 const LANG_PATH: string = "pages.paths.PathCreate";
 const strings = {
     title: "title"
 };
-const PathCreate = ({}: IPathCreateProps): React.JSX.Element => {
+const PathCreate = ({ me }: IPathCreateProps): React.JSX.Element => {
     const {t: translate} = useTranslation();
     const t = (key: string): string => translate(LANG_PATH + "." + key);
     const styles = useStyles();
@@ -36,6 +39,11 @@ const PathCreate = ({}: IPathCreateProps): React.JSX.Element => {
 
 
     const ok: boolean = [ titleIsValid, descriptionIsValid, notesIsValid, boatIsValid ].every(x => x);
+
+    const isLogged: boolean = me !== null && me !== undefined && me.active;
+    const canCreate: boolean = isLogged && (me as UserLogged).role >= 2;
+    if(!isLogged) return <GottaLoginFirst />;
+    if(!canCreate) return <InsufficientRole />;
 
     const save = (): void => {
         if(boat === null || !ok) return;

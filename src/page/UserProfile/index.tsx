@@ -21,6 +21,7 @@ import {useTranslation} from "react-i18next";
 import PasswordSection from "../../components/user/user-page/PasswordSection";
 import ActiveSection from "../../components/user/user-page/ActiveSection";
 import {UserProfileProps} from "./defs";
+import NotFound from "../err/NotFound";
 
 const LANG_PATH: string = "pages.UserProfile";
 const UserProfile = (props: UserProfileProps): React.JSX.Element => {
@@ -53,21 +54,14 @@ const UserProfile = (props: UserProfileProps): React.JSX.Element => {
     }
 
     if (user === null) {
-        return (
-            <Persona
-                textPosition="below"
-                name={"@" + username}
-                size={"huge"}
-                avatar={<Avatar name={""} />}
-                secondaryText={t('err.notFound')}
-            />
-        );
+        return <NotFound />;
     }
 
     const onTabChange = (_e: SelectTabEvent, data: SelectTabData): void => {
         setTab(data.value);
     };
     const canModify: boolean = (me !== null) && me.active && (me.role === 3 || (me._id === user._id));
+    const itsMe: boolean = (me !== null) && me.active && (me._id === user._id);
     return (<div className={"page-content flex-down"}>
         <div className="flex-down">
             <Persona
@@ -80,7 +74,7 @@ const UserProfile = (props: UserProfileProps): React.JSX.Element => {
         </div>
         <TabList className={""} defaultSelectedValue={tab} onTabSelect={onTabChange}>
             <Tab value="personal">{t('tabs.personal')}</Tab>
-            {canModify && <Tab value="actions">{t('tabs.more')}</Tab> }
+            {itsMe && <Tab value="actions">{t('tabs.more')}</Tab> }
         </TabList>
         { tab === "personal" && <div className={"tab-cnt flex-down"}>
             <NameSection user={user} me={me} onChange={(newName: string): void => setName(newName)} />

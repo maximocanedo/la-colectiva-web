@@ -14,6 +14,8 @@ import LocationField from "../../../components/docks/c/LocationField";
 import * as docks from "../../../data/actions/dock";
 import { useNavigate } from "react-router-dom";
 import GottaLoginFirst from "../../err/GottaLoginFirst";
+import WelcomingTitle from "../../../components/basic/WelcomingTitle";
+import InsufficientRole from "../../err/InsufficientRole";
 
 const LANG_PATH: string = "pages.docks.DockAdd";
 const strings = {
@@ -48,7 +50,7 @@ const DockAdd = ({ me, sendToast }: IDockAddProps): React.JSX.Element => {
     // @ts-ignore
     const canAdd: boolean = notNull && me.active && me.role >= 2;
     if(!notNull) return <GottaLoginFirst />;
-    if(!canAdd) return <>You can't perform this action. </>;
+    if(!canAdd) return <InsufficientRole />;
 
     const ableToRegister: boolean = [ nameIsValid, addressIsValid, regionIsValid, notesIsValid, statusIsValid, locationIsValid ].every((x: boolean) => x);
 
@@ -69,7 +71,7 @@ const DockAdd = ({ me, sendToast }: IDockAddProps): React.JSX.Element => {
 
 
     return (<div className={mergeClasses(styles.root, "page-content", "flex-down")}>
-        <Title2>{t(strings.title)}</Title2>
+        <WelcomingTitle content={t(strings.title)} />
         <br/>
         <NameField value={name} onChange={setName} onCheck={setNameValidity} />
         <RegionField value={region} onChange={setRegion} onCheck={setRegionValidity} />

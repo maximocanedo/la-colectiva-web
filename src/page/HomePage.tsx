@@ -34,15 +34,17 @@ const HomePage = (): React.JSX.Element => {
     return (<div className={"page-content flex-down"}>
         <br/>
         <div  className={mergeClasses(styles.mapHeaderContainer, "map-header-container")}>
-            <TripSelector from={from} dest={dest} onFromChange={setFrom} onDestinationChange={setDestination} />
-            <div className="btns">
-                <Button
-                    onClick={(): void => {
-                        if(from === null || dest === null) return;
-                        navigate("/next/from/"+from._id+"/to/"+dest._id);
-                    }}
-                    disabled={from === null || dest === null}
-                    appearance={"primary"}>Continuar</Button>
+            <div className="map-header-subcontainer">
+                <TripSelector from={from} dest={dest} onFromChange={setFrom} onDestinationChange={setDestination} />
+                <div className="btns">
+                    <Button
+                        onClick={(): void => {
+                            if(from === null || dest === null) return;
+                            navigate("/next/from/"+from._id+"/to/"+dest._id);
+                        }}
+                        disabled={from === null || dest === null}
+                        appearance={"primary"}>Continuar</Button>
+                </div>
             </div>
         </div>
         {  <DockSelector onClick={handleDockSelect} />

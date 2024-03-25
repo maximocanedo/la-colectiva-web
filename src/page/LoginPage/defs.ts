@@ -1,3 +1,5 @@
-import {ICommonPageProps} from "../../components/page/definitions";
+import {ICommonPageProps, Myself} from "../../components/page/definitions";
 
-export interface LoginPageProps extends ICommonPageProps {}
+export interface LoginPageProps extends ICommonPageProps {
+    sendMe(e: boolean): void;
+}

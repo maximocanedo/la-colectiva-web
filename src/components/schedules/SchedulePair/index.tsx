@@ -17,6 +17,19 @@ const strings = {
         path: "links.path"
     }
 };
+
+const calculateDiff = (first: string, last: string): number => {
+    const [firstHours, firstMinutes]: number[] = first.split(':').map(Number);
+    const [lastHours, lastMinutes]: number[] = last.split(':').map(Number);
+    const firstDate: Date = new Date();
+    firstDate.setHours(firstHours, firstMinutes, 0, 0);
+    const lastDate: Date = new Date();
+    lastDate.setHours(lastHours, lastMinutes, 0, 0);
+    if (lastDate < firstDate) {
+        lastDate.setDate(lastDate.getDate() + 1);
+    }
+    return lastDate.getTime() - firstDate.getTime();
+}
 const SchedulePair = ({ me, dockOrigin, dockDestination, ...data }: ISchedulePairProps): React.JSX.Element => {
     const {t: translate} = useTranslation();
     const t = (key: string): string => translate(LANG_PATH + "." + key);
@@ -32,7 +45,13 @@ const SchedulePair = ({ me, dockOrigin, dockDestination, ...data }: ISchedulePai
         const hours = minutes / 60;
         const days = hours / 24;
 
-        const rtf = new Intl.RelativeTimeFormat(translate("defLang"), { numeric: 'auto' });
+        const rtf = new Intl.RelativeTimeFormat(
+            translate("defLang"),
+            {
+                numeric: 'auto',
+                style: "short"
+            }
+        );
 
         if (Math.abs(days) >= 1) {
             return rtf.format(Math.round(days), 'day');
@@ -90,7 +109,7 @@ const SchedulePair = ({ me, dockOrigin, dockDestination, ...data }: ISchedulePai
                             downvoter={schedules.votes.downvote} />
                     </div>
                     <div className="spaceBetween">
-                        <span className="estimatedTime">{formatRelativeTime(data.duration)}</span>
+                        <span className="estimatedTime">{formatRelativeTime(calculateDiff(data.schedules[0].time, data.schedules[1].time))}</span>
                     </div>
                     <div className="lastScheduleData">
                         <div className="line">{data.schedules[1].time} · {ddName}</div>

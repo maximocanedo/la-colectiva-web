@@ -5,10 +5,9 @@ import {PasswordFieldProps} from "./defs";
 import {log} from "../../../page/definitions";
 
 
-const PasswordField = (props: PasswordFieldProps): React.JSX.Element => {
+const PasswordField = ({ value, onValueChange, onValidationChange }: PasswordFieldProps): React.JSX.Element => {
     log("PasswordField");
     const { t }: UseTranslationResponse<"translation", undefined> = useTranslation();
-    const [ value, setValue ] = useState<string>(props.value);
     const [ passwordNote, setPasswordNote ] = useState<string>("");
     const [ passwordStatus, setPasswordStatus ] = useState<"error" | "warning" | "success" | "none" | undefined>(undefined);
 
@@ -17,7 +16,6 @@ const PasswordField = (props: PasswordFieldProps): React.JSX.Element => {
         label={t('components.user.signup.PasswordField.label')}
         validationMessage={passwordNote}
         validationState={passwordStatus}
-        {...props}
     >
         <Input
             value={value}
@@ -25,16 +23,15 @@ const PasswordField = (props: PasswordFieldProps): React.JSX.Element => {
             minLength={8}
             onChange={ e => {
                 const { value } = e.target;
-                setValue(value);
-                props.onValueChange(value);
+                onValueChange(value);
                 if(value.trim().length === 0) {
                     setPasswordNote(t('components.user.login.PasswordField.err.enterPassword'));
                     setPasswordStatus("error");
-                    props.onValidationChange(false);
+                    onValidationChange(false);
                 } else {
                     setPasswordStatus(undefined);
                     setPasswordNote("");
-                    props.onValidationChange(true);
+                    onValidationChange(true);
                 }
             }}
             />

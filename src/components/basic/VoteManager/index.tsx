@@ -2,8 +2,14 @@ import {VoteManagerProps} from "./defs";
 import React, {useEffect, useState} from "react";
 import {StateManager} from "../../../page/SignUpPage/defs";
 import {VoteStatus, VoteType} from "../../../data/models/vote";
-import {ToggleButton} from "@fluentui/react-components";
-import {ArrowDown16Filled, ArrowDown16Regular, ArrowUp16Filled, ArrowUp16Regular} from "@fluentui/react-icons";
+import {ToggleButton, Tooltip} from "@fluentui/react-components";
+import {
+    ArrowDown16Filled,
+    ArrowDown16Regular,
+    ArrowUp16Filled,
+    ArrowUp16Regular,
+    Info16Regular
+} from "@fluentui/react-icons";
 import {log} from "../../page/definitions";
 
 
@@ -67,22 +73,26 @@ const VoteManager = ({ me, id, fetcher, upvoter, downvoter }: VoteManagerProps):
             });
     };
 
-    return (<div className="voter">
-        <ToggleButton
-            icon={mine === VoteType.UP ? <ArrowUp16Filled /> : <ArrowUp16Regular />}
-            shape={"circular"}
-            size={"small"}
-            appearance={"transparent"}
-            checked={mine === VoteType.UP}
-            onClick={upvote} />
-        <div className="total-votes">{total}</div>
-        <ToggleButton
-            icon={mine === VoteType.DOWN ? <ArrowDown16Filled /> : <ArrowDown16Regular />}
-            shape={"circular"}
-            size={"small"}
-            appearance={"transparent"}
-            checked={mine === VoteType.DOWN}
-            onClick={downvote} />
-    </div>)
+    return (<Tooltip relationship={"label"} content={"Votá para validar la información. "}>
+            <div className="voter">
+                <ToggleButton
+                    icon={mine === VoteType.UP ? <ArrowUp16Filled /> : <ArrowUp16Regular />}
+                    shape={"circular"}
+                    size={"small"}
+                    disabled={me === null || me === undefined || !me.active || me.role === 0}
+                    appearance={"transparent"}
+                    checked={mine === VoteType.UP}
+                    onClick={upvote} />
+                <div className="total-votes">{total}</div>
+                <ToggleButton
+                    icon={mine === VoteType.DOWN ? <ArrowDown16Filled /> : <ArrowDown16Regular />}
+                    shape={"circular"}
+                    size={"small"}
+                    disabled={me === null || me === undefined || !me.active || me.role === 0}
+                    appearance={"transparent"}
+                    checked={mine === VoteType.DOWN}
+                    onClick={downvote} />
+        </div>
+    </Tooltip>);
 };
 export default VoteManager;

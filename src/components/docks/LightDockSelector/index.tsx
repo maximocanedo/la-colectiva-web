@@ -18,7 +18,7 @@ const reducer = (state: D[], { type, payload }: { type: string, payload: (D | nu
     if(type === ADD && !exists(payload)) return [ ...state, payload ];
     return [ ...state ];
 }
-const LightDockSelector = ({ value, onChange, langPath }: ILightDockSelectorProps): React.JSX.Element => {
+const LightDockSelector = ({ value, onChange, langPath, placeholder }: ILightDockSelectorProps): React.JSX.Element => {
     const {t: translate} = useTranslation();
     const t = (key: string): string => translate((langPath?? LANG_PATH) + "." + key);
     const styles = useStyles();
@@ -83,6 +83,7 @@ const LightDockSelector = ({ value, onChange, langPath }: ILightDockSelectorProp
     }
 
     return (<Combobox
+        {...{ placeholder }}
         onOptionSelect={onSelectChange}
         selectedOptions={[...(value === null ? [] : [ value._id ])]}
         value={value === null ? "" : value.name}

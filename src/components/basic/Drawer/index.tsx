@@ -1,18 +1,26 @@
 import {
-    Button, CompoundButton,
+    Avatar, Body1, Body1Strong,
+    Button, CompoundButton, Divider,
     DrawerBody,
     DrawerHeader,
     DrawerHeaderNavigation,
-    DrawerHeaderTitle,
-    OverlayDrawer, Toolbar
+    DrawerHeaderTitle, mergeClasses,
+    OverlayDrawer, Persona, Toolbar
 } from "@fluentui/react-components";
-import {ArrowLeft32Regular, Dismiss24Regular, HomeFilled, VehicleShipFilled} from "@fluentui/react-icons";
+import {
+    ArrowLeft32Regular, BuildingMultipleFilled,
+    DataLineFilled,
+    Dismiss24Regular,
+    HomeFilled,
+    LocationArrowFilled,
+    VehicleShipFilled, WaterFilled
+} from "@fluentui/react-icons";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {IDrawerProps} from "./defs";
 import {useStyles} from "./styles";
 import {useNavigate} from "react-router-dom";
-import CurrentUserSection from "../Header/CurrentUserSection";
+import ColectivaIconRound from "./../../../assets/round.svg";
 
 const LANG_PATH: string = "components.Drawer";
 const strings = {};
@@ -25,6 +33,7 @@ const Drawer = ({ open, onUpdateOpenStatus, me }: IDrawerProps): React.JSX.Eleme
         navigate(-1);
         onUpdateOpenStatus(false);
     }
+    const close = (): void => onUpdateOpenStatus(false);
     return (<OverlayDrawer
         position={"start"}
         open={open}
@@ -49,21 +58,79 @@ const Drawer = ({ open, onUpdateOpenStatus, me }: IDrawerProps): React.JSX.Eleme
                 </div>
             </DrawerHeaderNavigation>
         </DrawerHeader>
-        <DrawerBody className={styles.body}>
-            <br/>
-            <Button
-                size={"large"}
-                appearance={"subtle"}
-                icon={<HomeFilled />}
-                className={styles.item}>Inicio</Button>
-            <Button
-                size={"large"}
-                appearance={"subtle"}
-                icon={<VehicleShipFilled />}
-                className={styles.item}>Embarcaciones</Button>
-            <br/>
-            <br/>
-            <CurrentUserSection onClick={() => onUpdateOpenStatus(false)} me={me} />
+        <DrawerBody className={mergeClasses(styles.body, "drawer-body")}>
+            <nav className={"drawer-body--firstNav"}>
+                <Button
+                    size={"large"}
+                    appearance={"subtle"}
+                    icon={<HomeFilled />}
+                    onClick={(): void => {
+                        navigate("/");
+                        close();
+                    }}
+                    className={styles.item}>{t("links.home")}</Button>
+                <Divider style={{ minHeight: "24px", maxHeight: "24px" }} />
+                <Button
+                    size={"large"}
+                    appearance={"subtle"}
+                    icon={<VehicleShipFilled />}
+                    onClick={(): void => {
+                        navigate("/boats");
+                        close();
+                    }}
+                    className={styles.item}>{t("links.boats")}</Button>
+                <Button
+                    size={"large"}
+                    appearance={"subtle"}
+                    icon={<LocationArrowFilled />}
+                    onClick={(): void => {
+                        navigate("/docks");
+                        close();
+                    }}
+                    className={styles.item}>{t("links.dockmap")}</Button>
+                <Button
+                    size={"large"}
+                    appearance={"subtle"}
+                    icon={<DataLineFilled />}
+                    onClick={(): void => {
+                        navigate("/paths");
+                        close();
+                    }}
+                    className={styles.item}>{t("links.paths")}</Button>
+                <Button
+                    size={"large"}
+                    appearance={"subtle"}
+                    icon={<WaterFilled />}
+                    onClick={(): void => {
+                        navigate("/regions");
+                        close();
+                    }}
+                    className={styles.item}>{t("links.paths")}</Button>
+                <Button
+                    size={"large"}
+                    appearance={"subtle"}
+                    onClick={(): void => {
+                        navigate("/enterprises");
+                        close();
+                    }}
+                    icon={<BuildingMultipleFilled />}
+                    className={styles.item}>{t("links.enterprises")}</Button>
+
+
+            </nav>
+            <nav>
+                <div className="col-brnd">
+                    <img src="/round.svg" alt="Logo de La Colectiva" />
+                    <div className="l">
+                        <div className="row">
+                            <Body1Strong>La Colectiva</Body1Strong>
+                        </div>
+                        <div className="row">
+                            <Body1>Versión 24.3.1</Body1>
+                        </div>
+                    </div>
+                </div>
+            </nav>
         </DrawerBody>
     </OverlayDrawer>);
 };

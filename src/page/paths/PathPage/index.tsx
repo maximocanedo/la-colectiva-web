@@ -49,6 +49,7 @@ import ResourceCommonHeader from "../../../components/page/ResourceCommonHeader"
 import ResourcePage from "../../../components/page/ResourcePage";
 import ResourcePageBody from "../../../components/page/ResourcePageBody";
 import DisableButton from "../../../components/basic/buttons/DisableButton";
+import NotFound from "../../err/NotFound";
 
 const LANG_PATH: string = "pages.paths.PathPage";
 const TextBulletIcon: FluentIcon = bundleIcon(TextBulletListSquare24Filled, TextBulletListSquare24Regular);
@@ -127,7 +128,7 @@ const PathPage = ({ me, sendReport }: IPathPageProps): React.JSX.Element => {
 
             });
     }, [ id ]);
-    if(data === null) return <></>;
+    if(data === null) return <NotFound />;
     const canEdit: boolean = me !== null && me !== undefined && me.active && me.role >= 2 && ((
         user !== null && user !== undefined && user._id === me._id
     ) || me.role === 3);
@@ -163,8 +164,8 @@ const PathPage = ({ me, sendReport }: IPathPageProps): React.JSX.Element => {
                 <br/>
                 <Link onClick={(_e): void => sendReport(id, "path")}>{translate("actions.report")}</Link>
             </div> }
-            { tab === "schedules" && <div className="resource-page-field-container">
-                <Card appearance={"outline"}>
+            { tab === "schedules" && <div className="resource-page-field-container fullWidth">
+                <Card appearance={"outline"} className={"fullWidth"}>
                     <CardHeader
                         header={<Subtitle2Stronger>
                             {t(strings.explorer.title)}
@@ -177,13 +178,13 @@ const PathPage = ({ me, sendReport }: IPathPageProps): React.JSX.Element => {
                 </Card>
                 <ScheduleLightHandler id={id} />
             </div> }
-            { tab === "availabilities" && <div className="resource-page-field-container">
+            { tab === "availabilities" && <div className="resource-page-field-container fullWidth">
                 <AvailabilityHandler me={me} id={id} editable={canEdit} />
             </div> }
-            { tab === "comments" && <div className="resource-page-field-container">
+            { tab === "comments" && <div className="resource-page-field-container fullWidth">
                 <CommentHandler {...{ id, me, sendReport }} fetcher={paths.comments.get} poster={paths.comments.post} remover={paths.comments.del} />
             </div> }
-            { tab === "history" && <div className="resource-page-field-container">
+            { tab === "history" && <div className="resource-page-field-container fullWidth">
                 <HistoryHandler id={id} me={me} fetcher={paths.fetchHistory} />
             </div> }
         </ResourcePageBody>

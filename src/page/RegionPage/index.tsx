@@ -32,6 +32,7 @@ import ResourcePage from "../../components/page/ResourcePage";
 import ResourceCommonHeader from "../../components/page/ResourceCommonHeader";
 import ResourcePageBody from "../../components/page/ResourcePageBody";
 import DisableButton from "../../components/basic/buttons/DisableButton";
+import NotFound from "../err/NotFound";
 
 
 const LANG_PATH: string = "pages.Region";
@@ -98,7 +99,7 @@ const RegionPage = ({ me, sendReport }: RegionPageProps): React.JSX.Element => {
     }, [id]);
 
 
-    if (region === null) return <></>;
+    if (region === null) return <NotFound />;
     const canEdit: boolean = (me !== null && region.user !== undefined && region.user !== null && me.active) && (((me._id === region.user) && (me.role as Role >= 2)) || (me.role === 3));
 
 

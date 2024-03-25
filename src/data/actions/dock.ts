@@ -81,6 +81,28 @@ export const create = async (data: IDockCreate): Promise<IDock> => {
         throw new Err(error);
     }
 };
+const open = (): Promise<IDBDatabase> => {
+    const request: IDBOpenDBRequest = indexedDB.open("docks", 1);
+    return new Promise<IDBDatabase>((resolve, reject): void => {
+        request.onupgradeneeded = function(evt: Event): void {
+            const db: IDBDatabase = request.result;
+            const store: IDBObjectStore = db.createObjectStore("docks", { keyPath: "_id" });
+            const nameIndex: IDBIndex = store.createIndex("byName", "name", {});
+            const addressIndex: IDBIndex = store.createIndex("byAddress", "address", {});
+            const notesIndex: IDBIndex = store.createIndex("byNotes", "notes", {});
+            const statusIndex: IDBIndex = store.createIndex("byStatus", "status", {});
+            const coordinates: IDBIndex = store.createIndex("byCoordinates", "coordinates", {});
+
+        };
+        request.onsuccess = function(evt: Event): void {
+            resolve(request.result);
+        };
+
+        request.onerror = function(evt: Event): void {
+            reject(request.error);
+        };
+    });
+};
 
 /**
  * Buscar registro de muelle por ID.

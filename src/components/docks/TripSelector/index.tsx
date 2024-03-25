@@ -28,9 +28,9 @@ const TripSelector = ({from, dest, onFromChange, onDestinationChange}: ITripSele
         </div>
         <div className="sels">
             <div className="ldsSpace"></div>
-            <LightDockSelector onChange={onFromChange} value={from} langPath={""}/>
+            <LightDockSelector placeholder={translate("components.Next.placeholder.from")} onChange={onFromChange} value={from} langPath={""}/>
             <div className="ldsMid"></div>
-            <LightDockSelector value={dest} onChange={onDestinationChange} langPath={""}/>
+            <LightDockSelector placeholder={translate("components.Next.placeholder.to")} value={dest} onChange={onDestinationChange} langPath={""}/>
             <div className="ldsSpace"></div>
         </div>
     </div>);
