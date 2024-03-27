@@ -1,6 +1,7 @@
 {
   "short_name": "La Colectiva",
-  "name": "No te pierdas la próxima lancha",
+  "name": "La Colectiva",
+  "description": "No te pierdas la próxima lancha. Conocé de antemano los horarios y los detalles del transporte fluvial antes de salir.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,18 +9,184 @@
       "type": "image/x-icon"
     },
     {
-      "src": "round192.png",
-      "type": "image/png",
+      "src": "icons/maskable/maskable.svg",
+      "type": "image/svg+xml",
+      "purpose": "any",
       "sizes": "192x192"
     },
     {
-      "src": "round512.png",
+      "src": "icons/81.png",
       "type": "image/png",
+      "purpose": "any",
+      "sizes": "81x81"
+    },
+    {
+      "src": "icons/108.png",
+      "type": "image/png",
+      "purpose": "any",
+      "sizes": "108x108"
+    },
+    {
+      "src": "icons/162.png",
+      "type": "image/png",
+      "purpose": "any",
+      "sizes": "162x162"
+    },
+    {
+      "src": "icons/192.png",
+      "type": "image/png",
+      "purpose": "any",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icons/216.png",
+      "type": "image/png",
+      "purpose": "any",
+      "sizes": "216x216"
+    },
+    {
+      "src": "icons/324.png",
+      "type": "image/png",
+      "purpose": "any",
+      "sizes": "324x324"
+    },
+    {
+      "src": "icons/432.png",
+      "type": "image/png",
+      "purpose": "any",
+      "sizes": "432x432"
+    },
+    {
+      "src": "icons/512.png",
+      "type": "image/png",
+      "purpose": "any",
       "sizes": "512x512"
+    },
+    {
+      "src": "icons/rounded.svg",
+      "type": "image/svg+xml",
+      "purpose": "any",
+      "sizes": "192x192"
     }
   ],
   "start_url": ".",
+  "id": "/",
   "display": "standalone",
-  "theme_color": "#2196f3",
-  "background_color": "#ffffff"
+  "scope": "/",
+  "shortcuts": [
+    {
+      "name": "¿A qué hora pasa la próxima lancha?",
+      "short_name": "Siguiente lancha",
+      "description": "Conocer horarios. ",
+      "url": "/",
+      "icons": [
+        {
+          "src": "shortcuts/next.svg",
+          "type": "image/svg+xml",
+          "sizes": "48x48"
+        },
+        {
+          "src": "shortcuts/next.svg",
+          "type": "image/svg+xml",
+          "sizes": "192x192"
+        }
+      ]
+    }, {
+      "name": "Mapa de muelles",
+      "short_name": "Mapa de muelles",
+      "description": "Navegá por los muelles registrados de La Colectiva. ",
+      "url": "/docks/",
+      "icons": [
+        {
+          "src": "shortcuts/docks.svg",
+          "type": "image/svg+xml",
+          "sizes": "48x48"
+        },
+        {
+          "src": "shortcuts/docks.svg",
+          "type": "image/svg+xml",
+          "sizes": "192x192"
+        }
+      ]
+    }, {
+      "name": "Embarcaciones",
+      "short_name": "Embarcaciones",
+      "description": "Conocé las embarcaciones registradas en La Colectiva. ",
+      "url": "/boats/",
+      "icons": [
+        {
+          "src": "shortcuts/boats.svg",
+          "type": "image/svg+xml",
+          "sizes": "48x48"
+        },
+        {
+          "src": "shortcuts/boats.svg",
+          "type": "image/svg+xml",
+          "sizes": "192x192"
+        }
+      ]
+    }, {
+      "name": "Recorridos",
+      "short_name": "Recorridos",
+      "description": "Conocé los recorrdos registrados en La Colectiva. ",
+      "url": "/paths/",
+      "icons": [
+        {
+          "src": "shortcuts/paths.svg",
+          "type": "image/svg+xml",
+          "sizes": "48x48"
+        },
+        {
+          "src": "shortcuts/paths.svg",
+          "type": "image/svg+xml",
+          "sizes": "192x192"
+        }
+      ]
+    }, {
+      "name": "Empresas",
+      "short_name": "Empresas",
+      "description": "Conocé las empresas registradas en La Colectiva. ",
+      "url": "/enterprises/",
+      "icons": [
+        {
+          "src": "shortcuts/enterprises.svg",
+          "type": "image/svg+xml",
+          "sizes": "48x48"
+        },
+        {
+          "src": "shortcuts/enterprises.svg",
+          "type": "image/svg+xml",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/icons/screenshots/pc1.png",
+      "sizes": "1365x767",
+      "type": "image/png",
+      "form_factor": "wide"
+    }, {
+      "src": "/icons/screenshots/pc2.png",
+      "sizes": "1365x767",
+      "type": "image/png",
+      "form_factor": "wide"
+    }, {
+      "src": "/icons/screenshots/mv1.png",
+      "sizes": "1442x2562",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }, {
+      "src": "/icons/screenshots/mv2.png",
+      "sizes": "1442x2562",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }, {
+      "src": "/icons/screenshots/mv3.png",
+      "sizes": "1442x2562",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
 }

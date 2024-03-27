@@ -1,14 +1,161 @@
 {
   "defLang": "en-US",
-  "now": "Just now",
-  "test": "This is a test. ",
+  "now": "Right now",
   "loading": "Loading... ",
+  "test": "This is a test.",
+  "selons": "According to",
+  "report": {
+    "pageTitle": "Reports",
+    "pageSearchPlaceholder": "Search all reports",
+    "dialog": {
+      "title": "Send a report",
+      "nouserTitle": "Login to make a report",
+      "nouserDescription": "To report a resource, you first need to log in. ",
+      "label": {
+        "reason": "Reason for the report: ",
+        "details": "Provide more details: ",
+        "ofm": "Response: ",
+        "eofm": "Reply"
+      }
+    },
+    "type": {
+      "availability": "Availability",
+      "boat": "boat",
+      "comment": "Comment",
+      "dock": "Dock",
+      "enterprise": "Delta transport company",
+      "path": "Route",
+      "picture": "Image",
+      "schedule": "Schedule",
+      "user": "User",
+      "region": "Region",
+      "other": "Others"
+    },
+    "card": {
+      "label": {
+        "reason": "Reason: ",
+        "details": "Details: ",
+        "status": "State: ",
+        "admin": "Attended by: ",
+        "response": "Answer: "
+      }
+    },
+    "status": {
+      "all": "All the states",
+      "i0": {
+        "det": "Your report has been sent. ",
+        "st": "Pending review"
+      },
+      "i1": {
+        "det": "An administrator saw your report and is aware of it.  ",
+        "st": "Seen"
+      },
+      "i2": {
+        "det": "The administrator is working to solve your problem. ",
+        "st": "Working"
+      },
+      "i3": {
+        "det": "Report resolved. ",
+        "st": "Resolved"
+      },
+      "i4": {
+        "det": "The report was closed. ",
+        "st": "Closed"
+      },
+      "i5": {
+        "det": "The report was closed as it was considered to be inappropriate, or based on false information. ",
+        "st": "Counterreported"
+      }
+    },
+    "reason": {
+      "all": "All the reasons",
+      "i0": {
+        "short": "Off-topic content",
+        "des": "The reported record is not related to the main topic."
+      },
+      "i1": {
+        "short": "Spam",
+        "des": "Repetitive content, advertising, etc. "
+      },
+      "i2": {
+        "short": "Inappropriate content",
+        "des": "The reported record contains sensitive or off-color information or pictures. "
+      },
+      "i3": {
+        "short": "Violent content",
+        "des": "The reported record contains violent content, such as threats or insults. "
+      },
+      "i4": {
+        "short": "Other",
+        "des": "Other reasons."
+      }
+    }
+  },
   "actions": {
+    "report": "Report",
+    "next": "Next",
     "loadMore": "Load more",
-    "next": "Next"
+    "save": "Save",
+    "register": "Register",
+    "cancel": "Cancel",
+    "add": "Add",
+    "close": "Close",
+    "delete": "Delete",
+    "enable": "Enable",
+    "search": "Search",
+    "disable": "Disable",
+    "continue": "Continue",
+    "options": "Options",
+    "explore": "Explore",
+    "login": "Log in",
+    "back": "Go back"
+  },
+  "err": {
+    "couldntUpdate": "Could not update. ",
+    "GottaLoginFirst": {
+      "title": "Please log in to access this page.",
+      "description": "Oops, it looks like you've landed on a restricted page.  "
+    },
+    "InsufficientRole": {
+      "title": "You do not have permission to access this page. ",
+      "description": "Request that your account be promoted to Moderator by sending a private message through any of La Colectiva's social networks, which you will find at the end of this page. "
+    },
+    "NotFound": {
+      "title": "Resource not found. ",
+      "description": "The resource you tried to access is not available. "
+    }
+  },
+  "av": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturdays",
+    "sunday": "Sundays",
+    "holiday": "Holidays"
+  },
+  "dockStatus": {
+    "private": "Private",
+    "public": "Public",
+    "business": "Commercial",
+    "government": "Governmental",
+    "neighbourhood": "Local",
+    "other": "Other",
+    "unlisted": "Unspecified"
+  },
+  "dockStatusL": {
+    "private": "Private dock",
+    "public": "public dock",
+    "business": "Commercial dock",
+    "government": "Government dock",
+    "neighbourhood": "Neighborhood dock",
+    "other": "Dock",
+    "unlisted": "Dock"
   },
   "models": {
     "region": {
+      "longName": "%name %type",
       "types": {
         "river": "River",
         "stream": "Stream",
@@ -16,7 +163,7 @@
         "canal": "Canal",
         "lake": "Lake",
         "pond": "Pond",
-        "lagoon": "Lagoon",
+        "lagoon": "lagoon",
         "reservoir": "Reservoir",
         "swamp": "Swamp",
         "well": "Well",
@@ -24,34 +171,116 @@
         "bay": "Bay",
         "gulf": "Gulf",
         "sea": "Sea",
-        "ocean": "Ocean"
+        "ocean": "Ocean",
+        "unknown": "Unknown"
       }
     }
   },
   "pages": {
+    "paths": {
+      "PathPage": {
+        "explorer": {
+          "title": "Navigate the map",
+          "des": "Check all schedules"
+        },
+        "tabs": {
+          "basic": "Basics",
+          "comments": "Comments",
+          "history": "History",
+          "schedules": "Schedules",
+          "availabilities": "Availability"
+        }
+      },
+      "PathCreate": {
+        "title": "Register a tour"
+      }
+    },
+    "docks": {
+      "DockAdd": {
+        "title": "Register a dock"
+      },
+      "DockPage": {
+        "tabs": {
+          "history": "History",
+          "comments": "Comments",
+          "pics": "Pictures",
+          "basic": "Basic info"
+        }
+      }
+    },
+    "boats": {
+      "SearchPage": {
+        "title": "Boats",
+        "label": {
+          "search": "Look for",
+          "register": "Register a boat"
+        }
+      },
+      "BoatAdd": {
+        "title": "Register a boat"
+      },
+      "Boat": {
+        "st": {
+          "registeredBy": "Registered by: ",
+          "uploaded": "Created on:  "
+        },
+        "actions": {
+          "disable": "Disable",
+          "enable": "Enable resource"
+        },
+        "tabs": {
+          "basic": "Basic info",
+          "comments": "Comments",
+          "history": "History",
+          "pics": "Pictures"
+        }
+      }
+    },
+    "enterprises": {
+      "Register": {
+        "title": "Register a company",
+        "registering": "Saving",
+        "register": "Save"
+      },
+      "Enterprise": {
+        "st": {
+          "registeredBy": "Registered by: ",
+          "uploaded": "Created on:  "
+        },
+        "actions": {
+          "disable": "Disable",
+          "enable": "Enable resource"
+        },
+        "tabs": {
+          "basic": "Basic info",
+          "comments": "Comments",
+          "history": "History"
+        }
+      }
+    },
     "signup": {
-      "title": "Create an account",
+      "title": "Create Account",
       "tabs": {
         "personal": {
           "title": "Personal info",
           "labels": {
             "name": "Name",
             "username": "Username",
-            "birth": "Birth date"
+            "birth": "Birthdate"
           }
         },
         "account": {
           "title": "Account",
           "labels": {
-            "email": "E-mail address",
+            "email": "Email address",
             "password": "Password",
-            "reenterPassword": "Re-enter password"
+            "reenterPassword": "Repeat password"
           }
         },
         "more": {
           "title": "More",
           "labels": {
-            "bio": "Bio"
+            "bio": "Biography"
           }
         }
       },
@@ -60,24 +289,24 @@
       },
       "err": {
         "creatingAccount": "There was an error trying to create your account. ",
-        "tryAgainLater": "Try again later. ",
+        "tryAgainLater": "Please try again later. ",
         "loggingIn": "There was an error trying to log in. ",
         "DoItManually": "You will have to do it manually. "
       },
       "ok": {
-        "accountCreated": "Your account was created successfully! ",
-        "loggedIn": "You are logged in. Redirecting you..."
+        "accountCreated": "Your account was created successfully!",
+        "loggedIn": "You are logged in.  "
       }
     },
     "login": {
       "title": "Log in",
       "actions": {
-        "login": "Sign in",
-        "signup": "Sign up"
+        "login": "Log in",
+        "signup": "Create Account"
       },
       "err": {
-        "unauthorized": "Invalid credentials. ",
-        "unknown": "An error occurred while trying to sign you in. "
+        "unauthorized": "Incorrect credentials. ",
+        "unknown": "An error occurred while trying to log in. "
       },
       "ok": {
         "loginSuccessful": "Welcome back!"
@@ -95,70 +324,391 @@
     },
     "Region": {
       "st": {
-        "registeredBy": "Registered by: "
+        "registeredBy": "Registered by: ",
+        "uploaded": "Created on:  "
+      },
+      "actions": {
+        "disable": "Disable",
+        "enable": "Enable"
       },
       "tabs": {
         "basic": "Basic info",
         "comments": "Comments",
         "history": "History"
       }
+    },
+    "Regions": {
+      "title": "Regions",
+      "label": {
+        "search": "Search by name",
+        "allregions": "All Categories"
+      }
+    },
+    "Paths": {
+      "title": "Tours",
+      "label": {
+        "search": "Search by name, description",
+        "register": "Register a tour"
+      }
+    },
+    "Enterprises": {
+      "title": "Delta transport companies",
+      "label": {
+        "search": "Search by name or CUIT ",
+        "register": "Register a company",
+        "allregions": "All Categories"
+      }
+    },
+    "RegionAdd": {
+      "title": "Register a region",
+      "registering": "Saving",
+      "register": "Save"
     }
   },
   "components": {
+    "Drawer": {
+      "links": {
+        "home": "Start",
+        "boats": "Boats",
+        "dockmap": "Docks map",
+        "paths": "Tours",
+        "regions": "Regions",
+        "enterprises": "Companies"
+      }
+    },
+    "Next": {
+      "err": {
+        "emp": {
+          "title": "No schedules found",
+          "description": "Try selecting another nearby dock. "
+        }
+      },
+      "label": {
+        "optionsDialog": "Options",
+        "useActualTime": "Use current time"
+      },
+      "placeholder": {
+        "from": "Where are you?",
+        "to": "Where do you want to go?"
+      }
+    },
+    "LoadTriggerButton": {
+      "label": {
+        "loaded": "Load more",
+        "loading": "Loading",
+        "no-data": "Retry",
+        "err": "Retry",
+        "initial": "Carry"
+      },
+      "message": {
+        "loaded": "",
+        "loading": "",
+        "no-data": "There are no more items",
+        "err": "An error occurred",
+        "initial": ""
+      }
+    },
+    "DisableButton": {
+      "before": {
+        "disable": {
+          "title": "Disable this element?",
+          "description": "The item will not be available to other users and will be ignored in searches. "
+        },
+        "enable": {
+          "title": "Enable this item?",
+          "description": "The item will be available to other users again and will appear in searches. "
+        }
+      }
+    },
+    "schedules": {
+      "SchedulePair": {
+        "moreInfo": "More information: ",
+        "links": {
+          "outSchedule": "Closing hour",
+          "arrivalSchedule": "Arrival schedule",
+          "path": "Route"
+        }
+      },
+      "res": {
+        "noSchedulesRegistered": "No recorded schedules. "
+      },
+      "ScheduleLightItem": {
+        "conf": {
+          "del": "Are you sure to delete this schedule?"
+        }
+      }
+    },
+    "paths": {
+      "PathMap": {},
+      "AvailabilityHandler": {
+        "label": {
+          "givenCondition": "Given condition: ",
+          "doneGivenCondition": "The tour is carried out when this condition is met"
+        }
+      },
+      "i": {
+        "TitleField": {
+          "label": "Qualification: ",
+          "ok": {
+            "updated": "Updated successfully. "
+          },
+          "err": {
+            "couldntUpdate": "Could not update. ",
+            "invalid": "The title must be between 3 and 48 characters. "
+          }
+        },
+        "DescriptionField": {
+          "label": "Description: ",
+          "ok": {
+            "updated": "Updated successfully. "
+          },
+          "err": {
+            "couldntUpdate": "Could not update. ",
+            "invalid": "The description must be between 3 and 128 characters. "
+          }
+        },
+        "NotesField": {
+          "label": "Observations: ",
+          "ok": {
+            "updated": "Updated successfully. "
+          },
+          "err": {
+            "couldntUpdate": "Could not update. ",
+            "invalid": "The field must be between 1 and 256 characters. "
+          }
+        },
+        "BoatField": {
+          "label": "Vessel: "
+        }
+      },
+      "c": {
+        "TitleField": {
+          "label": "Qualification: ",
+          "err": {
+            "minlength": "Minimum 3 characters. ",
+            "maxlength": "Maximum 48 characters. "
+          }
+        },
+        "BoatField": {
+          "label": "Designated vessel: ",
+          "err": {
+            "nul": "You must select a vessel. "
+          }
+        },
+        "DescriptionField": {
+          "label": "Description: ",
+          "err": {
+            "minlength": "Minimum 3 characters. ",
+            "maxlength": "Maximum 128 characters. "
+          }
+        },
+        "NotesField": {
+          "label": "Observations: ",
+          "err": {
+            "minlength": "You cannot leave this field blank. ",
+            "maxlength": "Maximum 256 characters. "
+          }
+        }
+      }
+    },
+    "PlaceSelector": {
+      "label": {
+        "selectInMap": "Select on map",
+        "type": "Enter manually",
+        "decimal": "In decimal format"
+      }
+    },
+    "docks": {
+      "c": {
+        "NameField": {
+          "label": "Name: ",
+          "noValid": "The name must contain between 3 and 48 characters. "
+        },
+        "AddressField": {
+          "label": "Height: ",
+          "noValid": "The height must be a number equal to or greater than 0. "
+        },
+        "RegionField": {
+          "label": "Region: ",
+          "noValid": "Required field. "
+        },
+        "NotesField": {
+          "label": "Observations: ",
+          "noValid": "Maximum 128 characters. "
+        },
+        "StatusSelField": {
+          "label": "Category: ",
+          "noValid": "Invalid value. "
+        },
+        "LocationField": {
+          "label": "Location: ",
+          "noValid": "Invalid values. "
+        }
+      },
+      "i": {
+        "LocationField": {
+          "label": "Location:"
+        },
+        "RegionField": {
+          "label": "Region: ",
+          "ok": "Updated successfully. "
+        },
+        "NameField": {
+          "label": "Name: ",
+          "ok": {
+            "updated": "Updated successfully. "
+          },
+          "st": {
+            "saving": "Saving",
+            "save": "Save",
+            "close": "Close",
+            "cancel": "Cancel"
+          },
+          "err": {
+            "invalid": "The name must contain between 3 and 48 characters. ",
+            "couldntUpdate": "Could not update. "
+          }
+        },
+        "StatusModifiableField": {
+          "label": "Category: ",
+          "updated": "Updated successfully",
+          "couldntUpdate": "Could not update. "
+        },
+        "NotesField": {
+          "label": "Observations: ",
+          "ok": {
+            "updated": "Updated successfully. "
+          },
+          "st": {
+            "saving": "Saving",
+            "save": "Save",
+            "close": "Close",
+            "cancel": "Cancel"
+          },
+          "err": {
+            "invalid": "Maximum 128 characters. ",
+            "couldntUpdate": "Could not update. "
+          }
+        },
+        "AddressField": {
+          "label": "Height: ",
+          "ok": {
+            "updated": "Updated successfully. "
+          },
+          "st": {
+            "saving": "Saving",
+            "save": "Save",
+            "close": "Close",
+            "cancel": "Cancel"
+          },
+          "err": {
+            "invalid": "The height must be a positive number. ",
+            "couldntUpdate": "Could not update. "
+          }
+        }
+      }
+    },
+    "pics": {
+      "card": {
+        "st": {
+          "removing": "Removing..."
+        },
+        "actions": {
+          "download": "Download",
+          "gotoProfile": "View profile",
+          "remove": "Delete",
+          "close": "Cancel"
+        },
+        "dialog": {
+          "remove": {
+            "title": "Are you sure to delete this picture?",
+            "description": "This action can not be undone. "
+          }
+        }
+      },
+      "poster": {
+        "actions": {
+          "cancel": "Cancel",
+          "post": "Post a picture",
+          "submit": "Post",
+          "upload": "Increase",
+          "change": "Change"
+        },
+        "st": {
+          "publishing": "Posting",
+          "publishingDes": "This can take a moment",
+          "noImage": "Upload a picture to start",
+          "draft": "Draft",
+          "chNi": "Post an picture",
+          "uploading": "Uploading"
+        },
+        "label": {
+          "description": "Describe this picture for someone who can't see it."
+        }
+      }
+    },
+    "basics": {
+      "UploadedBySection": {
+        "label": "Registered by: "
+      },
+      "UploadDateSection": {
+        "label": "Created on:  "
+      }
+    },
     "user": {
       "signup": {
         "NameField": {
           "label": "Name",
           "err": {
-            "atLeastThree": "Name must contain at least 3 characters. ",
-            "upToTwentyFour": "Name must contain up to 24 characters. "
+            "atLeastThree": "The name must be at least 3 characters.",
+            "upToTwentyFour": "The name must be no more than 24 characters."
           }
         },
         "UsernameField": {
           "label": "Username",
           "err": {
-            "noSpaces": "Username must not contain spaces. ",
-            "lengthNote": "Username must contain between 3-24 characters. ",
-            "notAvailable": "This username is not available. ",
-            "checkingAvailability": "Checking availability... ",
-            "unknownErrorWhileValidatingUsernameAvailability": "An error occurred. Please try again later. "
+            "noSpaces": "Username must not have spaces",
+            "lengthNote": "The username must be between 3-24 characters.",
+            "notAvailable": "This username is not available.",
+            "checkingAvailability": "Checking availability...",
+            "unknownErrorWhileValidatingUsernameAvailability": "An error occurred. "
           },
           "ok": {
-            "available": "Username is available. "
+            "available": "Available username."
           }
         },
         "BirthField": {
-          "label": "Birth date",
+          "label": "Birthdate",
           "err": {},
           "ok": {
             "select": "Select a date"
           }
         },
         "MailField": {
-          "label": "E-mail address",
+          "label": "Email address",
           "err": {
-            "nonValid": "E-mail entered is not valid. "
+            "nonValid": "The email entered is not valid."
           }
         },
         "PasswordField": {
           "label": "Password",
           "err": {
-            "atLeastEight": "Password must contain at least 8 characters. "
+            "atLeastEight": "The password must be at least 8 characters. "
           }
         },
         "RepeatPasswordField": {
-          "label": "Re-enter password",
+          "label": "Repeat password",
           "err": {
-            "dontMatch": "Passwords don't match. "
+            "dontMatch": "Passwords do not match. "
           },
           "ok": {
             "match": "Passwords match. "
           }
         },
         "BioField": {
-          "label": "Bio",
+          "label": "Biography",
           "err": {
-            "upToFourtyEight": "Bio can contain up to 48 characters. "
+            "upToFourtyEight": "The bio cannot be more than 48 characters."
           },
           "ok": {}
         }
@@ -177,17 +727,17 @@
       "login": {
         "IdentifierField": {
           "label": {
-            "neither": "E-mail or username",
-            "email": "E-mail address",
+            "neither": "Email or username",
+            "email": "Email",
             "username": "Username"
           },
           "err": {
-            "invalidIdentifier": "Enter a valid e-mail address or username. "
+            "invalidIdentifier": "Please enter a valid username or email. "
           }
         },
         "PasswordField": {
           "err": {
-            "enterPassword": "Enter a password. "
+            "enterPassword": "Enter a password"
           }
         }
       },
@@ -204,34 +754,34 @@
             "updated": "Updated successfully. "
           },
           "err": {
-            "noUpdated": "Couldn't update it. "
+            "noUpdated": "Could not update. "
           }
         },
         "EmailSection": {
           "label": {
             "send": "Send code",
             "sending": "Sending...",
-            "email": "E-mail address: ",
-            "new": "New e-mail address",
-            "prefixExample": "Ex.: ",
-            "editEmail": "Edit e-mail",
-            "enterCodeSent": "Enter code",
+            "email": "Email: ",
+            "new": "New email",
+            "prefixExample": "Example: ",
+            "editEmail": "Edit email",
+            "enterCodeSent": "Enter code sent",
             "cancel": "Cancel",
-            "change": "Update",
+            "change": "Change",
             "verifying": "Verifying...",
             "verify": "Verify"
           },
           "err": {
-            "invalidEmail": "E-mail address is not valid. ",
-            "incorrectCode": "Wrong code. ",
-            "unknown": "Unknown error. "
+            "invalidEmail": "The email entered is not correct. ",
+            "incorrectCode": "Incorrect code. ",
+            "unknown": "An unknown error occurred. "
           },
           "ok": {
-            "validated": "Verified!"
+            "validated": "Email successfully validated. "
           }
         },
         "BioSection": {
-          "label": "Bio:",
+          "label": "Biography:",
           "st": {
             "saving": "Saving... ",
             "save": "Save",
@@ -242,7 +792,7 @@
             "updated": "Updated successfully. "
           },
           "err": {
-            "couldntUpdate": "Couldn't update. "
+            "couldntUpdate": "Could not update. "
           }
         },
         "NameSection": {
@@ -257,11 +807,11 @@
             "updated": "Updated successfully. "
           },
           "err": {
-            "couldntUpdate": "Couldn't update. "
+            "couldntUpdate": "Could not update. "
           }
         },
         "BirthSection": {
-          "label": "Birth date:",
+          "label": "Birthdate:",
           "st": {
             "saving": "Saving... ",
             "save": "Save",
@@ -272,13 +822,13 @@
             "updated": "Updated successfully. "
           },
           "err": {
-            "couldntUpdate": "Couldn't update. "
+            "couldntUpdate": "Could not update. "
           }
         },
         "PasswordSection": {
           "title": "Password",
           "label": {
-            "p": "Enter new password",
+            "p": "Enter a new password",
             "r": "Re-enter password"
           },
           "st": {
@@ -286,24 +836,24 @@
             "update": "Update password",
             "close": "Close",
             "cancel": "Cancel",
-            "change": "Change password"
+            "change": "Change Password"
           },
           "ok": {
-            "updated": "Password updated successfully. ",
+            "updated": "The password was successfully updated. ",
             "eq": "Passwords match. "
           },
           "err": {
-            "len": "Password must contain at least 8 characters. ",
+            "len": "The password must be at least 8 characters long. ",
             "eq": "Passwords do not match. ",
-            "update": "Couldn't update password. "
+            "update": "Password was not updated. "
           }
         },
         "ActiveSection": {
-          "title": "Disable this account",
+          "title": "Disable account",
           "labels": {
             "btnDisable": "Disable",
-            "sure": "Sure, disable this account",
-            "back": "Back"
+            "sure": "Disable this account",
+            "back": "Return"
           },
           "p": {
             "dialog": {
@@ -315,14 +865,208 @@
             "disabled": "Account disabled successfully. "
           },
           "err": {
-            "disable": "Could not disable the account. ",
+            "disable": "Could not disable account. ",
             "err": "Error",
-            "try": "Try again later. "
+            "try": "Please try again later. "
           }
         }
       }
     },
+    "enterprise": {
+      "EnterpriseSelector": {
+        "noselected": "No company selected",
+        "placeholder": "Select a company"
+      },
+      "EnterpriseNameField": {
+        "label": "Name: ",
+        "err": {
+          "ok": "Valid name. ",
+          "min": "The name must contain at least three characters. ",
+          "max": "The name cannot be more than 48 characters. "
+        }
+      },
+      "EnterpriseFoundationDateField": {
+        "label": "Foundation date: ",
+        "err": {
+          "future": "Select a date before today. ",
+          "invalid": "Invalid date. "
+        }
+      },
+      "EnterpriseDescriptionField": {
+        "label": "Description: ",
+        "err": {
+          "ok": "",
+          "min": "The description must contain at least three characters. ",
+          "max": "The description cannot be more than 128 characters. "
+        }
+      },
+      "EnterpriseCUITField": {
+        "label": "C.U.I.T. number:",
+        "err": {
+          "min": "Enter a C.U.I.T. number.  ",
+          "max": "Invalid value. "
+        }
+      },
+      "EnterprisePhoneHandler": {
+        "item": {
+          "actions": {
+            "copy": "Copy",
+            "rem": "Delete"
+          },
+          "tooltips": {
+            "call": "Tick"
+          }
+        },
+        "title": "phones",
+        "actions": {
+          "add": "Add"
+        },
+        "add": {
+          "label": "Enter a phone number"
+        },
+        "err": {
+          "no15prefix": "Prefixes 15 or 015 are not accepted. Use 11 instead. ",
+          "invalidNumber": "Invalid number. ",
+          "externalNumber": "The number entered is not from Argentina. "
+        },
+        "tooltips": {
+          "firstvalid": "I corrected the number before adding it. ",
+          "add": "Add",
+          "cancel": "Close"
+        }
+      },
+      "FoundationField": {
+        "label": "Founded on:",
+        "st": {
+          "saving": "Saving... ",
+          "save": "Save",
+          "close": "Close",
+          "cancel": "Cancel"
+        },
+        "ok": {
+          "updated": "Updated successfully. "
+        },
+        "err": {
+          "couldntUpdate": "Could not update. "
+        }
+      },
+      "EnterpriseName": {
+        "label": "Name:",
+        "st": {
+          "saving": "Saving... ",
+          "save": "Save",
+          "close": "Close",
+          "cancel": "Cancel"
+        },
+        "ok": {
+          "updated": "Updated successfully. "
+        },
+        "err": {
+          "couldntUpdate": "Could not update. ",
+          "invalid": "The field must contain between 3 and 48 characters. "
+        }
+      },
+      "EnterpriseCUIT": {
+        "label": "CUIT number:",
+        "st": {
+          "saving": "Saving... ",
+          "save": "Save",
+          "close": "Close",
+          "cancel": "Cancel"
+        },
+        "ok": {
+          "updated": "Updated successfully. "
+        },
+        "err": {
+          "couldntUpdate": "Could not update. "
+        }
+      },
+      "EnterpriseDescription": {
+        "label": "Description:",
+        "st": {
+          "saving": "Saving... ",
+          "save": "Save",
+          "close": "Close",
+          "cancel": "Cancel"
+        },
+        "ok": {
+          "updated": "Updated successfully. "
+        },
+        "err": {
+          "couldntUpdate": "Could not update. ",
+          "invalid": "The field must contain between 3 and 48 characters. "
+        }
+      }
+    },
+    "boat": {
+      "BoatSelector": {
+        "noselected": "No vessel selected",
+        "placeholder": "Select a vessel"
+      },
+      "NameField": {
+        "err": "The name must contain between 3 and 48 characters.",
+        "label": "Name:",
+        "placeholder": ""
+      },
+      "BoatEnterprisePageField": {
+        "label": "Property of: ",
+        "st": {
+          "saving": "Saving",
+          "save": "Save",
+          "close": "Close",
+          "cancel": "Cancel"
+        }
+      },
+      "BoatMatPageField": {
+        "label": "Tuition:",
+        "st": {
+          "saving": "Saving... ",
+          "save": "Save",
+          "close": "Close",
+          "cancel": "Cancel"
+        },
+        "ok": {
+          "updated": "Updated successfully. "
+        },
+        "err": {
+          "couldntUpdate": "Could not update. ",
+          "invalid": "The field must contain between 3 and 48 characters. "
+        }
+      },
+      "BoatNamePageField": {
+        "label": "Name:",
+        "st": {
+          "saving": "Saving... ",
+          "save": "Save",
+          "close": "Close",
+          "cancel": "Cancel"
+        },
+        "ok": {
+          "updated": "Updated successfully. "
+        },
+        "err": {
+          "couldntUpdate": "Could not update. ",
+          "invalid": "The field must contain between 3 and 48 characters. "
+        }
+      },
+      "MatField": {
+        "label": "Tuition: ",
+        "placeholder": "Example: ABC-123",
+        "ok": "Registration available. ",
+        "err": {
+          "chars": "The license plate must contain between 2 and 16 characters. ",
+          "exists": "There is already a registered boat with that registration. "
+        }
+      },
+      "EnterpriseField": {
+        "label": "Company that manages the boat: "
+      }
+    },
     "region": {
+      "RegionSelector": {
+        "noselected": "No region selected",
+        "placeholder": "Select a region"
+      },
       "RegionName": {
         "label": "Name:",
         "st": {
@@ -332,15 +1076,15 @@
           "cancel": "Cancel"
         },
         "ok": {
-          "updated": "Successfully updated. "
+          "updated": "Updated successfully. "
         },
         "err": {
-          "couldntUpdate": "Couldn't update. ",
-          "invalid": "Field value is not valid. "
+          "couldntUpdate": "Could not update. ",
+          "invalid": "The field must contain between 3 and 48 characters. "
         }
       },
       "RegionType": {
-        "label": "Type: ",
+        "label": "Region: ",
         "st": {
           "saving": "Saving... ",
           "save": "Save",
@@ -348,11 +1092,11 @@
           "cancel": "Cancel"
         },
         "ok": {
-          "updated": "Successfully updated. "
+          "updated": "Updated successfully. "
         },
         "err": {
-          "couldntUpdate": "Couldn't update. ",
-          "invalid": "Field value is not valid. "
+          "couldntUpdate": "Could not update. ",
+          "invalid": "The field must contain between 3 and 48 characters. "
         }
       }
     },
@@ -361,6 +1105,12 @@
         "st": {
           "loading": "Loading... ",
           "more": "Load more"
+        },
+        "err": {
+          "noComments": {
+            "title": "No comment",
+            "description": "Be the first to comment."
+          }
         },
         "textarea": {
           "placeholder": "Leave a comment"
@@ -372,12 +1122,12 @@
           "options": {
             "edit": "Edit",
             "delete": "Delete",
-            "report": "Report"
+            "report": "report"
           }
         },
         "dialog": {
           "title": "Delete this comment?",
-          "description": "This action cannot be undone. "
+          "description": "This action can not be undone. "
         },
         "st": {
           "edited": "Edited"
@@ -392,11 +1142,44 @@
     "history": {
       "handler": {
         "st": {
-          "loading": "Loading...",
           "more": "Load more"
         }
       }
     }
-
+  },
+  "status": {
+    "saving": "Saving",
+    "registering": "Registering",
+    "reporting": "Sending report",
+    "updated": "Updated successfully. "
+  },
+  "footer": {
+    "loggingout": {
+      "title": "Do you want to log out?",
+      "description": ""
+    },
+    "st": {
+      "nosession": "You are not logged in. "
+    },
+    "actions": {
+      "login": "Enter",
+      "signup": "Sign up",
+      "leave": "Log out",
+      "me": "My profile"
+    },
+    "links": {
+      "boats": "Boats",
+      "docks": "Docks",
+      "enterprises": "Transport companies",
+      "paths": "Tours",
+      "regions": "Regions",
+      "reports": "Reports"
+    }
+  },
+  "screens": {
+    "NoSchedulesForThisDockScreen": {
+      "title": "There are no hours for this dock",
+      "description": "Try searching a nearby dock. "
+    }
   }
 }
