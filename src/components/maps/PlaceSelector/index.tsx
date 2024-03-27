@@ -45,11 +45,7 @@ const PlaceSelector = ({ value, onChange }: IPlaceSelectorProps): React.JSX.Elem
     const [ showMap, setMapShowing ] = useState<boolean>(true);
     const [ satelliteMode, setSatelliteMode ] = useState<boolean>(true);
 
-    const tileURL: string = satelliteMode
-        ? "https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.png"
-        : (isDarkModeEnabled()
-                ? "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-                : "https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png");
+    const tileURL: string = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
     let m: L.Map | null = null;
 
     const lc = () => {
