@@ -211,7 +211,7 @@ header .hdr-cnt-chl {
 }
 main {
     width: 100%;
-    height: calc(100%);
+    height: calc(100% + 20vh);
     padding: 12px;
     display: flex;
     justify-content: center;
@@ -712,7 +712,7 @@ footer {
     .btns {
         width: 100%;
         height: max-content;
-        display: flex;
+        display: flex !important;
         gap: 10px;
         flex-direction: row;
         justify-content: end;
